@@ -9,6 +9,6 @@ Phần mềm tổ chức tạo ngân hàng đề thi và tạo đề thi trắc 
 - Sau khi hoàn tất tuần 2 sẽ xóa 2 folder .vs và DemoWebsite này để thực hiện build app. Folder thử nghiệm sẽ tạo ở chỗ khác.
 
 ## 26.3.2023
-Đã kết nối với Visual Studio
-Thêm Solution DemoWeb
-Thêm Project Clone Shopee
+- Đã kết nối với Visual Studio
+- Thêm Solution DemoWeb
+- Thêm Project Clone Shopee
