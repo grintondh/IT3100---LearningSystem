@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Dylan Harris\\.nuget\\packages\\": {}
+    "C:\\Users\\PC ADMIN\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\DemoWebsite.csproj",
+      "projectUniqueName": "C:\\Users\\PC ADMIN\\Source\\Repos\\LearningSystem\\DemoWebsite\\DemoWebsite.csproj",
       "projectName": "DemoWebsite",
-      "projectPath": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\DemoWebsite.csproj",
-      "packagesPath": "C:\\Users\\Dylan Harris\\.nuget\\packages\\",
-      "outputPath": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\obj\\",
+      "projectPath": "C:\\Users\\PC ADMIN\\Source\\Repos\\LearningSystem\\DemoWebsite\\DemoWebsite.csproj",
+      "packagesPath": "C:\\Users\\PC ADMIN\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\PC ADMIN\\Source\\Repos\\LearningSystem\\DemoWebsite\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Dylan Harris\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PC ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -64,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
