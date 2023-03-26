@@ -9,37 +9,37 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Shopee
 build_property.RootNamespace = Shopee
-build_property.ProjectDir = C:\Users\PC ADMIN\source\repos\LearningSystem\DemoWebsite\
+build_property.ProjectDir = E:\Github\grintondh\LearningSystem\DemoWebsite\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\PC ADMIN\source\repos\LearningSystem\DemoWebsite
+build_property.MSBuildProjectDirectory = E:\Github\grintondh\LearningSystem\DemoWebsite
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/PC ADMIN/source/repos/LearningSystem/DemoWebsite/Pages/Error.cshtml]
+[E:/Github/grintondh/LearningSystem/DemoWebsite/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC ADMIN/source/repos/LearningSystem/DemoWebsite/Pages/Index.cshtml]
+[E:/Github/grintondh/LearningSystem/DemoWebsite/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC ADMIN/source/repos/LearningSystem/DemoWebsite/Pages/Privacy.cshtml]
+[E:/Github/grintondh/LearningSystem/DemoWebsite/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC ADMIN/source/repos/LearningSystem/DemoWebsite/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[E:/Github/grintondh/LearningSystem/DemoWebsite/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC ADMIN/source/repos/LearningSystem/DemoWebsite/Pages/_ViewImports.cshtml]
+[E:/Github/grintondh/LearningSystem/DemoWebsite/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC ADMIN/source/repos/LearningSystem/DemoWebsite/Pages/_ViewStart.cshtml]
+[E:/Github/grintondh/LearningSystem/DemoWebsite/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC ADMIN/source/repos/LearningSystem/DemoWebsite/Pages/Shared/_Layout.cshtml]
+[E:/Github/grintondh/LearningSystem/DemoWebsite/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-uzj0iirf4b
