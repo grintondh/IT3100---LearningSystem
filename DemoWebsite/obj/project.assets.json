@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\DemoWebsite.csproj",
-      "projectName": "DemoWebsite",
-      "projectPath": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\DemoWebsite.csproj",
+      "projectUniqueName": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\Shopee.csproj",
+      "projectName": "Shopee",
+      "projectPath": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\Shopee.csproj",
       "packagesPath": "C:\\Users\\Dylan Harris\\.nuget\\packages\\",
       "outputPath": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\obj\\",
       "projectStyle": "PackageReference",
