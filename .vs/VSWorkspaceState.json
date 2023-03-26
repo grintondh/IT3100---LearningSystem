@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\DemoWebsite"
+    "\\DemoWebsite",
+    "\\DemoWebsite\\bin\\Debug"
   ],
-  "SelectedNode": "\\DemoWebsite\\DemoWebsite.sln",
+  "SelectedNode": "\\README.md",
   "PreviewInSolutionExplorer": false
 }
