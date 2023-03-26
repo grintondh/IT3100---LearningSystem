@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "w8MfdecVnjXgXt55jCB+BQIyonqIVDCQKeUxAEBE8Xv1HJeYtDGFht/NG1ROludCVhmUeTUFF8nxuFj8JJXMig==",
   "success": true,
   "projectFilePath": "C:\\Users\\PC ADMIN\\Source\\Repos\\LearningSystem\\DemoWebsite\\DemoWebsite.csproj",
+=======
+  "dgSpecHash": "uvB76N6uz3NnXG0jqDZFgtwgdwZr4/69W1uImWvlR40XVhUwiSnnVSs8qR8ysEzR7dUa7RXirx/6gsqjE5efqQ==",
+  "success": true,
+  "projectFilePath": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\Shopee.csproj",
+>>>>>>> 4106c1cd1165bced3656c90c1325721952b4bee9
   "expectedPackageFiles": [],
   "logs": []
 }

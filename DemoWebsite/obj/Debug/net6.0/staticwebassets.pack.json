@@ -1,8 +1,28 @@
 {
   "Files": [
     {
-      "Id": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\DemoWebsite.bundle.scp.css",
-      "PackagePath": "staticwebassets\\DemoWebsite.bundle.scp.css"
+      "Id": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Shopee.bundle.scp.css",
+      "PackagePath": "staticwebassets\\Shopee.bundle.scp.css"
+    },
+    {
+      "Id": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\wwwroot\\css\\base.css",
+      "PackagePath": "staticwebassets\\css\\base.css"
+    },
+    {
+      "Id": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\wwwroot\\css\\grid.css",
+      "PackagePath": "staticwebassets\\css\\grid.css"
+    },
+    {
+      "Id": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\wwwroot\\css\\main.css",
+      "PackagePath": "staticwebassets\\css\\main.css"
+    },
+    {
+      "Id": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\wwwroot\\css\\normalize.min.css",
+      "PackagePath": "staticwebassets\\css\\normalize.min.css"
+    },
+    {
+      "Id": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\wwwroot\\css\\responsive.css",
+      "PackagePath": "staticwebassets\\css\\responsive.css"
     },
     {
       "Id": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\wwwroot\\css\\site.css",
@@ -11,6 +31,30 @@
     {
       "Id": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\wwwroot\\img\\appstore.png",
+      "PackagePath": "staticwebassets\\img\\appstore.png"
+    },
+    {
+      "Id": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\wwwroot\\img\\googleplay.png",
+      "PackagePath": "staticwebassets\\img\\googleplay.png"
+    },
+    {
+      "Id": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\wwwroot\\img\\no_cart.png",
+      "PackagePath": "staticwebassets\\img\\no_cart.png"
+    },
+    {
+      "Id": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\wwwroot\\img\\qr_code.png",
+      "PackagePath": "staticwebassets\\img\\qr_code.png"
+    },
+    {
+      "Id": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\wwwroot\\img\\shopee.svg",
+      "PackagePath": "staticwebassets\\img\\shopee.svg"
+    },
+    {
+      "Id": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\wwwroot\\js\\main.js",
+      "PackagePath": "staticwebassets\\js\\main.js"
     },
     {
       "Id": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\wwwroot\\js\\site.js",
@@ -245,20 +289,20 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.DemoWebsite.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.Shopee.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
     {
-      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.DemoWebsite.props",
-      "PackagePath": "build\\DemoWebsite.props"
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.Shopee.props",
+      "PackagePath": "build\\Shopee.props"
     },
     {
-      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.DemoWebsite.props",
-      "PackagePath": "buildMultiTargeting\\DemoWebsite.props"
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.Shopee.props",
+      "PackagePath": "buildMultiTargeting\\Shopee.props"
     },
     {
-      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.DemoWebsite.props",
-      "PackagePath": "buildTransitive\\DemoWebsite.props"
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.Shopee.props",
+      "PackagePath": "buildTransitive\\Shopee.props"
     }
   ],
   "ElementsToRemove": []
