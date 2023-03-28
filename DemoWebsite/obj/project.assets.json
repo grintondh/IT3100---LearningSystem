@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Dylan Harris\\.nuget\\packages\\": {}
+    "C:\\Users\\nguye\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\Shopee.csproj",
+      "projectUniqueName": "C:\\Users\\nguye\\Source\\Repos\\LearningSystem\\DemoWebsite\\Shopee.csproj",
       "projectName": "Shopee",
-      "projectPath": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\Shopee.csproj",
-      "packagesPath": "C:\\Users\\Dylan Harris\\.nuget\\packages\\",
-      "outputPath": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\obj\\",
+      "projectPath": "C:\\Users\\nguye\\Source\\Repos\\LearningSystem\\DemoWebsite\\Shopee.csproj",
+      "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nguye\\Source\\Repos\\LearningSystem\\DemoWebsite\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Dylan Harris\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\Shopee.csproj": {}
+    "C:\\Users\\nguye\\source\\repos\\LearningSystem\\DemoWebsite\\Shopee.csproj": {}
   },
   "projects": {
-    "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\Shopee.csproj": {
+    "C:\\Users\\nguye\\source\\repos\\LearningSystem\\DemoWebsite\\Shopee.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\Shopee.csproj",
+        "projectUniqueName": "C:\\Users\\nguye\\source\\repos\\LearningSystem\\DemoWebsite\\Shopee.csproj",
         "projectName": "Shopee",
-        "projectPath": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\Shopee.csproj",
-        "packagesPath": "C:\\Users\\Dylan Harris\\.nuget\\packages\\",
-        "outputPath": "E:\\Github\\grintondh\\LearningSystem\\DemoWebsite\\obj\\",
+        "projectPath": "C:\\Users\\nguye\\source\\repos\\LearningSystem\\DemoWebsite\\Shopee.csproj",
+        "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nguye\\source\\repos\\LearningSystem\\DemoWebsite\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Dylan Harris\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
