@@ -12,3 +12,6 @@ Phần mềm tổ chức tạo ngân hàng đề thi và tạo đề thi trắc 
 - Đã kết nối với Visual Studio
 - Thêm Solution DemoWeb
 - Thêm Project Clone Shopee
+
+## 1.4.2023
+- Tạo rồi nè
