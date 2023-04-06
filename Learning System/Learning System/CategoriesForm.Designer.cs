@@ -44,6 +44,7 @@
             // 
             CategoriesForm_HeadingLbl.AutoSize = true;
             CategoriesForm_HeadingLbl.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point);
+            CategoriesForm_HeadingLbl.ForeColor = Color.FromArgb(194, 36, 36);
             CategoriesForm_HeadingLbl.Location = new Point(13, 13);
             CategoriesForm_HeadingLbl.Name = "CategoriesForm_HeadingLbl";
             CategoriesForm_HeadingLbl.Size = new Size(227, 46);
@@ -122,13 +123,15 @@
             // 
             // CategoriesForm_AddCategoryBtn
             // 
+            CategoriesForm_AddCategoryBtn.BackColor = Color.FromArgb(194, 36, 36);
             CategoriesForm_AddCategoryBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            CategoriesForm_AddCategoryBtn.ForeColor = Color.White;
             CategoriesForm_AddCategoryBtn.Location = new Point(511, 482);
             CategoriesForm_AddCategoryBtn.Name = "CategoriesForm_AddCategoryBtn";
             CategoriesForm_AddCategoryBtn.Size = new Size(185, 51);
             CategoriesForm_AddCategoryBtn.TabIndex = 9;
             CategoriesForm_AddCategoryBtn.Text = "ADD CATEGORY";
-            CategoriesForm_AddCategoryBtn.UseVisualStyleBackColor = true;
+            CategoriesForm_AddCategoryBtn.UseVisualStyleBackColor = false;
             // 
             // CategoriesForm
             // 

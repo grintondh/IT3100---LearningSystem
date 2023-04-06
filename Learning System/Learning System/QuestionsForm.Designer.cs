@@ -39,14 +39,15 @@
             // 
             // QuestionsForm_CreateNewQuestionBtn
             // 
+            QuestionsForm_CreateNewQuestionBtn.BackColor = Color.FromArgb(0, 159, 229);
             QuestionsForm_CreateNewQuestionBtn.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            QuestionsForm_CreateNewQuestionBtn.ForeColor = Color.Black;
+            QuestionsForm_CreateNewQuestionBtn.ForeColor = Color.White;
             QuestionsForm_CreateNewQuestionBtn.Location = new Point(8, 164);
             QuestionsForm_CreateNewQuestionBtn.Name = "QuestionsForm_CreateNewQuestionBtn";
             QuestionsForm_CreateNewQuestionBtn.Size = new Size(243, 49);
             QuestionsForm_CreateNewQuestionBtn.TabIndex = 13;
             QuestionsForm_CreateNewQuestionBtn.Text = "CREATE A NEW QUESTION ...";
-            QuestionsForm_CreateNewQuestionBtn.UseVisualStyleBackColor = true;
+            QuestionsForm_CreateNewQuestionBtn.UseVisualStyleBackColor = false;
             // 
             // QuestionsForm_ShowOldQuestionsCb
             // 
@@ -105,7 +106,7 @@
             // 
             QuestionsForm_QuestionsBankLbl.AutoSize = true;
             QuestionsForm_QuestionsBankLbl.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point);
-            QuestionsForm_QuestionsBankLbl.ForeColor = Color.Black;
+            QuestionsForm_QuestionsBankLbl.ForeColor = Color.FromArgb(194, 36, 36);
             QuestionsForm_QuestionsBankLbl.Location = new Point(3, 11);
             QuestionsForm_QuestionsBankLbl.Name = "QuestionsForm_QuestionsBankLbl";
             QuestionsForm_QuestionsBankLbl.Size = new Size(251, 46);

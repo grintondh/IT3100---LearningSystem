@@ -61,7 +61,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Silver;
+            panel1.BackColor = Color.FromArgb(0, 115, 165);
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(HomePageForm_UserNameLbl);
             panel1.Controls.Add(HomePageForm_AvatarPic);
@@ -77,6 +77,7 @@
             HomePageForm_UserNameLbl.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             HomePageForm_UserNameLbl.AutoSize = true;
             HomePageForm_UserNameLbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            HomePageForm_UserNameLbl.ForeColor = Color.White;
             HomePageForm_UserNameLbl.Location = new Point(1215, 15);
             HomePageForm_UserNameLbl.Name = "HomePageForm_UserNameLbl";
             HomePageForm_UserNameLbl.Size = new Size(108, 28);
@@ -133,9 +134,10 @@
             // HomePageForm_QuestionsBtn
             // 
             HomePageForm_QuestionsBtn.FlatAppearance.BorderSize = 0;
-            HomePageForm_QuestionsBtn.FlatAppearance.MouseOverBackColor = Color.Gray;
+            HomePageForm_QuestionsBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 255, 255);
             HomePageForm_QuestionsBtn.FlatStyle = FlatStyle.Flat;
             HomePageForm_QuestionsBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            HomePageForm_QuestionsBtn.ForeColor = Color.FromArgb(44, 171, 230);
             HomePageForm_QuestionsBtn.Location = new Point(3, 3);
             HomePageForm_QuestionsBtn.Name = "HomePageForm_QuestionsBtn";
             HomePageForm_QuestionsBtn.Size = new Size(162, 39);
@@ -147,9 +149,10 @@
             // HomePageForm_CategoriesBtn
             // 
             HomePageForm_CategoriesBtn.FlatAppearance.BorderSize = 0;
-            HomePageForm_CategoriesBtn.FlatAppearance.MouseOverBackColor = Color.Gray;
+            HomePageForm_CategoriesBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 255, 255);
             HomePageForm_CategoriesBtn.FlatStyle = FlatStyle.Flat;
             HomePageForm_CategoriesBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            HomePageForm_CategoriesBtn.ForeColor = Color.FromArgb(44, 171, 230);
             HomePageForm_CategoriesBtn.Location = new Point(3, 48);
             HomePageForm_CategoriesBtn.Name = "HomePageForm_CategoriesBtn";
             HomePageForm_CategoriesBtn.Size = new Size(162, 39);
@@ -161,9 +164,10 @@
             // HomePageForm_ImportBtn
             // 
             HomePageForm_ImportBtn.FlatAppearance.BorderSize = 0;
-            HomePageForm_ImportBtn.FlatAppearance.MouseOverBackColor = Color.Gray;
+            HomePageForm_ImportBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 255, 255);
             HomePageForm_ImportBtn.FlatStyle = FlatStyle.Flat;
             HomePageForm_ImportBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            HomePageForm_ImportBtn.ForeColor = Color.FromArgb(44, 171, 230);
             HomePageForm_ImportBtn.Location = new Point(3, 93);
             HomePageForm_ImportBtn.Name = "HomePageForm_ImportBtn";
             HomePageForm_ImportBtn.Size = new Size(162, 39);
@@ -175,9 +179,10 @@
             // HomePageForm_ExportBtn
             // 
             HomePageForm_ExportBtn.FlatAppearance.BorderSize = 0;
-            HomePageForm_ExportBtn.FlatAppearance.MouseOverBackColor = Color.Gray;
+            HomePageForm_ExportBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 255, 255);
             HomePageForm_ExportBtn.FlatStyle = FlatStyle.Flat;
             HomePageForm_ExportBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            HomePageForm_ExportBtn.ForeColor = Color.FromArgb(44, 171, 230);
             HomePageForm_ExportBtn.Location = new Point(3, 138);
             HomePageForm_ExportBtn.Name = "HomePageForm_ExportBtn";
             HomePageForm_ExportBtn.Size = new Size(162, 39);
@@ -202,10 +207,11 @@
             // 
             HomePageForm_QuestionsBankLbl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             HomePageForm_QuestionsBankLbl.AutoSize = true;
-            HomePageForm_QuestionsBankLbl.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
+            HomePageForm_QuestionsBankLbl.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            HomePageForm_QuestionsBankLbl.ForeColor = Color.FromArgb(44, 171, 230);
             HomePageForm_QuestionsBankLbl.Location = new Point(925, 10);
             HomePageForm_QuestionsBankLbl.Name = "HomePageForm_QuestionsBankLbl";
-            HomePageForm_QuestionsBankLbl.Size = new Size(197, 38);
+            HomePageForm_QuestionsBankLbl.Size = new Size(209, 38);
             HomePageForm_QuestionsBankLbl.TabIndex = 0;
             HomePageForm_QuestionsBankLbl.Text = "Question Bank";
             HomePageForm_QuestionsBankLbl.Visible = false;
@@ -213,13 +219,15 @@
             // HomePageForm_EditingBtn
             // 
             HomePageForm_EditingBtn.Anchor = AnchorStyles.Right;
+            HomePageForm_EditingBtn.BackColor = Color.FromArgb(0, 115, 165);
             HomePageForm_EditingBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            HomePageForm_EditingBtn.ForeColor = Color.White;
             HomePageForm_EditingBtn.Location = new Point(1164, 63);
             HomePageForm_EditingBtn.Name = "HomePageForm_EditingBtn";
             HomePageForm_EditingBtn.Size = new Size(211, 46);
             HomePageForm_EditingBtn.TabIndex = 6;
             HomePageForm_EditingBtn.Text = "TURN EDITING ON";
-            HomePageForm_EditingBtn.UseVisualStyleBackColor = true;
+            HomePageForm_EditingBtn.UseVisualStyleBackColor = false;
             // 
             // HomePageForm_PathLbl
             // 
@@ -227,14 +235,15 @@
             HomePageForm_PathLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             HomePageForm_PathLbl.Location = new Point(22, 77);
             HomePageForm_PathLbl.Name = "HomePageForm_PathLbl";
-            HomePageForm_PathLbl.Size = new Size(290, 23);
+            HomePageForm_PathLbl.Size = new Size(291, 23);
             HomePageForm_PathLbl.TabIndex = 1;
-            HomePageForm_PathLbl.Text = "Home  /  My courses  /  THI GIỮA KỲ";
+            HomePageForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ";
             // 
             // HomePageForm_ITLbl
             // 
             HomePageForm_ITLbl.AutoSize = true;
             HomePageForm_ITLbl.Font = new Font("Segoe UI", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point);
+            HomePageForm_ITLbl.ForeColor = Color.FromArgb(194, 36, 36);
             HomePageForm_ITLbl.Location = new Point(22, 3);
             HomePageForm_ITLbl.Name = "HomePageForm_ITLbl";
             HomePageForm_ITLbl.Size = new Size(60, 60);
@@ -318,7 +327,6 @@
         private PictureBox HomePageForm_MenuPic;
         private Panel panel3;
         private PictureBox HomePageForm_GearPic;
-        private Label HomePageForm_PathLbl;
         private Label HomePageForm_ITLbl;
         private Label HomePageForm_QuestionsBankLbl;
         private Button HomePageForm_EditingBtn;
@@ -331,5 +339,6 @@
         private Panel panel2;
         private Panel panel4;
         private PopUpForm PopUpForm;
+        public Label HomePageForm_PathLbl;
     }
 }

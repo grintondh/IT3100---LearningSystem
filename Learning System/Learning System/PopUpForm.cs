@@ -21,7 +21,11 @@ namespace Learning_System
         {
             if (PopUpForm_QuestionsBtn.Focused == true)
             {
-                PopUpForm_QuestionsBtn.BackColor = Color.Gray;
+                PopUpForm_QuestionsBtn.ForeColor = Color.Black;
+                PopUpForm_CategoriesBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_ImportBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_ExportBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_QuestionsBtn.BackColor = Color.FromArgb(224, 224, 224);
                 PopUpForm_CategoriesBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ImportBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ExportBtn.BackColor = panel_chuc_nang.BackColor;
@@ -38,7 +42,11 @@ namespace Learning_System
             ImportForm.Visible = false;
             ExportForm.Visible = false;
             QuestionsForm.Visible = true;
-            PopUpForm_QuestionsBtn.BackColor = Color.Gray;
+            PopUpForm_QuestionsBtn.ForeColor = Color.Black;
+            PopUpForm_CategoriesBtn.ForeColor = Color.FromArgb(30, 170, 232);
+            PopUpForm_ImportBtn.ForeColor = Color.FromArgb(30, 170, 232);
+            PopUpForm_ExportBtn.ForeColor = Color.FromArgb(30, 170, 232);
+            PopUpForm_QuestionsBtn.BackColor = Color.FromArgb(224, 224, 224);
             PopUpForm_CategoriesBtn.BackColor = panel_chuc_nang.BackColor;
             PopUpForm_ImportBtn.BackColor = panel_chuc_nang.BackColor;
             PopUpForm_ExportBtn.BackColor = panel_chuc_nang.BackColor;
@@ -51,25 +59,37 @@ namespace Learning_System
             ExportForm.Visible = false;
             CategoriesForm.Visible = true;
             PopUpForm_QuestionsBtn.BackColor = panel_chuc_nang.BackColor;
-            PopUpForm_CategoriesBtn.BackColor = Color.Gray;
+            PopUpForm_CategoriesBtn.ForeColor = Color.Black;
+            PopUpForm_QuestionsBtn.ForeColor = Color.FromArgb(30, 170, 232);
+            PopUpForm_ImportBtn.ForeColor = Color.FromArgb(30, 170, 232);
+            PopUpForm_ExportBtn.ForeColor = Color.FromArgb(30, 170, 232);
+            PopUpForm_CategoriesBtn.BackColor = Color.FromArgb(224, 224, 224);
             PopUpForm_ImportBtn.BackColor = panel_chuc_nang.BackColor;
             PopUpForm_ExportBtn.BackColor = panel_chuc_nang.BackColor;
         }
 
         public void Show_Import()
         {
+            PopUpForm_ImportBtn.ForeColor = Color.Black;
+            PopUpForm_QuestionsBtn.ForeColor = Color.FromArgb(30, 170, 232);
+            PopUpForm_CategoriesBtn.ForeColor = Color.FromArgb(30, 170, 232);
+            PopUpForm_ExportBtn.ForeColor = Color.FromArgb(30, 170, 232);
             QuestionsForm.Visible = false;
             CategoriesForm.Visible = false;
             ExportForm.Visible = false;
             ImportForm.Visible = true;
             PopUpForm_QuestionsBtn.BackColor = panel_chuc_nang.BackColor;
             PopUpForm_CategoriesBtn.BackColor = panel_chuc_nang.BackColor;
-            PopUpForm_ImportBtn.BackColor = Color.Gray;
+            PopUpForm_ImportBtn.BackColor = Color.FromArgb(224, 224, 224);
             PopUpForm_ExportBtn.BackColor = panel_chuc_nang.BackColor;
         }
 
         public void Show_Export()
         {
+            PopUpForm_ExportBtn.ForeColor = Color.Black;
+            PopUpForm_QuestionsBtn.ForeColor = Color.FromArgb(30, 170, 232);
+            PopUpForm_CategoriesBtn.ForeColor = Color.FromArgb(30, 170, 232);
+            PopUpForm_ImportBtn.ForeColor = Color.FromArgb(30, 170, 232);
             QuestionsForm.Visible = false;
             CategoriesForm.Visible = false;
             ImportForm.Visible = false;
@@ -77,14 +97,18 @@ namespace Learning_System
             PopUpForm_QuestionsBtn.BackColor = panel_chuc_nang.BackColor;
             PopUpForm_CategoriesBtn.BackColor = panel_chuc_nang.BackColor;
             PopUpForm_ImportBtn.BackColor = panel_chuc_nang.BackColor;
-            PopUpForm_ExportBtn.BackColor = Color.Gray;
+            PopUpForm_ExportBtn.BackColor = Color.FromArgb(224, 224, 224);
         }
 
         private void giao_dien_xem_danh_sach_cau_hoi_Load(object sender, EventArgs e)
         {
             if (PopUpForm_QuestionsBtn.Focused == true)
             {
-                PopUpForm_QuestionsBtn.BackColor = Color.Gray;
+                PopUpForm_QuestionsBtn.ForeColor = Color.Black;
+                PopUpForm_CategoriesBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_ImportBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_ExportBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_QuestionsBtn.BackColor = Color.FromArgb(224, 224, 224);
                 PopUpForm_CategoriesBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ImportBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ExportBtn.BackColor = panel_chuc_nang.BackColor;
@@ -95,7 +119,11 @@ namespace Learning_System
         {
             if (PopUpForm_CategoriesBtn.Focused == true)
             {
-                PopUpForm_CategoriesBtn.BackColor = Color.Gray;
+                PopUpForm_CategoriesBtn.ForeColor = Color.Black;
+                PopUpForm_QuestionsBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_ImportBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_ExportBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_CategoriesBtn.BackColor = Color.FromArgb(224, 224, 224);
                 PopUpForm_QuestionsBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ImportBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ExportBtn.BackColor = panel_chuc_nang.BackColor;
@@ -110,7 +138,11 @@ namespace Learning_System
         {
             if (PopUpForm_CategoriesBtn.Focused == true)
             {
-                PopUpForm_CategoriesBtn.BackColor = Color.Gray;
+                PopUpForm_CategoriesBtn.ForeColor = Color.Black;
+                PopUpForm_QuestionsBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_ImportBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_ExportBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_CategoriesBtn.BackColor = Color.FromArgb(224, 224, 224);
                 PopUpForm_QuestionsBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ImportBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ExportBtn.BackColor = panel_chuc_nang.BackColor;
@@ -121,7 +153,11 @@ namespace Learning_System
         {
             if (PopUpForm_ImportBtn.Focused == true)
             {
-                PopUpForm_ImportBtn.BackColor = Color.Gray;
+                PopUpForm_ImportBtn.ForeColor = Color.Black;
+                PopUpForm_QuestionsBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_CategoriesBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_ExportBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_ImportBtn.BackColor = Color.FromArgb(224, 224, 224);
                 PopUpForm_QuestionsBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_CategoriesBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ExportBtn.BackColor = panel_chuc_nang.BackColor;
@@ -136,7 +172,11 @@ namespace Learning_System
         {
             if (PopUpForm_ImportBtn.Focused == true)
             {
-                PopUpForm_ImportBtn.BackColor = Color.Gray;
+                PopUpForm_ImportBtn.ForeColor = Color.Black;
+                PopUpForm_QuestionsBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_CategoriesBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_ExportBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_ImportBtn.BackColor = Color.FromArgb(224, 224, 224);
                 PopUpForm_QuestionsBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_CategoriesBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ExportBtn.BackColor = panel_chuc_nang.BackColor;
@@ -147,7 +187,11 @@ namespace Learning_System
         {
             if (PopUpForm_ExportBtn.Focused == true)
             {
-                PopUpForm_ExportBtn.BackColor = Color.Gray;
+                PopUpForm_ExportBtn.ForeColor = Color.Black;
+                PopUpForm_QuestionsBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_CategoriesBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_ImportBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_ExportBtn.BackColor = Color.FromArgb(224, 224, 224);
                 PopUpForm_QuestionsBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_CategoriesBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ImportBtn.BackColor = panel_chuc_nang.BackColor;
@@ -162,7 +206,11 @@ namespace Learning_System
         {
             if (PopUpForm_ExportBtn.Focused == true)
             {
-                PopUpForm_ExportBtn.BackColor = Color.Gray;
+                PopUpForm_ExportBtn.ForeColor = Color.Black;
+                PopUpForm_QuestionsBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_CategoriesBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_ImportBtn.ForeColor = Color.FromArgb(30, 170, 232);
+                PopUpForm_ExportBtn.BackColor = Color.FromArgb(224, 224, 224);
                 PopUpForm_QuestionsBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_CategoriesBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ImportBtn.BackColor = panel_chuc_nang.BackColor;

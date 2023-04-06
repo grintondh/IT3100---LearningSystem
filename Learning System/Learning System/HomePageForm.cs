@@ -1,4 +1,4 @@
-namespace Learning_System
+﻿namespace Learning_System
 {
     public partial class HomePageForm : Form
     {
@@ -25,7 +25,7 @@ namespace Learning_System
 
         private void Home_Page_Load(object sender, EventArgs e)
         {
-
+            HomePageForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ";
         }
 
         private void button_Import_Click(object sender, EventArgs e)
@@ -74,6 +74,11 @@ namespace Learning_System
             }
             PopUpForm.Visible = true;
             PopUpForm.Show_Export();
+        }
+
+        public void Change_Path_Label(string path)
+        {
+            HomePageForm_PathLbl.Text = path;
         }
     }
 }

@@ -58,10 +58,10 @@
             // 
             PopUpForm_ExportBtn.Dock = DockStyle.Left;
             PopUpForm_ExportBtn.FlatAppearance.BorderSize = 0;
-            PopUpForm_ExportBtn.FlatAppearance.MouseOverBackColor = Color.Silver;
+            PopUpForm_ExportBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(224, 224, 224);
             PopUpForm_ExportBtn.FlatStyle = FlatStyle.Flat;
             PopUpForm_ExportBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            PopUpForm_ExportBtn.ForeColor = Color.Black;
+            PopUpForm_ExportBtn.ForeColor = Color.FromArgb(30, 170, 232);
             PopUpForm_ExportBtn.Location = new Point(561, 0);
             PopUpForm_ExportBtn.Name = "PopUpForm_ExportBtn";
             PopUpForm_ExportBtn.Size = new Size(187, 66);
@@ -74,10 +74,10 @@
             // 
             PopUpForm_ImportBtn.Dock = DockStyle.Left;
             PopUpForm_ImportBtn.FlatAppearance.BorderSize = 0;
-            PopUpForm_ImportBtn.FlatAppearance.MouseOverBackColor = Color.Silver;
+            PopUpForm_ImportBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(224, 224, 224);
             PopUpForm_ImportBtn.FlatStyle = FlatStyle.Flat;
             PopUpForm_ImportBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            PopUpForm_ImportBtn.ForeColor = Color.Black;
+            PopUpForm_ImportBtn.ForeColor = Color.FromArgb(30, 170, 232);
             PopUpForm_ImportBtn.Location = new Point(374, 0);
             PopUpForm_ImportBtn.Name = "PopUpForm_ImportBtn";
             PopUpForm_ImportBtn.Size = new Size(187, 66);
@@ -90,10 +90,10 @@
             // 
             PopUpForm_CategoriesBtn.Dock = DockStyle.Left;
             PopUpForm_CategoriesBtn.FlatAppearance.BorderSize = 0;
-            PopUpForm_CategoriesBtn.FlatAppearance.MouseOverBackColor = Color.Silver;
+            PopUpForm_CategoriesBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(224, 224, 224);
             PopUpForm_CategoriesBtn.FlatStyle = FlatStyle.Flat;
             PopUpForm_CategoriesBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            PopUpForm_CategoriesBtn.ForeColor = Color.Black;
+            PopUpForm_CategoriesBtn.ForeColor = Color.FromArgb(30, 170, 232);
             PopUpForm_CategoriesBtn.Location = new Point(187, 0);
             PopUpForm_CategoriesBtn.Name = "PopUpForm_CategoriesBtn";
             PopUpForm_CategoriesBtn.Size = new Size(187, 66);
@@ -106,10 +106,10 @@
             // 
             PopUpForm_QuestionsBtn.Dock = DockStyle.Left;
             PopUpForm_QuestionsBtn.FlatAppearance.BorderSize = 0;
-            PopUpForm_QuestionsBtn.FlatAppearance.MouseOverBackColor = Color.Silver;
+            PopUpForm_QuestionsBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(224, 224, 224);
             PopUpForm_QuestionsBtn.FlatStyle = FlatStyle.Flat;
             PopUpForm_QuestionsBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            PopUpForm_QuestionsBtn.ForeColor = Color.Black;
+            PopUpForm_QuestionsBtn.ForeColor = Color.FromArgb(30, 170, 232);
             PopUpForm_QuestionsBtn.Location = new Point(0, 0);
             PopUpForm_QuestionsBtn.Name = "PopUpForm_QuestionsBtn";
             PopUpForm_QuestionsBtn.Size = new Size(187, 66);
@@ -120,6 +120,7 @@
             // 
             // panel1
             // 
+            panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(ExportForm);
             panel1.Controls.Add(ImportForm);
             panel1.Controls.Add(CategoriesForm);
@@ -135,7 +136,7 @@
             ExportForm.Dock = DockStyle.Fill;
             ExportForm.Location = new Point(0, 0);
             ExportForm.Name = "ExportForm";
-            ExportForm.Size = new Size(1089, 559);
+            ExportForm.Size = new Size(1087, 557);
             ExportForm.TabIndex = 4;
             ExportForm.Visible = false;
             ExportForm.Load += giao_dien_Export_Load;
@@ -145,7 +146,7 @@
             ImportForm.Dock = DockStyle.Fill;
             ImportForm.Location = new Point(0, 0);
             ImportForm.Name = "ImportForm";
-            ImportForm.Size = new Size(1089, 559);
+            ImportForm.Size = new Size(1087, 557);
             ImportForm.TabIndex = 4;
             ImportForm.Visible = false;
             ImportForm.Load += giao_dien_Import_Load;
@@ -156,7 +157,7 @@
             CategoriesForm.Dock = DockStyle.Fill;
             CategoriesForm.Location = new Point(0, 0);
             CategoriesForm.Name = "CategoriesForm";
-            CategoriesForm.Size = new Size(1089, 559);
+            CategoriesForm.Size = new Size(1087, 557);
             CategoriesForm.TabIndex = 4;
             CategoriesForm.Visible = false;
             CategoriesForm.Load += giao_dien_Categories_Load;
@@ -166,7 +167,7 @@
             QuestionsForm.Dock = DockStyle.Fill;
             QuestionsForm.Location = new Point(0, 0);
             QuestionsForm.Name = "QuestionsForm";
-            QuestionsForm.Size = new Size(1089, 559);
+            QuestionsForm.Size = new Size(1087, 557);
             QuestionsForm.TabIndex = 0;
             QuestionsForm.Load += giao_dien_xem_danh_sach_cau_hoi_Load;
             // 

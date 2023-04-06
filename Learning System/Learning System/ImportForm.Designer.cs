@@ -59,6 +59,7 @@
             // 
             ImportForm_HeadingLbl.AutoSize = true;
             ImportForm_HeadingLbl.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point);
+            ImportForm_HeadingLbl.ForeColor = Color.FromArgb(194, 36, 36);
             ImportForm_HeadingLbl.Location = new Point(3, 9);
             ImportForm_HeadingLbl.Name = "ImportForm_HeadingLbl";
             ImportForm_HeadingLbl.Size = new Size(410, 46);
@@ -72,23 +73,24 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 75);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1112, 74);
+            panel2.Size = new Size(1112, 58);
             panel2.TabIndex = 3;
             // 
             // ImportForm_FileFormatLbl
             // 
             ImportForm_FileFormatLbl.AutoSize = true;
-            ImportForm_FileFormatLbl.Location = new Point(573, 31);
+            ImportForm_FileFormatLbl.Location = new Point(566, 21);
             ImportForm_FileFormatLbl.Name = "ImportForm_FileFormatLbl";
-            ImportForm_FileFormatLbl.Size = new Size(136, 20);
+            ImportForm_FileFormatLbl.Size = new Size(95, 20);
             ImportForm_FileFormatLbl.TabIndex = 1;
-            ImportForm_FileFormatLbl.Text = "Viewing file format";
+            ImportForm_FileFormatLbl.Text = "Aiken format";
             // 
             // ImportForm_FileFormatBtn
             // 
             ImportForm_FileFormatBtn.FlatAppearance.BorderSize = 0;
             ImportForm_FileFormatBtn.FlatStyle = FlatStyle.Flat;
             ImportForm_FileFormatBtn.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            ImportForm_FileFormatBtn.ForeColor = Color.FromArgb(194, 36, 36);
             ImportForm_FileFormatBtn.Location = new Point(14, 16);
             ImportForm_FileFormatBtn.Name = "ImportForm_FileFormatBtn";
             ImportForm_FileFormatBtn.Size = new Size(106, 28);
@@ -100,7 +102,7 @@
             // 
             panel3.Controls.Add(ImportForm_GeneralBtn);
             panel3.Dock = DockStyle.Top;
-            panel3.Location = new Point(0, 149);
+            panel3.Location = new Point(0, 133);
             panel3.Name = "panel3";
             panel3.Size = new Size(1112, 69);
             panel3.TabIndex = 4;
@@ -110,6 +112,7 @@
             ImportForm_GeneralBtn.FlatAppearance.BorderSize = 0;
             ImportForm_GeneralBtn.FlatStyle = FlatStyle.Flat;
             ImportForm_GeneralBtn.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            ImportForm_GeneralBtn.ForeColor = Color.FromArgb(194, 36, 36);
             ImportForm_GeneralBtn.Location = new Point(14, 18);
             ImportForm_GeneralBtn.Name = "ImportForm_GeneralBtn";
             ImportForm_GeneralBtn.Size = new Size(86, 28);
@@ -124,35 +127,39 @@
             panel4.Controls.Add(ImportForm_ImportLbl);
             panel4.Controls.Add(ImportForm_ShowImportBtn);
             panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(0, 218);
+            panel4.Location = new Point(0, 202);
             panel4.Name = "panel4";
-            panel4.Size = new Size(1112, 367);
+            panel4.Size = new Size(1112, 383);
             panel4.TabIndex = 5;
             // 
             // ImportForm_ImportBtn
             // 
+            ImportForm_ImportBtn.BackColor = Color.FromArgb(194, 36, 36);
             ImportForm_ImportBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            ImportForm_ImportBtn.ForeColor = Color.White;
             ImportForm_ImportBtn.Location = new Point(473, 298);
             ImportForm_ImportBtn.Name = "ImportForm_ImportBtn";
             ImportForm_ImportBtn.Size = new Size(159, 53);
             ImportForm_ImportBtn.TabIndex = 4;
             ImportForm_ImportBtn.Text = "IMPORT";
-            ImportForm_ImportBtn.UseVisualStyleBackColor = true;
+            ImportForm_ImportBtn.UseVisualStyleBackColor = false;
             // 
             // ImportForm_SelectFileBtn
             // 
+            ImportForm_SelectFileBtn.BackColor = Color.FromArgb(0, 159, 229);
             ImportForm_SelectFileBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            ImportForm_SelectFileBtn.ForeColor = Color.White;
             ImportForm_SelectFileBtn.Location = new Point(445, 76);
             ImportForm_SelectFileBtn.Name = "ImportForm_SelectFileBtn";
             ImportForm_SelectFileBtn.Size = new Size(216, 53);
             ImportForm_SelectFileBtn.TabIndex = 3;
             ImportForm_SelectFileBtn.Text = "CHOOSE A FILE ...";
-            ImportForm_SelectFileBtn.UseVisualStyleBackColor = true;
+            ImportForm_SelectFileBtn.UseVisualStyleBackColor = false;
             // 
             // ImportForm_ImportLbl
             // 
             ImportForm_ImportLbl.AutoSize = true;
-            ImportForm_ImportLbl.Location = new Point(39, 76);
+            ImportForm_ImportLbl.Location = new Point(25, 76);
             ImportForm_ImportLbl.Name = "ImportForm_ImportLbl";
             ImportForm_ImportLbl.Size = new Size(54, 20);
             ImportForm_ImportLbl.TabIndex = 2;
@@ -163,6 +170,7 @@
             ImportForm_ShowImportBtn.FlatAppearance.BorderSize = 0;
             ImportForm_ShowImportBtn.FlatStyle = FlatStyle.Flat;
             ImportForm_ShowImportBtn.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            ImportForm_ShowImportBtn.ForeColor = Color.FromArgb(194, 36, 36);
             ImportForm_ShowImportBtn.Location = new Point(14, 6);
             ImportForm_ShowImportBtn.Name = "ImportForm_ShowImportBtn";
             ImportForm_ShowImportBtn.Size = new Size(219, 28);
