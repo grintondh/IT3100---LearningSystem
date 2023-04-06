@@ -1,8 +1,8 @@
 namespace Learning_System
 {
-    public partial class Home_Page : Form
+    public partial class HomePageForm : Form
     {
-        public Home_Page()
+        public HomePageForm()
         {
             InitializeComponent();
         }
@@ -13,13 +13,13 @@ namespace Learning_System
             {
                 panel_popup.Height = panel_popup.MaximumSize.Height;
                 flowLayoutPanel_popup.Visible = true;
-                label_Question_Bank.Visible = true;
+                HomePageForm_QuestionsBankLbl.Visible = true;
             }
             else
             {
                 panel_popup.Height = panel_popup.MinimumSize.Height;
                 flowLayoutPanel_popup.Visible = false;
-                label_Question_Bank.Visible = false;
+                HomePageForm_QuestionsBankLbl.Visible = false;
             }
         }
 
@@ -34,10 +34,10 @@ namespace Learning_System
             {
                 panel_popup.Height = panel_popup.MinimumSize.Height;
                 flowLayoutPanel_popup.Visible = false;
-                label_Question_Bank.Visible = false;
+                HomePageForm_QuestionsBankLbl.Visible = false;
             }
-            giao_dien_tu_pop_up.Visible = true;
-            giao_dien_tu_pop_up.Show_Import();
+            PopUpForm.Visible = true;
+            PopUpForm.Show_Import();
         }
 
         private void button_Categories_Click(object sender, EventArgs e)
@@ -46,10 +46,10 @@ namespace Learning_System
             {
                 panel_popup.Height = panel_popup.MinimumSize.Height;
                 flowLayoutPanel_popup.Visible = false;
-                label_Question_Bank.Visible = false;
+                HomePageForm_QuestionsBankLbl.Visible = false;
             }
-            giao_dien_tu_pop_up.Visible = true;
-            giao_dien_tu_pop_up.Show_Categories();
+            PopUpForm.Visible = true;
+            PopUpForm.Show_Categories();
         }
 
         private void button_Questions_Click(object sender, EventArgs e)
@@ -58,10 +58,10 @@ namespace Learning_System
             {
                 panel_popup.Height = panel_popup.MinimumSize.Height;
                 flowLayoutPanel_popup.Visible = false;
-                label_Question_Bank.Visible = false;
+                HomePageForm_QuestionsBankLbl.Visible = false;
             }
-            giao_dien_tu_pop_up.Visible = true;
-            giao_dien_tu_pop_up.Show_Questions();
+            PopUpForm.Visible = true;
+            PopUpForm.Show_Questions();
         }
 
         private void button_Export_Click(object sender, EventArgs e)
@@ -70,10 +70,10 @@ namespace Learning_System
             {
                 panel_popup.Height = panel_popup.MinimumSize.Height;
                 flowLayoutPanel_popup.Visible = false;
-                label_Question_Bank.Visible = false;
+                HomePageForm_QuestionsBankLbl.Visible = false;
             }
-            giao_dien_tu_pop_up.Visible = true;
-            giao_dien_tu_pop_up.Show_Export();
+            PopUpForm.Visible = true;
+            PopUpForm.Show_Export();
         }
     }
 }

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Learning_System
 {
-    public partial class Giao_dien_xem_danh_sach_cau_hoi : UserControl
+    public partial class CategoriesForm : UserControl
     {
-        public Giao_dien_xem_danh_sach_cau_hoi()
+        public CategoriesForm()
         {
             InitializeComponent();
         }

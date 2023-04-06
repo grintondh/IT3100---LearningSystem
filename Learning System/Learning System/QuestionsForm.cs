@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Learning_System
 {
-    public partial class giao_dien_Export : UserControl
+    public partial class QuestionsForm : UserControl
     {
-        public giao_dien_Export()
+        public QuestionsForm()
         {
             InitializeComponent();
         }

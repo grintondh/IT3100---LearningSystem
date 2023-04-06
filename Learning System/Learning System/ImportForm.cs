@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Learning_System
 {
-    public partial class Giao_dien_Categories : UserControl
+    public partial class ImportForm : UserControl
     {
-        public Giao_dien_Categories()
+        public ImportForm()
         {
             InitializeComponent();
         }

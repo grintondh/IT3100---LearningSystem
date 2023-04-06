@@ -1,6 +1,6 @@
 ﻿namespace Learning_System
 {
-    partial class giao_dien_Export
+    partial class ExportForm
     {
         /// <summary> 
         /// Required designer variable.
