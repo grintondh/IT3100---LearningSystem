@@ -40,6 +40,7 @@
             // QuestionsForm_CreateNewQuestionBtn
             // 
             QuestionsForm_CreateNewQuestionBtn.BackColor = Color.FromArgb(0, 159, 229);
+            QuestionsForm_CreateNewQuestionBtn.FlatStyle = FlatStyle.Flat;
             QuestionsForm_CreateNewQuestionBtn.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             QuestionsForm_CreateNewQuestionBtn.ForeColor = Color.White;
             QuestionsForm_CreateNewQuestionBtn.Location = new Point(8, 164);

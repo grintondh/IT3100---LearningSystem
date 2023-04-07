@@ -135,6 +135,7 @@
             // ImportForm_ImportBtn
             // 
             ImportForm_ImportBtn.BackColor = Color.FromArgb(194, 36, 36);
+            ImportForm_ImportBtn.FlatStyle = FlatStyle.Flat;
             ImportForm_ImportBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             ImportForm_ImportBtn.ForeColor = Color.White;
             ImportForm_ImportBtn.Location = new Point(473, 298);
@@ -147,6 +148,7 @@
             // ImportForm_SelectFileBtn
             // 
             ImportForm_SelectFileBtn.BackColor = Color.FromArgb(0, 159, 229);
+            ImportForm_SelectFileBtn.FlatStyle = FlatStyle.Flat;
             ImportForm_SelectFileBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             ImportForm_SelectFileBtn.ForeColor = Color.White;
             ImportForm_SelectFileBtn.Location = new Point(445, 76);

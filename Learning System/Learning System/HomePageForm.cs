@@ -23,11 +23,6 @@
             }
         }
 
-        private void Home_Page_Load(object sender, EventArgs e)
-        {
-            HomePageForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ";
-        }
-
         private void button_Import_Click(object sender, EventArgs e)
         {
             if (panel_popup.Height == panel_popup.MaximumSize.Height)
@@ -62,6 +57,7 @@
             }
             PopUpForm.Visible = true;
             PopUpForm.Show_Questions();
+            panel3.Visible = false;
         }
 
         private void button_Export_Click(object sender, EventArgs e)
@@ -74,11 +70,6 @@
             }
             PopUpForm.Visible = true;
             PopUpForm.Show_Export();
-        }
-
-        public void Change_Path_Label(string path)
-        {
-            HomePageForm_PathLbl.Text = path;
         }
     }
 }

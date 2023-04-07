@@ -220,6 +220,7 @@
             // 
             HomePageForm_EditingBtn.Anchor = AnchorStyles.Right;
             HomePageForm_EditingBtn.BackColor = Color.FromArgb(0, 115, 165);
+            HomePageForm_EditingBtn.FlatStyle = FlatStyle.Flat;
             HomePageForm_EditingBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             HomePageForm_EditingBtn.ForeColor = Color.White;
             HomePageForm_EditingBtn.Location = new Point(1164, 63);
@@ -303,7 +304,6 @@
             Name = "HomePageForm";
             Text = "Home Page";
             WindowState = FormWindowState.Maximized;
-            Load += Home_Page_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)HomePageForm_AvatarPic).EndInit();

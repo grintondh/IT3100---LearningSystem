@@ -124,6 +124,7 @@
             // CategoriesForm_AddCategoryBtn
             // 
             CategoriesForm_AddCategoryBtn.BackColor = Color.FromArgb(194, 36, 36);
+            CategoriesForm_AddCategoryBtn.FlatStyle = FlatStyle.Flat;
             CategoriesForm_AddCategoryBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             CategoriesForm_AddCategoryBtn.ForeColor = Color.White;
             CategoriesForm_AddCategoryBtn.Location = new Point(511, 482);
