@@ -33,6 +33,7 @@
             }
             PopUpForm.Visible = true;
             PopUpForm.Show_Import();
+            panel3.Visible = false;
         }
 
         private void button_Categories_Click(object sender, EventArgs e)
@@ -45,6 +46,7 @@
             }
             PopUpForm.Visible = true;
             PopUpForm.Show_Categories();
+            panel3.Visible = false;
         }
 
         private void button_Questions_Click(object sender, EventArgs e)
@@ -70,6 +72,7 @@
             }
             PopUpForm.Visible = true;
             PopUpForm.Show_Export();
+            panel3.Visible = false;
         }
     }
 }
