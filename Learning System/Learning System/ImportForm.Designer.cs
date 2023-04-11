@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportForm));
             panel1 = new Panel();
             ImportForm_HeadingLbl = new Label();
             panel2 = new Panel();
@@ -40,10 +41,16 @@
             ImportForm_SelectFileBtn = new Button();
             ImportForm_ImportLbl = new Label();
             ImportForm_ShowImportBtn = new Button();
+            ImportForm_ExpandPic1 = new PictureBox();
+            ImportForm_ExpandPic2 = new PictureBox();
+            ImportForm_ExpandPic3 = new PictureBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic3).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -68,6 +75,7 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(ImportForm_ExpandPic1);
             panel2.Controls.Add(ImportForm_FileFormatLbl);
             panel2.Controls.Add(ImportForm_FileFormatBtn);
             panel2.Dock = DockStyle.Top;
@@ -100,6 +108,7 @@
             // 
             // panel3
             // 
+            panel3.Controls.Add(ImportForm_ExpandPic2);
             panel3.Controls.Add(ImportForm_GeneralBtn);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 133);
@@ -122,6 +131,7 @@
             // 
             // panel4
             // 
+            panel4.Controls.Add(ImportForm_ExpandPic3);
             panel4.Controls.Add(ImportForm_ImportBtn);
             panel4.Controls.Add(ImportForm_SelectFileBtn);
             panel4.Controls.Add(ImportForm_ImportLbl);
@@ -173,12 +183,42 @@
             ImportForm_ShowImportBtn.FlatStyle = FlatStyle.Flat;
             ImportForm_ShowImportBtn.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             ImportForm_ShowImportBtn.ForeColor = Color.FromArgb(194, 36, 36);
-            ImportForm_ShowImportBtn.Location = new Point(14, 6);
+            ImportForm_ShowImportBtn.Location = new Point(15, 6);
             ImportForm_ShowImportBtn.Name = "ImportForm_ShowImportBtn";
             ImportForm_ShowImportBtn.Size = new Size(219, 28);
             ImportForm_ShowImportBtn.TabIndex = 2;
             ImportForm_ShowImportBtn.Text = "Import questions from file";
             ImportForm_ShowImportBtn.UseVisualStyleBackColor = true;
+            // 
+            // ImportForm_ExpandPic1
+            // 
+            ImportForm_ExpandPic1.Image = (Image)resources.GetObject("ImportForm_ExpandPic1.Image");
+            ImportForm_ExpandPic1.Location = new Point(8, 26);
+            ImportForm_ExpandPic1.Name = "ImportForm_ExpandPic1";
+            ImportForm_ExpandPic1.Size = new Size(15, 10);
+            ImportForm_ExpandPic1.SizeMode = PictureBoxSizeMode.Zoom;
+            ImportForm_ExpandPic1.TabIndex = 17;
+            ImportForm_ExpandPic1.TabStop = false;
+            // 
+            // ImportForm_ExpandPic2
+            // 
+            ImportForm_ExpandPic2.Image = (Image)resources.GetObject("ImportForm_ExpandPic2.Image");
+            ImportForm_ExpandPic2.Location = new Point(8, 30);
+            ImportForm_ExpandPic2.Name = "ImportForm_ExpandPic2";
+            ImportForm_ExpandPic2.Size = new Size(15, 10);
+            ImportForm_ExpandPic2.SizeMode = PictureBoxSizeMode.Zoom;
+            ImportForm_ExpandPic2.TabIndex = 17;
+            ImportForm_ExpandPic2.TabStop = false;
+            // 
+            // ImportForm_ExpandPic3
+            // 
+            ImportForm_ExpandPic3.Image = (Image)resources.GetObject("ImportForm_ExpandPic3.Image");
+            ImportForm_ExpandPic3.Location = new Point(8, 18);
+            ImportForm_ExpandPic3.Name = "ImportForm_ExpandPic3";
+            ImportForm_ExpandPic3.Size = new Size(15, 10);
+            ImportForm_ExpandPic3.SizeMode = PictureBoxSizeMode.Zoom;
+            ImportForm_ExpandPic3.TabIndex = 17;
+            ImportForm_ExpandPic3.TabStop = false;
             // 
             // ImportForm
             // 
@@ -197,6 +237,9 @@
             panel3.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic3).EndInit();
             ResumeLayout(false);
         }
 
@@ -214,5 +257,8 @@
         private Label ImportForm_ImportLbl;
         private Button ImportForm_ShowImportBtn;
         private Button ImportForm_ImportBtn;
+        private PictureBox ImportForm_ExpandPic1;
+        private PictureBox ImportForm_ExpandPic2;
+        private PictureBox ImportForm_ExpandPic3;
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CategoriesForm));
             CategoriesForm_HeadingLbl = new Label();
             CategoriesForm_ParentCategoryLbl = new Label();
             CategoriesForm_ParentCategoryCbo = new ComboBox();
@@ -38,6 +39,8 @@
             CategoriesForm_CategoryInfoLbl = new Label();
             CategoriesForm_IDNumberLbl = new Label();
             CategoriesForm_AddCategoryBtn = new Button();
+            CategoriesForm_ExpandPic = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)CategoriesForm_ExpandPic).BeginInit();
             SuspendLayout();
             // 
             // CategoriesForm_HeadingLbl
@@ -127,17 +130,28 @@
             CategoriesForm_AddCategoryBtn.FlatStyle = FlatStyle.Flat;
             CategoriesForm_AddCategoryBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             CategoriesForm_AddCategoryBtn.ForeColor = Color.White;
-            CategoriesForm_AddCategoryBtn.Location = new Point(511, 482);
+            CategoriesForm_AddCategoryBtn.Location = new Point(512, 511);
             CategoriesForm_AddCategoryBtn.Name = "CategoriesForm_AddCategoryBtn";
             CategoriesForm_AddCategoryBtn.Size = new Size(185, 51);
             CategoriesForm_AddCategoryBtn.TabIndex = 9;
             CategoriesForm_AddCategoryBtn.Text = "ADD CATEGORY";
             CategoriesForm_AddCategoryBtn.UseVisualStyleBackColor = false;
             // 
+            // CategoriesForm_ExpandPic
+            // 
+            CategoriesForm_ExpandPic.Image = (Image)resources.GetObject("CategoriesForm_ExpandPic.Image");
+            CategoriesForm_ExpandPic.Location = new Point(4, 33);
+            CategoriesForm_ExpandPic.Name = "CategoriesForm_ExpandPic";
+            CategoriesForm_ExpandPic.Size = new Size(14, 17);
+            CategoriesForm_ExpandPic.SizeMode = PictureBoxSizeMode.Zoom;
+            CategoriesForm_ExpandPic.TabIndex = 17;
+            CategoriesForm_ExpandPic.TabStop = false;
+            // 
             // CategoriesForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(CategoriesForm_ExpandPic);
             Controls.Add(CategoriesForm_AddCategoryBtn);
             Controls.Add(CategoriesForm_IDNumberLbl);
             Controls.Add(CategoriesForm_CategoryInfoLbl);
@@ -149,7 +163,8 @@
             Controls.Add(CategoriesForm_ParentCategoryLbl);
             Controls.Add(CategoriesForm_HeadingLbl);
             Name = "CategoriesForm";
-            Size = new Size(1178, 565);
+            Size = new Size(1178, 584);
+            ((System.ComponentModel.ISupportInitialize)CategoriesForm_ExpandPic).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -166,5 +181,6 @@
         private Label CategoriesForm_CategoryInfoLbl;
         private Label CategoriesForm_IDNumberLbl;
         private Button CategoriesForm_AddCategoryBtn;
+        private PictureBox CategoriesForm_ExpandPic;
     }
 }

@@ -209,7 +209,7 @@
             HomePageForm_QuestionsBankLbl.AutoSize = true;
             HomePageForm_QuestionsBankLbl.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
             HomePageForm_QuestionsBankLbl.ForeColor = Color.FromArgb(44, 171, 230);
-            HomePageForm_QuestionsBankLbl.Location = new Point(925, 10);
+            HomePageForm_QuestionsBankLbl.Location = new Point(889, 10);
             HomePageForm_QuestionsBankLbl.Name = "HomePageForm_QuestionsBankLbl";
             HomePageForm_QuestionsBankLbl.Size = new Size(209, 38);
             HomePageForm_QuestionsBankLbl.TabIndex = 0;
