@@ -67,6 +67,7 @@
             // CategoriesForm_ParentCategoryCbo
             // 
             CategoriesForm_ParentCategoryCbo.FormattingEnabled = true;
+            CategoriesForm_ParentCategoryCbo.Items.AddRange(new object[] { "1", "2", "3", "4", "5" });
             CategoriesForm_ParentCategoryCbo.Location = new Point(205, 83);
             CategoriesForm_ParentCategoryCbo.Name = "CategoriesForm_ParentCategoryCbo";
             CategoriesForm_ParentCategoryCbo.Size = new Size(276, 28);

@@ -1,4 +1,6 @@
-﻿namespace Learning_System
+﻿using Calculator;
+
+namespace Learning_System
 {
     public partial class HomePageForm : Form
     {
