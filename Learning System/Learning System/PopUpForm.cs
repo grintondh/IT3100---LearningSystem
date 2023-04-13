@@ -29,7 +29,6 @@ namespace Learning_System
                 PopUpForm_CategoriesBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ImportBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ExportBtn.BackColor = panel_chuc_nang.BackColor;
-                PopUpForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ  /  Questions";
             }
             CategoriesForm.Visible = false;
             ImportForm.Visible = false;
@@ -51,7 +50,6 @@ namespace Learning_System
             PopUpForm_CategoriesBtn.BackColor = panel_chuc_nang.BackColor;
             PopUpForm_ImportBtn.BackColor = panel_chuc_nang.BackColor;
             PopUpForm_ExportBtn.BackColor = panel_chuc_nang.BackColor;
-            PopUpForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ  /  Questions";
         }
 
         public void Show_Categories()
@@ -68,7 +66,6 @@ namespace Learning_System
             PopUpForm_CategoriesBtn.BackColor = Color.FromArgb(224, 224, 224);
             PopUpForm_ImportBtn.BackColor = panel_chuc_nang.BackColor;
             PopUpForm_ExportBtn.BackColor = panel_chuc_nang.BackColor;
-            PopUpForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ  /  Categories";
         }
 
         public void Show_Import()
@@ -85,7 +82,6 @@ namespace Learning_System
             PopUpForm_CategoriesBtn.BackColor = panel_chuc_nang.BackColor;
             PopUpForm_ImportBtn.BackColor = Color.FromArgb(224, 224, 224);
             PopUpForm_ExportBtn.BackColor = panel_chuc_nang.BackColor;
-            PopUpForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ  /  Import";
         }
 
         public void Show_Export()
@@ -102,7 +98,6 @@ namespace Learning_System
             PopUpForm_CategoriesBtn.BackColor = panel_chuc_nang.BackColor;
             PopUpForm_ImportBtn.BackColor = panel_chuc_nang.BackColor;
             PopUpForm_ExportBtn.BackColor = Color.FromArgb(224, 224, 224);
-            PopUpForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ  /  Export";
         }
 
         private void giao_dien_xem_danh_sach_cau_hoi_Load(object sender, EventArgs e)
@@ -117,7 +112,6 @@ namespace Learning_System
                 PopUpForm_CategoriesBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ImportBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ExportBtn.BackColor = panel_chuc_nang.BackColor;
-                PopUpForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ  /  Questions";
             }
         }
 
@@ -133,7 +127,6 @@ namespace Learning_System
                 PopUpForm_QuestionsBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ImportBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ExportBtn.BackColor = panel_chuc_nang.BackColor;
-                PopUpForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ  /  Categories";
             }
             QuestionsForm.Visible = false;
             ImportForm.Visible = false;
@@ -153,7 +146,6 @@ namespace Learning_System
                 PopUpForm_QuestionsBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ImportBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ExportBtn.BackColor = panel_chuc_nang.BackColor;
-                PopUpForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ  /  Categories";
             }
         }
 
@@ -169,7 +161,6 @@ namespace Learning_System
                 PopUpForm_QuestionsBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_CategoriesBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ExportBtn.BackColor = panel_chuc_nang.BackColor;
-                PopUpForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ  /  Import";
             }
             QuestionsForm.Visible = false;
             CategoriesForm.Visible = false;
@@ -189,7 +180,6 @@ namespace Learning_System
                 PopUpForm_QuestionsBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_CategoriesBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ExportBtn.BackColor = panel_chuc_nang.BackColor;
-                PopUpForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ  /  Import";
             }
         }
 
@@ -205,7 +195,6 @@ namespace Learning_System
                 PopUpForm_QuestionsBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_CategoriesBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ImportBtn.BackColor = panel_chuc_nang.BackColor;
-                PopUpForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ  /  Export";
             }
             QuestionsForm.Visible = false;
             CategoriesForm.Visible = false;
@@ -225,9 +214,7 @@ namespace Learning_System
                 PopUpForm_QuestionsBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_CategoriesBtn.BackColor = panel_chuc_nang.BackColor;
                 PopUpForm_ImportBtn.BackColor = panel_chuc_nang.BackColor;
-                PopUpForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ  /  Export";
             }
         }
-
     }
 }

@@ -9,70 +9,71 @@
 
         private void picture_setting_Click(object sender, EventArgs e)
         {
-            if (panel_popup.Height == panel_popup.MinimumSize.Height)
+            if (panel_popup.Visible == false)
             {
-                panel_popup.Height = panel_popup.MaximumSize.Height;
-                flowLayoutPanel_popup.Visible = true;
-                HomePageForm_QuestionsBankLbl.Visible = true;
+                panel_popup.Visible = true;
             }
             else
             {
-                panel_popup.Height = panel_popup.MinimumSize.Height;
-                flowLayoutPanel_popup.Visible = false;
-                HomePageForm_QuestionsBankLbl.Visible = false;
+                panel_popup.Visible = false;
             }
         }
 
         private void button_Import_Click(object sender, EventArgs e)
         {
-            if (panel_popup.Height == panel_popup.MaximumSize.Height)
+            if (panel_popup.Visible == false)
             {
-                panel_popup.Height = panel_popup.MinimumSize.Height;
-                flowLayoutPanel_popup.Visible = false;
-                HomePageForm_QuestionsBankLbl.Visible = false;
+                panel_popup.Visible = true;
+            }
+            else
+            {
+                panel_popup.Visible = false;
             }
             PopUpForm.Visible = true;
             PopUpForm.Show_Import();
-            panel3.Visible = false;
         }
 
         private void button_Categories_Click(object sender, EventArgs e)
         {
-            if (panel_popup.Height == panel_popup.MaximumSize.Height)
+            if (panel_popup.Visible == false)
             {
-                panel_popup.Height = panel_popup.MinimumSize.Height;
-                flowLayoutPanel_popup.Visible = false;
-                HomePageForm_QuestionsBankLbl.Visible = false;
+                panel_popup.Visible = true;
+            }
+            else
+            {
+                panel_popup.Visible = false;
             }
             PopUpForm.Visible = true;
             PopUpForm.Show_Categories();
-            panel3.Visible = false;
         }
 
         private void button_Questions_Click(object sender, EventArgs e)
         {
-            if (panel_popup.Height == panel_popup.MaximumSize.Height)
+            if (panel_popup.Visible == false)
             {
-                panel_popup.Height = panel_popup.MinimumSize.Height;
-                flowLayoutPanel_popup.Visible = false;
-                HomePageForm_QuestionsBankLbl.Visible = false;
+                panel_popup.Visible = true;
+            }
+            else
+            {
+                panel_popup.Visible = false;
             }
             PopUpForm.Visible = true;
             PopUpForm.Show_Questions();
-            panel3.Visible = false;
         }
 
         private void button_Export_Click(object sender, EventArgs e)
         {
-            if (panel_popup.Height == panel_popup.MaximumSize.Height)
+            if (panel_popup.Visible == false)
             {
-                panel_popup.Height = panel_popup.MinimumSize.Height;
-                flowLayoutPanel_popup.Visible = false;
-                HomePageForm_QuestionsBankLbl.Visible = false;
+                panel_popup.Visible = true;
+            }
+            else
+            {
+                panel_popup.Visible = false;
             }
             PopUpForm.Visible = true;
             PopUpForm.Show_Export();
-            panel3.Visible = false;
         }
+
     }
 }

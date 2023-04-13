@@ -33,30 +33,28 @@
             HomePageForm_UserNameLbl = new Label();
             HomePageForm_AvatarPic = new PictureBox();
             HomePageForm_MenuPic = new PictureBox();
+            HomePageForm_GearPic = new PictureBox();
+            HomePageForm_EditingBtn = new Button();
+            HomePageForm_PathLbl = new Label();
+            HomePageForm_ITLbl = new Label();
+            panel3 = new Panel();
             panel_popup = new Panel();
             flowLayoutPanel_popup = new FlowLayoutPanel();
             HomePageForm_QuestionsBtn = new Button();
             HomePageForm_CategoriesBtn = new Button();
             HomePageForm_ImportBtn = new Button();
             HomePageForm_ExportBtn = new Button();
-            HomePageForm_GearPic = new PictureBox();
             HomePageForm_QuestionsBankLbl = new Label();
-            HomePageForm_EditingBtn = new Button();
-            HomePageForm_PathLbl = new Label();
-            HomePageForm_ITLbl = new Label();
-            panel3 = new Panel();
             panel2 = new Panel();
-            panel4 = new Panel();
             PopUpForm = new PopUpForm();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)HomePageForm_AvatarPic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)HomePageForm_MenuPic).BeginInit();
-            panel_popup.SuspendLayout();
-            flowLayoutPanel_popup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)HomePageForm_GearPic).BeginInit();
             panel3.SuspendLayout();
+            panel_popup.SuspendLayout();
+            flowLayoutPanel_popup.SuspendLayout();
             panel2.SuspendLayout();
-            panel4.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -105,18 +103,75 @@
             HomePageForm_MenuPic.TabIndex = 0;
             HomePageForm_MenuPic.TabStop = false;
             // 
+            // HomePageForm_GearPic
+            // 
+            HomePageForm_GearPic.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            HomePageForm_GearPic.Image = (Image)resources.GetObject("HomePageForm_GearPic.Image");
+            HomePageForm_GearPic.Location = new Point(1330, 70);
+            HomePageForm_GearPic.Name = "HomePageForm_GearPic";
+            HomePageForm_GearPic.Size = new Size(48, 37);
+            HomePageForm_GearPic.SizeMode = PictureBoxSizeMode.Zoom;
+            HomePageForm_GearPic.TabIndex = 2;
+            HomePageForm_GearPic.TabStop = false;
+            HomePageForm_GearPic.Click += picture_setting_Click;
+            // 
+            // HomePageForm_EditingBtn
+            // 
+            HomePageForm_EditingBtn.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            HomePageForm_EditingBtn.BackColor = Color.FromArgb(0, 115, 165);
+            HomePageForm_EditingBtn.FlatStyle = FlatStyle.Flat;
+            HomePageForm_EditingBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            HomePageForm_EditingBtn.ForeColor = Color.White;
+            HomePageForm_EditingBtn.Location = new Point(1168, 96);
+            HomePageForm_EditingBtn.Name = "HomePageForm_EditingBtn";
+            HomePageForm_EditingBtn.Size = new Size(211, 44);
+            HomePageForm_EditingBtn.TabIndex = 6;
+            HomePageForm_EditingBtn.Text = "TURN EDITING ON";
+            HomePageForm_EditingBtn.UseVisualStyleBackColor = false;
+            // 
+            // HomePageForm_PathLbl
+            // 
+            HomePageForm_PathLbl.AutoSize = true;
+            HomePageForm_PathLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            HomePageForm_PathLbl.Location = new Point(23, 83);
+            HomePageForm_PathLbl.Name = "HomePageForm_PathLbl";
+            HomePageForm_PathLbl.Size = new Size(291, 23);
+            HomePageForm_PathLbl.TabIndex = 1;
+            HomePageForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ";
+            // 
+            // HomePageForm_ITLbl
+            // 
+            HomePageForm_ITLbl.AutoSize = true;
+            HomePageForm_ITLbl.Font = new Font("Segoe UI", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point);
+            HomePageForm_ITLbl.ForeColor = Color.FromArgb(194, 36, 36);
+            HomePageForm_ITLbl.Location = new Point(23, 13);
+            HomePageForm_ITLbl.Name = "HomePageForm_ITLbl";
+            HomePageForm_ITLbl.Size = new Size(60, 60);
+            HomePageForm_ITLbl.TabIndex = 0;
+            HomePageForm_ITLbl.Text = "IT";
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(HomePageForm_EditingBtn);
+            panel3.Controls.Add(HomePageForm_PathLbl);
+            panel3.Controls.Add(HomePageForm_ITLbl);
+            panel3.Dock = DockStyle.Top;
+            panel3.Location = new Point(0, 64);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(1385, 146);
+            panel3.TabIndex = 2;
+            // 
             // panel_popup
             // 
+            panel_popup.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            panel_popup.BorderStyle = BorderStyle.FixedSingle;
             panel_popup.Controls.Add(flowLayoutPanel_popup);
-            panel_popup.Controls.Add(HomePageForm_GearPic);
             panel_popup.Controls.Add(HomePageForm_QuestionsBankLbl);
-            panel_popup.Dock = DockStyle.Top;
-            panel_popup.Location = new Point(0, 64);
-            panel_popup.MaximumSize = new Size(0, 189);
-            panel_popup.MinimumSize = new Size(0, 45);
+            panel_popup.Location = new Point(822, 70);
             panel_popup.Name = "panel_popup";
-            panel_popup.Size = new Size(1385, 45);
+            panel_popup.Size = new Size(502, 190);
             panel_popup.TabIndex = 1;
+            panel_popup.Visible = false;
             // 
             // flowLayoutPanel_popup
             // 
@@ -125,11 +180,10 @@
             flowLayoutPanel_popup.Controls.Add(HomePageForm_CategoriesBtn);
             flowLayoutPanel_popup.Controls.Add(HomePageForm_ImportBtn);
             flowLayoutPanel_popup.Controls.Add(HomePageForm_ExportBtn);
-            flowLayoutPanel_popup.Location = new Point(1144, 6);
+            flowLayoutPanel_popup.Location = new Point(313, 6);
             flowLayoutPanel_popup.Name = "flowLayoutPanel_popup";
-            flowLayoutPanel_popup.Size = new Size(175, 36);
+            flowLayoutPanel_popup.Size = new Size(175, 179);
             flowLayoutPanel_popup.TabIndex = 9;
-            flowLayoutPanel_popup.Visible = false;
             // 
             // HomePageForm_QuestionsBtn
             // 
@@ -191,102 +245,33 @@
             HomePageForm_ExportBtn.UseVisualStyleBackColor = true;
             HomePageForm_ExportBtn.Click += button_Export_Click;
             // 
-            // HomePageForm_GearPic
-            // 
-            HomePageForm_GearPic.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            HomePageForm_GearPic.Image = (Image)resources.GetObject("HomePageForm_GearPic.Image");
-            HomePageForm_GearPic.Location = new Point(1325, 6);
-            HomePageForm_GearPic.Name = "HomePageForm_GearPic";
-            HomePageForm_GearPic.Size = new Size(48, 37);
-            HomePageForm_GearPic.SizeMode = PictureBoxSizeMode.Zoom;
-            HomePageForm_GearPic.TabIndex = 2;
-            HomePageForm_GearPic.TabStop = false;
-            HomePageForm_GearPic.Click += picture_setting_Click;
-            // 
             // HomePageForm_QuestionsBankLbl
             // 
             HomePageForm_QuestionsBankLbl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             HomePageForm_QuestionsBankLbl.AutoSize = true;
             HomePageForm_QuestionsBankLbl.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
             HomePageForm_QuestionsBankLbl.ForeColor = Color.FromArgb(44, 171, 230);
-            HomePageForm_QuestionsBankLbl.Location = new Point(889, 10);
+            HomePageForm_QuestionsBankLbl.Location = new Point(10, 10);
             HomePageForm_QuestionsBankLbl.Name = "HomePageForm_QuestionsBankLbl";
             HomePageForm_QuestionsBankLbl.Size = new Size(209, 38);
             HomePageForm_QuestionsBankLbl.TabIndex = 0;
             HomePageForm_QuestionsBankLbl.Text = "Question Bank";
-            HomePageForm_QuestionsBankLbl.Visible = false;
-            // 
-            // HomePageForm_EditingBtn
-            // 
-            HomePageForm_EditingBtn.Anchor = AnchorStyles.Right;
-            HomePageForm_EditingBtn.BackColor = Color.FromArgb(0, 115, 165);
-            HomePageForm_EditingBtn.FlatStyle = FlatStyle.Flat;
-            HomePageForm_EditingBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            HomePageForm_EditingBtn.ForeColor = Color.White;
-            HomePageForm_EditingBtn.Location = new Point(1164, 63);
-            HomePageForm_EditingBtn.Name = "HomePageForm_EditingBtn";
-            HomePageForm_EditingBtn.Size = new Size(211, 46);
-            HomePageForm_EditingBtn.TabIndex = 6;
-            HomePageForm_EditingBtn.Text = "TURN EDITING ON";
-            HomePageForm_EditingBtn.UseVisualStyleBackColor = false;
-            // 
-            // HomePageForm_PathLbl
-            // 
-            HomePageForm_PathLbl.AutoSize = true;
-            HomePageForm_PathLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            HomePageForm_PathLbl.Location = new Point(22, 77);
-            HomePageForm_PathLbl.Name = "HomePageForm_PathLbl";
-            HomePageForm_PathLbl.Size = new Size(291, 23);
-            HomePageForm_PathLbl.TabIndex = 1;
-            HomePageForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ";
-            // 
-            // HomePageForm_ITLbl
-            // 
-            HomePageForm_ITLbl.AutoSize = true;
-            HomePageForm_ITLbl.Font = new Font("Segoe UI", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point);
-            HomePageForm_ITLbl.ForeColor = Color.FromArgb(194, 36, 36);
-            HomePageForm_ITLbl.Location = new Point(22, 3);
-            HomePageForm_ITLbl.Name = "HomePageForm_ITLbl";
-            HomePageForm_ITLbl.Size = new Size(60, 60);
-            HomePageForm_ITLbl.TabIndex = 0;
-            HomePageForm_ITLbl.Text = "IT";
-            // 
-            // panel3
-            // 
-            panel3.Controls.Add(HomePageForm_ITLbl);
-            panel3.Controls.Add(HomePageForm_PathLbl);
-            panel3.Controls.Add(HomePageForm_EditingBtn);
-            panel3.Dock = DockStyle.Top;
-            panel3.Location = new Point(0, 109);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(1385, 115);
-            panel3.TabIndex = 2;
             // 
             // panel2
             // 
-            panel2.Controls.Add(panel4);
+            panel2.Controls.Add(PopUpForm);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(0, 224);
+            panel2.Location = new Point(0, 210);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1385, 500);
+            panel2.Size = new Size(1385, 514);
             panel2.TabIndex = 3;
-            // 
-            // panel4
-            // 
-            panel4.Controls.Add(PopUpForm);
-            panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(0, 0);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(1385, 500);
-            panel4.TabIndex = 0;
             // 
             // PopUpForm
             // 
-            PopUpForm.BorderStyle = BorderStyle.FixedSingle;
             PopUpForm.Dock = DockStyle.Fill;
             PopUpForm.Location = new Point(0, 0);
             PopUpForm.Name = "PopUpForm";
-            PopUpForm.Size = new Size(1385, 500);
+            PopUpForm.Size = new Size(1385, 514);
             PopUpForm.TabIndex = 0;
             PopUpForm.Visible = false;
             // 
@@ -296,9 +281,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1385, 724);
+            Controls.Add(HomePageForm_GearPic);
+            Controls.Add(panel_popup);
             Controls.Add(panel2);
             Controls.Add(panel3);
-            Controls.Add(panel_popup);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "HomePageForm";
@@ -308,14 +294,13 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)HomePageForm_AvatarPic).EndInit();
             ((System.ComponentModel.ISupportInitialize)HomePageForm_MenuPic).EndInit();
-            panel_popup.ResumeLayout(false);
-            panel_popup.PerformLayout();
-            flowLayoutPanel_popup.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)HomePageForm_GearPic).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            panel_popup.ResumeLayout(false);
+            panel_popup.PerformLayout();
+            flowLayoutPanel_popup.ResumeLayout(false);
             panel2.ResumeLayout(false);
-            panel4.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -328,17 +313,16 @@
         private Panel panel3;
         private PictureBox HomePageForm_GearPic;
         private Label HomePageForm_ITLbl;
-        private Label HomePageForm_QuestionsBankLbl;
         private Button HomePageForm_EditingBtn;
-        private Panel panel_popup;
-        private Button HomePageForm_QuestionsBtn;
-        private Button HomePageForm_ExportBtn;
-        private Button HomePageForm_ImportBtn;
-        private Button HomePageForm_CategoriesBtn;
-        private FlowLayoutPanel flowLayoutPanel_popup;
         private Panel panel2;
-        private Panel panel4;
+        private Label HomePageForm_PathLbl;
         private PopUpForm PopUpForm;
-        public Label HomePageForm_PathLbl;
+        private Label HomePageForm_QuestionsBankLbl;
+        private FlowLayoutPanel flowLayoutPanel_popup;
+        private Button HomePageForm_QuestionsBtn;
+        private Button HomePageForm_CategoriesBtn;
+        private Button HomePageForm_ImportBtn;
+        private Button HomePageForm_ExportBtn;
+        private Panel panel_popup;
     }
 }

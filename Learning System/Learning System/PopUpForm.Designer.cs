@@ -33,15 +33,11 @@
             PopUpForm_CategoriesBtn = new Button();
             PopUpForm_QuestionsBtn = new Button();
             ExportForm = new ExportForm();
-            panel_heading = new Panel();
-            PopUpForm_ITLbl = new Label();
-            PopUpForm_PathLbl = new Label();
             panel_chuc_nang = new Panel();
             QuestionsForm = new QuestionsForm();
             CategoriesForm = new CategoriesForm();
             ImportForm = new ImportForm();
             panel_giao_dien = new Panel();
-            panel_heading.SuspendLayout();
             panel_chuc_nang.SuspendLayout();
             panel_giao_dien.SuspendLayout();
             SuspendLayout();
@@ -111,41 +107,10 @@
             ExportForm.Dock = DockStyle.Fill;
             ExportForm.Location = new Point(0, 0);
             ExportForm.Name = "ExportForm";
-            ExportForm.Size = new Size(1089, 434);
+            ExportForm.Size = new Size(1089, 555);
             ExportForm.TabIndex = 4;
             ExportForm.Visible = false;
             ExportForm.Load += giao_dien_Export_Load;
-            // 
-            // panel_heading
-            // 
-            panel_heading.Controls.Add(PopUpForm_ITLbl);
-            panel_heading.Controls.Add(PopUpForm_PathLbl);
-            panel_heading.Dock = DockStyle.Top;
-            panel_heading.Location = new Point(0, 0);
-            panel_heading.Name = "panel_heading";
-            panel_heading.Size = new Size(1089, 121);
-            panel_heading.TabIndex = 3;
-            // 
-            // PopUpForm_ITLbl
-            // 
-            PopUpForm_ITLbl.AutoSize = true;
-            PopUpForm_ITLbl.Font = new Font("Segoe UI", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point);
-            PopUpForm_ITLbl.ForeColor = Color.FromArgb(194, 36, 36);
-            PopUpForm_ITLbl.Location = new Point(22, 3);
-            PopUpForm_ITLbl.Name = "PopUpForm_ITLbl";
-            PopUpForm_ITLbl.Size = new Size(60, 60);
-            PopUpForm_ITLbl.TabIndex = 0;
-            PopUpForm_ITLbl.Text = "IT";
-            // 
-            // PopUpForm_PathLbl
-            // 
-            PopUpForm_PathLbl.AutoSize = true;
-            PopUpForm_PathLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            PopUpForm_PathLbl.Location = new Point(22, 77);
-            PopUpForm_PathLbl.Name = "PopUpForm_PathLbl";
-            PopUpForm_PathLbl.Size = new Size(291, 23);
-            PopUpForm_PathLbl.TabIndex = 1;
-            PopUpForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ";
             // 
             // panel_chuc_nang
             // 
@@ -155,7 +120,7 @@
             panel_chuc_nang.Controls.Add(PopUpForm_ExportBtn);
             panel_chuc_nang.Controls.Add(PopUpForm_CategoriesBtn);
             panel_chuc_nang.Dock = DockStyle.Top;
-            panel_chuc_nang.Location = new Point(0, 121);
+            panel_chuc_nang.Location = new Point(0, 0);
             panel_chuc_nang.Name = "panel_chuc_nang";
             panel_chuc_nang.Size = new Size(1089, 70);
             panel_chuc_nang.TabIndex = 4;
@@ -165,7 +130,7 @@
             QuestionsForm.Dock = DockStyle.Fill;
             QuestionsForm.Location = new Point(0, 0);
             QuestionsForm.Name = "QuestionsForm";
-            QuestionsForm.Size = new Size(1089, 434);
+            QuestionsForm.Size = new Size(1089, 555);
             QuestionsForm.TabIndex = 0;
             QuestionsForm.Load += giao_dien_xem_danh_sach_cau_hoi_Load;
             // 
@@ -175,7 +140,7 @@
             CategoriesForm.Dock = DockStyle.Fill;
             CategoriesForm.Location = new Point(0, 0);
             CategoriesForm.Name = "CategoriesForm";
-            CategoriesForm.Size = new Size(1089, 434);
+            CategoriesForm.Size = new Size(1089, 555);
             CategoriesForm.TabIndex = 4;
             CategoriesForm.Visible = false;
             CategoriesForm.Load += giao_dien_Categories_Load;
@@ -185,7 +150,7 @@
             ImportForm.Dock = DockStyle.Fill;
             ImportForm.Location = new Point(0, 0);
             ImportForm.Name = "ImportForm";
-            ImportForm.Size = new Size(1089, 434);
+            ImportForm.Size = new Size(1089, 555);
             ImportForm.TabIndex = 4;
             ImportForm.Visible = false;
             ImportForm.Load += giao_dien_Import_Load;
@@ -197,9 +162,9 @@
             panel_giao_dien.Controls.Add(ExportForm);
             panel_giao_dien.Controls.Add(CategoriesForm);
             panel_giao_dien.Dock = DockStyle.Fill;
-            panel_giao_dien.Location = new Point(0, 191);
+            panel_giao_dien.Location = new Point(0, 70);
             panel_giao_dien.Name = "panel_giao_dien";
-            panel_giao_dien.Size = new Size(1089, 434);
+            panel_giao_dien.Size = new Size(1089, 555);
             panel_giao_dien.TabIndex = 5;
             // 
             // PopUpForm
@@ -208,11 +173,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(panel_giao_dien);
             Controls.Add(panel_chuc_nang);
-            Controls.Add(panel_heading);
             Name = "PopUpForm";
             Size = new Size(1089, 625);
-            panel_heading.ResumeLayout(false);
-            panel_heading.PerformLayout();
             panel_chuc_nang.ResumeLayout(false);
             panel_giao_dien.ResumeLayout(false);
             ResumeLayout(false);
@@ -224,9 +186,6 @@
         private Button PopUpForm_CategoriesBtn;
         private Button PopUpForm_QuestionsBtn;
         private ExportForm ExportForm;
-        private Panel panel_heading;
-        private Label PopUpForm_ITLbl;
-        public Label PopUpForm_PathLbl;
         private Panel panel_chuc_nang;
         private QuestionsForm QuestionsForm;
         private CategoriesForm CategoriesForm;
