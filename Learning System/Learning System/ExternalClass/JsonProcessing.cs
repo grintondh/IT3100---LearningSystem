@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Calculator
+namespace Learning_System.ExternalClass
 {
     /// <summary>
     /// Methods for processing Json file
@@ -36,7 +36,7 @@ namespace Calculator
 
                 try
                 {
-                    var _webRequest = (HttpWebRequest)HttpWebRequest.Create(sampleJsonWebPath);
+                    var _webRequest = (HttpWebRequest)WebRequest.Create(sampleJsonWebPath);
                     _webRequest.UserAgent = "Simple Calculator";
 
                     var _response = _webRequest.GetResponse();
@@ -119,7 +119,7 @@ namespace Calculator
         {
             try
             {
-                using (var _JsonFile = JsonProcessing.GetFileJsonInDefaultFolder(JsonPath, sampleJsonWebPath, sampleContent))
+                using (var _JsonFile = GetFileJsonInDefaultFolder(JsonPath, sampleJsonWebPath, sampleContent))
                 {
                     JArray _JsonData = JArray.Parse(_JsonFile.ReadToEnd());
                     return _JsonData;

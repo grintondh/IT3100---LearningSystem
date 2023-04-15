@@ -1,12 +1,15 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Accessibility;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text.Json.Serialization;
 using System.Windows.Forms;
 
-namespace Calculator
+namespace Learning_System.ExternalClass
 {
     public class DataProcessing
     {
@@ -15,10 +18,11 @@ namespace Calculator
         private List<Type> ShowColumnsType { get; set; } = new List<Type>();
         private static int length { get; set; }
         private static int Limit { get; set; }
-        private static List<string> Condition { get; set; }
-        private static List<string> Columns { get; set; }
+        private static List<string> Condition { get; set; } = new List<string>();
+        private static List<string> Columns { get; set; } = new List<string>();
         private static int Offset { get; set; }
-        private List<Tuple<int,int>> SelectedRow { get; set; } = new List<Tuple<int,int>>();
+        private List<Tuple<int, int>> SelectedRow { get; set; } = new List<Tuple<int, int>>();
+        public static List<string> emptyList { get; } = new List<string>();
 
         private const int DEFAULT_LIMIT = 25;
 
@@ -104,25 +108,25 @@ namespace Calculator
         {
             try
             {
-                if (_query != null && _query.Count % 2 != 0 && (_query.Count != 1 || _query[0] != "SAME"))
+                if (_query.Count % 2 != 0 && (_query.Count != 1 || _query[0] != "SAME"))
                     throw new Exception();
-                    
+
+                int _archievedOffset = Offset, _archievedLimit = Limit;
 
                 Offset = _offset;
                 Limit = _limit;
 
-                if (_query != null && _query.Count == 1 && _query[0] == "SAME")
+                bool _offOffset = _query.Contains("OffsetOff");
+
+                if (_query.Count == 1 && _query[0] == "SAME")
                     Condition = Condition;
-                else 
+                else
                     Condition = _query;
 
-                if (_columns != null && _columns.Count == 1 && _columns[0] == "SAME")
-                    Columns = Columns;    
+                if (_columns.Count == 1 && _columns.Count == 1 && _columns[0] == "SAME")
+                    Columns = Columns;
                 else
                     Columns = _columns;
-
-                if (Columns != null && (Columns.Contains("NotDelete") == false || Columns.Contains("delete") == false))
-                    throw new Exception();
 
                 /// Correction offset and limit value
                 Limit = Math.Min(Math.Max(0, Limit), length);
@@ -130,16 +134,16 @@ namespace Calculator
 
                 DataTable _dataTable = new DataTable();
 
-                if(Columns != null)
+                if (Columns.Count > 0)
                 {
                     for (int _j = 0; _j < Columns.Count; _j++)
                     {
                         string _columnName = Columns[_j];
                         bool _isExistColumn = false;
 
-                        for(int _k = 0; _k < ShowColumnsName.Count; _k++)
+                        for (int _k = 0; _k < ShowColumnsName.Count; _k++)
                         {
-                            if(_columnName == ShowColumnsName[_k])
+                            if (_columnName == ShowColumnsName[_k])
                             {
                                 Type _columnType = ShowColumnsType[_k];
                                 _dataTable.Columns.Add(_columnName, _columnType);
@@ -163,7 +167,9 @@ namespace Calculator
                     }
                 }
 
-                SelectedRow.Clear();
+                if(_offOffset == false)
+                    SelectedRow.Clear();
+
                 int _gotCount = 0;
 
                 for (int _i = Offset; _i < length && _gotCount < Limit; _i++)
@@ -172,12 +178,30 @@ namespace Calculator
 
                     bool _isSatisfy = true;
 
-                    if(Condition != null)
+                    if (Condition.Count > 0)
                     {
                         for (int _j = 0; _j < Condition.Count; _j += 2)
                         {
-                            var x = ListElements[_i][Condition[_j]].ToString();
-                            if (ListElements[_i][Condition[_j]].ToString() != Condition[_j + 1])
+                            if (Condition[_j] == "OffsetOff")
+                                continue;
+
+                            var _elementObj = ListElements[_i][Condition[_j]];
+                            if (_elementObj == null)
+                                continue;
+
+                            string x = _elementObj.ToString();
+
+                            if (Condition[_j + 1].Length > 7 && Condition[_j + 1].Substring(0, 7) == "CONTAIN")
+                            {
+                                string _compareValue = Condition[_j + 1].Substring(7, Condition[_j + 1].Length - 7);
+
+                                if (x.Contains(_compareValue) == false)
+                                {
+                                    _isSatisfy = false;
+                                    break;
+                                }
+                            }
+                            else if (x != Condition[_j + 1])
                             {
                                 _isSatisfy = false;
                                 break;
@@ -188,10 +212,12 @@ namespace Calculator
                     if (_isSatisfy == false)
                         continue;
 
-                    SelectedRow.Add(Tuple.Create<int,int>(_i, _gotCount));
+                    if (_offOffset == false)
+                        SelectedRow.Add(Tuple.Create(_i, _gotCount));
+
                     _gotCount++;
 
-                    if(Columns != null)
+                    if (Columns.Count > 0)
                     {
                         for (int _j = 0; _j < Columns.Count; _j++)
                         {
@@ -212,6 +238,12 @@ namespace Calculator
                 }
 
                 Limit = _gotCount;
+
+                if (_offOffset == true)
+                {
+                    Offset = _archievedOffset;
+                    Limit = _archievedLimit;
+                }
 
                 return _dataTable;
             }
@@ -240,7 +272,7 @@ namespace Calculator
         /// <returns></returns>
         public Tuple<int, int> GetOffsetLimitNow()
         {
-            Tuple<int, int> _tuple = Tuple.Create<int, int>(Offset, Limit);
+            Tuple<int, int> _tuple = Tuple.Create(Offset, Limit);
             return _tuple;
         }
 
@@ -303,8 +335,8 @@ namespace Calculator
             {
                 if (_dataTable.Rows[_indexInTable].Field<bool>("NotDelete") == false)
                 {
-                    foreach(var _i  in SelectedRow)
-                        if(_i.Item2 == _indexInTable)
+                    foreach (var _i in SelectedRow)
+                        if (_i.Item2 == _indexInTable)
                         {
                             ListElements.RemoveAt(_i.Item1);
                             length--;
@@ -331,14 +363,14 @@ namespace Calculator
             if (_dataTable == null || _indexInTable >= _dataTable.Rows.Count)
             {
                 MessageBox.Show("Couldn't change element", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return ;
+                return;
             }
             else
             {
                 foreach (var _i in SelectedRow)
                     if (_i.Item2 == _indexInTable)
                     {
-                        if(Columns != null)
+                        if (Columns != null)
                         {
                             for (int _j = 0; _j < Columns.Count; _j++)
                             {
@@ -358,8 +390,84 @@ namespace Calculator
                         break;
                     }
 
-                return ;
+                return;
             }
+        }
+
+        /// <summary>
+        /// Change all Elements which satisfy with conditions
+        /// </summary>
+        /// <param name="_query">Queries List</param>
+        /// <param name="_newValue">New value in JObject</param>
+        /// <return>Return DataTable</return>
+        public void ChangeElementswithCondition(List<string> _query, JObject _newValue)
+        {
+            try
+            {
+                if (_query.Count % 2 != 0 && (_query.Count != 1 || _query[0] != "SAME"))
+                    throw new Exception();
+
+                DataTable _dataTable = new DataTable();
+
+                for (int _i = 0; _i < length; _i++)
+                {
+                    bool _isSatisfy = true;
+
+                    if (Condition.Count > 0)
+                    {
+                        for (int _j = 0; _j < Condition.Count; _j += 2)
+                        { 
+                            var _elementObj = ListElements[_i][Condition[_j]];
+                            if (_elementObj == null)
+                                continue;
+
+                            string x = _elementObj.ToString();
+
+                            if (Condition[_j + 1].Length > 7 && Condition[_j + 1].Substring(0, 7) == "CONTAIN")
+                            {
+                                string _compareValue = Condition[_j + 1].Substring(7, Condition[_j + 1].Length - 7);
+
+                                if (x.Contains(_compareValue) == false)
+                                {
+                                    _isSatisfy = false;
+                                    break;
+                                }
+                            }
+                            else if (x != Condition[_j + 1])
+                            {
+                                _isSatisfy = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (_isSatisfy == false)
+                        continue;
+
+                    foreach(JProperty jProperty in _newValue.Properties())
+                        ListElements[_i][jProperty.Name] = jProperty.Value;
+
+                }
+
+                return;
+            }
+            catch (Exception ex)
+            {
+                DialogResult _errorDialog = MessageBox.Show("Couldn't get or change data\n" + ex, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+
+                if (_errorDialog == DialogResult.OK)
+                    Application.Exit();
+                return;
+            }
+        }
+        public static JObject ConvertDataRowToJObject(DataRow _dataRow)
+        {
+            JObject _returnObj = new JObject();
+
+            foreach(DataColumn _col in _dataRow.Table.Columns)
+                _returnObj.Add(_col.ColumnName, JToken.FromObject(_dataRow[_col]));
+
+            return _returnObj;
         }
         public JArray Export()
         {

@@ -1,6 +1,4 @@
-﻿using Calculator;
-
-namespace Learning_System
+﻿namespace Learning_System
 {
     public partial class HomePageForm : Form
     {
