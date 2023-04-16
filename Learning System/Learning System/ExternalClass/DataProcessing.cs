@@ -13,24 +13,23 @@ namespace Learning_System.ExternalClass
 {
     public class DataProcessing
     {
-        private static JArray ListElements { get; set; } = new JArray();
+        private JArray ListElements { get; set; } = new JArray();
         private List<string> ShowColumnsName { get; set; } = new List<string>();
         private List<Type> ShowColumnsType { get; set; } = new List<Type>();
-        private static int length { get; set; }
-        private static int Limit { get; set; }
-        private static List<string> Condition { get; set; } = new List<string>();
-        private static List<string> Columns { get; set; } = new List<string>();
-        private static int Offset { get; set; }
+        private int length { get; set; }
+        private int Limit { get; set; }
+        private List<string> Condition { get; set; } = new List<string>();
+        private List<string> Columns { get; set; } = new List<string>();
+        private int Offset { get; set; }
         private List<Tuple<int, int>> SelectedRow { get; set; } = new List<Tuple<int, int>>();
         public static List<string> emptyList { get; } = new List<string>();
 
         private const int DEFAULT_LIMIT = 25;
-
+        
         /// <summary>
         /// Import data file
         /// </summary>
         /// <param name="_jsonDataList">Data which is parsed in JArray.</param>
-        /// IMPORTANT: Data needs to have "NotDelete" property
         /// <param name="_columns">List of columns' name you want to show</param>
         /// <param name="_columnsType">List of columns' type you want to show</param>
         public void Import(List<string> _columns, List<Type> _columnsType)
@@ -49,12 +48,9 @@ namespace Learning_System.ExternalClass
                 DialogResult _errorDialog = MessageBox.Show("Couldn't import data\n" + ex, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
 
                 if (_errorDialog == DialogResult.Retry)
-                {
                     Import(_columns, _columnsType);
-                    return;
-                }
-                else
-                    return;
+                    
+                return;
             }
         }
         public void Import(JArray _jsonDataList)
@@ -87,12 +83,9 @@ namespace Learning_System.ExternalClass
                 DialogResult _errorDialog = MessageBox.Show("Couldn't import data\n" + ex, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
 
                 if (_errorDialog == DialogResult.Retry)
-                {
                     Import(_jsonDataList);
-                    return;
-                }
-                else
-                    return;
+                    
+                return;
             }
         }
 
@@ -101,10 +94,10 @@ namespace Learning_System.ExternalClass
         /// </summary>
         /// <param name="_offset">First index you want to get</param>
         /// <param name="_limit">Number of elements you want to get</param>
-        /// <param name="_query">Queries List</param>
-        /// <param name="_columns">Columns List</param>
+        /// <param name="_query">Queries List (optional)</param>
+        /// <param name="_columns">Columns List (optional)</param>
         /// <return>Return DataTable</return>
-        public DataTable GetList(int _offset, int _limit, List<string> _query, List<string> _columns)
+        public DataTable GetList(int _offset, int _limit, List<string> _query, List<string> _columns, string _sort)
         {
             try
             {
@@ -116,14 +109,12 @@ namespace Learning_System.ExternalClass
                 Offset = _offset;
                 Limit = _limit;
 
-                bool _offOffset = _query.Contains("OffsetOff");
-
                 if (_query.Count == 1 && _query[0] == "SAME")
                     Condition = Condition;
                 else
                     Condition = _query;
 
-                if (_columns.Count == 1 && _columns.Count == 1 && _columns[0] == "SAME")
+                if (_columns.Count == 1 && _columns[0] == "SAME")
                     Columns = Columns;
                 else
                     Columns = _columns;
@@ -167,8 +158,7 @@ namespace Learning_System.ExternalClass
                     }
                 }
 
-                if(_offOffset == false)
-                    SelectedRow.Clear();
+                SelectedRow.Clear();
 
                 int _gotCount = 0;
 
@@ -182,7 +172,7 @@ namespace Learning_System.ExternalClass
                     {
                         for (int _j = 0; _j < Condition.Count; _j += 2)
                         {
-                            if (Condition[_j] == "OffsetOff")
+                            if (Condition[_j] == "GetMaxOn")
                                 continue;
 
                             var _elementObj = ListElements[_i][Condition[_j]];
@@ -193,7 +183,7 @@ namespace Learning_System.ExternalClass
 
                             if (Condition[_j + 1].Length > 7 && Condition[_j + 1].Substring(0, 7) == "CONTAIN")
                             {
-                                string _compareValue = Condition[_j + 1].Substring(7, Condition[_j + 1].Length - 7);
+                                string _compareValue = Condition[_j + 1].Substring(8, Condition[_j + 1].Length - 8);
 
                                 if (x.Contains(_compareValue) == false)
                                 {
@@ -212,8 +202,7 @@ namespace Learning_System.ExternalClass
                     if (_isSatisfy == false)
                         continue;
 
-                    if (_offOffset == false)
-                        SelectedRow.Add(Tuple.Create(_i, _gotCount));
+                    SelectedRow.Add(Tuple.Create(_i, _gotCount));
 
                     _gotCount++;
 
@@ -239,10 +228,11 @@ namespace Learning_System.ExternalClass
 
                 Limit = _gotCount;
 
-                if (_offOffset == true)
+                if(_sort != null)
                 {
-                    Offset = _archievedOffset;
-                    Limit = _archievedLimit;
+                    DataView _dv = _dataTable.DefaultView;
+                    _dv.Sort = _sort;
+                    _dataTable = _dv.ToTable();
                 }
 
                 return _dataTable;
@@ -255,6 +245,47 @@ namespace Learning_System.ExternalClass
                     Application.Exit();
                 return null;
             }
+        }
+
+        public DataTable GetList(int _offset, int _limit)
+        {
+            return GetList(_offset, _limit, emptyList, emptyList, null);
+        }
+
+        public DataTable GetList(int _offset, int _limit, string _sort)
+        {
+            return GetList(_offset, _limit, emptyList, emptyList, _sort);
+        }
+
+        public DataTable GetList(int _offset, int _limit, List<string> _query, string _sort)
+        {
+            return GetList(_offset, _limit, _query, emptyList, _sort);
+        }
+
+        public DataTable GetList(int _offset, int _limit, List<string> _query, List<string> _columns)
+        {
+            return GetList(_offset, _limit, _query, _columns, null);
+        }
+
+        /// <summary>
+        /// Return max / min datarow satisfy conditions
+        /// </summary>
+        /// <param name="_offset">Offset</param>
+        /// <param name="_limit">Limit</param>
+        /// <param name="_query">Conditions list</param>
+        /// <param name="_sort">Sort conditions</param>
+        /// <param name="_maxMin">MAX / MIN</param>
+        /// <returns>A datarow</returns>
+        public DataRow GetMaxMin(int _offset, int _limit, List<string> _query, string _sort, string _maxMin)
+        {
+            DataTable _sortedDB = GetList(_offset, _limit, _query, _sort);
+
+            if (_maxMin == "MAX")
+                return _sortedDB.Rows[_sortedDB.Rows.Count - 1];
+            else if (_maxMin == "MIN")
+                return _sortedDB.Rows[0];
+            else
+                return null;
         }
 
         /// <summary>
@@ -333,7 +364,28 @@ namespace Learning_System.ExternalClass
             }
             else
             {
-                if (_dataTable.Rows[_indexInTable].Field<bool>("NotDelete") == false)
+                if (_dataTable.Rows[_indexInTable].Table.Columns.Contains("NotDelete") == true)
+                {
+                    if (_dataTable.Rows[_indexInTable].Field<bool>("NotDelete") == false)
+                    {
+                        foreach (var _i in SelectedRow)
+                            if (_i.Item2 == _indexInTable)
+                            {
+                                ListElements.RemoveAt(_i.Item1);
+                                length--;
+
+                                break;
+                            }
+
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("You don't have permission to delete this element", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                else
                 {
                     foreach (var _i in SelectedRow)
                         if (_i.Item2 == _indexInTable)
@@ -344,11 +396,6 @@ namespace Learning_System.ExternalClass
                             break;
                         }
 
-                    return;
-                }
-                else
-                {
-                    MessageBox.Show("You don't have permission to delete this element", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }
@@ -413,19 +460,19 @@ namespace Learning_System.ExternalClass
                 {
                     bool _isSatisfy = true;
 
-                    if (Condition.Count > 0)
+                    if (_query.Count > 0)
                     {
-                        for (int _j = 0; _j < Condition.Count; _j += 2)
+                        for (int _j = 0; _j < _query.Count; _j += 2)
                         { 
-                            var _elementObj = ListElements[_i][Condition[_j]];
+                            var _elementObj = ListElements[_i][_query[_j]];
                             if (_elementObj == null)
                                 continue;
 
                             string x = _elementObj.ToString();
 
-                            if (Condition[_j + 1].Length > 7 && Condition[_j + 1].Substring(0, 7) == "CONTAIN")
+                            if (_query[_j + 1].Length > 7 && _query[_j + 1].Substring(0, 7) == "CONTAIN")
                             {
-                                string _compareValue = Condition[_j + 1].Substring(7, Condition[_j + 1].Length - 7);
+                                string _compareValue = _query[_j + 1].Substring(7, _query[_j + 1].Length - 7);
 
                                 if (x.Contains(_compareValue) == false)
                                 {
@@ -433,7 +480,7 @@ namespace Learning_System.ExternalClass
                                     break;
                                 }
                             }
-                            else if (x != Condition[_j + 1])
+                            else if (x != _query[_j + 1])
                             {
                                 _isSatisfy = false;
                                 break;
@@ -486,6 +533,20 @@ namespace Learning_System.ExternalClass
             MessageBox.Show("Export all data!", "Success", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
             return _returnData;
+        }
+
+        /// <summary>
+        /// Copy data to another DataProcessing _x
+        /// </summary>
+        /// <param name="_x"></param>
+        public void CopyData(DataProcessing _x)
+        {
+            List<string> _newColumnName = new List<string>(ShowColumnsName);
+            List<Type> _newColumnType = new List<Type>(ShowColumnsType);
+            JArray _newListElements = new JArray(ListElements);
+
+            _x.Import(_newColumnName, _newColumnType);
+            _x.Import(_newListElements);
         }
     }
 }

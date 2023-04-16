@@ -49,7 +49,7 @@
             CategoriesForm_HeadingLbl.AutoSize = true;
             CategoriesForm_HeadingLbl.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point);
             CategoriesForm_HeadingLbl.ForeColor = Color.FromArgb(194, 36, 36);
-            CategoriesForm_HeadingLbl.Location = new Point(53, 17);
+            CategoriesForm_HeadingLbl.Location = new Point(53, 19);
             CategoriesForm_HeadingLbl.Name = "CategoriesForm_HeadingLbl";
             CategoriesForm_HeadingLbl.Size = new Size(227, 46);
             CategoriesForm_HeadingLbl.TabIndex = 0;
