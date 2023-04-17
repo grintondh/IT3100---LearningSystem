@@ -16,5 +16,12 @@ namespace Learning_System
         {
             InitializeComponent();
         }
+
+        private void QuestionsForm_CreateNewQuestionBtn_Click(object sender, EventArgs e)
+        {
+            AddNewQuestionForm addNewQuestionForm = new AddNewQuestionForm();
+            //addNewQuestionForm.ShowDialog();
+            addNewQuestionForm.Show();
+        }
     }
 }

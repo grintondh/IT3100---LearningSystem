@@ -49,6 +49,7 @@
             QuestionsForm_CreateNewQuestionBtn.TabIndex = 13;
             QuestionsForm_CreateNewQuestionBtn.Text = "CREATE A NEW QUESTION ...";
             QuestionsForm_CreateNewQuestionBtn.UseVisualStyleBackColor = false;
+            QuestionsForm_CreateNewQuestionBtn.Click += QuestionsForm_CreateNewQuestionBtn_Click;
             // 
             // QuestionsForm_ShowOldQuestionsCb
             // 
