@@ -111,7 +111,7 @@ namespace Learning_System
                 DataProcessing _p = new DataProcessing();
                 categoriesData.CopyData(_p);
 
-                List<string> _query = new List<string> { "Id", _newCategory.Id.ToString() };
+                List<string> _query = new List<string> { "Id", _parentId.ToString() };
                 DataRow _parentRow = _p.GetMaxMin(0, 1, _query, null, "MAX");
 
                 if (_parentRow != null)
