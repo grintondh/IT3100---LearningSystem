@@ -23,7 +23,6 @@ namespace Learning_System
         private DataTable categoriesDataTable = new DataTable();
         private int currentLimit = 50;
         private int currentOffset = 0;
-
         public void loadCombobox()
         {
             try

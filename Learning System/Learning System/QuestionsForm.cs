@@ -15,15 +15,15 @@ namespace Learning_System
 {
     public partial class QuestionsForm : UserControl
     {
-         private List<Categories> listCategories = new List<Categories>();
-         private List<Categories> newListCategories = new List<Categories>();
         public void loadCategoriesData()
         {
+            List<Categories> listCategories = new List<Categories>();
+            List<Categories> newListCategories = new List<Categories>();
             try
             {
-                JArray _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("category.json", null, null);
+                JArray _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
                 listCategories = _categoriesData.ToObject<List<Categories>>();
-                AddSpace(ref newListCategories, listCategories, 0, "  ");
+                AddSpace(ref newListCategories,ref listCategories, 0, "  ");
                 newListCategories.Reverse();
             }
             catch (Exception ex)
@@ -37,16 +37,16 @@ namespace Learning_System
 
             QuestionsForm_SelectCategoryCbo.ValueMember = "Id";
             QuestionsForm_SelectCategoryCbo.DisplayMember = "Name";
-            QuestionsForm_SelectCategoryCbo.DataSource = listCategories;
+            QuestionsForm_SelectCategoryCbo.DataSource = newListCategories;
         }
 
         //Them Space cho cac lua chon Combobox
-        public void AddSpace(ref List<Categories> List, List<Categories> addList, int begin, string space)
+        public void AddSpace(ref List<Categories> List,ref List<Categories> addList, int begin, string space)
         {
             foreach (int x in addList[begin].SubArray)
             {
                 addList[x].Name = space + addList[x].Name;
-                AddSpace(ref List, addList, x, space + "  ");
+                AddSpace(ref List, ref addList, x, space + "  ");
             }
             addList[begin].Name = "  " + addList[begin].Name;
 
