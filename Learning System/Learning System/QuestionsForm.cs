@@ -23,7 +23,7 @@ namespace Learning_System
             {
                 JArray _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
                 listCategories = _categoriesData.ToObject<List<Categories>>();
-                AddSpace(ref newListCategories,ref listCategories, 0, "  ");
+                AddSpace(ref newListCategories, ref listCategories, 0, "  ");
                 newListCategories.Reverse();
             }
             catch (Exception ex)
@@ -41,7 +41,7 @@ namespace Learning_System
         }
 
         //Them Space cho cac lua chon Combobox
-        public void AddSpace(ref List<Categories> List,ref List<Categories> addList, int begin, string space)
+        public void AddSpace(ref List<Categories> List, ref List<Categories> addList, int begin, string space)
         {
             foreach (int x in addList[begin].SubArray)
             {
@@ -92,6 +92,11 @@ namespace Learning_System
         private void QuestionsForm_SelectCategoryCbo_DropDown(object sender, EventArgs e)
         {
             loadCategoriesData();
+        }
+
+        private void QuestionsForm_ShowOldQuestionsCb_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
