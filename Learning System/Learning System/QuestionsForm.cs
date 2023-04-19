@@ -94,9 +94,12 @@ namespace Learning_System
             loadCategoriesData();
         }
 
-        private void QuestionsForm_ShowOldQuestionsCb_CheckedChanged(object sender, EventArgs e)
+        private void QuestionsForm_CreateNewQuestionBtn_Click(object sender, EventArgs e)
         {
-
+            /*
+            var val = QuestionsForm_SelectCategoryCbo.SelectedValue.ToString();
+            MessageBox.Show(val, "?");
+            */
         }
     }
 }

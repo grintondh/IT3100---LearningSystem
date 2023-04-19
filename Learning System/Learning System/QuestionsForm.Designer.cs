@@ -43,34 +43,34 @@
             QuestionsForm_CreateNewQuestionBtn.FlatStyle = FlatStyle.Flat;
             QuestionsForm_CreateNewQuestionBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             QuestionsForm_CreateNewQuestionBtn.ForeColor = Color.White;
-            QuestionsForm_CreateNewQuestionBtn.Location = new Point(7, 207);
+            QuestionsForm_CreateNewQuestionBtn.Location = new Point(51, 242);
             QuestionsForm_CreateNewQuestionBtn.Name = "QuestionsForm_CreateNewQuestionBtn";
-            QuestionsForm_CreateNewQuestionBtn.Size = new Size(265, 44);
+            QuestionsForm_CreateNewQuestionBtn.Size = new Size(265, 51);
             QuestionsForm_CreateNewQuestionBtn.TabIndex = 13;
-            QuestionsForm_CreateNewQuestionBtn.Text = "CREATE A NEW QUESTION ...";
+            QuestionsForm_CreateNewQuestionBtn.Text = "CREATE A NEW QUESTION";
             QuestionsForm_CreateNewQuestionBtn.UseVisualStyleBackColor = false;
+            QuestionsForm_CreateNewQuestionBtn.Click += QuestionsForm_CreateNewQuestionBtn_Click;
             // 
             // QuestionsForm_ShowOldQuestionsCb
             // 
             QuestionsForm_ShowOldQuestionsCb.AutoSize = true;
-            QuestionsForm_ShowOldQuestionsCb.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            QuestionsForm_ShowOldQuestionsCb.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             QuestionsForm_ShowOldQuestionsCb.ForeColor = Color.Black;
-            QuestionsForm_ShowOldQuestionsCb.Location = new Point(27, 161);
+            QuestionsForm_ShowOldQuestionsCb.Location = new Point(71, 197);
             QuestionsForm_ShowOldQuestionsCb.Name = "QuestionsForm_ShowOldQuestionsCb";
-            QuestionsForm_ShowOldQuestionsCb.Size = new Size(215, 27);
+            QuestionsForm_ShowOldQuestionsCb.Size = new Size(237, 29);
             QuestionsForm_ShowOldQuestionsCb.TabIndex = 12;
             QuestionsForm_ShowOldQuestionsCb.Text = "Also show old questions";
             QuestionsForm_ShowOldQuestionsCb.UseVisualStyleBackColor = true;
-            QuestionsForm_ShowOldQuestionsCb.CheckedChanged += QuestionsForm_ShowOldQuestionsCb_CheckedChanged;
             // 
             // QuestionsForm_ShowFromSubcategoriesCb
             // 
             QuestionsForm_ShowFromSubcategoriesCb.AutoSize = true;
-            QuestionsForm_ShowFromSubcategoriesCb.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            QuestionsForm_ShowFromSubcategoriesCb.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             QuestionsForm_ShowFromSubcategoriesCb.ForeColor = Color.Black;
-            QuestionsForm_ShowFromSubcategoriesCb.Location = new Point(27, 128);
+            QuestionsForm_ShowFromSubcategoriesCb.Location = new Point(72, 165);
             QuestionsForm_ShowFromSubcategoriesCb.Name = "QuestionsForm_ShowFromSubcategoriesCb";
-            QuestionsForm_ShowFromSubcategoriesCb.Size = new Size(337, 27);
+            QuestionsForm_ShowFromSubcategoriesCb.Size = new Size(372, 29);
             QuestionsForm_ShowFromSubcategoriesCb.TabIndex = 11;
             QuestionsForm_ShowFromSubcategoriesCb.Text = "Also show questions from subcategories";
             QuestionsForm_ShowFromSubcategoriesCb.UseVisualStyleBackColor = true;
@@ -80,7 +80,7 @@
             QuestionsForm_Lbl.AutoSize = true;
             QuestionsForm_Lbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             QuestionsForm_Lbl.ForeColor = Color.Black;
-            QuestionsForm_Lbl.Location = new Point(27, 94);
+            QuestionsForm_Lbl.Location = new Point(47, 127);
             QuestionsForm_Lbl.Name = "QuestionsForm_Lbl";
             QuestionsForm_Lbl.Size = new Size(464, 28);
             QuestionsForm_Lbl.TabIndex = 10;
@@ -88,11 +88,11 @@
             // 
             // QuestionsForm_SelectCategoryCbo
             // 
-            QuestionsForm_SelectCategoryCbo.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            QuestionsForm_SelectCategoryCbo.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             QuestionsForm_SelectCategoryCbo.FormattingEnabled = true;
-            QuestionsForm_SelectCategoryCbo.Location = new Point(183, 63);
+            QuestionsForm_SelectCategoryCbo.Location = new Point(217, 76);
             QuestionsForm_SelectCategoryCbo.Name = "QuestionsForm_SelectCategoryCbo";
-            QuestionsForm_SelectCategoryCbo.Size = new Size(164, 31);
+            QuestionsForm_SelectCategoryCbo.Size = new Size(332, 33);
             QuestionsForm_SelectCategoryCbo.TabIndex = 9;
             QuestionsForm_SelectCategoryCbo.DropDown += QuestionsForm_SelectCategoryCbo_DropDown;
             QuestionsForm_SelectCategoryCbo.Click += QuestionsForm_SelectCategoryCbo_Click;
@@ -100,11 +100,11 @@
             // QuestionsForm_SelectCategoryLbl
             // 
             QuestionsForm_SelectCategoryLbl.AutoSize = true;
-            QuestionsForm_SelectCategoryLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            QuestionsForm_SelectCategoryLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             QuestionsForm_SelectCategoryLbl.ForeColor = Color.Black;
-            QuestionsForm_SelectCategoryLbl.Location = new Point(7, 64);
+            QuestionsForm_SelectCategoryLbl.Location = new Point(47, 79);
             QuestionsForm_SelectCategoryLbl.Name = "QuestionsForm_SelectCategoryLbl";
-            QuestionsForm_SelectCategoryLbl.Size = new Size(149, 23);
+            QuestionsForm_SelectCategoryLbl.Size = new Size(164, 25);
             QuestionsForm_SelectCategoryLbl.TabIndex = 8;
             QuestionsForm_SelectCategoryLbl.Text = "Select a category :";
             // 
@@ -113,7 +113,7 @@
             QuestionsForm_QuestionsBankLbl.AutoSize = true;
             QuestionsForm_QuestionsBankLbl.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point);
             QuestionsForm_QuestionsBankLbl.ForeColor = Color.FromArgb(194, 36, 36);
-            QuestionsForm_QuestionsBankLbl.Location = new Point(3, 11);
+            QuestionsForm_QuestionsBankLbl.Location = new Point(40, 21);
             QuestionsForm_QuestionsBankLbl.Name = "QuestionsForm_QuestionsBankLbl";
             QuestionsForm_QuestionsBankLbl.Size = new Size(251, 46);
             QuestionsForm_QuestionsBankLbl.TabIndex = 7;
