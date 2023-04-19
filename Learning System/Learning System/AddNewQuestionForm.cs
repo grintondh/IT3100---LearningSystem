@@ -13,9 +13,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Learning_System
-{
+{   
+    
     public partial class AddNewQuestionForm : Form
     {
+
+        public static int Count_Choices = 0;
+
         // Data cho category
         private DataProcessing categoriesData = new DataProcessing();
         private List<string> showColumns = new List<string> { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
@@ -170,5 +174,56 @@ namespace Learning_System
         {
 
         }
+
+        private void AddNewQuestionForm_MoreChoicesBtn_Click_1(object sender, EventArgs e)
+        {
+            Count_Choices++;
+            //panel_choice_11.Visible = false;
+            //panel_choice_10.Visible = false;
+            //panel_choice_9.Visible = false;
+            //panel_choice_8.Visible = false;
+            //panel_choice_7.Visible = false;
+            //panel_choice_6.Visible = false;
+            //panel_choice_5.Visible = false;
+            //panel_choice_4.Visible = false;
+            //panel_choice_3.Visible = false;
+            if (Count_Choices == 1)
+            {
+                panel_choice_5.Visible = true;
+                panel_choice_4.Visible = true;
+                panel_choice_3.Visible = true;
+                panel_button.Location = new System.Drawing.Point(0, 1558);
+            }
+            //else
+            if (Count_Choices == 2)
+            {
+                panel_choice_8.Visible = true;
+                panel_choice_7.Visible = true;
+                panel_choice_6.Visible = true;
+                panel_choice_5.Visible = true;
+                panel_choice_4.Visible = true;
+                panel_choice_3.Visible = true;
+                panel_button.Location = new System.Drawing.Point(0, 1558 );
+            }
+                //else
+            if (Count_Choices == 3)
+            {
+                panel_choice_11.Visible = true;
+                panel_choice_10.Visible = true;
+                panel_choice_9.Visible = true;
+                panel_choice_8.Visible = true;
+                panel_choice_7.Visible = true;
+                panel_choice_6.Visible = true;
+                panel_choice_5.Visible = true;
+                panel_choice_4.Visible = true;
+                panel_choice_3.Visible = true;
+                panel_button.Location = new System.Drawing.Point(0, 1558);
+            }
+                
+            
+            
+        }
+
+        
     }
 }
