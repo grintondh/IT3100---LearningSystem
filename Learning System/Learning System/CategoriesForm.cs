@@ -119,7 +119,7 @@ namespace Learning_System
                     _parentRow.Field<JArray>("SubArray").Add(_newCategory.Id);
                     JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
 
-                    categoriesData.ChangeElementswithCondition(_query, JObject.FromObject(x));
+                    categoriesData.ChangeElementswithCondition(_query, x);
 
                     /*
                     string _jsonData = JsonConvert.SerializeObject(categoriesData.Export());
