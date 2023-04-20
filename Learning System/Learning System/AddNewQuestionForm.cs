@@ -13,12 +13,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Learning_System
-{   
-    
+{
+
     public partial class AddNewQuestionForm : Form
     {
 
-        public static int Count_Choices = 0;
+        private int Count_Choices = 0;
 
         // Data cho category
         private DataProcessing categoriesData = new DataProcessing();
@@ -101,9 +101,6 @@ namespace Learning_System
                 AddNewQuestionForm_ErrorLbl.Text = "";
                 var _parentId = AddNewQuestionForm_CategoryCbo.SelectedValue;
                 var _name = AddNewQuestionForm_NameTxt.Text;
-                var text = new MemoryStream();
-                //AddNewQuestionForm_TextRtb.SaveFile(text, RichTextBoxStreamType.RichText);
-                //text.Position = 0;
                 var _content = AddNewQuestionForm_TextRtb.Rtf;
                 try
                 {
@@ -115,12 +112,93 @@ namespace Learning_System
                     return;
                 }
                 var _defaultmark = Convert.ToDouble(AddNewQuestionForm_MarkTxt.Text);
+                // doc du lieu tu dap an
                 var _qchoice1 = new QuestionChoice()
                 {
-                    choice = AddNewQuestionForm_Choice1Rtb.Text,
-                    mark = Convert.ToDouble(AddNewQuestionForm_Grade1Cbo.SelectedItem)
+                    choice = richTextBox1.Text,
+                    mark = (Convert.ToDouble(comboBox1.Text.Substring(0, comboBox1.Text.Length - 1))) / 100.0
                 };
-                var _choice = new List<QuestionChoice> { _qchoice1 };
+                var _qchoice2 = new QuestionChoice()
+                {
+                    choice = richTextBox2.Text,
+                    mark = (Convert.ToDouble(comboBox2.Text.Substring(0, comboBox2.Text.Length - 1))) / 100.0
+                };
+                var _qchoice3 = new QuestionChoice()
+                {
+                    choice = richTextBox3.Text,
+                    mark = (Convert.ToDouble(comboBox3.Text.Substring(0, comboBox3.Text.Length - 1))) / 100.0
+                };
+                var _qchoice4 = new QuestionChoice()
+                {
+                    choice = richTextBox4.Text,
+                    mark = (Convert.ToDouble(comboBox4.Text.Substring(0, comboBox4.Text.Length - 1))) / 100.0
+                };
+                var _qchoice5 = new QuestionChoice()
+                {
+                    choice = richTextBox5.Text,
+                    mark = (Convert.ToDouble(comboBox5.Text.Substring(0, comboBox5.Text.Length - 1))) / 100.0
+                };
+                var _qchoice6 = new QuestionChoice()
+                {
+                    choice = richTextBox6.Text,
+                    mark = (Convert.ToDouble(comboBox6.Text.Substring(0, comboBox6.Text.Length - 1))) / 100.0
+                };
+                var _qchoice7 = new QuestionChoice()
+                {
+                    choice = richTextBox7.Text,
+                    mark = (Convert.ToDouble(comboBox7.Text.Substring(0, comboBox7.Text.Length - 1))) / 100.0
+                };
+                var _qchoice8 = new QuestionChoice()
+                {
+                    choice = richTextBox8.Text,
+                    mark = (Convert.ToDouble(comboBox8.Text.Substring(0, comboBox8.Text.Length - 1))) / 100.0
+                };
+                var _qchoice9 = new QuestionChoice()
+                {
+                    choice = richTextBox9.Text,
+                    mark = (Convert.ToDouble(comboBox9.Text.Substring(0, comboBox9.Text.Length - 1))) / 100.0
+                };
+                var _qchoice10 = new QuestionChoice()
+                {
+                    choice = richTextBox10.Text,
+                    mark = (Convert.ToDouble(comboBox10.Text.Substring(0, comboBox10.Text.Length - 1))) / 100.0
+                };
+                var _qchoice11 = new QuestionChoice()
+                {
+                    choice = richTextBox11.Text,
+                    mark = (Convert.ToDouble(comboBox11.Text.Substring(0, comboBox11.Text.Length - 1))) / 100.0
+                };
+                // them du lieu tu dap ap vao list _choice
+                var _choice = new List<QuestionChoice>();
+                _choice.Add(_qchoice1);
+                _choice.Add(_qchoice2);
+                if (Count_Choices == 1)
+                {
+                    _choice.Add(_qchoice3);
+                    _choice.Add(_qchoice4);
+                    _choice.Add(_qchoice5);
+                }
+                if (Count_Choices == 2)
+                {
+                    _choice.Add(_qchoice3);
+                    _choice.Add(_qchoice4);
+                    _choice.Add(_qchoice5);
+                    _choice.Add(_qchoice6);
+                    _choice.Add(_qchoice7);
+                    _choice.Add(_qchoice8);
+                }
+                if (Count_Choices == 3)
+                {
+                    _choice.Add(_qchoice3);
+                    _choice.Add(_qchoice4);
+                    _choice.Add(_qchoice5);
+                    _choice.Add(_qchoice6);
+                    _choice.Add(_qchoice7);
+                    _choice.Add(_qchoice8);
+                    _choice.Add(_qchoice9);
+                    _choice.Add(_qchoice10);
+                    _choice.Add(_qchoice11);
+                }
 
                 DataRow _maxIDRow = questionsData.GetMaxMin(0, questionsData.GetLength(), DataProcessing.emptyList, "ID asc", "MAX");
 
@@ -172,58 +250,50 @@ namespace Learning_System
 
         private void AddNewQuestionForm_MoreChoicesBtn_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void AddNewQuestionForm_MoreChoicesBtn_Click_1(object sender, EventArgs e)
-        {
             Count_Choices++;
-            //panel_choice_11.Visible = false;
-            //panel_choice_10.Visible = false;
-            //panel_choice_9.Visible = false;
-            //panel_choice_8.Visible = false;
-            //panel_choice_7.Visible = false;
-            //panel_choice_6.Visible = false;
-            //panel_choice_5.Visible = false;
-            //panel_choice_4.Visible = false;
-            //panel_choice_3.Visible = false;
             if (Count_Choices == 1)
             {
-                panel_choice_5.Visible = true;
-                panel_choice_4.Visible = true;
-                panel_choice_3.Visible = true;
-                panel_button.Location = new System.Drawing.Point(0, 1558);
+                panel_choice_3.Height = 258;
+                panel_choice_4.Height = 258;
+                panel_choice_5.Height = 258;
             }
             //else
             if (Count_Choices == 2)
             {
-                panel_choice_8.Visible = true;
-                panel_choice_7.Visible = true;
-                panel_choice_6.Visible = true;
-                panel_choice_5.Visible = true;
-                panel_choice_4.Visible = true;
-                panel_choice_3.Visible = true;
-                panel_button.Location = new System.Drawing.Point(0, 1558 );
+                panel_choice_6.Height = 258;
+                panel_choice_7.Height = 258;
+                panel_choice_8.Height = 258;
             }
-                //else
+            //else
             if (Count_Choices == 3)
             {
-                panel_choice_11.Visible = true;
-                panel_choice_10.Visible = true;
-                panel_choice_9.Visible = true;
-                panel_choice_8.Visible = true;
-                panel_choice_7.Visible = true;
-                panel_choice_6.Visible = true;
-                panel_choice_5.Visible = true;
-                panel_choice_4.Visible = true;
-                panel_choice_3.Visible = true;
-                panel_button.Location = new System.Drawing.Point(0, 1558);
+                panel_choice_9.Height = 258;
+                panel_choice_10.Height = 258;
+                panel_choice_11.Height = 258;
+                AddNewQuestionForm_MoreChoicesBtn.Visible = false;
             }
-                
-            
-            
         }
 
-        
+        private void AddNewQuestionForm_Load(object sender, EventArgs e)
+        {
+            panel_choice_11.Visible = true;
+            panel_choice_10.Visible = true;
+            panel_choice_9.Visible = true;
+            panel_choice_8.Visible = true;
+            panel_choice_7.Visible = true;
+            panel_choice_6.Visible = true;
+            panel_choice_5.Visible = true;
+            panel_choice_4.Visible = true;
+            panel_choice_3.Visible = true;
+            panel_choice_3.Height = 0;
+            panel_choice_4.Height = 0;
+            panel_choice_5.Height = 0;
+            panel_choice_6.Height = 0;
+            panel_choice_7.Height = 0;
+            panel_choice_8.Height = 0;
+            panel_choice_9.Height = 0;
+            panel_choice_10.Height = 0;
+            panel_choice_11.Height = 0;
+        }
     }
 }
