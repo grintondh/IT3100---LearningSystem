@@ -213,11 +213,12 @@
             // comboBox11
             // 
             comboBox11.FormattingEnabled = true;
-            comboBox11.Items.AddRange(new object[] { "1", "0,5", "0" });
+            comboBox11.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox11.Location = new Point(106, 201);
             comboBox11.Name = "comboBox11";
             comboBox11.Size = new Size(151, 28);
             comboBox11.TabIndex = 3;
+            comboBox11.Text = "None";
             // 
             // label19
             // 
@@ -269,11 +270,12 @@
             // comboBox10
             // 
             comboBox10.FormattingEnabled = true;
-            comboBox10.Items.AddRange(new object[] { "1", "0,5", "0" });
+            comboBox10.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox10.Location = new Point(106, 201);
             comboBox10.Name = "comboBox10";
             comboBox10.Size = new Size(151, 28);
             comboBox10.TabIndex = 3;
+            comboBox10.Text = "None";
             // 
             // label17
             // 
@@ -325,11 +327,12 @@
             // comboBox9
             // 
             comboBox9.FormattingEnabled = true;
-            comboBox9.Items.AddRange(new object[] { "1", "0,5", "0" });
+            comboBox9.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox9.Location = new Point(106, 201);
             comboBox9.Name = "comboBox9";
             comboBox9.Size = new Size(151, 28);
             comboBox9.TabIndex = 3;
+            comboBox9.Text = "None";
             // 
             // label15
             // 
@@ -381,11 +384,12 @@
             // comboBox8
             // 
             comboBox8.FormattingEnabled = true;
-            comboBox8.Items.AddRange(new object[] { "1", "0,5", "0" });
+            comboBox8.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox8.Location = new Point(106, 201);
             comboBox8.Name = "comboBox8";
             comboBox8.Size = new Size(151, 28);
             comboBox8.TabIndex = 3;
+            comboBox8.Text = "None";
             // 
             // label13
             // 
@@ -437,11 +441,12 @@
             // comboBox7
             // 
             comboBox7.FormattingEnabled = true;
-            comboBox7.Items.AddRange(new object[] { "1", "0,5", "0" });
+            comboBox7.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox7.Location = new Point(106, 201);
             comboBox7.Name = "comboBox7";
             comboBox7.Size = new Size(151, 28);
             comboBox7.TabIndex = 3;
+            comboBox7.Text = "None";
             // 
             // label11
             // 
@@ -493,11 +498,12 @@
             // comboBox6
             // 
             comboBox6.FormattingEnabled = true;
-            comboBox6.Items.AddRange(new object[] { "1", "0,5", "0" });
+            comboBox6.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox6.Location = new Point(106, 201);
             comboBox6.Name = "comboBox6";
             comboBox6.Size = new Size(151, 28);
             comboBox6.TabIndex = 3;
+            comboBox6.Text = "None";
             // 
             // label9
             // 
@@ -549,11 +555,12 @@
             // comboBox5
             // 
             comboBox5.FormattingEnabled = true;
-            comboBox5.Items.AddRange(new object[] { "1", "0,5", "0" });
+            comboBox5.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox5.Location = new Point(106, 201);
             comboBox5.Name = "comboBox5";
             comboBox5.Size = new Size(151, 28);
             comboBox5.TabIndex = 3;
+            comboBox5.Text = "None";
             // 
             // label7
             // 
@@ -605,11 +612,12 @@
             // comboBox4
             // 
             comboBox4.FormattingEnabled = true;
-            comboBox4.Items.AddRange(new object[] { "1", "0,5", "0" });
+            comboBox4.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox4.Location = new Point(106, 201);
             comboBox4.Name = "comboBox4";
             comboBox4.Size = new Size(151, 28);
             comboBox4.TabIndex = 3;
+            comboBox4.Text = "None";
             // 
             // label5
             // 
@@ -661,11 +669,12 @@
             // comboBox3
             // 
             comboBox3.FormattingEnabled = true;
-            comboBox3.Items.AddRange(new object[] { "1", "0,5", "0" });
+            comboBox3.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox3.Location = new Point(106, 201);
             comboBox3.Name = "comboBox3";
             comboBox3.Size = new Size(151, 28);
             comboBox3.TabIndex = 3;
+            comboBox3.Text = "None";
             // 
             // label3
             // 
@@ -716,11 +725,12 @@
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
-            comboBox2.Items.AddRange(new object[] { "100%", "50%" });
+            comboBox2.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox2.Location = new Point(106, 201);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(151, 28);
             comboBox2.TabIndex = 3;
+            comboBox2.Text = "None";
             // 
             // label1
             // 
@@ -854,6 +864,7 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(151, 28);
             comboBox1.TabIndex = 3;
+            comboBox1.Text = "None";
             // 
             // AddNewQuestionForm_Grade1Lbl
             // 

@@ -116,57 +116,57 @@ namespace Learning_System
                 var _qchoice1 = new QuestionChoice()
                 {
                     choice = richTextBox1.Text,
-                    mark = (Convert.ToDouble(comboBox1.Text.Substring(0, comboBox1.Text.Length - 1))) / 100.0
+                    mark = ConvertComboboxTextToDouble(comboBox1.Text)
                 };
                 var _qchoice2 = new QuestionChoice()
                 {
                     choice = richTextBox2.Text,
-                    mark = (Convert.ToDouble(comboBox2.Text.Substring(0, comboBox2.Text.Length - 1))) / 100.0
+                    mark = ConvertComboboxTextToDouble(comboBox2.Text)
                 };
                 var _qchoice3 = new QuestionChoice()
                 {
                     choice = richTextBox3.Text,
-                    mark = (Convert.ToDouble(comboBox3.Text.Substring(0, comboBox3.Text.Length - 1))) / 100.0
+                    mark = ConvertComboboxTextToDouble(comboBox3.Text)
                 };
                 var _qchoice4 = new QuestionChoice()
                 {
                     choice = richTextBox4.Text,
-                    mark = (Convert.ToDouble(comboBox4.Text.Substring(0, comboBox4.Text.Length - 1))) / 100.0
+                    mark = ConvertComboboxTextToDouble(comboBox4.Text)
                 };
                 var _qchoice5 = new QuestionChoice()
                 {
                     choice = richTextBox5.Text,
-                    mark = (Convert.ToDouble(comboBox5.Text.Substring(0, comboBox5.Text.Length - 1))) / 100.0
+                    mark = ConvertComboboxTextToDouble(comboBox5.Text)
                 };
                 var _qchoice6 = new QuestionChoice()
                 {
                     choice = richTextBox6.Text,
-                    mark = (Convert.ToDouble(comboBox6.Text.Substring(0, comboBox6.Text.Length - 1))) / 100.0
+                    mark = ConvertComboboxTextToDouble(comboBox6.Text)
                 };
                 var _qchoice7 = new QuestionChoice()
                 {
                     choice = richTextBox7.Text,
-                    mark = (Convert.ToDouble(comboBox7.Text.Substring(0, comboBox7.Text.Length - 1))) / 100.0
+                    mark = ConvertComboboxTextToDouble(comboBox7.Text)
                 };
                 var _qchoice8 = new QuestionChoice()
                 {
                     choice = richTextBox8.Text,
-                    mark = (Convert.ToDouble(comboBox8.Text.Substring(0, comboBox8.Text.Length - 1))) / 100.0
+                    mark = ConvertComboboxTextToDouble(comboBox8.Text)
                 };
                 var _qchoice9 = new QuestionChoice()
                 {
                     choice = richTextBox9.Text,
-                    mark = (Convert.ToDouble(comboBox9.Text.Substring(0, comboBox9.Text.Length - 1))) / 100.0
+                    mark = ConvertComboboxTextToDouble(comboBox9.Text)
                 };
                 var _qchoice10 = new QuestionChoice()
                 {
                     choice = richTextBox10.Text,
-                    mark = (Convert.ToDouble(comboBox10.Text.Substring(0, comboBox10.Text.Length - 1))) / 100.0
+                    mark = ConvertComboboxTextToDouble(comboBox10.Text)
                 };
                 var _qchoice11 = new QuestionChoice()
                 {
                     choice = richTextBox11.Text,
-                    mark = (Convert.ToDouble(comboBox11.Text.Substring(0, comboBox11.Text.Length - 1))) / 100.0
+                    mark = ConvertComboboxTextToDouble(comboBox11.Text)
                 };
                 // them du lieu tu dap ap vao list _choice
                 var _choice = new List<QuestionChoice>();
@@ -294,6 +294,18 @@ namespace Learning_System
             panel_choice_9.Height = 0;
             panel_choice_10.Height = 0;
             panel_choice_11.Height = 0;
+        }
+
+        private double ConvertComboboxTextToDouble(string _CboText)
+        {
+            try
+            {
+                return Convert.ToDouble(_CboText.Substring(0, _CboText.Length - 1)) / 100.0;
+            }
+            catch
+            {
+                return 0;
+            }
         }
     }
 }
