@@ -6,7 +6,9 @@ using System.Buffers;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +21,8 @@ namespace Learning_System
     {
 
         private int Count_Choices = 0;
+        private int Count_Button = 0;
+        private int Count_Line = 0;
 
         // Data cho category
         private DataProcessing categoriesData = new DataProcessing();
@@ -73,6 +77,211 @@ namespace Learning_System
 
         private void AddNewQuestionForm_SaveBtn_Click(object sender, EventArgs e)
         {
+            if (Count_Button > 0)
+            {
+
+                questionsData.DeleteElementInRange(questionsDataTable, questionsDataTable.Rows.Count - 1);
+                //JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export());
+            }
+            string _error = "";
+            if (AddNewQuestionForm_NameTxt.Text == null || AddNewQuestionForm_NameTxt.Text == "")
+                {
+                    if (_error.Length > 0)
+                        _error += ", ";
+                    _error += "Question name";
+                }
+            if (AddNewQuestionForm_TextRtb.Text == null || AddNewQuestionForm_TextRtb.Text == "")
+                {
+                    if (_error.Length > 0)
+                        _error += ", ";
+                    _error += "Question text";
+                }
+            if (AddNewQuestionForm_MarkTxt.Text == null || AddNewQuestionForm_MarkTxt.Text == "")
+                {
+                    if (_error.Length > 0)
+                        _error += ", ";
+                    _error += "Default mark";
+                }
+            if (_error != "")
+                {
+                    AddNewQuestionForm_ErrorLbl.Text = "Must be filled: " + _error;
+                }
+            else
+                {
+                    AddNewQuestionForm_ErrorLbl.Text = "";
+                    var _parentId = AddNewQuestionForm_CategoryCbo.SelectedValue;
+                    var _name = AddNewQuestionForm_NameTxt.Text;
+                    var _content = AddNewQuestionForm_TextRtb.Rtf;
+                    try
+                    {
+                        Convert.ToDouble(AddNewQuestionForm_MarkTxt.Text);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Default mark must be double");
+                        return;
+                    }
+                    var _defaultmark = Convert.ToDouble(AddNewQuestionForm_MarkTxt.Text);
+                    // doc du lieu tu dap an
+                    var _qchoice1 = new QuestionChoice()
+                    {
+                        choice = richTextBox1.Text,
+                        mark = ConvertComboboxTextToDouble(comboBox1.Text)
+                    };
+                    var _qchoice2 = new QuestionChoice()
+                    {
+                        choice = richTextBox2.Text,
+                        mark = ConvertComboboxTextToDouble(comboBox2.Text)
+                    };
+                    var _qchoice3 = new QuestionChoice()
+                    {
+                        choice = richTextBox3.Text,
+                        mark = ConvertComboboxTextToDouble(comboBox3.Text)
+                    };
+                    var _qchoice4 = new QuestionChoice()
+                    {
+                        choice = richTextBox4.Text,
+                        mark = ConvertComboboxTextToDouble(comboBox4.Text)
+                    };
+                    var _qchoice5 = new QuestionChoice()
+                    {
+                        choice = richTextBox5.Text,
+                        mark = ConvertComboboxTextToDouble(comboBox5.Text)
+                    };
+                    var _qchoice6 = new QuestionChoice()
+                    {
+                        choice = richTextBox6.Text,
+                        mark = ConvertComboboxTextToDouble(comboBox6.Text)
+                    };
+                    var _qchoice7 = new QuestionChoice()
+                    {
+                        choice = richTextBox7.Text,
+                        mark = ConvertComboboxTextToDouble(comboBox7.Text)
+                    };
+                    var _qchoice8 = new QuestionChoice()
+                    {
+                        choice = richTextBox8.Text,
+                        mark = ConvertComboboxTextToDouble(comboBox8.Text)
+                    };
+                    var _qchoice9 = new QuestionChoice()
+                    {
+                        choice = richTextBox9.Text,
+                        mark = ConvertComboboxTextToDouble(comboBox9.Text)
+                    };
+                    var _qchoice10 = new QuestionChoice()
+                    {
+                        choice = richTextBox10.Text,
+                        mark = ConvertComboboxTextToDouble(comboBox10.Text)
+                    };
+                    var _qchoice11 = new QuestionChoice()
+                    {
+                        choice = richTextBox11.Text,
+                        mark = ConvertComboboxTextToDouble(comboBox11.Text)
+                    };
+                    // them du lieu tu dap ap vao list _choice
+                    var _choice = new List<QuestionChoice>();
+                    if ((_qchoice1.choice != "") && (_qchoice1.choice != null))
+                        _choice.Add(_qchoice1);
+                    if ((_qchoice2.choice != "") && (_qchoice2.choice != null))
+                        _choice.Add(_qchoice2);
+                    if (Count_Choices == 1)
+                    {
+                        if ((_qchoice3.choice != "") && (_qchoice3.choice != null))
+                            _choice.Add(_qchoice3);
+                        if ((_qchoice4.choice != "") && (_qchoice4.choice != null))
+                            _choice.Add(_qchoice4);
+                        if ((_qchoice5.choice != "") && (_qchoice5.choice != null))
+                            _choice.Add(_qchoice5);
+                    }
+                    if (Count_Choices == 2)
+                    {
+                        if ((_qchoice3.choice != "") && (_qchoice3.choice != null))
+                            _choice.Add(_qchoice3);
+                        if ((_qchoice4.choice != "") && (_qchoice4.choice != null))
+                            _choice.Add(_qchoice4);
+                        if ((_qchoice5.choice != "") && (_qchoice5.choice != null))
+                            _choice.Add(_qchoice5);
+                        if ((_qchoice6.choice != "") && (_qchoice6.choice != null))
+                            _choice.Add(_qchoice6);
+                        if ((_qchoice7.choice != "") && (_qchoice7.choice != null))
+                            _choice.Add(_qchoice7);
+                        if ((_qchoice8.choice != "") && (_qchoice8.choice != null))
+                            _choice.Add(_qchoice8);
+                    }
+                    if (Count_Choices == 3)
+                    {
+                        if ((_qchoice3.choice != "") && (_qchoice3.choice != null))
+                            _choice.Add(_qchoice3);
+                        if ((_qchoice4.choice != "") && (_qchoice4.choice != null))
+                            _choice.Add(_qchoice4);
+                        if ((_qchoice5.choice != "") && (_qchoice5.choice != null))
+                            _choice.Add(_qchoice5);
+                        if ((_qchoice6.choice != "") && (_qchoice6.choice != null))
+                            _choice.Add(_qchoice6);
+                        if ((_qchoice7.choice != "") && (_qchoice7.choice != null))
+                            _choice.Add(_qchoice7);
+                        if ((_qchoice8.choice != "") && (_qchoice8.choice != null))
+                            _choice.Add(_qchoice8);
+                        if ((_qchoice9.choice != "") && (_qchoice9.choice != null))
+                            _choice.Add(_qchoice9);
+                        if ((_qchoice10.choice != "") && (_qchoice10.choice != null))
+                            _choice.Add(_qchoice10);
+                        if ((_qchoice11.choice != "") && (_qchoice11.choice != null))
+                            _choice.Add(_qchoice11);
+                    }
+
+                    DataRow _maxIDRow = questionsData.GetMaxMin(0, questionsData.GetLength(), DataProcessing.emptyList, "ID asc", "MAX");
+
+                    Questions _newQuestion = new Questions()
+                    {
+                        ID = _maxIDRow.Field<int>("ID") + 1,
+                        CategoryID = Convert.ToInt32(_parentId.ToString()),
+                        Name = _name,
+                        Content = _content,
+                        DefaultMark = _defaultmark,
+                        Choice = _choice
+                    };
+
+                    List<string> _query = new List<string> { "OffsetOff", "1", "Id", _parentId.ToString() };
+                    List<string> _column = new List<string> { "QuestionArray" };
+                    DataTable _parentRow = categoriesData.GetList(0, 1, _query, _column);
+
+                    if (_parentRow != null)
+                    {
+                        _parentRow.Rows[0].Field<JArray>("QuestionArray").Add(_newQuestion.ID);
+                        JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow.Rows[0]);
+
+                        categoriesData.ChangeElementswithCondition(_query.GetRange(2, 2).ToList(), JObject.FromObject(x));
+
+                        JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export());
+                    }
+                    else
+                    {
+                        MessageBox.Show("Thêm thất bại do không tìm thấy parent category thỏa mãn.", "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                
+                
+                    questionsData.AddNewElement(JObject.FromObject(_newQuestion));
+                    JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export());
+
+                    this.Close();
+                }
+            
+        }
+
+        private void AddNewQuestionForm_CancelBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void AddNewQuestionForm_SaveAndContinueBtn_Click(object sender, EventArgs e)
+        {
+            if (Count_Button > 0)
+            {   
+                
+                questionsData.DeleteElementInRange(questionsDataTable, questionsDataTable.Rows.Count - 1);
+                //JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export());
+            }
             string _error = "";
             if (AddNewQuestionForm_NameTxt.Text == null || AddNewQuestionForm_NameTxt.Text == "")
             {
@@ -170,34 +379,54 @@ namespace Learning_System
                 };
                 // them du lieu tu dap ap vao list _choice
                 var _choice = new List<QuestionChoice>();
-                _choice.Add(_qchoice1);
-                _choice.Add(_qchoice2);
+                if ((_qchoice1.choice != "") && (_qchoice1.choice != null))
+                    _choice.Add(_qchoice1);
+                if ((_qchoice2.choice != "") && (_qchoice2.choice != null))
+                    _choice.Add(_qchoice2);
                 if (Count_Choices == 1)
                 {
-                    _choice.Add(_qchoice3);
-                    _choice.Add(_qchoice4);
-                    _choice.Add(_qchoice5);
+                    if ((_qchoice3.choice != "") && (_qchoice3.choice != null))
+                        _choice.Add(_qchoice3);
+                    if ((_qchoice4.choice != "") && (_qchoice4.choice != null))
+                        _choice.Add(_qchoice4);
+                    if ((_qchoice5.choice != "") && (_qchoice5.choice != null))
+                        _choice.Add(_qchoice5);
                 }
                 if (Count_Choices == 2)
                 {
-                    _choice.Add(_qchoice3);
-                    _choice.Add(_qchoice4);
-                    _choice.Add(_qchoice5);
-                    _choice.Add(_qchoice6);
-                    _choice.Add(_qchoice7);
-                    _choice.Add(_qchoice8);
+                    if ((_qchoice3.choice != "") && (_qchoice3.choice != null))
+                        _choice.Add(_qchoice3);
+                    if ((_qchoice4.choice != "") && (_qchoice4.choice != null))
+                        _choice.Add(_qchoice4);
+                    if ((_qchoice5.choice != "") && (_qchoice5.choice != null))
+                        _choice.Add(_qchoice5);
+                    if ((_qchoice6.choice != "") && (_qchoice6.choice != null))
+                        _choice.Add(_qchoice6);
+                    if ((_qchoice7.choice != "") && (_qchoice7.choice != null))
+                        _choice.Add(_qchoice7);
+                    if ((_qchoice8.choice != "") && (_qchoice8.choice != null))
+                        _choice.Add(_qchoice8);
                 }
                 if (Count_Choices == 3)
                 {
-                    _choice.Add(_qchoice3);
-                    _choice.Add(_qchoice4);
-                    _choice.Add(_qchoice5);
-                    _choice.Add(_qchoice6);
-                    _choice.Add(_qchoice7);
-                    _choice.Add(_qchoice8);
-                    _choice.Add(_qchoice9);
-                    _choice.Add(_qchoice10);
-                    _choice.Add(_qchoice11);
+                    if ((_qchoice3.choice != "") && (_qchoice3.choice != null))
+                        _choice.Add(_qchoice3);
+                    if ((_qchoice4.choice != "") && (_qchoice4.choice != null))
+                        _choice.Add(_qchoice4);
+                    if ((_qchoice5.choice != "") && (_qchoice5.choice != null))
+                        _choice.Add(_qchoice5);
+                    if ((_qchoice6.choice != "") && (_qchoice6.choice != null))
+                        _choice.Add(_qchoice6);
+                    if ((_qchoice7.choice != "") && (_qchoice7.choice != null))
+                        _choice.Add(_qchoice7);
+                    if ((_qchoice8.choice != "") && (_qchoice8.choice != null))
+                        _choice.Add(_qchoice8);
+                    if ((_qchoice9.choice != "") && (_qchoice9.choice != null))
+                        _choice.Add(_qchoice9);
+                    if ((_qchoice10.choice != "") && (_qchoice10.choice != null))
+                        _choice.Add(_qchoice10);
+                    if ((_qchoice11.choice != "") && (_qchoice11.choice != null))
+                        _choice.Add(_qchoice11);
                 }
 
                 DataRow _maxIDRow = questionsData.GetMaxMin(0, questionsData.GetLength(), DataProcessing.emptyList, "ID asc", "MAX");
@@ -233,19 +462,10 @@ namespace Learning_System
                 questionsData.AddNewElement(JObject.FromObject(_newQuestion));
                 JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export());
 
-                this.Close();
+                
             }
 
-        }
-
-        private void AddNewQuestionForm_CancelBtn_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void AddNewQuestionForm_SaveAndContinueBtn_Click(object sender, EventArgs e)
-        {
-
+            Count_Button++;
         }
 
         private void AddNewQuestionForm_MoreChoicesBtn_Click(object sender, EventArgs e)
@@ -253,23 +473,23 @@ namespace Learning_System
             Count_Choices++;
             if (Count_Choices == 1)
             {
-                panel_choice_3.Height = 258;
-                panel_choice_4.Height = 258;
-                panel_choice_5.Height = 258;
+                panel_choice_3.Height = 322;
+                panel_choice_4.Height = 322;
+                panel_choice_5.Height = 322;
             }
             //else
             if (Count_Choices == 2)
             {
-                panel_choice_6.Height = 258;
-                panel_choice_7.Height = 258;
-                panel_choice_8.Height = 258;
+                panel_choice_6.Height = 322;
+                panel_choice_7.Height = 322;
+                panel_choice_8.Height = 322;
             }
             //else
             if (Count_Choices == 3)
             {
-                panel_choice_9.Height = 258;
-                panel_choice_10.Height = 258;
-                panel_choice_11.Height = 258;
+                panel_choice_9.Height = 322;
+                panel_choice_10.Height = 322;
+                panel_choice_11.Height = 322;
                 AddNewQuestionForm_MoreChoicesBtn.Visible = false;
             }
         }

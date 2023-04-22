@@ -373,7 +373,7 @@ namespace Learning_System.ExternalClass
                             {
                                 ListElements.RemoveAt(_i.Item1);
                                 length--;
-
+                                MessageBox.Show("Da Xoa");
                                 break;
                             }
 
@@ -388,16 +388,20 @@ namespace Learning_System.ExternalClass
                 else
                 {
                     foreach (var _i in SelectedRow)
+                    {
+                        MessageBox.Show(_indexInTable.ToString());
+                        MessageBox.Show(_i.Item2.ToString());
                         if (_i.Item2 == _indexInTable)
                         {
                             ListElements.RemoveAt(_i.Item1);
                             length--;
-
+                            MessageBox.Show("Da xoa");
                             break;
                         }
-
+                    }
                     return;
                 }
+
             }
         }
         /// <summary>
