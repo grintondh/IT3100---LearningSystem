@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Learning_System.ExternalClass;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Learning_System
 {
@@ -27,9 +30,159 @@ namespace Learning_System
                 ImportForm_StatusLbl.Text = "File choosen: " + Path.GetFileName(openFileDialog.FileName);
             }
         }
-        private bool CheckAikenFormat(string _ImportPath)
+
+        private char CheckChoicesAikenFormat(string choice)
         {
-            return true;
+            if (choice.Length < 4) return ' ';
+            return choice[0] < 'A' || choice[0] > 'Z' || choice[1] != '.' || choice[2] != ' ' || choice[3] == ' ' ? ' ' : choice[0];
+        }
+
+        private bool CheckAnswerAikenFormat(string answer, List <char> _listAnswers)
+        {
+            if (answer.Length != 9) return false;
+            if (answer[..8] != "ANSWER: ") return false;
+            foreach (char c in _listAnswers)
+            {
+                if (answer.EndsWith(c)) return true;
+            }
+            return false;
+        }
+        private int CheckAikenFormat(List<string> lines)
+        {
+            int i = 0;
+            int questionCount = 0;
+            while (i < lines.Count)
+            {
+                if (lines[i].Length > 0)
+                {
+                    questionCount++;
+                    i++;
+                    List<char> listAnswers = new List<char>();
+                    while (lines[i] != null)
+                    {
+                        if (!CheckAnswerAikenFormat(lines[i], listAnswers))
+                        {
+                            if (CheckChoicesAikenFormat(lines[i]) == ' ') return i;
+                            listAnswers.Add(CheckChoicesAikenFormat(lines[i]));
+                            i++;
+                        }
+                        else
+                        {
+                            i++;
+                            if (i  == lines.Count) break;
+                            if (lines[i].Length > 0) return i;
+                            i++;
+                            break;
+                        }
+                    }
+                }
+                else return i;
+            }
+            return -questionCount;
+        }
+
+        private void ImportQuestionsFile(List<string> lines)
+        {
+            DataProcessing questionsData = new DataProcessing();
+            List<string> _showQuestionsColumns = new List<string> {"ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
+            List<Type> _showQuestionsType = new List<Type> { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
+            
+            DataProcessing categoriesData = new DataProcessing();
+            List<string> _showCategoryColumns = new List<string> { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
+            List<Type> _showCategoryType = new List<Type> { typeof(int), typeof(string), typeof(JArray), typeof(JArray), typeof(string), typeof(string) };
+
+            try
+            {
+                JArray _questionsData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
+                questionsData.Import(_showQuestionsColumns, _showQuestionsType);
+                questionsData.Import(_questionsData);
+            }
+            catch (Exception ex)
+            {
+                DialogResult dialogResult = MessageBox.Show("Can't get questions data:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+ 
+                if (dialogResult == DialogResult.OK)
+                    Application.Exit();
+            }
+
+            try
+            {
+                JArray _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
+                categoriesData.Import(_showCategoryColumns, _showCategoryType);
+                categoriesData.Import(_categoriesData);
+            }
+            catch (Exception ex)
+            {
+                DialogResult dialogResult = MessageBox.Show("Can't get categories data:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+                if (dialogResult == DialogResult.OK)
+                    Application.Exit();
+            }
+
+            List<string> _query = new List<string> { "Id", "0" } ;
+            DataRow _parentCategory = categoriesData.GetMaxMin(0, 1, _query, "Id asc", "MAX");
+            if (_parentCategory == null)
+            {
+                MessageBox.Show("Thêm thất bại do không tồn tại category thoả mãn", "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int questionIDCount = questionsData.GetLength() - 1;
+            
+            int i = 0;
+            while (i < lines.Count){
+                if (lines[i].Length > 0)
+                {
+                    string questionContent = lines[i];
+                    questionIDCount++;
+                    i++;
+                    List<QuestionChoice> _questionChoices = new List<QuestionChoice>();
+                    while (lines[i].Length > 0)
+                    {
+                        if (lines[i][1] == '.')
+                        {
+                            QuestionChoice _questionChoice = new QuestionChoice()
+                            {
+                                choice = lines[i],
+                                mark = 0
+                            };
+                            _questionChoices.Add(_questionChoice);
+                            i++;
+                        }
+                        else
+                        {
+                            foreach (QuestionChoice _questionChoice in _questionChoices)
+                            {
+                                if (lines[i].EndsWith(_questionChoice.choice[0])) _questionChoice.mark = 1;
+                            }
+                            i += 2;
+                            break;
+                        }
+                    }
+                    Questions newQuestions = new Questions()
+                    {
+                        ID = questionIDCount,
+                        Name = "",
+                        CategoryID = 0,
+                        Content = questionContent,
+                        DefaultMark = 1,
+                        Choice = _questionChoices
+                    };
+
+                    questionsData.AddNewElement(JObject.FromObject(newQuestions));
+
+                    _parentCategory.Field<JArray>("QuestionArray").Add(newQuestions.ID);
+                }
+            }
+
+            JObject x = DataProcessing.ConvertDataRowToJObject(_parentCategory);
+
+            categoriesData.ChangeElementswithCondition(_query, JObject.FromObject(x));
+
+            JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export());
+
+            JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export());
+            return;
         }
         private bool CheckFileFormat(string _ImportPath)
         {
@@ -50,15 +203,21 @@ namespace Learning_System
             {
                 MessageBox.Show("Wrong format!");
             }
-            else if (CheckAikenFormat(ImportPath) == false)
-            {
-                MessageBox.Show("Error at ...");
-            }
             else
-            { 
-                MessageBox.Show("Success ...");
-                ImportForm_StatusLbl.Text = "Maximum size for new files: ___";
-                ImportPath = null;
+            {
+                List<string> lines = File.ReadAllLines(ImportPath).ToList();
+                int checkAikenFormat = CheckAikenFormat(lines);
+                if (checkAikenFormat >= 0)
+                {
+                    MessageBox.Show($"Error at line {checkAikenFormat + 1}!");
+                }
+                else
+                {
+                    MessageBox.Show($"OK. Successfully imported {-checkAikenFormat} question(s)!");
+                    ImportQuestionsFile(lines);
+                    ImportForm_StatusLbl.Text = "Maximum size for new files: ___";
+                    ImportPath = null;
+                }
             }
         }
 
