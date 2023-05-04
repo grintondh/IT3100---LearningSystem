@@ -1,4 +1,4 @@
-﻿using Accessibility;
+using Accessibility;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -324,7 +324,7 @@ namespace Learning_System.ExternalClass
                     length++;
 
                     DataTable _x = GetList(length + 1, DEFAULT_LIMIT, Condition, Columns);
-                    MessageBox.Show("Added new element!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+//                    MessageBox.Show("Added new element!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     return _x;
                 }

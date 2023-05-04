@@ -32,24 +32,31 @@
             panel1 = new Panel();
             ImportForm_HeadingLbl = new Label();
             panel2 = new Panel();
+            ImportForm_ExpandPic1 = new PictureBox();
             ImportForm_FileFormatLbl = new Label();
             ImportForm_FileFormatBtn = new Button();
             panel3 = new Panel();
+            ImportForm_ExpandPic2 = new PictureBox();
             ImportForm_GeneralBtn = new Button();
             panel4 = new Panel();
+            panel_drop_file = new Panel();
+            ImportForm_DropLbl = new Label();
+            ImportForm_DropPic = new PictureBox();
+            ImportForm_ExpandPic3 = new PictureBox();
             ImportForm_ImportBtn = new Button();
             ImportForm_SelectFileBtn = new Button();
             ImportForm_ImportLbl = new Label();
             ImportForm_ShowImportBtn = new Button();
-            ImportForm_ExpandPic1 = new PictureBox();
-            ImportForm_ExpandPic2 = new PictureBox();
-            ImportForm_ExpandPic3 = new PictureBox();
+            openFileDialog = new OpenFileDialog();
+            ImportForm_StatusLbl = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
-            panel3.SuspendLayout();
-            panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic1).BeginInit();
+            panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic2).BeginInit();
+            panel4.SuspendLayout();
+            panel_drop_file.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ImportForm_DropPic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic3).BeginInit();
             SuspendLayout();
             // 
@@ -84,6 +91,16 @@
             panel2.Size = new Size(1112, 58);
             panel2.TabIndex = 3;
             // 
+            // ImportForm_ExpandPic1
+            // 
+            ImportForm_ExpandPic1.Image = (Image)resources.GetObject("ImportForm_ExpandPic1.Image");
+            ImportForm_ExpandPic1.Location = new Point(8, 26);
+            ImportForm_ExpandPic1.Name = "ImportForm_ExpandPic1";
+            ImportForm_ExpandPic1.Size = new Size(15, 10);
+            ImportForm_ExpandPic1.SizeMode = PictureBoxSizeMode.Zoom;
+            ImportForm_ExpandPic1.TabIndex = 17;
+            ImportForm_ExpandPic1.TabStop = false;
+            // 
             // ImportForm_FileFormatLbl
             // 
             ImportForm_FileFormatLbl.AutoSize = true;
@@ -116,6 +133,16 @@
             panel3.Size = new Size(1112, 69);
             panel3.TabIndex = 4;
             // 
+            // ImportForm_ExpandPic2
+            // 
+            ImportForm_ExpandPic2.Image = (Image)resources.GetObject("ImportForm_ExpandPic2.Image");
+            ImportForm_ExpandPic2.Location = new Point(8, 30);
+            ImportForm_ExpandPic2.Name = "ImportForm_ExpandPic2";
+            ImportForm_ExpandPic2.Size = new Size(15, 10);
+            ImportForm_ExpandPic2.SizeMode = PictureBoxSizeMode.Zoom;
+            ImportForm_ExpandPic2.TabIndex = 17;
+            ImportForm_ExpandPic2.TabStop = false;
+            // 
             // ImportForm_GeneralBtn
             // 
             ImportForm_GeneralBtn.FlatAppearance.BorderSize = 0;
@@ -131,6 +158,9 @@
             // 
             // panel4
             // 
+            panel4.AutoScroll = true;
+            panel4.Controls.Add(ImportForm_StatusLbl);
+            panel4.Controls.Add(panel_drop_file);
             panel4.Controls.Add(ImportForm_ExpandPic3);
             panel4.Controls.Add(ImportForm_ImportBtn);
             panel4.Controls.Add(ImportForm_SelectFileBtn);
@@ -142,18 +172,61 @@
             panel4.Size = new Size(1112, 383);
             panel4.TabIndex = 5;
             // 
+            // panel_drop_file
+            // 
+            panel_drop_file.AllowDrop = true;
+            panel_drop_file.BorderStyle = BorderStyle.FixedSingle;
+            panel_drop_file.Controls.Add(ImportForm_DropLbl);
+            panel_drop_file.Controls.Add(ImportForm_DropPic);
+            panel_drop_file.Location = new Point(445, 151);
+            panel_drop_file.Name = "panel_drop_file";
+            panel_drop_file.Size = new Size(400, 141);
+            panel_drop_file.TabIndex = 18;
+            panel_drop_file.DragDrop += panel_drop_file_DragDrop;
+            panel_drop_file.DragEnter += panel_drop_file_DragEnter;
+            // 
+            // ImportForm_DropLbl
+            // 
+            ImportForm_DropLbl.AutoSize = true;
+            ImportForm_DropLbl.Location = new Point(50, 97);
+            ImportForm_DropLbl.Name = "ImportForm_DropLbl";
+            ImportForm_DropLbl.Size = new Size(313, 20);
+            ImportForm_DropLbl.TabIndex = 1;
+            ImportForm_DropLbl.Text = "You can drag and drop files here to add them.\r\n";
+            // 
+            // ImportForm_DropPic
+            // 
+            ImportForm_DropPic.Image = (Image)resources.GetObject("ImportForm_DropPic.Image");
+            ImportForm_DropPic.Location = new Point(138, 29);
+            ImportForm_DropPic.Name = "ImportForm_DropPic";
+            ImportForm_DropPic.Size = new Size(119, 62);
+            ImportForm_DropPic.SizeMode = PictureBoxSizeMode.Zoom;
+            ImportForm_DropPic.TabIndex = 0;
+            ImportForm_DropPic.TabStop = false;
+            // 
+            // ImportForm_ExpandPic3
+            // 
+            ImportForm_ExpandPic3.Image = (Image)resources.GetObject("ImportForm_ExpandPic3.Image");
+            ImportForm_ExpandPic3.Location = new Point(8, 18);
+            ImportForm_ExpandPic3.Name = "ImportForm_ExpandPic3";
+            ImportForm_ExpandPic3.Size = new Size(15, 10);
+            ImportForm_ExpandPic3.SizeMode = PictureBoxSizeMode.Zoom;
+            ImportForm_ExpandPic3.TabIndex = 17;
+            ImportForm_ExpandPic3.TabStop = false;
+            // 
             // ImportForm_ImportBtn
             // 
             ImportForm_ImportBtn.BackColor = Color.FromArgb(194, 36, 36);
             ImportForm_ImportBtn.FlatStyle = FlatStyle.Flat;
             ImportForm_ImportBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             ImportForm_ImportBtn.ForeColor = Color.White;
-            ImportForm_ImportBtn.Location = new Point(473, 298);
+            ImportForm_ImportBtn.Location = new Point(473, 314);
             ImportForm_ImportBtn.Name = "ImportForm_ImportBtn";
             ImportForm_ImportBtn.Size = new Size(159, 53);
             ImportForm_ImportBtn.TabIndex = 4;
             ImportForm_ImportBtn.Text = "IMPORT";
             ImportForm_ImportBtn.UseVisualStyleBackColor = false;
+            ImportForm_ImportBtn.Click += ImportForm_ImportBtn_Click;
             // 
             // ImportForm_SelectFileBtn
             // 
@@ -167,6 +240,7 @@
             ImportForm_SelectFileBtn.TabIndex = 3;
             ImportForm_SelectFileBtn.Text = "CHOOSE A FILE ...";
             ImportForm_SelectFileBtn.UseVisualStyleBackColor = false;
+            ImportForm_SelectFileBtn.Click += ImportForm_SelectFileBtn_Click;
             // 
             // ImportForm_ImportLbl
             // 
@@ -190,35 +264,14 @@
             ImportForm_ShowImportBtn.Text = "Import questions from file";
             ImportForm_ShowImportBtn.UseVisualStyleBackColor = true;
             // 
-            // ImportForm_ExpandPic1
+            // ImportForm_StatusLbl
             // 
-            ImportForm_ExpandPic1.Image = (Image)resources.GetObject("ImportForm_ExpandPic1.Image");
-            ImportForm_ExpandPic1.Location = new Point(8, 26);
-            ImportForm_ExpandPic1.Name = "ImportForm_ExpandPic1";
-            ImportForm_ExpandPic1.Size = new Size(15, 10);
-            ImportForm_ExpandPic1.SizeMode = PictureBoxSizeMode.Zoom;
-            ImportForm_ExpandPic1.TabIndex = 17;
-            ImportForm_ExpandPic1.TabStop = false;
-            // 
-            // ImportForm_ExpandPic2
-            // 
-            ImportForm_ExpandPic2.Image = (Image)resources.GetObject("ImportForm_ExpandPic2.Image");
-            ImportForm_ExpandPic2.Location = new Point(8, 30);
-            ImportForm_ExpandPic2.Name = "ImportForm_ExpandPic2";
-            ImportForm_ExpandPic2.Size = new Size(15, 10);
-            ImportForm_ExpandPic2.SizeMode = PictureBoxSizeMode.Zoom;
-            ImportForm_ExpandPic2.TabIndex = 17;
-            ImportForm_ExpandPic2.TabStop = false;
-            // 
-            // ImportForm_ExpandPic3
-            // 
-            ImportForm_ExpandPic3.Image = (Image)resources.GetObject("ImportForm_ExpandPic3.Image");
-            ImportForm_ExpandPic3.Location = new Point(8, 18);
-            ImportForm_ExpandPic3.Name = "ImportForm_ExpandPic3";
-            ImportForm_ExpandPic3.Size = new Size(15, 10);
-            ImportForm_ExpandPic3.SizeMode = PictureBoxSizeMode.Zoom;
-            ImportForm_ExpandPic3.TabIndex = 17;
-            ImportForm_ExpandPic3.TabStop = false;
+            ImportForm_StatusLbl.AutoSize = true;
+            ImportForm_StatusLbl.Location = new Point(667, 95);
+            ImportForm_StatusLbl.Name = "ImportForm_StatusLbl";
+            ImportForm_StatusLbl.Size = new Size(214, 20);
+            ImportForm_StatusLbl.TabIndex = 2;
+            ImportForm_StatusLbl.Text = "Maximum size for new files: ___";
             // 
             // ImportForm
             // 
@@ -234,11 +287,14 @@
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic1).EndInit();
             panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic2).EndInit();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic2).EndInit();
+            panel_drop_file.ResumeLayout(false);
+            panel_drop_file.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)ImportForm_DropPic).EndInit();
             ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic3).EndInit();
             ResumeLayout(false);
         }
@@ -260,5 +316,10 @@
         private PictureBox ImportForm_ExpandPic1;
         private PictureBox ImportForm_ExpandPic2;
         private PictureBox ImportForm_ExpandPic3;
+        private OpenFileDialog openFileDialog;
+        private Panel panel_drop_file;
+        private Label ImportForm_DropLbl;
+        private PictureBox ImportForm_DropPic;
+        private Label ImportForm_StatusLbl;
     }
 }
