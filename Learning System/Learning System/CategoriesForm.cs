@@ -18,9 +18,10 @@ namespace Learning_System
     public partial class CategoriesForm : UserControl
     {
         private DataProcessing categoriesData = new DataProcessing();
-        private List<string> showColumns = new List<string> { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
-        private List<Type> showType = new List<Type> { typeof(int), typeof(string), typeof(JArray), typeof(JArray), typeof(string), typeof(string) };
-        private DataTable categoriesDataTable = new DataTable();
+        private List<string> showColumns = new() { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
+        private List<Type> showType = new() { typeof(int), typeof(string), typeof(JArray), typeof(JArray), typeof(string), typeof(string) };
+        private readonly List<string> showKey = new() { "PRIMARY KEY", "", "", "", "", "" };
+        private DataTable? categoriesDataTable = new();
         private int currentLimit = 50;
         private int currentOffset = 0;
         public void loadCombobox()
@@ -29,10 +30,9 @@ namespace Learning_System
             {
                 JArray _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("category.json", null, null);
 
-
-                categoriesData.Import(showColumns, showType);
+                categoriesData.Import(showColumns, showType, showKey);
                 categoriesData.Import(_categoriesData);
-                categoriesDataTable = categoriesData.GetList(currentOffset, currentLimit);
+                categoriesDataTable = categoriesData.Init().Offset(currentOffset).Limit(currentLimit).Get();
             }
             catch (Exception ex)
             {
@@ -41,7 +41,6 @@ namespace Learning_System
                 if (dialog == DialogResult.OK)
                     Application.Exit();
             }
-
 
             CategoriesForm_ParentCategoryCbo.ValueMember = "Id";
             CategoriesForm_ParentCategoryCbo.DisplayMember = "Name";
@@ -88,69 +87,69 @@ namespace Learning_System
             }
             else
             {
-                CategoriesForm_errorTextLbl.Text = "Đang thêm dữ liệu...";
-                CategoriesForm_errorTextLbl.ForeColor = Color.Green;
-
-                DataProcessing _tmpDT = new DataProcessing();
-                categoriesData.CopyData(_tmpDT);
-                DataRow _maxIdRow = _tmpDT.GetMaxMin(0, _tmpDT.GetLength(), DataProcessing.emptyList, "Id asc", "MAX");
-
-                Categories _newCategory = new Categories()
+                try
                 {
-                    Id = _maxIdRow.Field<int>("Id") + 1,
-                    Name = _name,
-                    SubArray = new List<int>(),
-                    QuestionArray = new List<int>(),
-                    Description = _description,
-                    IdNumber = _id
-                };
+                    CategoriesForm_errorTextLbl.Text = "Đang thêm dữ liệu...";
+                    CategoriesForm_errorTextLbl.ForeColor = Color.Green;
 
-                categoriesData.AddNewElement(JObject.FromObject(_newCategory));
+                    DataRow? _maxIdRow = categoriesData.Init()
+                                                       .Offset(0)
+                                                       .Limit(categoriesData.Length())
+                                                       .Sort("Id desc")
+                                                       .GetFirstRow();
 
-                DataProcessing _p = new DataProcessing();
-                categoriesData.CopyData(_p);
+                    Categories _newCategory = new()
+                    {
+                        Id = (_maxIdRow == null) ? 0 : (_maxIdRow.Field<int>("Id") + 1),
+                        Name = _name,
+                        SubArray = new List<int>(),
+                        QuestionArray = new List<int>(),
+                        Description = _description,
+                        IdNumber = _id
+                    };
 
-                List<string> _query = new List<string> { "Id", _parentId.ToString() };
-                DataRow _parentRow = _p.GetMaxMin(0, 1, _query, null, "MAX");
+                    if (categoriesData.Insert(JObject.FromObject(_newCategory)) == DataProcessing.StatusCode.Error)
+                        throw new Exception();
 
-                if (_parentRow != null)
-                {
-                    _parentRow.Field<JArray>("SubArray").Add(_newCategory.Id);
-                    JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
+                    List<string> _query = new() { "Id", _parentId.ToString() };
+                    DataRow? _parentRow = categoriesData.Init().Offset(currentOffset).Limit(currentLimit).Query(_query).GetFirstRow();
 
-                    categoriesData.ChangeElementswithCondition(_query, x);
+                    if (_parentRow != null)
+                    {
+                        var _x = _parentRow.Field<JArray>("SubArray");
+                        if (_x != null)
+                            _x.Add(_newCategory.Id);
+                        else
+                        {
+                            MessageBox.Show("Không tìm thấy cột SubArray trong dữ liệu!", "Error");
+                            throw new Exception();
+                        }
 
-                    /*
-                    string _jsonData = JsonConvert.SerializeObject(categoriesData.Export());
+                        JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
 
-                    // Creates a resource writer.
-                    IResourceWriter writer = new ResourceWriter("Properties.Resources.Category");
+                        if (categoriesData.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
+                            throw new Exception();
 
-                    // Adds resources to the resource writer.
-                    writer.AddResource("String 1", "First String");
-                    writer.AddResource("String 2", "Second String");
+                        CategoriesForm_ParentCategoryCbo.ValueMember = "Id";
+                        CategoriesForm_ParentCategoryCbo.DisplayMember = "Name";
+                        CategoriesForm_ParentCategoryCbo.DataSource = categoriesData.Init().Offset(currentOffset).Limit(currentLimit).Query(DataProcessing.EmptyList).Sort(null).Get();
 
-                    // Writes the resources to the file or stream, and closes it.
-                    writer.Close();
+                        JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export());
+                        MessageBox.Show("Đã thêm thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    */
+                        CategoriesForm_errorTextLbl.Text = "Đã thêm dữ liệu";
+                        CategoriesForm_errorTextLbl.ForeColor = Color.Red;
 
-                    JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export());
-
-                    MessageBox.Show("Đã thêm thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    CategoriesForm_errorTextLbl.Text = "Đã thêm dữ liệu";
-                    CategoriesForm_errorTextLbl.ForeColor = Color.Red;
-
-                    CategoriesForm_NameTxt.Text = "";
-                    CategoriesForm_CategoryInfoTxt.Text = "";
-                    CategoriesForm_IDNumberTxt.Text = "";
-
-                    loadCombobox();
+                        CategoriesForm_NameTxt.Text = "";
+                        CategoriesForm_CategoryInfoTxt.Text = "";
+                        CategoriesForm_IDNumberTxt.Text = "";
+                    }
+                    else
+                        throw new Exception();
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Thêm thất bại do không tìm thấy parent category thỏa mãn.", "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Thêm phần tử thất bại!\nChi tiết lỗi:\n" + ex, "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     CategoriesForm_errorTextLbl.Text = "Thêm dữ liệu lỗi!";
                     CategoriesForm_errorTextLbl.ForeColor = Color.Red;
