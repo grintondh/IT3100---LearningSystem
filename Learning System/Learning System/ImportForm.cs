@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Microsoft.Office.Interop.Word;
 
 namespace Learning_System
 {
@@ -39,6 +40,7 @@ namespace Learning_System
 
         private bool CheckAnswerAikenFormat(string answer, List<char> _listAnswers)
         {
+            if (_listAnswers.Count < 2) return false;
             if (answer.Length != 9) return false;
             if (answer[..8] != "ANSWER: ") return false;
             foreach (char c in _listAnswers)
@@ -58,22 +60,30 @@ namespace Learning_System
                     questionCount++;
                     i++;
                     List<char> listAnswers = new List<char>();
-                    while (lines[i] != null)
+                    try
                     {
-                        if (!CheckAnswerAikenFormat(lines[i], listAnswers))
+                        while (lines[i] != null)
                         {
-                            if (CheckChoicesAikenFormat(lines[i]) == ' ') return i;
-                            listAnswers.Add(CheckChoicesAikenFormat(lines[i]));
-                            i++;
+                            if (!CheckAnswerAikenFormat(lines[i], listAnswers))
+                            {
+                                if (CheckChoicesAikenFormat(lines[i]) == ' ') return i;
+                                listAnswers.Add(CheckChoicesAikenFormat(lines[i]));
+                                i++;
+                            }
+                            else
+                            {
+                                i++;
+                                if (i == lines.Count) break;
+                                if (lines[i].Length > 0) return i;
+                                i++;
+                                break;
+                            }
                         }
-                        else
-                        {
-                            i++;
-                            if (i == lines.Count) break;
-                            if (lines[i].Length > 0) return i;
-                            i++;
-                            break;
-                        }
+                    }
+                    catch (Exception)
+                    {
+                        return i;
+                        throw;
                     }
                 }
                 else return i;
@@ -106,7 +116,7 @@ namespace Learning_System
                 DialogResult dialogResult = MessageBox.Show("Can't get questions data:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 if (dialogResult == DialogResult.OK)
-                    Application.Exit();
+                    System.Windows.Forms.Application.Exit();
             }
 
             try
@@ -120,7 +130,7 @@ namespace Learning_System
                 DialogResult dialogResult = MessageBox.Show("Can't get categories data:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 if (dialogResult == DialogResult.OK)
-                    Application.Exit();
+                    System.Windows.Forms.Application.Exit();
             }
 
             List<string> _query = new List<string> { "Id", "0" };
@@ -130,8 +140,13 @@ namespace Learning_System
                 MessageBox.Show("Thêm thất bại do không tồn tại category thoả mãn", "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            DataRow? _maxQuestionIdRow = questionsData.Init()
+                                                       .Offset(0)
+                                                       .Limit(questionsData.Length())
+                                                       .Sort("ID desc")
+                                                       .GetFirstRow();
 
-            int questionIDCount = questionsData.Length() - 1;
+            int questionIDCount = (_maxQuestionIdRow == null) ? 0 : (_maxQuestionIdRow.Field<int>("ID"));
 
             int i = 0;
             while (i < lines.Count)
@@ -190,6 +205,8 @@ namespace Learning_System
             return;
         }
 
+
+
         private bool CheckFileFormat(string _ImportPath)
         {
             if (Path.GetExtension(_ImportPath) != ".txt" && Path.GetExtension(_ImportPath) != ".doc" && Path.GetExtension(_ImportPath) != ".docx")
@@ -199,6 +216,36 @@ namespace Learning_System
             else return true;
         }
 
+        private List<string> ReadFromDocumentFile(string _ImportPath)
+        {
+            List<string> _lines = new List<string>();
+            if (Path.GetExtension(_ImportPath) == ".txt")
+            {
+                _lines = File.ReadAllLines(_ImportPath).ToList();
+            }
+            else
+            {
+                Microsoft.Office.Interop.Word.Application application = new Microsoft.Office.Interop.Word.Application();
+                object miss = System.Reflection.Missing.Value;
+                object path = _ImportPath;
+                object readOnly = true;
+                Document docs = application.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                if (docs != null)
+                {
+                    string totaltext = "";
+
+                    foreach (Paragraph p in docs.Paragraphs)
+                    {
+                        totaltext += p.Range.Text;
+                    }
+                    string[] _totaltext = totaltext.Split('\r');
+                    _lines.AddRange(_totaltext);
+                }
+                docs.Close();
+                application.Quit();
+            }
+            return _lines;
+        }
         private void ImportForm_ImportBtn_Click(object sender, EventArgs e)
         {
             if (ImportPath == null)
@@ -211,7 +258,7 @@ namespace Learning_System
             }
             else
             {
-                List<string> lines = File.ReadAllLines(ImportPath).ToList();
+                List<string> lines = ReadFromDocumentFile(ImportPath);
                 int checkAikenFormat = CheckAikenFormat(lines);
                 if (checkAikenFormat >= 0)
                 {
