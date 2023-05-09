@@ -81,9 +81,10 @@ namespace Learning_System
         {
             if (Count_Button > 0)
             {
-
-                //questionsData.DeleteElementInRange(questionsDataTable, questionsDataTable.Rows.Count - 1);
-                //JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export());
+                DataRow _maxIDRow = questionsData.Init().Offset(0).Limit(questionsData.Length()).Sort("ID desc").GetFirstRow();
+                var a = _maxIDRow.Field<int>("ID");
+                List<string> _query = new() { "ID", a.ToString() };
+                int check = questionsData.Init().Offset(0).Limit(1).Query(_query).Delete();
             }
             string _error = "";
             if (AddNewQuestionForm_NameTxt.Text == null || AddNewQuestionForm_NameTxt.Text == "")
@@ -249,14 +250,15 @@ namespace Learning_System
 
                         if (_parentRow != null)
                         {
-                        var _x = _parentRow.Field<JArray>("QuestionArray");
-                        _x.Add(_newQuestion.ID);
-                        JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
-                        if (categoriesData.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
-                            throw new Exception();
-
-                        JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export());
-
+                            if (Count_Button == 0)
+                            {
+                                var _x = _parentRow.Field<JArray>("QuestionArray");
+                                _x.Add(_newQuestion.ID);
+                                JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
+                                if (categoriesData.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
+                                     throw new Exception();
+                                JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export());
+                            }
                         questionsData.Insert(JObject.FromObject(_newQuestion));
                         JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export());
                         }
@@ -279,10 +281,11 @@ namespace Learning_System
         private void AddNewQuestionForm_SaveAndContinueBtn_Click(object sender, EventArgs e)
         {
             if (Count_Button > 0)
-            {   
-                
-                //questionsData.DeleteElementInRange(questionsDataTable, questionsDataTable.Rows.Count - 1);
-                //JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export());
+            {
+                DataRow _maxIDRow = questionsData.Init().Offset(0).Limit(questionsData.Length()).Sort("ID desc").GetFirstRow();
+                var a = _maxIDRow.Field<int>("ID");
+                List<string> _query = new() { "ID", a.ToString() };
+                int check = questionsData.Init().Offset(0).Limit(1).Query(_query).Delete();
             }
             string _error = "";
             if (AddNewQuestionForm_NameTxt.Text == null || AddNewQuestionForm_NameTxt.Text == "")
@@ -450,13 +453,14 @@ namespace Learning_System
                 if (_parentRow != null)
                 {
                     var _x = _parentRow.Field<JArray>("QuestionArray");
-                    _x.Add(_newQuestion.ID);
-                    JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
-                    if (categoriesData.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
-                        throw new Exception();
-
-                    JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export());
-
+                    if (Count_Button == 0) 
+                    {
+                        _x.Add(_newQuestion.ID);
+                        JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
+                        if (categoriesData.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
+                            throw new Exception();
+                        JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export());
+                    }
                     questionsData.Insert(JObject.FromObject(_newQuestion));
                     JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export());
                 }
