@@ -26,9 +26,10 @@ namespace Learning_System
 
         // Data cho category
         private DataProcessing categoriesData = new DataProcessing();
-        private List<string> showColumns = new List<string> { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
-        private List<Type> showType = new List<Type> { typeof(int), typeof(string), typeof(JArray), typeof(JArray), typeof(string), typeof(string) };
-        private DataTable categoriesDataTable = new DataTable();
+        private List<string> showColumns = new() { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
+        private List<Type> showType = new() { typeof(int), typeof(string), typeof(JArray), typeof(JArray), typeof(string), typeof(string) };
+        private readonly List<string> showKey = new() { "PRIMARY KEY", "", "", "", "", "" };
+        private DataTable? categoriesDataTable = new();
         private int currentLimit = 50;
         private int currentOffset = 0;
 
@@ -36,16 +37,17 @@ namespace Learning_System
         private DataProcessing questionsData = new DataProcessing();
         private List<string> showColumns_questions = new List<string> { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
         private List<Type> showType_questions = new List<Type> { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
-        private DataTable questionsDataTable = new DataTable();
+        private readonly List<string> showKey_questions = new List<string>() { "PRIMARY KEY", "", "", "", "", "" };
+        private DataTable? questionsDataTable = new();
 
         public AddNewQuestionForm()
         {
             try
             {
                 JArray _questionsData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
-                questionsData.Import(showColumns_questions, showType_questions);
+                questionsData.Import(showColumns_questions, showType_questions, showKey_questions);
                 questionsData.Import(_questionsData);
-                questionsDataTable = questionsData.GetList(currentOffset, currentLimit, DataProcessing.emptyList, DataProcessing.emptyList);
+                questionsDataTable = questionsData.Init().Offset(currentOffset).Limit(currentLimit).Get();
             }
             catch (Exception ex)
             {
@@ -60,9 +62,9 @@ namespace Learning_System
             try
             {
                 JArray _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
-                categoriesData.Import(showColumns, showType);
+                categoriesData.Import(showColumns, showType, showKey);
                 categoriesData.Import(_categoriesData);
-                categoriesDataTable = categoriesData.GetList(currentOffset, currentLimit);
+                categoriesDataTable = categoriesData.Init().Offset(currentOffset).Limit(currentLimit).Get();
             }
             catch (Exception ex)
             {
@@ -80,7 +82,7 @@ namespace Learning_System
             if (Count_Button > 0)
             {
 
-                questionsData.DeleteElementInRange(questionsDataTable, questionsDataTable.Rows.Count - 1);
+                //questionsData.DeleteElementInRange(questionsDataTable, questionsDataTable.Rows.Count - 1);
                 //JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export());
             }
             string _error = "";
@@ -229,41 +231,41 @@ namespace Learning_System
                         if ((_qchoice11.choice != "") && (_qchoice11.choice != null))
                             _choice.Add(_qchoice11);
                     }
-
-                    DataRow _maxIDRow = questionsData.GetMaxMin(0, questionsData.GetLength(), DataProcessing.emptyList, "ID asc", "MAX");
-
-                    Questions _newQuestion = new Questions()
+                    try
                     {
-                        ID = _maxIDRow.Field<int>("ID") + 1,
-                        CategoryID = Convert.ToInt32(_parentId.ToString()),
-                        Name = _name,
-                        Content = _content,
-                        DefaultMark = _defaultmark,
-                        Choice = _choice
-                    };
+                        DataRow _maxIDRow = questionsData.Init().Offset(0).Limit(questionsData.Length()).Sort("ID desc").GetFirstRow();
+                        Questions _newQuestion = new Questions()
+                        {
+                            ID = (_maxIDRow == null) ? 0 : (_maxIDRow.Field<int>("ID") + 1),
+                            CategoryID = Convert.ToInt32(_parentId.ToString()),
+                            Name = _name,
+                            Content = _content,
+                            DefaultMark = _defaultmark,
+                            Choice = _choice
+                        };
 
-                    List<string> _query = new List<string> { "OffsetOff", "1", "Id", _parentId.ToString() };
-                    List<string> _column = new List<string> { "QuestionArray" };
-                    DataTable _parentRow = categoriesData.GetList(0, 1, _query, _column);
+                        List<string> _query = new List<string> { "Id", _parentId.ToString() };
+                        DataRow? _parentRow = categoriesData.Init().Offset(currentOffset).Limit(currentLimit).Query(_query).GetFirstRow();
 
-                    if (_parentRow != null)
-                    {
-                        _parentRow.Rows[0].Field<JArray>("QuestionArray").Add(_newQuestion.ID);
-                        JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow.Rows[0]);
-
-                        categoriesData.ChangeElementswithCondition(_query.GetRange(2, 2).ToList(), JObject.FromObject(x));
+                        if (_parentRow != null)
+                        {
+                        var _x = _parentRow.Field<JArray>("QuestionArray");
+                        _x.Add(_newQuestion.ID);
+                        JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
+                        if (categoriesData.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
+                            throw new Exception();
 
                         JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export());
-                    }
-                    else
-                    {
-                        MessageBox.Show("Thêm thất bại do không tìm thấy parent category thỏa mãn.", "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                
-                
-                    questionsData.AddNewElement(JObject.FromObject(_newQuestion));
-                    JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export());
 
+                        questionsData.Insert(JObject.FromObject(_newQuestion));
+                        JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export());
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Thêm phần tử thất bại!\nChi tiết lỗi:\n" + ex, "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    
                     this.Close();
                 }
             
@@ -279,7 +281,7 @@ namespace Learning_System
             if (Count_Button > 0)
             {   
                 
-                questionsData.DeleteElementInRange(questionsDataTable, questionsDataTable.Rows.Count - 1);
+                //questionsData.DeleteElementInRange(questionsDataTable, questionsDataTable.Rows.Count - 1);
                 //JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export());
             }
             string _error = "";
@@ -428,8 +430,9 @@ namespace Learning_System
                     if ((_qchoice11.choice != "") && (_qchoice11.choice != null))
                         _choice.Add(_qchoice11);
                 }
-
-                DataRow _maxIDRow = questionsData.GetMaxMin(0, questionsData.GetLength(), DataProcessing.emptyList, "ID asc", "MAX");
+            try
+            { 
+                DataRow _maxIDRow = questionsData.Init().Offset(0).Limit(questionsData.Length()).Sort("ID desc").GetFirstRow();
 
                 Questions _newQuestion = new Questions()
                 {
@@ -441,28 +444,28 @@ namespace Learning_System
                     Choice = _choice
                 };
 
-                List<string> _query = new List<string> { "OffsetOff", "1", "Id", _parentId.ToString() };
-                List<string> _column = new List<string> { "QuestionArray" };
-                DataTable _parentRow = categoriesData.GetList(0, 1, _query, _column);
+                List<string> _query = new List<string> { "Id", _parentId.ToString() };
+                DataRow _parentRow = categoriesData.Init().Offset(currentOffset).Limit(currentLimit).Query(_query).GetFirstRow();
 
                 if (_parentRow != null)
                 {
-                    _parentRow.Rows[0].Field<JArray>("QuestionArray").Add(_newQuestion.ID);
-                    JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow.Rows[0]);
-
-                    categoriesData.ChangeElementswithCondition(_query.GetRange(2, 2).ToList(), JObject.FromObject(x));
+                    var _x = _parentRow.Field<JArray>("QuestionArray");
+                    _x.Add(_newQuestion.ID);
+                    JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
+                    if (categoriesData.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
+                        throw new Exception();
 
                     JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export());
-                }
-                else
-                {
-                    MessageBox.Show("Thêm thất bại do không tìm thấy parent category thỏa mãn.", "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
 
-                questionsData.AddNewElement(JObject.FromObject(_newQuestion));
-                JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export());
+                    questionsData.Insert(JObject.FromObject(_newQuestion));
+                    JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export());
+                }
+            }
+            catch (Exception ex)
+            {
+                    MessageBox.Show("Thêm phần tử thất bại!\nChi tiết lỗi:\n" + ex, "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-                
             }
 
             Count_Button++;
