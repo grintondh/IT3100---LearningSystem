@@ -35,6 +35,12 @@
             QuestionsForm_SelectCategoryCbo = new ComboBox();
             QuestionsForm_SelectCategoryLbl = new Label();
             QuestionsForm_QuestionsBankLbl = new Label();
+            QuestionForm_ShowQuestionsDtg = new DataGridView();
+            CheckBoxes = new DataGridViewCheckBoxColumn();
+            QuestionName = new DataGridViewTextBoxColumn();
+            Edit = new DataGridViewButtonColumn();
+            CheckBox = new DataGridViewCheckBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)QuestionForm_ShowQuestionsDtg).BeginInit();
             SuspendLayout();
             // 
             // QuestionsForm_CreateNewQuestionBtn
@@ -74,6 +80,7 @@
             QuestionsForm_ShowFromSubcategoriesCb.TabIndex = 11;
             QuestionsForm_ShowFromSubcategoriesCb.Text = "Also show questions from subcategories";
             QuestionsForm_ShowFromSubcategoriesCb.UseVisualStyleBackColor = true;
+            QuestionsForm_ShowFromSubcategoriesCb.CheckedChanged += QuestionsForm_ShowFromSubcategoriesCb_CheckedChanged;
             // 
             // QuestionsForm_Lbl
             // 
@@ -95,6 +102,7 @@
             QuestionsForm_SelectCategoryCbo.Size = new Size(332, 33);
             QuestionsForm_SelectCategoryCbo.TabIndex = 9;
             QuestionsForm_SelectCategoryCbo.DropDown += QuestionsForm_SelectCategoryCbo_DropDown;
+            QuestionsForm_SelectCategoryCbo.SelectedIndexChanged += QuestionsForm_SelectCategoryCbo_SelectedIndexChanged;
             QuestionsForm_SelectCategoryCbo.Click += QuestionsForm_SelectCategoryCbo_Click;
             // 
             // QuestionsForm_SelectCategoryLbl
@@ -119,10 +127,63 @@
             QuestionsForm_QuestionsBankLbl.TabIndex = 7;
             QuestionsForm_QuestionsBankLbl.Text = "Questions Bank";
             // 
+            // QuestionForm_ShowQuestionsDtg
+            // 
+            QuestionForm_ShowQuestionsDtg.AllowUserToDeleteRows = false;
+            QuestionForm_ShowQuestionsDtg.AllowUserToResizeColumns = false;
+            QuestionForm_ShowQuestionsDtg.AllowUserToResizeRows = false;
+            QuestionForm_ShowQuestionsDtg.BackgroundColor = SystemColors.ButtonFace;
+            QuestionForm_ShowQuestionsDtg.BorderStyle = BorderStyle.None;
+            QuestionForm_ShowQuestionsDtg.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            QuestionForm_ShowQuestionsDtg.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            QuestionForm_ShowQuestionsDtg.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            QuestionForm_ShowQuestionsDtg.Columns.AddRange(new DataGridViewColumn[] { CheckBoxes, QuestionName, Edit });
+            QuestionForm_ShowQuestionsDtg.GridColor = SystemColors.ButtonFace;
+            QuestionForm_ShowQuestionsDtg.Location = new Point(51, 337);
+            QuestionForm_ShowQuestionsDtg.Name = "QuestionForm_ShowQuestionsDtg";
+            QuestionForm_ShowQuestionsDtg.ReadOnly = true;
+            QuestionForm_ShowQuestionsDtg.RowHeadersVisible = false;
+            QuestionForm_ShowQuestionsDtg.RowHeadersWidth = 51;
+            QuestionForm_ShowQuestionsDtg.RowTemplate.Height = 29;
+            QuestionForm_ShowQuestionsDtg.Size = new Size(1800, 400);
+            QuestionForm_ShowQuestionsDtg.TabIndex = 15;
+            // 
+            // CheckBoxes
+            // 
+            CheckBoxes.HeaderText = "T";
+            CheckBoxes.MinimumWidth = 6;
+            CheckBoxes.Name = "CheckBoxes";
+            CheckBoxes.ReadOnly = true;
+            CheckBoxes.Width = 40;
+            // 
+            // QuestionName
+            // 
+            QuestionName.HeaderText = "Question";
+            QuestionName.MinimumWidth = 6;
+            QuestionName.Name = "QuestionName";
+            QuestionName.ReadOnly = true;
+            QuestionName.Width = 1600;
+            // 
+            // Edit
+            // 
+            Edit.HeaderText = "Actions";
+            Edit.MinimumWidth = 6;
+            Edit.Name = "Edit";
+            Edit.ReadOnly = true;
+            Edit.Width = 160;
+            // 
+            // CheckBox
+            // 
+            CheckBox.HeaderText = "T";
+            CheckBox.MinimumWidth = 6;
+            CheckBox.Name = "CheckBox";
+            CheckBox.Width = 125;
+            // 
             // QuestionsForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(QuestionForm_ShowQuestionsDtg);
             Controls.Add(QuestionsForm_CreateNewQuestionBtn);
             Controls.Add(QuestionsForm_ShowOldQuestionsCb);
             Controls.Add(QuestionsForm_ShowFromSubcategoriesCb);
@@ -131,7 +192,8 @@
             Controls.Add(QuestionsForm_SelectCategoryLbl);
             Controls.Add(QuestionsForm_QuestionsBankLbl);
             Name = "QuestionsForm";
-            Size = new Size(1084, 466);
+            Size = new Size(1565, 801);
+            ((System.ComponentModel.ISupportInitialize)QuestionForm_ShowQuestionsDtg).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -145,5 +207,10 @@
         private ComboBox QuestionsForm_SelectCategoryCbo;
         private Label QuestionsForm_SelectCategoryLbl;
         private Label QuestionsForm_QuestionsBankLbl;
+        private DataGridView QuestionForm_ShowQuestionsDtg;
+        private DataGridViewCheckBoxColumn CheckBox;
+        private DataGridViewCheckBoxColumn CheckBoxes;
+        private DataGridViewTextBoxColumn QuestionName;
+        private DataGridViewButtonColumn Edit;
     }
 }
