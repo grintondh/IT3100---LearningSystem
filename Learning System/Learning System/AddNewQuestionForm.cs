@@ -23,6 +23,8 @@ namespace Learning_System
         private int Count_Choices = 0;
         private int Count_Button = 0;
         private int Count_Line = 0;
+        private bool IsInitial = true;
+        private int CurrentParentId;
 
         // Data cho category
         private DataProcessing categoriesData = new DataProcessing();
@@ -61,10 +63,14 @@ namespace Learning_System
         {
             try
             {
-                JArray _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
-                categoriesData.Import(showColumns, showType, showKey);
-                categoriesData.Import(_categoriesData);
-                categoriesDataTable = categoriesData.Init().Offset(currentOffset).Limit(currentLimit).Get();
+                if (IsInitial == true)
+                {
+                    JArray _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
+                    categoriesData.Import(showColumns, showType, showKey);
+                    categoriesData.Import(_categoriesData);
+                    categoriesDataTable = categoriesData.Init().Offset(currentOffset).Limit(currentLimit).Get();
+                    IsInitial = false;
+                }
             }
             catch (Exception ex)
             {
@@ -85,6 +91,14 @@ namespace Learning_System
                 var a = _maxIDRow.Field<int>("ID");
                 List<string> _query = new() { "ID", a.ToString() };
                 int check = questionsData.Init().Offset(0).Limit(1).Query(_query).Delete();
+
+                List<string> _query1 = new() { "Id", CurrentParentId.ToString() };
+                DataRow _parentRow = categoriesData.Init().Offset(0).Limit(1).Query(_query1).GetFirstRow();
+                var _x = _parentRow.Field<JArray>("QuestionArray");
+                _x.RemoveAt(_x.Count - 1);
+                JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
+                if (categoriesData.Init().Offset(0).Limit(1).Query(_query1).Update(x) == DataProcessing.StatusCode.Error)
+                    throw new Exception();
             }
             string _error = "";
             if (AddNewQuestionForm_NameTxt.Text == null || AddNewQuestionForm_NameTxt.Text == "")
@@ -250,7 +264,7 @@ namespace Learning_System
 
                         if (_parentRow != null)
                         {
-                            if (Count_Button == 0)
+                            if (true)
                             {
                                 var _x = _parentRow.Field<JArray>("QuestionArray");
                                 _x.Add(_newQuestion.ID);
@@ -258,7 +272,8 @@ namespace Learning_System
                                 if (categoriesData.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
                                      throw new Exception();
                                 JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export());
-                            }
+                                CurrentParentId = Convert.ToInt32(_parentId.ToString());
+                        }
                         questionsData.Insert(JObject.FromObject(_newQuestion));
                         JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export());
                         }
@@ -286,6 +301,14 @@ namespace Learning_System
                 var a = _maxIDRow.Field<int>("ID");
                 List<string> _query = new() { "ID", a.ToString() };
                 int check = questionsData.Init().Offset(0).Limit(1).Query(_query).Delete();
+
+                List<string> _query1 = new() { "Id", CurrentParentId.ToString() };
+                DataRow _parentRow = categoriesData.Init().Offset(0).Limit(1).Query(_query1).GetFirstRow();
+                var _x = _parentRow.Field<JArray>("QuestionArray");
+                _x.RemoveAt(_x.Count - 1);
+                JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
+                if (categoriesData.Init().Offset(0).Limit(1).Query(_query1).Update(x) == DataProcessing.StatusCode.Error)
+                    throw new Exception();
             }
             string _error = "";
             if (AddNewQuestionForm_NameTxt.Text == null || AddNewQuestionForm_NameTxt.Text == "")
@@ -453,13 +476,14 @@ namespace Learning_System
                 if (_parentRow != null)
                 {
                     var _x = _parentRow.Field<JArray>("QuestionArray");
-                    if (Count_Button == 0) 
+                    if (true) 
                     {
                         _x.Add(_newQuestion.ID);
                         JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
                         if (categoriesData.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
                             throw new Exception();
                         JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export());
+                        CurrentParentId = Convert.ToInt32(_parentId.ToString());
                     }
                     questionsData.Insert(JObject.FromObject(_newQuestion));
                     JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export());
