@@ -147,11 +147,11 @@
             // AddNewQuestionForm_HeadingLbl
             // 
             AddNewQuestionForm_HeadingLbl.AutoSize = true;
-            AddNewQuestionForm_HeadingLbl.Font = new Font("Segoe UI", 19.8F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_HeadingLbl.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_HeadingLbl.ForeColor = Color.FromArgb(194, 36, 36);
             AddNewQuestionForm_HeadingLbl.Location = new Point(4, 7);
             AddNewQuestionForm_HeadingLbl.Name = "AddNewQuestionForm_HeadingLbl";
-            AddNewQuestionForm_HeadingLbl.Size = new Size(517, 45);
+            AddNewQuestionForm_HeadingLbl.Size = new Size(634, 54);
             AddNewQuestionForm_HeadingLbl.TabIndex = 8;
             AddNewQuestionForm_HeadingLbl.Text = "Adding a Multiple choice question";
             // 
@@ -162,7 +162,7 @@
             panel_heading.Dock = DockStyle.Top;
             panel_heading.Location = new Point(0, 0);
             panel_heading.Name = "panel_heading";
-            panel_heading.Size = new Size(1233, 60);
+            panel_heading.Size = new Size(1233, 71);
             panel_heading.TabIndex = 9;
             // 
             // panel_body
@@ -184,9 +184,9 @@
             panel_body.Controls.Add(AddNewQuestionForm_ExpandPic);
             panel_body.Controls.Add(AddNewQuestionForm_GeneralBtn);
             panel_body.Dock = DockStyle.Fill;
-            panel_body.Location = new Point(0, 60);
+            panel_body.Location = new Point(0, 71);
             panel_body.Name = "panel_body";
-            panel_body.Size = new Size(1233, 780);
+            panel_body.Size = new Size(1233, 769);
             panel_body.TabIndex = 10;
             // 
             // panel_choice_11
@@ -212,25 +212,28 @@
             // 
             // comboBox11
             // 
+            comboBox11.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             comboBox11.FormattingEnabled = true;
             comboBox11.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox11.Location = new Point(106, 201);
             comboBox11.Name = "comboBox11";
-            comboBox11.Size = new Size(151, 28);
+            comboBox11.Size = new Size(151, 31);
             comboBox11.TabIndex = 3;
             comboBox11.Text = "None";
             // 
             // label19
             // 
             label19.AutoSize = true;
+            label19.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label19.Location = new Point(12, 201);
             label19.Name = "label19";
-            label19.Size = new Size(49, 20);
+            label19.Size = new Size(56, 23);
             label19.TabIndex = 2;
             label19.Text = "Grade";
             // 
             // richTextBox11
             // 
+            richTextBox11.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             richTextBox11.Location = new Point(106, 14);
             richTextBox11.Name = "richTextBox11";
             richTextBox11.Size = new Size(434, 162);
@@ -240,9 +243,10 @@
             // label20
             // 
             label20.AutoSize = true;
+            label20.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label20.Location = new Point(12, 14);
             label20.Name = "label20";
-            label20.Size = new Size(70, 20);
+            label20.Size = new Size(80, 23);
             label20.TabIndex = 0;
             label20.Text = "Choice11";
             // 
@@ -269,34 +273,38 @@
             // 
             // comboBox10
             // 
+            comboBox10.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             comboBox10.FormattingEnabled = true;
             comboBox10.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox10.Location = new Point(106, 201);
             comboBox10.Name = "comboBox10";
-            comboBox10.Size = new Size(151, 28);
+            comboBox10.Size = new Size(151, 31);
             comboBox10.TabIndex = 3;
             comboBox10.Text = "None";
             // 
             // label17
             // 
             label17.AutoSize = true;
+            label17.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label17.Location = new Point(12, 201);
             label17.Name = "label17";
-            label17.Size = new Size(49, 20);
+            label17.Size = new Size(56, 23);
             label17.TabIndex = 2;
             label17.Text = "Grade";
             // 
             // label18
             // 
             label18.AutoSize = true;
+            label18.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label18.Location = new Point(12, 14);
             label18.Name = "label18";
-            label18.Size = new Size(70, 20);
+            label18.Size = new Size(80, 23);
             label18.TabIndex = 0;
             label18.Text = "Choice10";
             // 
             // richTextBox10
             // 
+            richTextBox10.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             richTextBox10.Location = new Point(106, 14);
             richTextBox10.Name = "richTextBox10";
             richTextBox10.Size = new Size(434, 162);
@@ -326,34 +334,38 @@
             // 
             // comboBox9
             // 
+            comboBox9.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             comboBox9.FormattingEnabled = true;
             comboBox9.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox9.Location = new Point(106, 201);
             comboBox9.Name = "comboBox9";
-            comboBox9.Size = new Size(151, 28);
+            comboBox9.Size = new Size(151, 31);
             comboBox9.TabIndex = 3;
             comboBox9.Text = "None";
             // 
             // label15
             // 
             label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label15.Location = new Point(12, 201);
             label15.Name = "label15";
-            label15.Size = new Size(49, 20);
+            label15.Size = new Size(56, 23);
             label15.TabIndex = 2;
             label15.Text = "Grade";
             // 
             // label16
             // 
             label16.AutoSize = true;
+            label16.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label16.Location = new Point(12, 14);
             label16.Name = "label16";
-            label16.Size = new Size(62, 20);
+            label16.Size = new Size(71, 23);
             label16.TabIndex = 0;
             label16.Text = "Choice9";
             // 
             // richTextBox9
             // 
+            richTextBox9.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             richTextBox9.Location = new Point(106, 14);
             richTextBox9.Name = "richTextBox9";
             richTextBox9.Size = new Size(434, 162);
@@ -383,34 +395,38 @@
             // 
             // comboBox8
             // 
+            comboBox8.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             comboBox8.FormattingEnabled = true;
             comboBox8.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox8.Location = new Point(106, 201);
             comboBox8.Name = "comboBox8";
-            comboBox8.Size = new Size(151, 28);
+            comboBox8.Size = new Size(151, 31);
             comboBox8.TabIndex = 3;
             comboBox8.Text = "None";
             // 
             // label13
             // 
             label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label13.Location = new Point(12, 201);
             label13.Name = "label13";
-            label13.Size = new Size(49, 20);
+            label13.Size = new Size(56, 23);
             label13.TabIndex = 2;
             label13.Text = "Grade";
             // 
             // label14
             // 
             label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label14.Location = new Point(12, 14);
             label14.Name = "label14";
-            label14.Size = new Size(62, 20);
+            label14.Size = new Size(71, 23);
             label14.TabIndex = 0;
             label14.Text = "Choice8";
             // 
             // richTextBox8
             // 
+            richTextBox8.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             richTextBox8.Location = new Point(106, 14);
             richTextBox8.Name = "richTextBox8";
             richTextBox8.Size = new Size(434, 162);
@@ -440,34 +456,38 @@
             // 
             // comboBox7
             // 
+            comboBox7.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             comboBox7.FormattingEnabled = true;
             comboBox7.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox7.Location = new Point(106, 201);
             comboBox7.Name = "comboBox7";
-            comboBox7.Size = new Size(151, 28);
+            comboBox7.Size = new Size(151, 31);
             comboBox7.TabIndex = 3;
             comboBox7.Text = "None";
             // 
             // label11
             // 
             label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label11.Location = new Point(12, 201);
             label11.Name = "label11";
-            label11.Size = new Size(49, 20);
+            label11.Size = new Size(56, 23);
             label11.TabIndex = 2;
             label11.Text = "Grade";
             // 
             // label12
             // 
             label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label12.Location = new Point(12, 14);
             label12.Name = "label12";
-            label12.Size = new Size(62, 20);
+            label12.Size = new Size(71, 23);
             label12.TabIndex = 0;
             label12.Text = "Choice7";
             // 
             // richTextBox7
             // 
+            richTextBox7.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             richTextBox7.Location = new Point(106, 14);
             richTextBox7.Name = "richTextBox7";
             richTextBox7.Size = new Size(434, 162);
@@ -497,34 +517,38 @@
             // 
             // comboBox6
             // 
+            comboBox6.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             comboBox6.FormattingEnabled = true;
             comboBox6.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox6.Location = new Point(106, 201);
             comboBox6.Name = "comboBox6";
-            comboBox6.Size = new Size(151, 28);
+            comboBox6.Size = new Size(151, 31);
             comboBox6.TabIndex = 3;
             comboBox6.Text = "None";
             // 
             // label9
             // 
             label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label9.Location = new Point(12, 201);
             label9.Name = "label9";
-            label9.Size = new Size(49, 20);
+            label9.Size = new Size(56, 23);
             label9.TabIndex = 2;
             label9.Text = "Grade";
             // 
             // label10
             // 
             label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label10.Location = new Point(12, 14);
             label10.Name = "label10";
-            label10.Size = new Size(62, 20);
+            label10.Size = new Size(71, 23);
             label10.TabIndex = 0;
             label10.Text = "Choice6";
             // 
             // richTextBox6
             // 
+            richTextBox6.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             richTextBox6.Location = new Point(106, 14);
             richTextBox6.Name = "richTextBox6";
             richTextBox6.Size = new Size(434, 162);
@@ -554,25 +578,28 @@
             // 
             // comboBox5
             // 
+            comboBox5.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             comboBox5.FormattingEnabled = true;
             comboBox5.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox5.Location = new Point(106, 201);
             comboBox5.Name = "comboBox5";
-            comboBox5.Size = new Size(151, 28);
+            comboBox5.Size = new Size(151, 31);
             comboBox5.TabIndex = 3;
             comboBox5.Text = "None";
             // 
             // label7
             // 
             label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label7.Location = new Point(12, 201);
             label7.Name = "label7";
-            label7.Size = new Size(49, 20);
+            label7.Size = new Size(56, 23);
             label7.TabIndex = 2;
             label7.Text = "Grade";
             // 
             // richTextBox5
             // 
+            richTextBox5.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             richTextBox5.Location = new Point(106, 14);
             richTextBox5.Name = "richTextBox5";
             richTextBox5.Size = new Size(434, 162);
@@ -582,9 +609,10 @@
             // label8
             // 
             label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label8.Location = new Point(12, 14);
             label8.Name = "label8";
-            label8.Size = new Size(62, 20);
+            label8.Size = new Size(71, 23);
             label8.TabIndex = 0;
             label8.Text = "Choice5";
             // 
@@ -611,25 +639,28 @@
             // 
             // comboBox4
             // 
+            comboBox4.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             comboBox4.FormattingEnabled = true;
             comboBox4.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox4.Location = new Point(106, 201);
             comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(151, 28);
+            comboBox4.Size = new Size(151, 31);
             comboBox4.TabIndex = 3;
             comboBox4.Text = "None";
             // 
             // label5
             // 
             label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label5.Location = new Point(12, 201);
             label5.Name = "label5";
-            label5.Size = new Size(49, 20);
+            label5.Size = new Size(56, 23);
             label5.TabIndex = 2;
             label5.Text = "Grade";
             // 
             // richTextBox4
             // 
+            richTextBox4.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             richTextBox4.Location = new Point(106, 14);
             richTextBox4.Name = "richTextBox4";
             richTextBox4.Size = new Size(434, 162);
@@ -639,9 +670,10 @@
             // label6
             // 
             label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label6.Location = new Point(12, 14);
             label6.Name = "label6";
-            label6.Size = new Size(62, 20);
+            label6.Size = new Size(71, 23);
             label6.TabIndex = 0;
             label6.Text = "Choice4";
             // 
@@ -668,25 +700,28 @@
             // 
             // comboBox3
             // 
+            comboBox3.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             comboBox3.FormattingEnabled = true;
             comboBox3.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox3.Location = new Point(106, 201);
             comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(151, 28);
+            comboBox3.Size = new Size(151, 31);
             comboBox3.TabIndex = 3;
             comboBox3.Text = "None";
             // 
             // label3
             // 
             label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label3.Location = new Point(12, 201);
             label3.Name = "label3";
-            label3.Size = new Size(49, 20);
+            label3.Size = new Size(56, 23);
             label3.TabIndex = 2;
             label3.Text = "Grade";
             // 
             // richTextBox3
             // 
+            richTextBox3.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             richTextBox3.Location = new Point(106, 14);
             richTextBox3.Name = "richTextBox3";
             richTextBox3.Size = new Size(434, 162);
@@ -696,9 +731,10 @@
             // label4
             // 
             label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label4.Location = new Point(12, 14);
             label4.Name = "label4";
-            label4.Size = new Size(62, 20);
+            label4.Size = new Size(71, 23);
             label4.TabIndex = 0;
             label4.Text = "Choice3";
             // 
@@ -724,25 +760,28 @@
             // 
             // comboBox2
             // 
+            comboBox2.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             comboBox2.FormattingEnabled = true;
             comboBox2.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox2.Location = new Point(106, 201);
             comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(151, 28);
+            comboBox2.Size = new Size(151, 31);
             comboBox2.TabIndex = 3;
             comboBox2.Text = "None";
             // 
             // label1
             // 
             label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(12, 201);
             label1.Name = "label1";
-            label1.Size = new Size(49, 20);
+            label1.Size = new Size(56, 23);
             label1.TabIndex = 2;
             label1.Text = "Grade";
             // 
             // richTextBox2
             // 
+            richTextBox2.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             richTextBox2.Location = new Point(106, 14);
             richTextBox2.Name = "richTextBox2";
             richTextBox2.Size = new Size(434, 162);
@@ -752,9 +791,10 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label2.Location = new Point(12, 14);
             label2.Name = "label2";
-            label2.Size = new Size(62, 20);
+            label2.Size = new Size(71, 23);
             label2.TabIndex = 0;
             label2.Text = "Choice2";
             // 
@@ -858,25 +898,28 @@
             // 
             // comboBox1
             // 
+            comboBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
             comboBox1.Location = new Point(106, 201);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
+            comboBox1.Size = new Size(151, 31);
             comboBox1.TabIndex = 3;
             comboBox1.Text = "None";
             // 
             // AddNewQuestionForm_Grade1Lbl
             // 
             AddNewQuestionForm_Grade1Lbl.AutoSize = true;
+            AddNewQuestionForm_Grade1Lbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_Grade1Lbl.Location = new Point(12, 201);
             AddNewQuestionForm_Grade1Lbl.Name = "AddNewQuestionForm_Grade1Lbl";
-            AddNewQuestionForm_Grade1Lbl.Size = new Size(49, 20);
+            AddNewQuestionForm_Grade1Lbl.Size = new Size(56, 23);
             AddNewQuestionForm_Grade1Lbl.TabIndex = 2;
             AddNewQuestionForm_Grade1Lbl.Text = "Grade";
             // 
             // richTextBox1
             // 
+            richTextBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             richTextBox1.Location = new Point(106, 14);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.Size = new Size(434, 162);
@@ -886,9 +929,10 @@
             // AddNewQuestionForm_Choice1Lbl
             // 
             AddNewQuestionForm_Choice1Lbl.AutoSize = true;
+            AddNewQuestionForm_Choice1Lbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_Choice1Lbl.Location = new Point(12, 14);
             AddNewQuestionForm_Choice1Lbl.Name = "AddNewQuestionForm_Choice1Lbl";
-            AddNewQuestionForm_Choice1Lbl.Size = new Size(62, 20);
+            AddNewQuestionForm_Choice1Lbl.Size = new Size(71, 23);
             AddNewQuestionForm_Choice1Lbl.TabIndex = 0;
             AddNewQuestionForm_Choice1Lbl.Text = "Choice1";
             // 
@@ -911,14 +955,16 @@
             // AddNewQuestionForm_CategoryLbl
             // 
             AddNewQuestionForm_CategoryLbl.AutoSize = true;
+            AddNewQuestionForm_CategoryLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_CategoryLbl.Location = new Point(33, 56);
             AddNewQuestionForm_CategoryLbl.Name = "AddNewQuestionForm_CategoryLbl";
-            AddNewQuestionForm_CategoryLbl.Size = new Size(69, 20);
+            AddNewQuestionForm_CategoryLbl.Size = new Size(79, 23);
             AddNewQuestionForm_CategoryLbl.TabIndex = 4;
             AddNewQuestionForm_CategoryLbl.Text = "Category";
             // 
             // AddNewQuestionForm_TextRtb
             // 
+            AddNewQuestionForm_TextRtb.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_TextRtb.Location = new Point(460, 180);
             AddNewQuestionForm_TextRtb.Name = "AddNewQuestionForm_TextRtb";
             AddNewQuestionForm_TextRtb.Size = new Size(568, 235);
@@ -928,51 +974,57 @@
             // AddNewQuestionForm_NameLbl
             // 
             AddNewQuestionForm_NameLbl.AutoSize = true;
+            AddNewQuestionForm_NameLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_NameLbl.Location = new Point(33, 104);
             AddNewQuestionForm_NameLbl.Name = "AddNewQuestionForm_NameLbl";
-            AddNewQuestionForm_NameLbl.Size = new Size(129, 20);
+            AddNewQuestionForm_NameLbl.Size = new Size(149, 23);
             AddNewQuestionForm_NameLbl.TabIndex = 5;
             AddNewQuestionForm_NameLbl.Text = "Question name (*)";
             // 
             // AddNewQuestionForm_TextLbl
             // 
             AddNewQuestionForm_TextLbl.AutoSize = true;
+            AddNewQuestionForm_TextLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_TextLbl.Location = new Point(33, 180);
             AddNewQuestionForm_TextLbl.Name = "AddNewQuestionForm_TextLbl";
-            AddNewQuestionForm_TextLbl.Size = new Size(117, 20);
+            AddNewQuestionForm_TextLbl.Size = new Size(135, 23);
             AddNewQuestionForm_TextLbl.TabIndex = 6;
             AddNewQuestionForm_TextLbl.Text = "Question text (*)";
             // 
             // AddNewQuestionForm_MarkLbl
             // 
             AddNewQuestionForm_MarkLbl.AutoSize = true;
+            AddNewQuestionForm_MarkLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_MarkLbl.Location = new Point(33, 439);
             AddNewQuestionForm_MarkLbl.Name = "AddNewQuestionForm_MarkLbl";
-            AddNewQuestionForm_MarkLbl.Size = new Size(115, 20);
+            AddNewQuestionForm_MarkLbl.Size = new Size(130, 23);
             AddNewQuestionForm_MarkLbl.TabIndex = 7;
             AddNewQuestionForm_MarkLbl.Text = "Default mark (*)";
             // 
             // AddNewQuestionForm_CategoryCbo
             // 
+            AddNewQuestionForm_CategoryCbo.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_CategoryCbo.FormattingEnabled = true;
             AddNewQuestionForm_CategoryCbo.Location = new Point(460, 53);
             AddNewQuestionForm_CategoryCbo.Name = "AddNewQuestionForm_CategoryCbo";
-            AddNewQuestionForm_CategoryCbo.Size = new Size(281, 28);
+            AddNewQuestionForm_CategoryCbo.Size = new Size(281, 31);
             AddNewQuestionForm_CategoryCbo.TabIndex = 8;
             AddNewQuestionForm_CategoryCbo.DropDown += AddNewQuestionForm_CategoryCbo_DropDown;
             // 
             // AddNewQuestionForm_NameTxt
             // 
+            AddNewQuestionForm_NameTxt.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_NameTxt.Location = new Point(460, 101);
             AddNewQuestionForm_NameTxt.Name = "AddNewQuestionForm_NameTxt";
-            AddNewQuestionForm_NameTxt.Size = new Size(281, 27);
+            AddNewQuestionForm_NameTxt.Size = new Size(281, 30);
             AddNewQuestionForm_NameTxt.TabIndex = 9;
             // 
             // AddNewQuestionForm_MarkTxt
             // 
+            AddNewQuestionForm_MarkTxt.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_MarkTxt.Location = new Point(460, 436);
             AddNewQuestionForm_MarkTxt.Name = "AddNewQuestionForm_MarkTxt";
-            AddNewQuestionForm_MarkTxt.Size = new Size(281, 27);
+            AddNewQuestionForm_MarkTxt.Size = new Size(281, 30);
             AddNewQuestionForm_MarkTxt.TabIndex = 11;
             // 
             // AddNewQuestionForm_ExpandPic
