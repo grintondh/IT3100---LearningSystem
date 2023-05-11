@@ -28,17 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            ExportForm_ExportBtn = new Button();
             SuspendLayout();
             // 
-            // giao_dien_Export
+            // ExportForm_ExportBtn
+            // 
+            ExportForm_ExportBtn.BackColor = Color.FromArgb(194, 36, 36);
+            ExportForm_ExportBtn.FlatStyle = FlatStyle.Flat;
+            ExportForm_ExportBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            ExportForm_ExportBtn.ForeColor = Color.White;
+            ExportForm_ExportBtn.Location = new Point(173, 124);
+            ExportForm_ExportBtn.Name = "ExportForm_ExportBtn";
+            ExportForm_ExportBtn.Size = new Size(185, 51);
+            ExportForm_ExportBtn.TabIndex = 10;
+            ExportForm_ExportBtn.Text = "EXPORT";
+            ExportForm_ExportBtn.UseVisualStyleBackColor = false;
+            ExportForm_ExportBtn.Click += ExportForm_ExportBtn_Click;
+            // 
+            // ExportForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Name = "giao_dien_Export";
+            Controls.Add(ExportForm_ExportBtn);
+            Name = "ExportForm";
             Size = new Size(919, 555);
             ResumeLayout(false);
         }
 
         #endregion
+
+        private Button ExportForm_ExportBtn;
     }
 }
