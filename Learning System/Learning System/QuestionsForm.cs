@@ -17,6 +17,9 @@ namespace Learning_System
 {
     public partial class QuestionsForm : UserControl
     {
+        //bien dung de gui id cua category dang duoc chon sang form edit question
+        private int SendParentIdToEditForm;
+        //
         private List<int> selectedCategoriesIdList = new List<int>();
         private bool showQuestionsFromSubcategories = false;
         private void GetSubCategories(int _parentCategories, ref List<int> _subCategories, ref List<Categories> categories)
@@ -55,6 +58,7 @@ namespace Learning_System
                     {
                         DataRow Question = questionsData.Init().Offset(i).Limit(1).GetFirstRow();
                         int inCategories = Question.Field<int>("CategoryID");
+                        int QuestionID = Question.Field<int>("ID");
                         if ((showQuestionsFromCategoriesID.Contains(inCategories) && _showQuestionsFromSubcategories) || (showQuestionsFromCategoriesID[0] == inCategories && !showQuestionsFromSubcategories))
                         {
                             string _QuestionName = Question.Field<string>("Content");
@@ -62,6 +66,7 @@ namespace Learning_System
                             DataGridViewRow row = (DataGridViewRow)QuestionForm_ShowQuestionsDtg.Rows[0].Clone();
                             row.Cells[1].Value = _QuestionName;
                             row.Cells[2].Value = "Edit";
+                            row.Cells[3].Value = QuestionID;
                             if (i % 2 == 0) row.DefaultCellStyle.BackColor = Color.White;
                             else row.DefaultCellStyle.BackColor = Color.LightGray;
                             QuestionForm_ShowQuestionsDtg.Rows.Add(row);
@@ -151,6 +156,9 @@ namespace Learning_System
             var a = (Categories)QuestionsForm_SelectCategoryCbo.SelectedItem;
             selectedCategoriesIdList.Clear();
             int _parentCategories = a.Id;
+            //
+            SendParentIdToEditForm = _parentCategories;
+            //
             try
             {
                 JArray _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
@@ -175,6 +183,16 @@ namespace Learning_System
         {
             showQuestionsFromSubcategories = QuestionsForm_ShowFromSubcategoriesCb.Checked;
             showQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
+        }
+
+        private void QuestionForm_ShowQuestionsDtg_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (QuestionForm_ShowQuestionsDtg.Columns[e.ColumnIndex].Name == "Edit")
+            {
+                var a = QuestionForm_ShowQuestionsDtg.Rows[e.RowIndex];
+                EditQuestionForm editQuestionForm = new EditQuestionForm(Convert.ToInt32(a.Cells[3].Value), SendParentIdToEditForm);
+                editQuestionForm.Show();
+            }
         }
     }
 }
