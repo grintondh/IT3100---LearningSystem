@@ -31,6 +31,12 @@
             AddNewQuestionForm_HeadingLbl = new Label();
             panel_heading = new Panel();
             panel_body = new Panel();
+            panel_button = new Panel();
+            AddNewQuestionForm_ErrorLbl = new Label();
+            AddNewQuestionForm_MoreChoicesBtn = new Button();
+            AddNewQuestionForm_SaveAndContinueBtn = new Button();
+            AddNewQuestionForm_SaveBtn = new Button();
+            AddNewQuestionForm_CancelBtn = new Button();
             panel_choice_11 = new Panel();
             panel11 = new Panel();
             comboBox11 = new ComboBox();
@@ -91,12 +97,6 @@
             label1 = new Label();
             richTextBox2 = new RichTextBox();
             label2 = new Label();
-            panel_button = new Panel();
-            AddNewQuestionForm_ErrorLbl = new Label();
-            AddNewQuestionForm_MoreChoicesBtn = new Button();
-            AddNewQuestionForm_SaveAndContinueBtn = new Button();
-            AddNewQuestionForm_SaveBtn = new Button();
-            AddNewQuestionForm_CancelBtn = new Button();
             panel_choice_1 = new Panel();
             panel_choice1 = new Panel();
             comboBox1 = new ComboBox();
@@ -116,6 +116,7 @@
             AddNewQuestionForm_GeneralBtn = new Button();
             panel_heading.SuspendLayout();
             panel_body.SuspendLayout();
+            panel_button.SuspendLayout();
             panel_choice_11.SuspendLayout();
             panel11.SuspendLayout();
             panel_choice_10.SuspendLayout();
@@ -136,7 +137,6 @@
             panel3.SuspendLayout();
             panel_choice_2.SuspendLayout();
             panel2.SuspendLayout();
-            panel_button.SuspendLayout();
             panel_choice_1.SuspendLayout();
             panel_choice1.SuspendLayout();
             panel_.SuspendLayout();
@@ -177,16 +177,93 @@
             panel_body.Controls.Add(panel_choice_4);
             panel_body.Controls.Add(panel_choice_3);
             panel_body.Controls.Add(panel_choice_2);
-            panel_body.Controls.Add(panel_button);
             panel_body.Controls.Add(panel_choice_1);
             panel_body.Controls.Add(panel_);
             panel_body.Controls.Add(AddNewQuestionForm_ExpandPic);
             panel_body.Controls.Add(AddNewQuestionForm_GeneralBtn);
+            panel_body.Controls.Add(panel_button);
             panel_body.Dock = DockStyle.Fill;
             panel_body.Location = new Point(0, 71);
             panel_body.Name = "panel_body";
             panel_body.Size = new Size(1233, 769);
             panel_body.TabIndex = 10;
+            // 
+            // panel_button
+            // 
+            panel_button.Controls.Add(AddNewQuestionForm_ErrorLbl);
+            panel_button.Controls.Add(AddNewQuestionForm_MoreChoicesBtn);
+            panel_button.Controls.Add(AddNewQuestionForm_SaveAndContinueBtn);
+            panel_button.Controls.Add(AddNewQuestionForm_SaveBtn);
+            panel_button.Controls.Add(AddNewQuestionForm_CancelBtn);
+            panel_button.Location = new Point(0, 0);
+            panel_button.Margin = new Padding(2);
+            panel_button.Name = "panel_button";
+            panel_button.Size = new Size(1212, 258);
+            panel_button.TabIndex = 22;
+            // 
+            // AddNewQuestionForm_ErrorLbl
+            // 
+            AddNewQuestionForm_ErrorLbl.AutoSize = true;
+            AddNewQuestionForm_ErrorLbl.Location = new Point(316, 88);
+            AddNewQuestionForm_ErrorLbl.Name = "AddNewQuestionForm_ErrorLbl";
+            AddNewQuestionForm_ErrorLbl.Size = new Size(0, 20);
+            AddNewQuestionForm_ErrorLbl.TabIndex = 20;
+            // 
+            // AddNewQuestionForm_MoreChoicesBtn
+            // 
+            AddNewQuestionForm_MoreChoicesBtn.BackColor = Color.FromArgb(0, 159, 229);
+            AddNewQuestionForm_MoreChoicesBtn.FlatStyle = FlatStyle.Flat;
+            AddNewQuestionForm_MoreChoicesBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_MoreChoicesBtn.ForeColor = Color.White;
+            AddNewQuestionForm_MoreChoicesBtn.Location = new Point(316, 21);
+            AddNewQuestionForm_MoreChoicesBtn.Name = "AddNewQuestionForm_MoreChoicesBtn";
+            AddNewQuestionForm_MoreChoicesBtn.Size = new Size(340, 51);
+            AddNewQuestionForm_MoreChoicesBtn.TabIndex = 12;
+            AddNewQuestionForm_MoreChoicesBtn.Text = "BLANKS FOR 3 MORE CHOICES ";
+            AddNewQuestionForm_MoreChoicesBtn.UseVisualStyleBackColor = false;
+            AddNewQuestionForm_MoreChoicesBtn.Click += AddNewQuestionForm_MoreChoicesBtn_Click;
+            // 
+            // AddNewQuestionForm_SaveAndContinueBtn
+            // 
+            AddNewQuestionForm_SaveAndContinueBtn.BackColor = Color.FromArgb(0, 159, 229);
+            AddNewQuestionForm_SaveAndContinueBtn.FlatStyle = FlatStyle.Flat;
+            AddNewQuestionForm_SaveAndContinueBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_SaveAndContinueBtn.ForeColor = Color.White;
+            AddNewQuestionForm_SaveAndContinueBtn.Location = new Point(316, 126);
+            AddNewQuestionForm_SaveAndContinueBtn.Name = "AddNewQuestionForm_SaveAndContinueBtn";
+            AddNewQuestionForm_SaveAndContinueBtn.Size = new Size(386, 51);
+            AddNewQuestionForm_SaveAndContinueBtn.TabIndex = 14;
+            AddNewQuestionForm_SaveAndContinueBtn.Text = "SAVE CHANGES AND CONTINUE EDITING";
+            AddNewQuestionForm_SaveAndContinueBtn.UseVisualStyleBackColor = false;
+            AddNewQuestionForm_SaveAndContinueBtn.Click += AddNewQuestionForm_SaveAndContinueBtn_Click;
+            // 
+            // AddNewQuestionForm_SaveBtn
+            // 
+            AddNewQuestionForm_SaveBtn.BackColor = Color.FromArgb(194, 36, 36);
+            AddNewQuestionForm_SaveBtn.FlatStyle = FlatStyle.Flat;
+            AddNewQuestionForm_SaveBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_SaveBtn.ForeColor = Color.White;
+            AddNewQuestionForm_SaveBtn.Location = new Point(316, 183);
+            AddNewQuestionForm_SaveBtn.Name = "AddNewQuestionForm_SaveBtn";
+            AddNewQuestionForm_SaveBtn.Size = new Size(181, 53);
+            AddNewQuestionForm_SaveBtn.TabIndex = 13;
+            AddNewQuestionForm_SaveBtn.Text = "SAVE CHANGES";
+            AddNewQuestionForm_SaveBtn.UseVisualStyleBackColor = false;
+            AddNewQuestionForm_SaveBtn.Click += AddNewQuestionForm_SaveBtn_Click;
+            // 
+            // AddNewQuestionForm_CancelBtn
+            // 
+            AddNewQuestionForm_CancelBtn.BackColor = Color.FromArgb(0, 159, 229);
+            AddNewQuestionForm_CancelBtn.FlatStyle = FlatStyle.Flat;
+            AddNewQuestionForm_CancelBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_CancelBtn.ForeColor = Color.White;
+            AddNewQuestionForm_CancelBtn.Location = new Point(530, 183);
+            AddNewQuestionForm_CancelBtn.Name = "AddNewQuestionForm_CancelBtn";
+            AddNewQuestionForm_CancelBtn.Size = new Size(135, 53);
+            AddNewQuestionForm_CancelBtn.TabIndex = 15;
+            AddNewQuestionForm_CancelBtn.Text = "CANCEL";
+            AddNewQuestionForm_CancelBtn.UseVisualStyleBackColor = false;
+            AddNewQuestionForm_CancelBtn.Click += AddNewQuestionForm_CancelBtn_Click;
             // 
             // panel_choice_11
             // 
@@ -797,84 +874,6 @@
             label2.TabIndex = 0;
             label2.Text = "Choice2";
             // 
-            // panel_button
-            // 
-            panel_button.Controls.Add(AddNewQuestionForm_ErrorLbl);
-            panel_button.Controls.Add(AddNewQuestionForm_MoreChoicesBtn);
-            panel_button.Controls.Add(AddNewQuestionForm_SaveAndContinueBtn);
-            panel_button.Controls.Add(AddNewQuestionForm_SaveBtn);
-            panel_button.Controls.Add(AddNewQuestionForm_CancelBtn);
-            panel_button.Dock = DockStyle.Bottom;
-            panel_button.Location = new Point(0, 3312);
-            panel_button.Margin = new Padding(2);
-            panel_button.Name = "panel_button";
-            panel_button.Size = new Size(1212, 258);
-            panel_button.TabIndex = 22;
-            // 
-            // AddNewQuestionForm_ErrorLbl
-            // 
-            AddNewQuestionForm_ErrorLbl.AutoSize = true;
-            AddNewQuestionForm_ErrorLbl.Location = new Point(316, 88);
-            AddNewQuestionForm_ErrorLbl.Name = "AddNewQuestionForm_ErrorLbl";
-            AddNewQuestionForm_ErrorLbl.Size = new Size(0, 20);
-            AddNewQuestionForm_ErrorLbl.TabIndex = 20;
-            // 
-            // AddNewQuestionForm_MoreChoicesBtn
-            // 
-            AddNewQuestionForm_MoreChoicesBtn.BackColor = Color.FromArgb(0, 159, 229);
-            AddNewQuestionForm_MoreChoicesBtn.FlatStyle = FlatStyle.Flat;
-            AddNewQuestionForm_MoreChoicesBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            AddNewQuestionForm_MoreChoicesBtn.ForeColor = Color.White;
-            AddNewQuestionForm_MoreChoicesBtn.Location = new Point(316, 21);
-            AddNewQuestionForm_MoreChoicesBtn.Name = "AddNewQuestionForm_MoreChoicesBtn";
-            AddNewQuestionForm_MoreChoicesBtn.Size = new Size(340, 51);
-            AddNewQuestionForm_MoreChoicesBtn.TabIndex = 12;
-            AddNewQuestionForm_MoreChoicesBtn.Text = "BLANKS FOR 3 MORE CHOICES ";
-            AddNewQuestionForm_MoreChoicesBtn.UseVisualStyleBackColor = false;
-            AddNewQuestionForm_MoreChoicesBtn.Click += AddNewQuestionForm_MoreChoicesBtn_Click;
-            // 
-            // AddNewQuestionForm_SaveAndContinueBtn
-            // 
-            AddNewQuestionForm_SaveAndContinueBtn.BackColor = Color.FromArgb(0, 159, 229);
-            AddNewQuestionForm_SaveAndContinueBtn.FlatStyle = FlatStyle.Flat;
-            AddNewQuestionForm_SaveAndContinueBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            AddNewQuestionForm_SaveAndContinueBtn.ForeColor = Color.White;
-            AddNewQuestionForm_SaveAndContinueBtn.Location = new Point(316, 126);
-            AddNewQuestionForm_SaveAndContinueBtn.Name = "AddNewQuestionForm_SaveAndContinueBtn";
-            AddNewQuestionForm_SaveAndContinueBtn.Size = new Size(386, 51);
-            AddNewQuestionForm_SaveAndContinueBtn.TabIndex = 14;
-            AddNewQuestionForm_SaveAndContinueBtn.Text = "SAVE CHANGES AND CONTINUE EDITING";
-            AddNewQuestionForm_SaveAndContinueBtn.UseVisualStyleBackColor = false;
-            AddNewQuestionForm_SaveAndContinueBtn.Click += AddNewQuestionForm_SaveAndContinueBtn_Click;
-            // 
-            // AddNewQuestionForm_SaveBtn
-            // 
-            AddNewQuestionForm_SaveBtn.BackColor = Color.FromArgb(194, 36, 36);
-            AddNewQuestionForm_SaveBtn.FlatStyle = FlatStyle.Flat;
-            AddNewQuestionForm_SaveBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            AddNewQuestionForm_SaveBtn.ForeColor = Color.White;
-            AddNewQuestionForm_SaveBtn.Location = new Point(316, 183);
-            AddNewQuestionForm_SaveBtn.Name = "AddNewQuestionForm_SaveBtn";
-            AddNewQuestionForm_SaveBtn.Size = new Size(181, 53);
-            AddNewQuestionForm_SaveBtn.TabIndex = 13;
-            AddNewQuestionForm_SaveBtn.Text = "SAVE CHANGES";
-            AddNewQuestionForm_SaveBtn.UseVisualStyleBackColor = false;
-            AddNewQuestionForm_SaveBtn.Click += AddNewQuestionForm_SaveBtn_Click;
-            // 
-            // AddNewQuestionForm_CancelBtn
-            // 
-            AddNewQuestionForm_CancelBtn.BackColor = Color.FromArgb(0, 159, 229);
-            AddNewQuestionForm_CancelBtn.FlatStyle = FlatStyle.Flat;
-            AddNewQuestionForm_CancelBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            AddNewQuestionForm_CancelBtn.ForeColor = Color.White;
-            AddNewQuestionForm_CancelBtn.Location = new Point(530, 183);
-            AddNewQuestionForm_CancelBtn.Name = "AddNewQuestionForm_CancelBtn";
-            AddNewQuestionForm_CancelBtn.Size = new Size(135, 53);
-            AddNewQuestionForm_CancelBtn.TabIndex = 15;
-            AddNewQuestionForm_CancelBtn.Text = "CANCEL";
-            AddNewQuestionForm_CancelBtn.UseVisualStyleBackColor = false;
-            AddNewQuestionForm_CancelBtn.Click += AddNewQuestionForm_CancelBtn_Click;
-            // 
             // panel_choice_1
             // 
             panel_choice_1.Controls.Add(panel_choice1);
@@ -1061,6 +1060,8 @@
             panel_heading.ResumeLayout(false);
             panel_heading.PerformLayout();
             panel_body.ResumeLayout(false);
+            panel_button.ResumeLayout(false);
+            panel_button.PerformLayout();
             panel_choice_11.ResumeLayout(false);
             panel11.ResumeLayout(false);
             panel11.PerformLayout();
@@ -1091,8 +1092,6 @@
             panel_choice_2.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            panel_button.ResumeLayout(false);
-            panel_button.PerformLayout();
             panel_choice_1.ResumeLayout(false);
             panel_choice1.ResumeLayout(false);
             panel_choice1.PerformLayout();

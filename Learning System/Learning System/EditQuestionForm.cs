@@ -97,6 +97,7 @@ namespace Learning_System
             AddNewQuestionForm_MarkTxt.Text = currentQuestionRow.Field<double>("DefaultMark").ToString();
             List<QuestionChoice> choices = currentQuestionRow.Field<JArray>("Choice").ToObject<List<QuestionChoice>>();
             // dynamic control
+            Panel[] panelParent = new Panel[choices.Count];
             Panel[] panel = new Panel[choices.Count];
             RichTextBox[] richTextBoxes = new RichTextBox[choices.Count];
             System.Windows.Forms.ComboBox[] combobox = new System.Windows.Forms.ComboBox[choices.Count];
@@ -108,22 +109,18 @@ namespace Learning_System
                 combobox[i] = new System.Windows.Forms.ComboBox();
                 labelChoice[i] = new Label();
                 labelGrade[i] = new Label();
+                //panel Parent
+                panelParent[i] = new Panel();
+                panelParent[i].Location = new Point(0, 474 + i * 258);
+                panelParent[i].Size = new Size(1212, 258);
                 //panel
-                this.Controls.Add(panel[i]);
-                this.Controls.Add(richTextBoxes[i]);
-                this.Controls.Add(combobox[i]);
-                this.Controls.Add(labelChoice[i]);
-                this.Controls.Add(labelGrade[i]);
                 panel[i] = new Panel();
-                panel[i].Dock = DockStyle.Top;
-                panel[i].Location = new Point(0, 474 + i*258);
-                panel[i].Name = "panel" + i.ToString();
-                panel[i].Size = new Size(1212, 258);
+                panel[i].Location = new Point(354, 6);
+                panel[i].Size = new Size(565, 243);
                 panel[i].Controls.Add(richTextBoxes[i]);
                 panel[i].Controls.Add(combobox[i]);
                 panel[i].Controls.Add(labelChoice[i]);
                 panel[i].Controls.Add(labelGrade[i]);
-                panel[i].SuspendLayout();
                 // combobox
                 combobox[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
                 combobox[i].FormattingEnabled = true;
@@ -141,7 +138,7 @@ namespace Learning_System
                 labelChoice[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
                 labelChoice[i].Location = new Point(12, 14);
                 labelChoice[i].Size = new Size(71, 23);
-                labelChoice[i].Text = "Choice" + i.ToString();
+                labelChoice[i].Text = "Choice" + (i + 1).ToString();
                 // label grade
                 labelGrade[i].AutoSize = true;
                 labelGrade[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
@@ -149,10 +146,10 @@ namespace Learning_System
                 labelGrade[i].Size = new Size(56, 23);
                 labelGrade[i].Text = "Grade";
 
-                panel[i].ResumeLayout(false);
-                panel[i].PerformLayout();
-                this.ResumeLayout(false);
+                panel_body.Controls.Add(panelParent[i]);
+                panelParent[i].Controls.Add(panel[i]);
             }
+            panel_button.Location = new Point(0, 474 + choices.Count*258);
         }
 
         public EditQuestionForm()
@@ -657,6 +654,6 @@ namespace Learning_System
             if (mark == 0) return 0;
             else return list.IndexOf(mark * 100);
         }
-        
+
     }
 }
