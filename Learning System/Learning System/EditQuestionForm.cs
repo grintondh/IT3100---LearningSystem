@@ -21,7 +21,7 @@ namespace Learning_System
 
     public partial class EditQuestionForm : Form
     {
-
+        const int MAXOFCHOICE = 20;
         private int Count_Choices;
         private int Count_Button = 1;
         private int Count_Line = 0;
@@ -29,12 +29,12 @@ namespace Learning_System
         private int CurrentParentId;
         private int QuestionID;
         // dynamic control
-        Panel[] panelParent = new Panel[20];
-        Panel[] panel = new Panel[20];
-        RichTextBox[] richTextBoxes = new RichTextBox[20];
-        System.Windows.Forms.ComboBox[] combobox = new System.Windows.Forms.ComboBox[20];
-        Label[] labelChoice = new Label[20];
-        Label[] labelGrade = new Label[20];
+        Panel[] panelParent = new Panel[MAXOFCHOICE];
+        Panel[] panel = new Panel[MAXOFCHOICE];
+        RichTextBox[] richTextBoxes = new RichTextBox[MAXOFCHOICE];
+        System.Windows.Forms.ComboBox[] combobox = new System.Windows.Forms.ComboBox[MAXOFCHOICE];
+        Label[] labelChoice = new Label[MAXOFCHOICE];
+        Label[] labelGrade = new Label[MAXOFCHOICE];
         // Data cho category
         private DataProcessing categoriesData = new DataProcessing();
         private List<string> showColumns = new() { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
@@ -102,8 +102,14 @@ namespace Learning_System
                 AddNewQuestionForm_TextRtb.Text = currentQuestionRow.Field<string>("Content");
             }
             AddNewQuestionForm_MarkTxt.Text = currentQuestionRow.Field<double>("DefaultMark").ToString();
+            AddNewQuestionForm_CategoryCbo.SelectedIndex = CurrentParentId;
             List<QuestionChoice> choices = currentQuestionRow.Field<JArray>("Choice").ToObject<List<QuestionChoice>>();
             Count_Choices = choices.Count;
+            if (choices.Count > MAXOFCHOICE)
+            {
+                MessageBox.Show($"Max number of choice is {MAXOFCHOICE}, others is deleted!");
+                choices.RemoveRange(MAXOFCHOICE, choices.Count - MAXOFCHOICE);
+            }
             for (int i = 0; i < choices.Count; i++)
             {
                 richTextBoxes[i] = new RichTextBox();
@@ -117,7 +123,7 @@ namespace Learning_System
                 //panel
                 panel[i] = new Panel();
                 panel[i].Location = new Point(354, 6);
-                panel[i].Size = new Size(565, 243);
+                panel[i].Size = new Size(800, 243);
                 panel[i].Controls.Add(richTextBoxes[i]);
                 panel[i].Controls.Add(combobox[i]);
                 panel[i].Controls.Add(labelChoice[i]);
@@ -131,7 +137,7 @@ namespace Learning_System
                 // richtextbox
                 richTextBoxes[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
                 richTextBoxes[i].Location = new Point(106, 14);
-                richTextBoxes[i].Size = new Size(434, 162);
+                richTextBoxes[i].Size = new Size(568, 162);
                 richTextBoxes[i].Text = "";
                 // label choice
                 labelChoice[i].AutoSize = true;
@@ -235,9 +241,9 @@ namespace Learning_System
                 var _defaultmark = Convert.ToDouble(AddNewQuestionForm_MarkTxt.Text);
                 // doc du lieu tu dap an
                 var _choice = new List<QuestionChoice>();
-                for (int i=0; i< Count_Choices; i++)
+                for (int i = 0; i < Count_Choices; i++)
                 {
-                    if (richTextBoxes[i].Text != null && richTextBoxes[i].Text != "")
+                    if (richTextBoxes[i].TextLength != 0)
                     {
                         _choice.Add(new QuestionChoice()
                         {
@@ -245,7 +251,7 @@ namespace Learning_System
                             mark = ConvertComboboxTextToDouble(combobox[i].Text)
                         });
                     }
-                } 
+                }
                 try
                 {
                     DataRow _maxIDRow = questionsData.Init().Offset(0).Limit(questionsData.Length()).Sort("ID desc").GetFirstRow();
@@ -357,7 +363,7 @@ namespace Learning_System
                 var _choice = new List<QuestionChoice>();
                 for (int i = 0; i < Count_Choices; i++)
                 {
-                    if (richTextBoxes[i].Text != null && richTextBoxes[i].Text != "")
+                    if (richTextBoxes[i].TextLength != 0)
                     {
                         _choice.Add(new QuestionChoice()
                         {
@@ -411,7 +417,13 @@ namespace Learning_System
 
         private void AddNewQuestionForm_MoreChoicesBtn_Click(object sender, EventArgs e)
         {
-            for(int i = Count_Choices; i < Count_Choices +3; i++)
+            if (Count_Choices + 3 > MAXOFCHOICE)
+            {
+                MessageBox.Show($"Max of choice is {MAXOFCHOICE}");
+                AddNewQuestionForm_MoreChoicesBtn.Visible = false ;
+                return;
+            }
+            for (int i = Count_Choices; i < Count_Choices + 3; i++)
             {
                 richTextBoxes[i] = new RichTextBox();
                 combobox[i] = new System.Windows.Forms.ComboBox();
@@ -419,12 +431,12 @@ namespace Learning_System
                 labelGrade[i] = new Label();
                 //panel Parent
                 panelParent[i] = new Panel();
-                panelParent[i].Location = new Point(0, panelParent[i-1].Location.Y + 258);
+                panelParent[i].Location = new Point(0, panelParent[i - 1].Location.Y + 258);
                 panelParent[i].Size = new Size(1212, 258);
                 //panel
                 panel[i] = new Panel();
                 panel[i].Location = new Point(354, 6);
-                panel[i].Size = new Size(565, 243);
+                panel[i].Size = new Size(800, 243);
                 panel[i].Controls.Add(richTextBoxes[i]);
                 panel[i].Controls.Add(combobox[i]);
                 panel[i].Controls.Add(labelChoice[i]);
@@ -439,7 +451,7 @@ namespace Learning_System
                 // richtextbox
                 richTextBoxes[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
                 richTextBoxes[i].Location = new Point(106, 14);
-                richTextBoxes[i].Size = new Size(434, 162);
+                richTextBoxes[i].Size = new Size(568, 162);
                 richTextBoxes[i].Text = "";
                 // label choice
                 labelChoice[i].AutoSize = true;
@@ -457,8 +469,8 @@ namespace Learning_System
                 panel_body.Controls.Add(panelParent[i]);
                 panelParent[i].Controls.Add(panel[i]);
             }
-            panel_button.Location = new Point(0, panelParent[Count_Choices+2].Location.Y +258);
-            if (Count_Choices + 3 >= 20)
+            panel_button.Location = new Point(0, panelParent[Count_Choices + 2].Location.Y + 258);
+            if (Count_Choices + 3 >= MAXOFCHOICE)
                 AddNewQuestionForm_MoreChoicesBtn.Visible = false;
             else Count_Choices += 3;
         }

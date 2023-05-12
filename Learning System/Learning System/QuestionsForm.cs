@@ -64,7 +64,18 @@ namespace Learning_System
                             string _QuestionName = Question.Field<string>("Content");
 
                             DataGridViewRow row = (DataGridViewRow)QuestionForm_ShowQuestionsDtg.Rows[0].Clone();
-                            row.Cells[1].Value = _QuestionName;
+                            //
+                            RichTextBox tmp = new RichTextBox();
+                            tmp.Visible = false;
+                            try
+                            {
+                                tmp.Rtf = _QuestionName;
+                                row.Cells[1].Value = tmp.Text;
+                            }
+                            catch
+                            {
+                                row.Cells[1].Value = _QuestionName;
+                            }
                             row.Cells[2].Value = "Edit";
                             row.Cells[3].Value = QuestionID;
                             if (i % 2 == 0) row.DefaultCellStyle.BackColor = Color.White;
