@@ -36,11 +36,11 @@
             QuestionsForm_SelectCategoryLbl = new Label();
             QuestionsForm_QuestionsBankLbl = new Label();
             QuestionForm_ShowQuestionsDtg = new DataGridView();
+            CheckBox = new DataGridViewCheckBoxColumn();
             CheckBoxes = new DataGridViewCheckBoxColumn();
             QuestionName = new DataGridViewTextBoxColumn();
             Edit = new DataGridViewButtonColumn();
             ID = new DataGridViewTextBoxColumn();
-            CheckBox = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)QuestionForm_ShowQuestionsDtg).BeginInit();
             SuspendLayout();
             // 
@@ -138,7 +138,7 @@
             QuestionForm_ShowQuestionsDtg.BorderStyle = BorderStyle.None;
             QuestionForm_ShowQuestionsDtg.CellBorderStyle = DataGridViewCellBorderStyle.None;
             QuestionForm_ShowQuestionsDtg.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            QuestionForm_ShowQuestionsDtg.ColumnHeadersHeight = 29;
+            QuestionForm_ShowQuestionsDtg.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             QuestionForm_ShowQuestionsDtg.Columns.AddRange(new DataGridViewColumn[] { CheckBoxes, QuestionName, Edit, ID });
             QuestionForm_ShowQuestionsDtg.GridColor = SystemColors.ButtonFace;
             QuestionForm_ShowQuestionsDtg.Location = new Point(51, 337);
@@ -149,6 +149,13 @@
             QuestionForm_ShowQuestionsDtg.Size = new Size(1800, 400);
             QuestionForm_ShowQuestionsDtg.TabIndex = 15;
             QuestionForm_ShowQuestionsDtg.CellContentClick += QuestionForm_ShowQuestionsDtg_CellContentClick;
+            // 
+            // CheckBox
+            // 
+            CheckBox.HeaderText = "T";
+            CheckBox.MinimumWidth = 6;
+            CheckBox.Name = "CheckBox";
+            CheckBox.Width = 125;
             // 
             // CheckBoxes
             // 
@@ -173,18 +180,12 @@
             // 
             // ID
             // 
-            ID.HeaderText = "";
+            ID.HeaderText = "ID";
             ID.MinimumWidth = 6;
             ID.Name = "ID";
+            ID.ReadOnly = true;
             ID.Visible = false;
             ID.Width = 125;
-            // 
-            // CheckBox
-            // 
-            CheckBox.HeaderText = "T";
-            CheckBox.MinimumWidth = 6;
-            CheckBox.Name = "CheckBox";
-            CheckBox.Width = 125;
             // 
             // QuestionsForm
             // 
