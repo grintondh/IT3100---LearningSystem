@@ -48,23 +48,24 @@ namespace Learning_System
                 if (questionsData.Length() == 0) MessageBox.Show("Không có câu hỏi nào trong Categories này!");
                 else
                 {
-                    DataGridViewRow _row = (DataGridViewRow)QuestionForm_ShowQuestionsDtg.Rows[0].Clone();
-                    _row.Cells[1].Value = "Question name / ID number";
-                    QuestionForm_ShowQuestionsDtg.Rows.Add(_row);
-                    for (int i = 0; i < questionsData.Length(); i++)
+                    var index = QuestionForm_ShowQuestionsDtg.Rows.Add();
+                    QuestionForm_ShowQuestionsDtg.Rows[index].Cells[1].Value = "Question name / ID number";
+                    for (int i = 1; i <= questionsData.Length(); i++)
                     {
                         DataRow Question = questionsData.Init().Offset(i).Limit(1).GetFirstRow();
                         int inCategories = Question.Field<int>("CategoryID");
                         if ((showQuestionsFromCategoriesID.Contains(inCategories) && _showQuestionsFromSubcategories) || (showQuestionsFromCategoriesID[0] == inCategories && !showQuestionsFromSubcategories))
                         {
                             string _QuestionName = Question.Field<string>("Content");
-
-                            DataGridViewRow row = (DataGridViewRow)QuestionForm_ShowQuestionsDtg.Rows[0].Clone();
+                            index = QuestionForm_ShowQuestionsDtg.Rows.Add();
+                            DataGridViewRow row = (DataGridViewRow)QuestionForm_ShowQuestionsDtg.Rows[index];
                             row.Cells[1].Value = _QuestionName;
                             row.Cells[2].Value = "Edit";
+                            row.Cells[3].Value = Question.Field<int>("ID");
+
                             if (i % 2 == 0) row.DefaultCellStyle.BackColor = Color.White;
-                            else row.DefaultCellStyle.BackColor = Color.LightGray;
-                            QuestionForm_ShowQuestionsDtg.Rows.Add(row);
+                            else row.DefaultCellStyle.BackColor = Color.AliceBlue;
+
                         }
 
                     }
@@ -175,6 +176,23 @@ namespace Learning_System
         {
             showQuestionsFromSubcategories = QuestionsForm_ShowFromSubcategoriesCb.Checked;
             showQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
+        }
+
+        private void QuestionForm_ShowQuestionsDtg_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 1)
+            {
+                try
+                {
+                    int questionId = (int)senderGrid.Rows[e.RowIndex].Cells[3].Value;
+                    if (questionId != null) MessageBox.Show($"{questionId}");
+                }
+                catch (Exception ex)
+                {
+                    return;
+                }
+            }
         }
     }
 }

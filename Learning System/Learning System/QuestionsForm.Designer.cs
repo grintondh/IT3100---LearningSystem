@@ -39,6 +39,7 @@
             CheckBoxes = new DataGridViewCheckBoxColumn();
             QuestionName = new DataGridViewTextBoxColumn();
             Edit = new DataGridViewButtonColumn();
+            ID = new DataGridViewTextBoxColumn();
             CheckBox = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)QuestionForm_ShowQuestionsDtg).BeginInit();
             SuspendLayout();
@@ -129,6 +130,7 @@
             // 
             // QuestionForm_ShowQuestionsDtg
             // 
+            QuestionForm_ShowQuestionsDtg.AllowUserToAddRows = false;
             QuestionForm_ShowQuestionsDtg.AllowUserToDeleteRows = false;
             QuestionForm_ShowQuestionsDtg.AllowUserToResizeColumns = false;
             QuestionForm_ShowQuestionsDtg.AllowUserToResizeRows = false;
@@ -136,24 +138,23 @@
             QuestionForm_ShowQuestionsDtg.BorderStyle = BorderStyle.None;
             QuestionForm_ShowQuestionsDtg.CellBorderStyle = DataGridViewCellBorderStyle.None;
             QuestionForm_ShowQuestionsDtg.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            QuestionForm_ShowQuestionsDtg.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            QuestionForm_ShowQuestionsDtg.Columns.AddRange(new DataGridViewColumn[] { CheckBoxes, QuestionName, Edit });
+            QuestionForm_ShowQuestionsDtg.ColumnHeadersHeight = 29;
+            QuestionForm_ShowQuestionsDtg.Columns.AddRange(new DataGridViewColumn[] { CheckBoxes, QuestionName, Edit, ID });
             QuestionForm_ShowQuestionsDtg.GridColor = SystemColors.ButtonFace;
             QuestionForm_ShowQuestionsDtg.Location = new Point(51, 337);
             QuestionForm_ShowQuestionsDtg.Name = "QuestionForm_ShowQuestionsDtg";
-            QuestionForm_ShowQuestionsDtg.ReadOnly = true;
             QuestionForm_ShowQuestionsDtg.RowHeadersVisible = false;
-            QuestionForm_ShowQuestionsDtg.RowHeadersWidth = 51;
+            QuestionForm_ShowQuestionsDtg.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             QuestionForm_ShowQuestionsDtg.RowTemplate.Height = 29;
             QuestionForm_ShowQuestionsDtg.Size = new Size(1800, 400);
             QuestionForm_ShowQuestionsDtg.TabIndex = 15;
+            QuestionForm_ShowQuestionsDtg.CellContentClick += QuestionForm_ShowQuestionsDtg_CellContentClick;
             // 
             // CheckBoxes
             // 
             CheckBoxes.HeaderText = "T";
             CheckBoxes.MinimumWidth = 6;
             CheckBoxes.Name = "CheckBoxes";
-            CheckBoxes.ReadOnly = true;
             CheckBoxes.Width = 40;
             // 
             // QuestionName
@@ -161,7 +162,6 @@
             QuestionName.HeaderText = "Question";
             QuestionName.MinimumWidth = 6;
             QuestionName.Name = "QuestionName";
-            QuestionName.ReadOnly = true;
             QuestionName.Width = 1600;
             // 
             // Edit
@@ -169,8 +169,15 @@
             Edit.HeaderText = "Actions";
             Edit.MinimumWidth = 6;
             Edit.Name = "Edit";
-            Edit.ReadOnly = true;
             Edit.Width = 160;
+            // 
+            // ID
+            // 
+            ID.HeaderText = "";
+            ID.MinimumWidth = 6;
+            ID.Name = "ID";
+            ID.Visible = false;
+            ID.Width = 125;
             // 
             // CheckBox
             // 
@@ -212,5 +219,6 @@
         private DataGridViewCheckBoxColumn CheckBoxes;
         private DataGridViewTextBoxColumn QuestionName;
         private DataGridViewButtonColumn Edit;
+        private DataGridViewTextBoxColumn ID;
     }
 }
