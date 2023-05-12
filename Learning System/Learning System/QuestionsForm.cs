@@ -19,8 +19,9 @@ namespace Learning_System
     {
         //bien dung de gui id cua category dang duoc chon sang form edit question
         private int SendParentIdToEditForm;
-        //
+        //bien luu cac category duoc hien tren datagridview
         private List<int> selectedCategoriesIdList = new List<int>();
+        // bien co hien cau hoi tu category con hay khong
         private bool showQuestionsFromSubcategories = false;
         private void GetSubCategories(int _parentCategories, ref List<int> _subCategories, ref List<Categories> categories)
         {
@@ -62,7 +63,9 @@ namespace Learning_System
                         {
                             string _QuestionName = Question.Field<string>("Content");
 
-                            DataGridViewRow row = (DataGridViewRow)QuestionForm_ShowQuestionsDtg.Rows[0].Clone();
+//                            DataGridViewRow row = (DataGridViewRow)QuestionForm_ShowQuestionsDtg.Rows[0].Clone();
+                            index = QuestionForm_ShowQuestionsDtg.Rows.Add();
+                            DataGridViewRow row = QuestionForm_ShowQuestionsDtg.Rows[index];
                             //
                             RichTextBox tmp = new RichTextBox();
                             tmp.Visible = false;
@@ -197,11 +200,12 @@ namespace Learning_System
 
         private void QuestionForm_ShowQuestionsDtg_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (QuestionForm_ShowQuestionsDtg.Columns[e.ColumnIndex].Name == "Edit")
+            if (QuestionForm_ShowQuestionsDtg.Columns[e.ColumnIndex].Name == "Edit" && e.RowIndex >= 0)
             {
                 var a = QuestionForm_ShowQuestionsDtg.Rows[e.RowIndex];
-                EditQuestionForm editQuestionForm = new EditQuestionForm(Convert.ToInt32(a.Cells[3].Value), SendParentIdToEditForm);
+                EditQuestionForm editQuestionForm = new EditQuestionForm(Convert.ToInt32(a.Cells[3].Value), SendParentIdToEditForm, selectedCategoriesIdList, showQuestionsFromSubcategories);
                 editQuestionForm.Show();
+                showQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
             }
         }
     }
