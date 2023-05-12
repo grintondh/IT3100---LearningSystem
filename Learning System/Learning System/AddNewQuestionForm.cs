@@ -19,13 +19,19 @@ namespace Learning_System
 
     public partial class AddNewQuestionForm : Form
     {
-
-        private int Count_Choices = 0;
+        const int MAXOFCHOICE = 20;
+        private int Count_Choices = 2;
         private int Count_Button = 0;
         private int Count_Line = 0;
         private bool IsInitial = true;
         private int CurrentParentId;
-
+        // dynamic control
+        Panel[] panelParent = new Panel[MAXOFCHOICE];
+        Panel[] panel = new Panel[MAXOFCHOICE];
+        RichTextBox[] richTextBoxes = new RichTextBox[MAXOFCHOICE];
+        System.Windows.Forms.ComboBox[] combobox = new System.Windows.Forms.ComboBox[MAXOFCHOICE];
+        Label[] labelChoice = new Label[MAXOFCHOICE];
+        Label[] labelGrade = new Label[MAXOFCHOICE];
         // Data cho category
         private DataProcessing categoriesData = new DataProcessing();
         private List<string> showColumns = new() { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
@@ -57,6 +63,52 @@ namespace Learning_System
 
             }
             InitializeComponent();
+            for (int i = 0; i < 2; i++)
+            {
+                richTextBoxes[i] = new RichTextBox();
+                combobox[i] = new System.Windows.Forms.ComboBox();
+                labelChoice[i] = new Label();
+                labelGrade[i] = new Label();
+                //panel Parent
+                panelParent[i] = new Panel();
+                panelParent[i].Location = new Point(0, panel_.Height + i * 258);
+                panelParent[i].Size = new Size(1212, 258);
+                //panel
+                panel[i] = new Panel();
+                panel[i].Location = new Point(354, 6);
+                panel[i].Size = new Size(800, 243);
+                panel[i].Controls.Add(richTextBoxes[i]);
+                panel[i].Controls.Add(combobox[i]);
+                panel[i].Controls.Add(labelChoice[i]);
+                panel[i].Controls.Add(labelGrade[i]);
+                // combobox
+                combobox[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                combobox[i].FormattingEnabled = true;
+                combobox[i].Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
+                combobox[i].Location = new Point(106, 201);
+                combobox[i].Size = new Size(151, 31);
+                // richtextbox
+                richTextBoxes[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                richTextBoxes[i].Location = new Point(106, 14);
+                richTextBoxes[i].Size = new Size(568, 162);
+                richTextBoxes[i].Text = "";
+                // label choice
+                labelChoice[i].AutoSize = true;
+                labelChoice[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                labelChoice[i].Location = new Point(12, 14);
+                labelChoice[i].Size = new Size(71, 23);
+                labelChoice[i].Text = "Choice" + (i + 1).ToString();
+                // label grade
+                labelGrade[i].AutoSize = true;
+                labelGrade[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                labelGrade[i].Location = new Point(12, 201);
+                labelGrade[i].Size = new Size(56, 23);
+                labelGrade[i].Text = "Grade";
+
+                panel_body.Controls.Add(panelParent[i]);
+                panelParent[i].Controls.Add(panel[i]);
+            }
+            panel_button.Location = new Point(0, panelParent[Count_Choices - 1].Location.Y + 258);
         }
 
         private void AddNewQuestionForm_CategoryCbo_DropDown(object sender, EventArgs e)
@@ -145,111 +197,17 @@ namespace Learning_System
                 }
                 var _defaultmark = Convert.ToDouble(AddNewQuestionForm_MarkTxt.Text);
                 // doc du lieu tu dap an
-                var _qchoice1 = new QuestionChoice()
-                {
-                    choice = richTextBox1.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox1.Text)
-                };
-                var _qchoice2 = new QuestionChoice()
-                {
-                    choice = richTextBox2.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox2.Text)
-                };
-                var _qchoice3 = new QuestionChoice()
-                {
-                    choice = richTextBox3.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox3.Text)
-                };
-                var _qchoice4 = new QuestionChoice()
-                {
-                    choice = richTextBox4.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox4.Text)
-                };
-                var _qchoice5 = new QuestionChoice()
-                {
-                    choice = richTextBox5.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox5.Text)
-                };
-                var _qchoice6 = new QuestionChoice()
-                {
-                    choice = richTextBox6.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox6.Text)
-                };
-                var _qchoice7 = new QuestionChoice()
-                {
-                    choice = richTextBox7.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox7.Text)
-                };
-                var _qchoice8 = new QuestionChoice()
-                {
-                    choice = richTextBox8.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox8.Text)
-                };
-                var _qchoice9 = new QuestionChoice()
-                {
-                    choice = richTextBox9.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox9.Text)
-                };
-                var _qchoice10 = new QuestionChoice()
-                {
-                    choice = richTextBox10.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox10.Text)
-                };
-                var _qchoice11 = new QuestionChoice()
-                {
-                    choice = richTextBox11.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox11.Text)
-                };
-                // them du lieu tu dap ap vao list _choice
                 var _choice = new List<QuestionChoice>();
-                if ((_qchoice1.choice != "") && (_qchoice1.choice != null))
-                    _choice.Add(_qchoice1);
-                if ((_qchoice2.choice != "") && (_qchoice2.choice != null))
-                    _choice.Add(_qchoice2);
-                if (Count_Choices == 1)
+                for (int i = 0; i < Count_Choices; i++)
                 {
-                    if ((_qchoice3.choice != "") && (_qchoice3.choice != null))
-                        _choice.Add(_qchoice3);
-                    if ((_qchoice4.choice != "") && (_qchoice4.choice != null))
-                        _choice.Add(_qchoice4);
-                    if ((_qchoice5.choice != "") && (_qchoice5.choice != null))
-                        _choice.Add(_qchoice5);
-                }
-                if (Count_Choices == 2)
-                {
-                    if ((_qchoice3.choice != "") && (_qchoice3.choice != null))
-                        _choice.Add(_qchoice3);
-                    if ((_qchoice4.choice != "") && (_qchoice4.choice != null))
-                        _choice.Add(_qchoice4);
-                    if ((_qchoice5.choice != "") && (_qchoice5.choice != null))
-                        _choice.Add(_qchoice5);
-                    if ((_qchoice6.choice != "") && (_qchoice6.choice != null))
-                        _choice.Add(_qchoice6);
-                    if ((_qchoice7.choice != "") && (_qchoice7.choice != null))
-                        _choice.Add(_qchoice7);
-                    if ((_qchoice8.choice != "") && (_qchoice8.choice != null))
-                        _choice.Add(_qchoice8);
-                }
-                if (Count_Choices == 3)
-                {
-                    if ((_qchoice3.choice != "") && (_qchoice3.choice != null))
-                        _choice.Add(_qchoice3);
-                    if ((_qchoice4.choice != "") && (_qchoice4.choice != null))
-                        _choice.Add(_qchoice4);
-                    if ((_qchoice5.choice != "") && (_qchoice5.choice != null))
-                        _choice.Add(_qchoice5);
-                    if ((_qchoice6.choice != "") && (_qchoice6.choice != null))
-                        _choice.Add(_qchoice6);
-                    if ((_qchoice7.choice != "") && (_qchoice7.choice != null))
-                        _choice.Add(_qchoice7);
-                    if ((_qchoice8.choice != "") && (_qchoice8.choice != null))
-                        _choice.Add(_qchoice8);
-                    if ((_qchoice9.choice != "") && (_qchoice9.choice != null))
-                        _choice.Add(_qchoice9);
-                    if ((_qchoice10.choice != "") && (_qchoice10.choice != null))
-                        _choice.Add(_qchoice10);
-                    if ((_qchoice11.choice != "") && (_qchoice11.choice != null))
-                        _choice.Add(_qchoice11);
+                    if (richTextBoxes[i].TextLength != 0)
+                    {
+                        _choice.Add(new QuestionChoice()
+                        {
+                            choice = richTextBoxes[i].Rtf,
+                            mark = ConvertComboboxTextToDouble(combobox[i].Text)
+                        });
+                    }
                 }
                 try
                 {
@@ -360,111 +318,17 @@ namespace Learning_System
                 }
                 var _defaultmark = Convert.ToDouble(AddNewQuestionForm_MarkTxt.Text);
                 // doc du lieu tu dap an
-                var _qchoice1 = new QuestionChoice()
-                {
-                    choice = richTextBox1.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox1.Text)
-                };
-                var _qchoice2 = new QuestionChoice()
-                {
-                    choice = richTextBox2.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox2.Text)
-                };
-                var _qchoice3 = new QuestionChoice()
-                {
-                    choice = richTextBox3.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox3.Text)
-                };
-                var _qchoice4 = new QuestionChoice()
-                {
-                    choice = richTextBox4.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox4.Text)
-                };
-                var _qchoice5 = new QuestionChoice()
-                {
-                    choice = richTextBox5.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox5.Text)
-                };
-                var _qchoice6 = new QuestionChoice()
-                {
-                    choice = richTextBox6.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox6.Text)
-                };
-                var _qchoice7 = new QuestionChoice()
-                {
-                    choice = richTextBox7.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox7.Text)
-                };
-                var _qchoice8 = new QuestionChoice()
-                {
-                    choice = richTextBox8.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox8.Text)
-                };
-                var _qchoice9 = new QuestionChoice()
-                {
-                    choice = richTextBox9.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox9.Text)
-                };
-                var _qchoice10 = new QuestionChoice()
-                {
-                    choice = richTextBox10.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox10.Text)
-                };
-                var _qchoice11 = new QuestionChoice()
-                {
-                    choice = richTextBox11.Text,
-                    mark = ConvertComboboxTextToDouble(comboBox11.Text)
-                };
-                // them du lieu tu dap ap vao list _choice
                 var _choice = new List<QuestionChoice>();
-                if ((_qchoice1.choice != "") && (_qchoice1.choice != null))
-                    _choice.Add(_qchoice1);
-                if ((_qchoice2.choice != "") && (_qchoice2.choice != null))
-                    _choice.Add(_qchoice2);
-                if (Count_Choices == 1)
+                for (int i = 0; i < Count_Choices; i++)
                 {
-                    if ((_qchoice3.choice != "") && (_qchoice3.choice != null))
-                        _choice.Add(_qchoice3);
-                    if ((_qchoice4.choice != "") && (_qchoice4.choice != null))
-                        _choice.Add(_qchoice4);
-                    if ((_qchoice5.choice != "") && (_qchoice5.choice != null))
-                        _choice.Add(_qchoice5);
-                }
-                if (Count_Choices == 2)
-                {
-                    if ((_qchoice3.choice != "") && (_qchoice3.choice != null))
-                        _choice.Add(_qchoice3);
-                    if ((_qchoice4.choice != "") && (_qchoice4.choice != null))
-                        _choice.Add(_qchoice4);
-                    if ((_qchoice5.choice != "") && (_qchoice5.choice != null))
-                        _choice.Add(_qchoice5);
-                    if ((_qchoice6.choice != "") && (_qchoice6.choice != null))
-                        _choice.Add(_qchoice6);
-                    if ((_qchoice7.choice != "") && (_qchoice7.choice != null))
-                        _choice.Add(_qchoice7);
-                    if ((_qchoice8.choice != "") && (_qchoice8.choice != null))
-                        _choice.Add(_qchoice8);
-                }
-                if (Count_Choices == 3)
-                {
-                    if ((_qchoice3.choice != "") && (_qchoice3.choice != null))
-                        _choice.Add(_qchoice3);
-                    if ((_qchoice4.choice != "") && (_qchoice4.choice != null))
-                        _choice.Add(_qchoice4);
-                    if ((_qchoice5.choice != "") && (_qchoice5.choice != null))
-                        _choice.Add(_qchoice5);
-                    if ((_qchoice6.choice != "") && (_qchoice6.choice != null))
-                        _choice.Add(_qchoice6);
-                    if ((_qchoice7.choice != "") && (_qchoice7.choice != null))
-                        _choice.Add(_qchoice7);
-                    if ((_qchoice8.choice != "") && (_qchoice8.choice != null))
-                        _choice.Add(_qchoice8);
-                    if ((_qchoice9.choice != "") && (_qchoice9.choice != null))
-                        _choice.Add(_qchoice9);
-                    if ((_qchoice10.choice != "") && (_qchoice10.choice != null))
-                        _choice.Add(_qchoice10);
-                    if ((_qchoice11.choice != "") && (_qchoice11.choice != null))
-                        _choice.Add(_qchoice11);
+                    if (richTextBoxes[i].TextLength != 0)
+                    {
+                        _choice.Add(new QuestionChoice()
+                        {
+                            choice = richTextBoxes[i].Rtf,
+                            mark = ConvertComboboxTextToDouble(combobox[i].Text)
+                        });
+                    }
                 }
                 try
                 {
@@ -511,50 +375,61 @@ namespace Learning_System
 
         private void AddNewQuestionForm_MoreChoicesBtn_Click(object sender, EventArgs e)
         {
-            Count_Choices++;
-            if (Count_Choices == 1)
+            for (int i = Count_Choices; i < Count_Choices + 3; i++)
             {
-                panel_choice_3.Height = 322;
-                panel_choice_4.Height = 322;
-                panel_choice_5.Height = 322;
+                richTextBoxes[i] = new RichTextBox();
+                combobox[i] = new System.Windows.Forms.ComboBox();
+                labelChoice[i] = new Label();
+                labelGrade[i] = new Label();
+                //panel Parent
+                panelParent[i] = new Panel();
+                panelParent[i].Location = new Point(0, panelParent[i - 1].Location.Y + 258);
+                panelParent[i].Size = new Size(1212, 258);
+                //panel
+                panel[i] = new Panel();
+                panel[i].Location = new Point(354, 6);
+                panel[i].Size = new Size(800, 243);
+                panel[i].Controls.Add(richTextBoxes[i]);
+                panel[i].Controls.Add(combobox[i]);
+                panel[i].Controls.Add(labelChoice[i]);
+                panel[i].Controls.Add(labelGrade[i]);
+                // combobox
+                combobox[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                combobox[i].FormattingEnabled = true;
+                combobox[i].Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
+                combobox[i].Location = new Point(106, 201);
+                combobox[i].Size = new Size(151, 31);
+                combobox[i].Text = "None";
+                // richtextbox
+                richTextBoxes[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                richTextBoxes[i].Location = new Point(106, 14);
+                richTextBoxes[i].Size = new Size(568, 162);
+                richTextBoxes[i].Text = "";
+                // label choice
+                labelChoice[i].AutoSize = true;
+                labelChoice[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                labelChoice[i].Location = new Point(12, 14);
+                labelChoice[i].Size = new Size(71, 23);
+                labelChoice[i].Text = "Choice" + (i + 1).ToString();
+                // label grade
+                labelGrade[i].AutoSize = true;
+                labelGrade[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                labelGrade[i].Location = new Point(12, 201);
+                labelGrade[i].Size = new Size(56, 23);
+                labelGrade[i].Text = "Grade";
+
+                panel_body.Controls.Add(panelParent[i]);
+                panelParent[i].Controls.Add(panel[i]);
             }
-            //else
-            if (Count_Choices == 2)
-            {
-                panel_choice_6.Height = 322;
-                panel_choice_7.Height = 322;
-                panel_choice_8.Height = 322;
-            }
-            //else
-            if (Count_Choices == 3)
-            {
-                panel_choice_9.Height = 322;
-                panel_choice_10.Height = 322;
-                panel_choice_11.Height = 322;
+            panel_button.Location = new Point(0, panelParent[Count_Choices + 2].Location.Y + 258);
+            if (Count_Choices + 3 >= MAXOFCHOICE)
                 AddNewQuestionForm_MoreChoicesBtn.Visible = false;
-            }
+            else Count_Choices += 3;
         }
 
         private void AddNewQuestionForm_Load(object sender, EventArgs e)
         {
-            panel_choice_11.Visible = true;
-            panel_choice_10.Visible = true;
-            panel_choice_9.Visible = true;
-            panel_choice_8.Visible = true;
-            panel_choice_7.Visible = true;
-            panel_choice_6.Visible = true;
-            panel_choice_5.Visible = true;
-            panel_choice_4.Visible = true;
-            panel_choice_3.Visible = true;
-            panel_choice_3.Height = 0;
-            panel_choice_4.Height = 0;
-            panel_choice_5.Height = 0;
-            panel_choice_6.Height = 0;
-            panel_choice_7.Height = 0;
-            panel_choice_8.Height = 0;
-            panel_choice_9.Height = 0;
-            panel_choice_10.Height = 0;
-            panel_choice_11.Height = 0;
+            //
         }
 
         private double ConvertComboboxTextToDouble(string _CboText)
@@ -568,5 +443,6 @@ namespace Learning_System
                 return 0;
             }
         }
+
     }
 }
