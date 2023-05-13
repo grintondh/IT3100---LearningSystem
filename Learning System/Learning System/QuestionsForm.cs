@@ -20,8 +20,9 @@ namespace Learning_System
         private void QuestionsForm_CreateNewQuestionBtn_Click(object sender, EventArgs e)
         {
             AddNewQuestionForm addNewQuestionForm = new AddNewQuestionForm();
-            //addNewQuestionForm.ShowDialog();
-            addNewQuestionForm.Show();
+            addNewQuestionForm.ShowDialog();
+            // Hàm ngay bên dưới này dùng để load lại datagridview, khi nào merge code vào thì ông bỏ // đi hộ tôi nhá
+            //showQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
         }
     }
 }
