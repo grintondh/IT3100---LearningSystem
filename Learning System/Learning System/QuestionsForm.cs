@@ -204,7 +204,8 @@ namespace Learning_System
             {
                 var a = QuestionForm_ShowQuestionsDtg.Rows[e.RowIndex];
                 EditQuestionForm editQuestionForm = new EditQuestionForm(Convert.ToInt32(a.Cells[3].Value), SendParentIdToEditForm);
-                editQuestionForm.Show();
+                editQuestionForm.ShowDialog();
+                showQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
             }
         }
     }
