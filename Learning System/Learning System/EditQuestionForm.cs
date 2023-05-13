@@ -50,14 +50,10 @@ namespace Learning_System
         private List<Type> showType_questions = new List<Type> { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
         private readonly List<string> showKey_questions = new List<string>() { "PRIMARY KEY", "", "", "", "", "" };
         private DataTable? questionsDataTable = new();
-        private List<int> selectedCategoriesIdList = new List<int>();
-        private bool showQuestionsFromSubcategories = false;
-        public EditQuestionForm(int ID, int ParentID, List<int> showQuestionsFromCategoriesID, bool _showQuestionsFromSubcategories)
+        public EditQuestionForm(int ID, int ParentID)
         {
             CurrentParentId = ParentID;
             QuestionID = ID;
-            selectedCategoriesIdList = showQuestionsFromCategoriesID;
-            showQuestionsFromSubcategories = _showQuestionsFromSubcategories;
             // Doc du lieu Question
             try
             {

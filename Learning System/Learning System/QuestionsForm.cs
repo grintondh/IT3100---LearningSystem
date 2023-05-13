@@ -52,9 +52,9 @@ namespace Learning_System
                 if (questionsData.Length() == 0) MessageBox.Show("Không có câu hỏi nào trong Categories này!");
                 else
                 {
-                    var index = QuestionForm_ShowQuestionsDtg.Rows.Add();
-                    QuestionForm_ShowQuestionsDtg.Rows[index].Cells[1].Value = "Question name / ID number";
-                    for (int i = 1; i <= questionsData.Length(); i++)
+                    //var index = QuestionForm_ShowQuestionsDtg.Rows.Add();
+                    //QuestionForm_ShowQuestionsDtg.Rows[index].Cells[1].Value = "Question name / ID number";
+                    for (int i = 0; i < questionsData.Length(); i++)
                     {
                         DataRow Question = questionsData.Init().Offset(i).Limit(1).GetFirstRow();
                         int inCategories = Question.Field<int>("CategoryID");
@@ -63,8 +63,8 @@ namespace Learning_System
                         {
                             string _QuestionName = Question.Field<string>("Content");
 
-//                            DataGridViewRow row = (DataGridViewRow)QuestionForm_ShowQuestionsDtg.Rows[0].Clone();
-                            index = QuestionForm_ShowQuestionsDtg.Rows.Add();
+                            //                            DataGridViewRow row = (DataGridViewRow)QuestionForm_ShowQuestionsDtg.Rows[0].Clone();
+                            var index = QuestionForm_ShowQuestionsDtg.Rows.Add();
                             DataGridViewRow row = QuestionForm_ShowQuestionsDtg.Rows[index];
                             //
                             RichTextBox tmp = new RichTextBox();
@@ -203,9 +203,8 @@ namespace Learning_System
             if (QuestionForm_ShowQuestionsDtg.Columns[e.ColumnIndex].Name == "Edit" && e.RowIndex >= 0)
             {
                 var a = QuestionForm_ShowQuestionsDtg.Rows[e.RowIndex];
-                EditQuestionForm editQuestionForm = new EditQuestionForm(Convert.ToInt32(a.Cells[3].Value), SendParentIdToEditForm, selectedCategoriesIdList, showQuestionsFromSubcategories);
+                EditQuestionForm editQuestionForm = new EditQuestionForm(Convert.ToInt32(a.Cells[3].Value), SendParentIdToEditForm);
                 editQuestionForm.Show();
-                showQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
             }
         }
     }
