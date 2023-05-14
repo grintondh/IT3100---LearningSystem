@@ -181,20 +181,6 @@ namespace Learning_System
 
         private void AddNewQuestionForm_SaveBtn_Click(object sender, EventArgs e)
         {
-            if (Count_Button > 0)
-            {
-                List<string> _query = new() { "ID", QuestionID.ToString() };
-                int check = questionsData.Init().Offset(0).Limit(1).Query(_query).Delete();
-
-                List<string> _query1 = new() { "Id", CurrentParentId.ToString() };
-                DataRow _parentRow = categoriesData.Init().Offset(0).Limit(1).Query(_query1).GetFirstRow();
-                var _x = _parentRow.Field<JArray>("QuestionArray");
-                List<int> questionArray = _x.ToObject<List<int>>();
-                _x.RemoveAt(questionArray.IndexOf(QuestionID));
-                JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
-                if (categoriesData.Init().Offset(0).Limit(1).Query(_query1).Update(x) == DataProcessing.StatusCode.Error)
-                    throw new Exception();
-            }
             string _error = "";
             if (AddNewQuestionForm_NameTxt.Text == null || AddNewQuestionForm_NameTxt.Text == "")
             {
@@ -220,6 +206,21 @@ namespace Learning_System
             }
             else
             {
+                if (Count_Button > 0)
+                {
+                    List<string> _query = new() { "ID", QuestionID.ToString() };
+                    int check = questionsData.Init().Offset(0).Limit(1).Query(_query).Delete();
+
+                    List<string> _query1 = new() { "Id", CurrentParentId.ToString() };
+                    DataRow _parentRow = categoriesData.Init().Offset(0).Limit(1).Query(_query1).GetFirstRow();
+                    var _x = _parentRow.Field<JArray>("QuestionArray");
+                    List<int> questionArray = _x.ToObject<List<int>>();
+                    int y = questionArray.IndexOf(QuestionID);
+                    _x.RemoveAt(questionArray.IndexOf(QuestionID));
+                    JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
+                    if (categoriesData.Init().Offset(0).Limit(1).Query(_query1).Update(x) == DataProcessing.StatusCode.Error)
+                        throw new Exception();
+                }
                 AddNewQuestionForm_ErrorLbl.Text = "";
                 if (AddNewQuestionForm_CategoryCbo.SelectedValue == null)
                 {
