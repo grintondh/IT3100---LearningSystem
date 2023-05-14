@@ -257,6 +257,7 @@
             AddNewQuestionForm_MarkTxt.Name = "AddNewQuestionForm_MarkTxt";
             AddNewQuestionForm_MarkTxt.Size = new Size(281, 30);
             AddNewQuestionForm_MarkTxt.TabIndex = 11;
+            AddNewQuestionForm_MarkTxt.Text = "1";
             // 
             // AddNewQuestionForm_ExpandPic
             // 
