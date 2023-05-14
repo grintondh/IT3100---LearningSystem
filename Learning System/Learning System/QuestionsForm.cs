@@ -47,7 +47,7 @@ namespace Learning_System
                 JArray _questionsData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
                 questionsData.Import(_showQuestionsColumns, _showQuestionsType, _showQuestionsKey);
                 questionsData.Import(_questionsData);
-                questionDataTable = questionsData.Init().Offset(currentOffset).Limit(currentLimit).Get();
+                questionDataTable = questionsData.Init().Offset(currentOffset).Limit(currentLimit).Sort("ID desc").Get();
 
                 if (questionsData.Length() == 0) MessageBox.Show("Không có câu hỏi nào trong Categories này!");
                 else
@@ -56,7 +56,7 @@ namespace Learning_System
                     //QuestionForm_ShowQuestionsDtg.Rows[index].Cells[1].Value = "Question name / ID number";
                     for (int i = 0; i < questionsData.Length(); i++)
                     {
-                        DataRow Question = questionsData.Init().Offset(i).Limit(1).GetFirstRow();
+                        DataRow Question = questionsData.Init().Offset(i).Limit(1).Sort("ID desc").GetFirstRow();
                         int inCategories = Question.Field<int>("CategoryID");
                         int QuestionID = Question.Field<int>("ID");
                         if ((showQuestionsFromCategoriesID.Contains(inCategories) && _showQuestionsFromSubcategories) || (showQuestionsFromCategoriesID[0] == inCategories && !showQuestionsFromSubcategories))
