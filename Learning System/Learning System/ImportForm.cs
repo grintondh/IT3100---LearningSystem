@@ -240,17 +240,11 @@ namespace Learning_System
                     RichTextBox textBox = new RichTextBox();
                     DataFormats.Format format = DataFormats.GetFormat(System.Windows.Forms.DataFormats.Bitmap);
                     textBox.Paste(format);
-                    
-                    selectedImage = "picture";
+                    selectedImage = textBox.Rtf;
                 }
                 else
                 {
-                    if (data.GetDataPresent(System.Windows.Forms.DataFormats.UnicodeText))
-                    {
-                        string line = (string)data.GetData(System.Windows.Forms.DataFormats.UnicodeText, true);
-                        selectedImage = line;
-                    }
-                    else selectedImage = "unicode";
+                    selectedImage = "";
                 }
             }
             else
@@ -289,13 +283,13 @@ namespace Learning_System
                 {
                     for (int i = 1; i <= application.ActiveDocument.InlineShapes.Count; i++)
                     {
-                        selectedLineIndex = i;
+                        selectedImageIndex = i;
                        //_lines.Add(CopyFromClipboardInlineShape());
                         Thread thread = new Thread(CopyFromClipboardInlineShape);
                         thread.SetApartmentState(ApartmentState.STA);
                         thread.Start();
                         thread.Join();
-                        _lines.Add(selectedLine);
+                        _lines.Add(selectedImage);
                     }
                 }
                 finally
