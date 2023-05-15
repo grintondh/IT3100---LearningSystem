@@ -11,12 +11,20 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.Office.Interop.Word;
+using System.Reflection;
+using Microsoft.VisualBasic.Devices;
 
 namespace Learning_System
 {
     public partial class ImportForm : UserControl
     {
         private string? ImportPath;
+
+        private Microsoft.Office.Interop.Word.Application application = new Microsoft.Office.Interop.Word.Application();
+
+        private int selectedImageIndex = 0;
+
+        private string selectedImage;
         public ImportForm()
         {
             InitializeComponent();
@@ -216,6 +224,41 @@ namespace Learning_System
             else return true;
         }
 
+        protected void CopyFromClipboardInlineShape()
+        {
+            InlineShape inlineShape = application.ActiveDocument.InlineShapes[selectedImageIndex];
+            inlineShape.Select();
+            application.Selection.Copy();
+            Computer computer = new Computer();
+            //Image img = computer.Clipboard.GetImage();
+            if (computer.Clipboard.GetDataObject() != null)
+            {
+                System.Windows.Forms.IDataObject data = computer.Clipboard.GetDataObject();
+                if (data.GetDataPresent(System.Windows.Forms.DataFormats.Bitmap))
+                {
+                    Image image = (Image)data.GetData(System.Windows.Forms.DataFormats.Bitmap, true);
+                    RichTextBox textBox = new RichTextBox();
+                    DataFormats.Format format = DataFormats.GetFormat(System.Windows.Forms.DataFormats.Bitmap);
+                    textBox.Paste(format);
+                    
+                    selectedImage = "picture";
+                }
+                else
+                {
+                    if (data.GetDataPresent(System.Windows.Forms.DataFormats.UnicodeText))
+                    {
+                        string line = (string)data.GetData(System.Windows.Forms.DataFormats.UnicodeText, true);
+                        selectedImage = line;
+                    }
+                    else selectedImage = "unicode";
+                }
+            }
+            else
+            {
+                selectedImage = "";
+            }
+        }
+
         private List<string> ReadFromDocumentFile(string _ImportPath)
         {
             List<string> _lines = new List<string>();
@@ -225,7 +268,6 @@ namespace Learning_System
             }
             else
             {
-                Microsoft.Office.Interop.Word.Application application = new Microsoft.Office.Interop.Word.Application();
                 object miss = System.Reflection.Missing.Value;
                 object path = _ImportPath;
                 object readOnly = true;
@@ -241,8 +283,27 @@ namespace Learning_System
                     string[] _totaltext = totaltext.Split('\r');
                     _lines.AddRange(_totaltext);
                 }
-                docs.Close();
-                application.Quit();
+                //docs.Close();
+                //application.Quit();
+                try
+                {
+                    for (int i = 1; i <= application.ActiveDocument.InlineShapes.Count; i++)
+                    {
+                        selectedLineIndex = i;
+                       //_lines.Add(CopyFromClipboardInlineShape());
+                        Thread thread = new Thread(CopyFromClipboardInlineShape);
+                        thread.SetApartmentState(ApartmentState.STA);
+                        thread.Start();
+                        thread.Join();
+                        _lines.Add(selectedLine);
+                    }
+                }
+                finally
+                {
+                    object save = false;
+                    application.Quit(ref save, ref miss, ref miss);
+                    application = null;
+                }
             }
             return _lines;
         }
