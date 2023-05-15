@@ -13,6 +13,8 @@ using Newtonsoft.Json.Linq;
 using Microsoft.Office.Interop.Word;
 using System.Reflection;
 using Microsoft.VisualBasic.Devices;
+using static System.Windows.Forms.DataFormats;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Learning_System
 {
@@ -20,11 +22,15 @@ namespace Learning_System
     {
         private string? ImportPath;
 
-        private Microsoft.Office.Interop.Word.Application application = new Microsoft.Office.Interop.Word.Application();
-
-        private int selectedImageIndex = 0;
-
         private string selectedImage;
+
+        private Paragraph paragraph;
+
+        private int lineIndex = 0;
+
+        const int MAX_OF_LINES = 2000;
+        private RichTextBox[] lineTextBoxes = new RichTextBox[MAX_OF_LINES];
+
         public ImportForm()
         {
             InitializeComponent();
@@ -99,7 +105,7 @@ namespace Learning_System
             return -questionCount;
         }
 
-        private void ImportQuestionsFile(List<string> lines)
+        private void ImportQuestionsFile(List<string> lines, string _ImportPath)
         {
             DataProcessing questionsData = new();
             List<string> _showQuestionsColumns = new() { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
@@ -161,7 +167,10 @@ namespace Learning_System
             {
                 if (lines[i].Length > 0)
                 {
-                    string questionContent = lines[i];
+                    string _stringContent;
+                    if (Path.GetExtension(ImportPath) != ".txt") _stringContent = lineTextBoxes[i].Rtf;
+                    else _stringContent = lines[i];
+                    string questionContent = _stringContent;
                     questionIDCount++;
                     i++;
                     List<QuestionChoice> _questionChoices = new List<QuestionChoice>();
@@ -169,9 +178,11 @@ namespace Learning_System
                     {
                         if (lines[i][1] == '.')
                         {
+                            if (Path.GetExtension(ImportPath) != ".txt") _stringContent = lineTextBoxes[i].Rtf;
+                            else _stringContent = lines[i];
                             QuestionChoice _questionChoice = new QuestionChoice()
                             {
-                                choice = lines[i],
+                                choice = _stringContent,
                                 mark = 0
                             };
                             _questionChoices.Add(_questionChoice);
@@ -179,9 +190,11 @@ namespace Learning_System
                         }
                         else
                         {
+                            int j = 0;
                             foreach (QuestionChoice _questionChoice in _questionChoices)
                             {
-                                if (lines[i].EndsWith(_questionChoice.choice[0])) _questionChoice.mark = 1;
+                                if (lines[i].EndsWith(lines[i - _questionChoices.Count + j][0])) _questionChoice.mark = 1;
+                                j++;
                             }
                             i += 2;
                             break;
@@ -226,26 +239,30 @@ namespace Learning_System
 
         protected void CopyFromClipboardInlineShape()
         {
-            InlineShape inlineShape = application.ActiveDocument.InlineShapes[selectedImageIndex];
-            inlineShape.Select();
-            application.Selection.Copy();
+            //InlineShape inlineShape = paragraph.Range.InlineShapes[selectedImageIndex];
+            paragraph.Range.Select();
+            paragraph.Range.Copy();
             Computer computer = new Computer();
             //Image img = computer.Clipboard.GetImage();
             if (computer.Clipboard.GetDataObject() != null)
             {
-                System.Windows.Forms.IDataObject data = computer.Clipboard.GetDataObject();
-                if (data.GetDataPresent(System.Windows.Forms.DataFormats.Bitmap))
-                {
-                    Image image = (Image)data.GetData(System.Windows.Forms.DataFormats.Bitmap, true);
-                    RichTextBox textBox = new RichTextBox();
-                    DataFormats.Format format = DataFormats.GetFormat(System.Windows.Forms.DataFormats.Bitmap);
-                    textBox.Paste(format);
-                    selectedImage = textBox.Rtf;
-                }
-                else
-                {
-                    selectedImage = "";
-                }
+                RichTextBox t = new RichTextBox();
+                lineTextBoxes[lineIndex] = new RichTextBox();
+                t.Paste();
+                selectedImage = t.Rtf;
+                //System.Windows.Forms.IDataObject data = computer.Clipboard.GetDataObject();
+                //if (data.GetDataPresent(System.Windows.Forms.DataFormats.Bitmap))
+                //{
+                //    Image image = (Image)data.GetData(System.Windows.Forms.DataFormats.Bitmap, true);
+                //    RichTextBox textBox = new RichTextBox();
+                //    DataFormats.Format format = DataFormats.GetFormat(System.Windows.Forms.DataFormats.Bitmap);
+                //    textBox.Paste(format);
+                //    selectedImage = textBox.Rtf;
+                //}
+                //else
+                //{
+                //    selectedImage = "";
+                //}
             }
             else
             {
@@ -262,42 +279,34 @@ namespace Learning_System
             }
             else
             {
+                Microsoft.Office.Interop.Word.Application application = new Microsoft.Office.Interop.Word.Application();
                 object miss = System.Reflection.Missing.Value;
                 object path = _ImportPath;
                 object readOnly = true;
                 Document docs = application.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
                 if (docs != null)
                 {
-                    string totaltext = "";
-
+                    lineIndex = 0;
                     foreach (Paragraph p in docs.Paragraphs)
                     {
-                        totaltext += p.Range.Text;
-                    }
-                    string[] _totaltext = totaltext.Split('\r');
-                    _lines.AddRange(_totaltext);
-                }
-                //docs.Close();
-                //application.Quit();
-                try
-                {
-                    for (int i = 1; i <= application.ActiveDocument.InlineShapes.Count; i++)
-                    {
-                        selectedImageIndex = i;
-                       //_lines.Add(CopyFromClipboardInlineShape());
+                        paragraph = p;
+                        //_lines.Add(CopyFromClipboardInlineShape());
                         Thread thread = new Thread(CopyFromClipboardInlineShape);
                         thread.SetApartmentState(ApartmentState.STA);
                         thread.Start();
                         thread.Join();
-                        _lines.Add(selectedImage);
+                        lineTextBoxes[lineIndex] = new RichTextBox();
+                        lineTextBoxes[lineIndex].Rtf = selectedImage;
+                        _lines.Add(lineTextBoxes[lineIndex].Text.Trim());
+                        lineIndex++;
+                        //totaltext += p.Range.Text;
                     }
+                    //string[] _totaltext = totaltext.Split('\r');
+                    //_lines.AddRange(_totaltext);
                 }
-                finally
-                {
-                    object save = false;
-                    application.Quit(ref save, ref miss, ref miss);
-                    application = null;
-                }
+                object save = false;
+                docs.Close(ref save, ref miss, ref miss);
+                application.Quit(ref save, ref miss, ref miss);
             }
             return _lines;
         }
@@ -322,9 +331,11 @@ namespace Learning_System
                 else
                 {
                     MessageBox.Show($"OK. Successfully imported {-checkAikenFormat} question(s)!");
-                    ImportQuestionsFile(lines);
+                    ImportQuestionsFile(lines, ImportPath);
                     ImportForm_StatusLbl.Text = "Maximum size for new files: ___";
                     ImportPath = null;
+                    selectedImage = null;
+                    paragraph = null;
                 }
             }
         }
