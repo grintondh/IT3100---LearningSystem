@@ -22,18 +22,26 @@ namespace Learning_System
     {
         private string? ImportPath;
 
-        private string selectedImage;
+        private string? selectedImage;
 
-        private Paragraph paragraph;
+        private Paragraph? paragraph;
 
         private int lineIndex = 0;
 
+        private const long SIZE_OF_MB = 1024 * 1024;
+
+        private const int MAX_OF_SIZE = 200;
+
+        private double maximumSizeForNewFiles = MAX_OF_SIZE;
+
         const int MAX_OF_LINES = 2000;
+
         private RichTextBox[] lineTextBoxes = new RichTextBox[MAX_OF_LINES];
 
         public ImportForm()
         {
             InitializeComponent();
+            ImportForm_StatusLbl.Text = $"Maximum size for new files: {maximumSizeForNewFiles} MB";
         }
 
         private void ImportForm_SelectFileBtn_Click(object sender, EventArgs e)
@@ -121,7 +129,12 @@ namespace Learning_System
 
             try
             {
-                JArray _questionsData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
+                JArray? _questionsData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
+                if (_questionsData == null)
+                {
+                    MessageBox.Show("Can't get questions data:\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 questionsData.Import(_showQuestionsColumns, _showQuestionsType, _showQuestionsKey);
                 questionsData.Import(_questionsData);
             }
@@ -135,7 +148,12 @@ namespace Learning_System
 
             try
             {
-                JArray _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
+                JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
+                if (_categoriesData == null)
+                {
+                    MessageBox.Show("Can't get categories data:\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 categoriesData.Import(_showCategoryColumns, _showCategoryType, _showCategoryKey);
                 categoriesData.Import(_categoriesData);
             }
@@ -211,7 +229,11 @@ namespace Learning_System
                     };
 
                     questionsData.Insert(JObject.FromObject(newQuestions));
-
+                    if (_parentCategory.Field<JArray>("QuestionArray") == null)
+                    {
+                        MessageBox.Show("Can't get parents categories data:\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    }
                     _parentCategory.Field<JArray>("QuestionArray").Add(newQuestions.ID);
                 }
             }
@@ -239,6 +261,7 @@ namespace Learning_System
 
         protected void CopyFromClipboardInlineShape()
         {
+            if (paragraph == null) return;
             //InlineShape inlineShape = paragraph.Range.InlineShapes[selectedImageIndex];
             paragraph.Range.Select();
             paragraph.Range.Copy();
@@ -283,9 +306,15 @@ namespace Learning_System
                 object miss = System.Reflection.Missing.Value;
                 object path = _ImportPath;
                 object readOnly = true;
+                object save = false;
                 Document docs = application.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
                 if (docs != null)
                 {
+                    if (docs.Paragraphs.Count > MAX_OF_LINES)
+                    {
+                        MessageBox.Show($"Maximum {MAX_OF_LINES} lines on .doc and .docx files!");
+                        return _lines;
+                    }
                     lineIndex = 0;
                     foreach (Paragraph p in docs.Paragraphs)
                     {
@@ -303,9 +332,8 @@ namespace Learning_System
                     }
                     //string[] _totaltext = totaltext.Split('\r');
                     //_lines.AddRange(_totaltext);
+                    docs.Close(ref save, ref miss, ref miss);
                 }
-                object save = false;
-                docs.Close(ref save, ref miss, ref miss);
                 application.Quit(ref save, ref miss, ref miss);
             }
             return _lines;
@@ -322,7 +350,14 @@ namespace Learning_System
             }
             else
             {
+                long fileSize = new System.IO.FileInfo(ImportPath).Length;
+                if (fileSize >= MAX_OF_SIZE * SIZE_OF_MB)
+                {
+                    MessageBox.Show($"File's size must be smaller than {MAX_OF_SIZE} MB!");
+                    return;
+                }
                 List<string> lines = ReadFromDocumentFile(ImportPath);
+                if (lines == null) { return; }
                 int checkAikenFormat = CheckAikenFormat(lines);
                 if (checkAikenFormat >= 0)
                 {
@@ -332,7 +367,8 @@ namespace Learning_System
                 {
                     MessageBox.Show($"OK. Successfully imported {-checkAikenFormat} question(s)!");
                     ImportQuestionsFile(lines, ImportPath);
-                    ImportForm_StatusLbl.Text = "Maximum size for new files: ___";
+                    maximumSizeForNewFiles = maximumSizeForNewFiles - fileSize / SIZE_OF_MB;
+                    ImportForm_StatusLbl.Text = $"Maximum size for new files: {maximumSizeForNewFiles} MB";
                     ImportPath = null;
                     selectedImage = null;
                     paragraph = null;
@@ -342,6 +378,10 @@ namespace Learning_System
 
         private void panel_drop_file_DragDrop(object sender, DragEventArgs e)
         {
+            if (e.Data == null) {
+                MessageBox.Show("Please dragdrop a file here");
+                return; 
+            }
             string[] FileList = (string[])e.Data.GetData(DataFormats.FileDrop);
             ImportPath = FileList[0];
             ImportForm_StatusLbl.Text = "File choosen: " + Path.GetFileName(ImportPath);
@@ -349,6 +389,11 @@ namespace Learning_System
 
         private void panel_drop_file_DragEnter(object sender, DragEventArgs e)
         {
+            if (e.Data == null)
+            {
+                MessageBox.Show("Please dragdrop a file here");
+                return;
+            }
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 e.Effect = DragDropEffects.All;
