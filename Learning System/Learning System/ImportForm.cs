@@ -41,7 +41,7 @@ namespace Learning_System
         public ImportForm()
         {
             InitializeComponent();
-            ImportForm_StatusLbl.Text = $"Maximum size for new files: {maximumSizeForNewFiles} MB";
+            ImportForm_StatusLbl.Text = $"Maximum size for new files: {Math.Round(maximumSizeForNewFiles, 2)} MB";
         }
 
         private void ImportForm_SelectFileBtn_Click(object sender, EventArgs e)
@@ -54,12 +54,20 @@ namespace Learning_System
             }
         }
 
+        /// <summary>
+        /// Check Aiken format của dòng lựa chọn ("A. Choice's content")
+        /// </summary>
         private char CheckChoicesAikenFormat(string choice)
         {
             if (choice.Length < 4) return ' ';
             return choice[0] < 'A' || choice[0] > 'Z' || choice[1] != '.' || choice[2] != ' ' || choice[3] == ' ' ? ' ' : choice[0];
         }
 
+        /// <summary>
+        /// Check Aiken format của dòng đáp án ("ANSWER: A")
+        /// </summary>
+        /// <param name="answer"> Dòng đáp án</param>
+        /// <param name="_listAnswers"> Danh sách các lựa chọn của câu hỏi</param>
         private bool CheckAnswerAikenFormat(string answer, List<char> _listAnswers)
         {
             if (_listAnswers.Count < 2) return false;
@@ -71,6 +79,11 @@ namespace Learning_System
             }
             return false;
         }
+        /// <summary>
+        /// Check Aiken format của file
+        /// </summary>
+        /// <param name="lines"> Các dòng text trong file</param>
+        /// <returns> Số âm: Đúng format và trả về số câu hỏi trong file; Số dương: Sai format và trả về dòng đầu tiên bị sai format </returns>
         private int CheckAikenFormat(List<string> lines)
         {
             int i = 0;
@@ -113,6 +126,11 @@ namespace Learning_System
             return -questionCount;
         }
 
+        /// <summary>
+        /// Import câu hỏi vào file json
+        /// </summary>
+        /// <param name="lines"> Các dòng text trong file</param>
+        /// <param name="_ImportPath"> Đường dẫn của file được chọn</param>
         private void ImportQuestionsFile(List<string> lines, string _ImportPath)
         {
             DataProcessing questionsData = new();
@@ -259,6 +277,9 @@ namespace Learning_System
             else return true;
         }
 
+        /// <summary>
+        /// Copy dòng đang được selected từ file .doc hoặc .docx để paste vào Rich Text Box.
+        /// </summary>
         protected void CopyFromClipboardInlineShape()
         {
             if (paragraph == null) return;
@@ -293,6 +314,11 @@ namespace Learning_System
             }
         }
 
+        /// <summary>
+        /// Đọc file .txt, .doc, .docx được chọn
+        /// </summary>
+        /// <param name="_ImportPath"> Đường dẫn của file được chọn </param>
+        /// <returns>Trả về list các dòng text trong file, nếu là file doc thì paste content vào mảng Rich Text Box </returns>
         private List<string> ReadFromDocumentFile(string _ImportPath)
         {
             List<string> _lines = new List<string>();
@@ -350,7 +376,7 @@ namespace Learning_System
             }
             else
             {
-                long fileSize = new System.IO.FileInfo(ImportPath).Length;
+                double fileSize = new System.IO.FileInfo(ImportPath).Length;
                 if (fileSize >= MAX_OF_SIZE * SIZE_OF_MB)
                 {
                     MessageBox.Show($"File's size must be smaller than {MAX_OF_SIZE} MB!");
@@ -368,11 +394,11 @@ namespace Learning_System
                     MessageBox.Show($"OK. Successfully imported {-checkAikenFormat} question(s)!");
                     ImportQuestionsFile(lines, ImportPath);
                     maximumSizeForNewFiles = maximumSizeForNewFiles - fileSize / SIZE_OF_MB;
-                    ImportForm_StatusLbl.Text = $"Maximum size for new files: {maximumSizeForNewFiles} MB";
-                    ImportPath = null;
-                    selectedImage = null;
-                    paragraph = null;
+                    ImportForm_StatusLbl.Text = $"Maximum size for new files: {Math.Round(maximumSizeForNewFiles, 2)} MB";
                 }
+                ImportPath = null;
+                selectedImage = null;
+                paragraph = null;
             }
         }
 
