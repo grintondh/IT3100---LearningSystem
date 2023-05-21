@@ -6,7 +6,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Learning_System;
 
-public partial class AddingNewQuiz : UserControl
+public partial class AddingNewQuiz : Form
 {
     private DataProcessing quizData = new DataProcessing();
     private List<string> showColumns = new() { "Id", "Name", "Description", "DescriptionShow", "QuestionArray", "ShuffleAnswer", 
@@ -56,7 +56,7 @@ public partial class AddingNewQuiz : UserControl
 
     public void AddNewQuizForm_Load()
     {
-        JArray _quizData = JsonProcessing.ImportJsonContentInDefaultFolder("contests.json", null, null);
+        JArray _quizData = JsonProcessing.ImportJsonContentInDefaultFolder("Contests.json", null, null);
 
         quizData.Import(showColumns, showType, showKey);
         quizData.Import(_quizData);
@@ -224,7 +224,7 @@ public partial class AddingNewQuiz : UserControl
 
     private void btn_Cancel_Click(object sender, EventArgs e)
     {
-        Application.Exit();
+        this.Close();
     }
 
    

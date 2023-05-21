@@ -645,6 +645,7 @@ partial class AddingNewQuiz
     private PictureBox ImportForm_ExpandPic1;
     private PictureBox pictureBox1;
 }
+/*
 =======
         
          //
@@ -841,6 +842,7 @@ partial class AddingNewQuiz
             // AddNewQuizForm_MonthopenCbo
             //
 
+/*
             AddNewQuizForm_MonthopenCbo = new ComboBox();
             AddNewQuizForm_MonthopenCbo.AutoSize = true;
             AddNewQuizForm_MonthopenCbo.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
@@ -864,7 +866,7 @@ partial class AddingNewQuiz
             // AddNewQuizForm_YearopenCbo
             //
 
-            AddNewQuizForm_YearopenCbo = new ComboBox();
+/*            AddNewQuizForm_YearopenCbo = new ComboBox();
             AddNewQuizForm_YearopenCbo.AutoSize = true;
             AddNewQuizForm_YearopenCbo.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuizForm_YearopenCbo.Name = "AddNewQuizForm_YearopenCbo";
@@ -891,7 +893,7 @@ partial class AddingNewQuiz
             // AddNewQuizForm_HouropenCbo
             //
 
-            AddNewQuizForm_HouropenCbo = new ComboBox();
+/*            AddNewQuizForm_HouropenCbo = new ComboBox();
             AddNewQuizForm_HouropenCbo.AutoSize = true;
             AddNewQuizForm_HouropenCbo.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuizForm_HouropenCbo.Name = "AddNewQuizForm_HouropenCbo";
@@ -917,7 +919,7 @@ partial class AddingNewQuiz
             // AddNewQuizForm_MinuteopenCbo
             //
 
-            AddNewQuizForm_MinuteopenCbo = new ComboBox();
+ /*           AddNewQuizForm_MinuteopenCbo = new ComboBox();
             AddNewQuizForm_MinuteopenCbo.AutoSize = true;
             AddNewQuizForm_MinuteopenCbo.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuizForm_MinuteopenCbo.Name = " AddNewQuizForm_MinuteopenCbo";
@@ -943,7 +945,7 @@ partial class AddingNewQuiz
             // AddNewQuizForm_openTbt
             // 
 
-            AddNewQuizForm_openTbt = new TextBox();
+   /*         AddNewQuizForm_openTbt = new TextBox();
             AddNewQuizForm_openTbt.Multiline = true;
             AddNewQuizForm_openTbt.Name = " AddNewQuizForm_openTbt";
             AddNewQuizForm_openTbt.TabIndex = 20;
@@ -992,7 +994,7 @@ partial class AddingNewQuiz
             // AddNewQuizForm_MonthCloseCbo
             //
 
-            AddNewQuizForm_MonthCloseCbo = new ComboBox();
+    /*        AddNewQuizForm_MonthCloseCbo = new ComboBox();
             AddNewQuizForm_MonthCloseCbo.AutoSize = true;
             AddNewQuizForm_MonthCloseCbo.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuizForm_MonthCloseCbo.Name = "MonthCloseCbo";
@@ -1015,7 +1017,7 @@ partial class AddingNewQuiz
             // AddNewQuizForm_YearCloseCbo
             //
 
-            AddNewQuizForm_YearCloseCbo = new ComboBox();
+      /*      AddNewQuizForm_YearCloseCbo = new ComboBox();
             AddNewQuizForm_YearCloseCbo.AutoSize = true;
             AddNewQuizForm_YearCloseCbo.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuizForm_YearCloseCbo.Name = "YearCloseCbo";
@@ -1042,7 +1044,7 @@ partial class AddingNewQuiz
             // AddNewQuizForm_HourCloseCbo
             //
 
-            AddNewQuizForm_HourCloseCbo = new ComboBox();
+       /*     AddNewQuizForm_HourCloseCbo = new ComboBox();
             AddNewQuizForm_HourCloseCbo.AutoSize = true;
             AddNewQuizForm_HourCloseCbo.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuizForm_HourCloseCbo.Name = "AddNewQuizForm_HourCloseCbo";
@@ -1068,7 +1070,7 @@ partial class AddingNewQuiz
             // AddNewQuizForm_MinuteCloseCbo
             //
 
-            AddNewQuizForm_MinuteCloseCbo = new ComboBox();
+      /*      AddNewQuizForm_MinuteCloseCbo = new ComboBox();
             AddNewQuizForm_MinuteCloseCbo.AutoSize = true;
             AddNewQuizForm_MinuteCloseCbo.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuizForm_MinuteCloseCbo.Name = "AddNewQuizForm_MinuteCloseCbo";
@@ -1093,7 +1095,7 @@ partial class AddingNewQuiz
             // AddNewQuizForm_CloseTbt
             // 
 
-            AddNewQuizForm_CloseTbt = new TextBox();
+    /*      AddNewQuizForm_CloseTbt = new TextBox();
             AddNewQuizForm_CloseTbt.Multiline = true;
             AddNewQuizForm_CloseTbt.Name = "AddNewQuizForm_CloseTbt";
             AddNewQuizForm_CloseTbt.TabIndex = 27;
@@ -1282,3 +1284,5 @@ partial class AddingNewQuiz
         private ComboBox AddNewQuizForm_TimeexpiresCloseCbo;
 }
 >>>>>>> origin/Bai5
+
+*/

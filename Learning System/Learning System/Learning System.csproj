@@ -24,9 +24,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Update="AddingNewQuiz.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="AddingNewQuiz.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +36,9 @@
 
   <ItemGroup>
     <None Update="Category.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Contests.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Properties\Settings.settings">
