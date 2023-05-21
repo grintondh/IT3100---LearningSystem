@@ -75,5 +75,11 @@
             PopUpForm.Show_Export();
         }
 
+        private void HomePageForm_EditingBtn_Click(object sender, EventArgs e)
+        {
+            AddingNewQuiz aDN = new AddingNewQuiz();
+            aDN.Show();
+        }
+
     }
 }

@@ -128,6 +128,7 @@
             HomePageForm_EditingBtn.TabIndex = 6;
             HomePageForm_EditingBtn.Text = "TURN EDITING ON";
             HomePageForm_EditingBtn.UseVisualStyleBackColor = false;
+            HomePageForm_EditingBtn.Click += HomePageForm_EditingBtn_Click;
             // 
             // HomePageForm_PathLbl
             // 
