@@ -88,7 +88,7 @@ namespace Learning_System.ExternalClass
         /// <param name="sampleJsonWebPath">The json url you want to import if we need to create a new one for you.</param>
         /// <param name="sampleContent">The content you want to import if we need to create a new one for you (provided that you can't access to your web path)</param>
         /// <returns>Your data in JArray format. If something get error, it will return a null value.</returns>
-        public static JArray? ImportJsonContentInDefaultFolder(string JsonPath, string? sampleJsonWebPath, string sampleContent)
+        public static JArray? ImportJsonContentInDefaultFolder(string JsonPath, string? sampleJsonWebPath, string? sampleContent)
         {
             try
             {

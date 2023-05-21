@@ -39,15 +39,20 @@ namespace Learning_System
             List<string> _showQuestionsColumns = new() { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
             List<Type> _showQuestionsType = new() { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
             List<string> _showQuestionsKey = new() { "PRIMARY KEY", "", "", "", "", "" };
-            System.Data.DataTable questionDataTable = new();
-            int currentLimit = 100;
-            int currentOffset = 0;
             try
             {
-                JArray _questionsData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
+                JArray? jArray = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
+                if (jArray == null) {
+
+                    DialogResult dialogResult = MessageBox.Show("Can't get questions data:\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    if (dialogResult == DialogResult.OK)
+                    System.Windows.Forms.Application.Exit();
+                    return;
+                }
+                JArray _questionsData = jArray;
                 questionsData.Import(_showQuestionsColumns, _showQuestionsType, _showQuestionsKey);
                 questionsData.Import(_questionsData);
-                questionDataTable = questionsData.Init().Offset(currentOffset).Limit(currentLimit).Sort("ID desc").Get();
 
                 if (questionsData.Length() == 0) MessageBox.Show("Không có câu hỏi nào trong Categories này!");
                 else
@@ -56,12 +61,20 @@ namespace Learning_System
                     //QuestionForm_ShowQuestionsDtg.Rows[index].Cells[1].Value = "Question name / ID number";
                     for (int i = 0; i < questionsData.Length(); i++)
                     {
-                        DataRow Question = questionsData.Init().Offset(i).Limit(1).Sort("ID desc").GetFirstRow();
+                        DataRow? Question = questionsData.Init().Offset(i).Limit(1).Sort("ID desc").GetFirstRow();
+                        if (Question == null)
+                        {
+                            DialogResult dialogResult = MessageBox.Show("Can't get questions data:\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                            if (dialogResult == DialogResult.OK)
+                                System.Windows.Forms.Application.Exit();
+                            return;
+                        }
                         int inCategories = Question.Field<int>("CategoryID");
                         int QuestionID = Question.Field<int>("ID");
                         if ((showQuestionsFromCategoriesID.Contains(inCategories) && _showQuestionsFromSubcategories) || (showQuestionsFromCategoriesID[0] == inCategories && !showQuestionsFromSubcategories))
                         {
-                            string _QuestionName = Question.Field<string>("Content");
+                            string? _QuestionName = Question.Field<string>("Content");
 
                             //                            DataGridViewRow row = (DataGridViewRow)QuestionForm_ShowQuestionsDtg.Rows[0].Clone();
                             var index = QuestionForm_ShowQuestionsDtg.Rows.Add();
@@ -98,13 +111,14 @@ namespace Learning_System
         }
         public void loadCategoriesData()
         {
-            List<Categories> listCategories = new List<Categories>();
+            List<Categories>? listCategories = new List<Categories>();
             List<Categories> newListCategories = new List<Categories>();
             try
             {
-                JArray _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
+                JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
+                if (_categoriesData == null) return;
                 listCategories = _categoriesData.ToObject<List<Categories>>();
-
+                if (listCategories == null) return;
                 AddSpace(ref newListCategories, ref listCategories, 0, "  ");
                 newListCategories.Reverse();
             }
@@ -174,8 +188,10 @@ namespace Learning_System
             //
             try
             {
-                JArray _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
-                List<Categories> categories = _categoriesData.ToObject<List<Categories>>();
+                JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
+                if (_categoriesData == null) return;
+                List<Categories>? categories = _categoriesData.ToObject<List<Categories>>();
+                if (categories == null || _categoriesData == null) return;
                 if (_parentCategories >= 0)
                 {
                     selectedCategoriesIdList.Add(_parentCategories);
