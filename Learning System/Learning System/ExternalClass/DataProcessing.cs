@@ -1,5 +1,6 @@
-﻿// DataProcessing.cs v3.0.1
-// Last modified: 4.5.2023 by DH
+﻿// DataProcessing.cs v3.0.3
+// Last modified: 13.5.2023 by DH
+// Add ImportedColumns & Modified 2nd Import to load only selected columns
 
 using Newtonsoft.Json.Linq;
 using System.Data;
@@ -27,6 +28,8 @@ namespace Learning_System.ExternalClass
             public const int Unset = 0;
         }
 
+        public bool ImportedColumns = false;
+
         /// <summary>
         /// Nhập dữ liệu (cột)
         /// </summary>
@@ -36,6 +39,8 @@ namespace Learning_System.ExternalClass
         /// <returns>StatusCode: OK (1): Thành công; Error (2): Thất bại</returns>
         public int Import(List<string> _columns, List<Type> _columnsType, List<string> _columnsKey)
         {
+            ImportedColumns = true;
+
             if (_columnsKey.Contains("PRIMARY KEY") == false)
             {
                 MessageBox.Show("Cần có ít nhất một cột có tính chất Primary (Unique + Not null) trong bảng!\n", "Error");
@@ -71,7 +76,33 @@ namespace Learning_System.ExternalClass
                     ListElements.Clear();
 
                     foreach (JObject _jsonObj in _jsonDataList.Cast<JObject>())
+                    {
+                        /*
+                        JObject _newObj = new();
+
+                        foreach (var _col in ColumnsSetting)
+                        {
+                            if ((_col.Key.Contains("NOT NULL") == true || _col.Key.Contains("PRIMARY KEY") == true) && _jsonObj[_col.Name] == null)
+                            {
+                                MessageBox.Show("Không thể nhập dữ liệu: " + _col.Name + " chứa giá trị NULL trong khi cột được đặt là NOT NULL!", "Error");
+                                return StatusCode.Error;
+                            }
+                            else if (_col.Key.Contains("PRIMARY KEY") == true || _col.Key.Contains("UNIQUE") == true)
+                            {
+                                foreach (var _row in ListElements)
+                                    if (_jsonObj[_col.Name].ToString().ToLower() == _row[_col.Name].ToString().ToLower())
+                                    {
+                                        MessageBox.Show("Không thể thêm phần tử mới: " + _col.Name + " chứa giá trị trùng lặp trong khi cột được đặt là UNIQUE!", "Error");
+                                        return StatusCode.Error;
+                                    }
+                            }
+
+                            _newObj.Add(_col.Name, _jsonObj[_col.Name]);
+                            ListElements.Add(_newObj);
+                        }
+                        */
                         ListElements.Add(_jsonObj);
+                    }
 
                     return StatusCode.OK;
                 }
@@ -411,7 +442,7 @@ namespace Learning_System.ExternalClass
             PrevListElements = ListElements;
             ListElements.Clear();
         }
-
+        
         /// <summary>
         /// Xóa (các) bản ghi thỏa mãn điều kiện (kết hợp với Offset(), Limit(), Query(), Select(), Sort())
         /// </summary>

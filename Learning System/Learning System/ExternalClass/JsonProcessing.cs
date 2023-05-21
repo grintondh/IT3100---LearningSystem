@@ -35,7 +35,7 @@ namespace Learning_System.ExternalClass
                     File.WriteAllText(JsonPath, sampleContent + "\n");
                 else
                 {
-                    DialogResult _userReturnDialog = MessageBox.Show("Can't find your request file in default folders. We couldn't create a sample one for you. Please check your internet connection and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DialogResult _userReturnDialog = MessageBox.Show("Can't find your request file in default folders. We couldn't create a sample one for you. Please check your internet connection and try again.\nPath: " + JsonPath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     if (_userReturnDialog == DialogResult.OK)
                         Application.Exit();
@@ -88,7 +88,7 @@ namespace Learning_System.ExternalClass
         /// <param name="sampleJsonWebPath">The json url you want to import if we need to create a new one for you.</param>
         /// <param name="sampleContent">The content you want to import if we need to create a new one for you (provided that you can't access to your web path)</param>
         /// <returns>Your data in JArray format. If something get error, it will return a null value.</returns>
-        public static JArray? ImportJsonContentInDefaultFolder(string JsonPath, string? sampleJsonWebPath, string sampleContent)
+        public static JArray? ImportJsonContentInDefaultFolder(string JsonPath, string? sampleJsonWebPath, string? sampleContent)
         {
             try
             {

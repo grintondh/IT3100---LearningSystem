@@ -28,7 +28,10 @@ namespace Learning_System
         {
             try
             {
-                JArray _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("category.json", null, null);
+                JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("category.json", null, null);
+
+                if (_categoriesData == null)
+                    throw new Exception();
 
                 categoriesData.Import(showColumns, showType, showKey);
                 categoriesData.Import(_categoriesData);
