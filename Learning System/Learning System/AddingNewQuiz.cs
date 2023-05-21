@@ -44,10 +44,10 @@ public partial class AddingNewQuiz : Form
         Controls.Add(AddNewQuizForm_TimelimiMinuteCbo);
         Controls.Add(AddNewQuizForm_TimeexpiresCloseCbo);
 
-        AddingNewQuizForm_closeMonthCbo.SelectedItem = 0;
-        AddingNewQuizForm_openMonthCbo.SelectedItem = 0;
-        AddNewQuizForm_TimelimiMinuteCbo.SelectedItem = 0;
-        AddNewQuizForm_TimeexpiresCloseCbo.SelectedItem = 0;
+        AddingNewQuizForm_closeMonthCbo.SelectedIndex = 0;
+        AddingNewQuizForm_openMonthCbo.SelectedIndex = 0;
+        AddNewQuizForm_TimelimiMinuteCbo.SelectedIndex = 0;
+        AddNewQuizForm_TimeexpiresCloseCbo.SelectedIndex = 0;
         AddingNewQuizForm_openDayNud.Maximum = 31;
         AddingNewQuizForm_closeDayNud.Maximum = 31;
 
