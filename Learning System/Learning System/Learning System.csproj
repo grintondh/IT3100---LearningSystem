@@ -50,4 +50,23 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="D:\icon1.png">
+      <Link>icon1.png</Link>
+      <DependentUpon>AddingNewQuiz.Designer.cs</DependentUpon>
+    </Content>
+    <Content Include="D:\icon2.png">
+      <Link>icon2.png</Link>
+      <DependentUpon>AddingNewQuiz.Designer.cs</DependentUpon>
+    </Content>
+    <Content Include="D:\icon3.png">
+      <Link>icon3.png</Link>
+      <DependentUpon>AddingNewQuiz.Designer.cs</DependentUpon>
+    </Content>
+    <Content Include="D:\icon4.png">
+      <Link>icon4.png</Link>
+      <DependentUpon>AddingNewQuiz.Designer.cs</DependentUpon>
+    </Content>
+  </ItemGroup>
+
 </Project>
