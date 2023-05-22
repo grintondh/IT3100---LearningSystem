@@ -20,8 +20,9 @@ namespace Learning_System
             loadQuestionData();
             loadCategoryData();
             loadContestData();
-            editQuiz.questionsData = questionsData;
-            editQuiz.categoriesData = categoriesData;
+            editQuiz.addData(questionsData, categoriesData);
+            editQuiz.fromQuestionBank.addData(questionsData, categoriesData);
+            editQuiz.randomQuestion.addData(questionsData, categoriesData);
         }
 
         private void ContestForm_EditPic_Click(object sender, EventArgs e)

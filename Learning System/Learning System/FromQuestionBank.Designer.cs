@@ -66,6 +66,7 @@
             FromQuestionBank_CategoryCbo.Name = "FromQuestionBank_CategoryCbo";
             FromQuestionBank_CategoryCbo.Size = new Size(190, 31);
             FromQuestionBank_CategoryCbo.TabIndex = 19;
+            FromQuestionBank_CategoryCbo.DropDown += FromQuestionBank_CategoryCbo_DropDown;
             // 
             // FromQuestionBank_OptionLbl
             // 

@@ -19,6 +19,11 @@ namespace Learning_System
         {
             InitializeComponent();
         }
+        public void addData(DataProcessing _questionData, DataProcessing _categoriesData)
+        {
+            questionsData = _questionData;
+            categoriesData = _categoriesData;
+        }
 
         private void RandomQuestion_AddBtn_Click(object sender, EventArgs e)
         {

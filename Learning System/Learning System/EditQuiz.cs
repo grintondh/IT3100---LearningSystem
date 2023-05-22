@@ -18,10 +18,11 @@ namespace Learning_System
         public EditQuiz()
         {
             InitializeComponent();
-            fromQuestionBank.questionsData = questionsData;
-            fromQuestionBank.categoriesData = categoriesData;
-            randomQuestion.questionsData = questionsData;
-            randomQuestion.categoriesData = categoriesData;
+        }
+        public void addData(DataProcessing _questionData, DataProcessing _categoriesData)
+        {
+            questionsData = _questionData;
+            categoriesData = _categoriesData;
         }
 
         private void EditQuiz_AddBtn_Click(object sender, EventArgs e)

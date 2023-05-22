@@ -71,6 +71,7 @@
             // flowLayoutPanel_popup
             // 
             flowLayoutPanel_popup.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            flowLayoutPanel_popup.BorderStyle = BorderStyle.FixedSingle;
             flowLayoutPanel_popup.Controls.Add(EditForm_NewQuestionBtn);
             flowLayoutPanel_popup.Controls.Add(EditQuiz_BankBtn);
             flowLayoutPanel_popup.Controls.Add(EditQuiz_RandomBtn);
@@ -295,7 +296,7 @@
         private Button EditForm_NewQuestionBtn;
         private Button EditQuiz_BankBtn;
         private Button EditQuiz_RandomBtn;
-        private RandomQuestion randomQuestion;
-        private FromQuestionBank fromQuestionBank;
+        public RandomQuestion randomQuestion;
+        public FromQuestionBank fromQuestionBank;
     }
 }
