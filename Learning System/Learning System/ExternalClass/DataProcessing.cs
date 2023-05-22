@@ -77,7 +77,6 @@ namespace Learning_System.ExternalClass
 
                     foreach (JObject _jsonObj in _jsonDataList.Cast<JObject>())
                     {
-                        /*
                         JObject _newObj = new();
 
                         foreach (var _col in ColumnsSetting)
@@ -98,10 +97,9 @@ namespace Learning_System.ExternalClass
                             }
 
                             _newObj.Add(_col.Name, _jsonObj[_col.Name]);
-                            ListElements.Add(_newObj);
                         }
-                        */
-                        ListElements.Add(_jsonObj);
+
+                        ListElements.Add(_newObj);
                     }
 
                     return StatusCode.OK;

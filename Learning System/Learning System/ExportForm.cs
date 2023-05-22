@@ -1,10 +1,17 @@
-﻿using iTextSharp.text;
-using iTextSharp.text.pdf;
-using Learning_System.ExternalClass;
+﻿using Learning_System.ExternalClass;
 using Newtonsoft.Json.Linq;
 using System.Data;
 using System.Globalization;
 using System.Text;
+using RtfPipe;
+using iText.Kernel.Pdf;
+using iText.Layout.Element;
+using iText.Layout.Properties;
+using iText.Html2pdf;
+using iText.Html2pdf.Resolver.Font;
+using iText.Layout.Font;
+using iText.Kernel.Font;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Learning_System
 {
@@ -13,54 +20,6 @@ namespace Learning_System
         public ExportForm()
         {
             InitializeComponent();
-
-            JArray? contestJson = JsonProcessing.ImportJsonContentInDefaultFolder("contest.json", null, null);
-
-            try
-            {
-                if (contestJson != null)
-                {
-                    DataProcessing contestData = new();
-                    List<string> contestColumns = new() { "Name", "TimeStart" };
-                    List<Type> contestType = new() { typeof(string), typeof(DateTime) };
-                    List<string> contestKey = new() { "PRIMARY KEY", "" };
-
-                    contestData.Import(contestColumns, contestType, contestKey);
-                    contestData.Import(contestJson);
-
-                    DataTable? _DT = contestData.Init().Sort("TimeStart asc").Get();
-
-                    if(_DT != null)
-                    {
-                        for (int i = 0; i < _DT.Rows.Count; i++)
-                        {
-                            LinkLabel linklbl = new LinkLabel {
-                                Name = "ExportForm_Linklbl" + i.ToString(),
-                                Location = new Point(90, 150 + i * 45),
-                                Font = new System.Drawing.Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point),
-                                FlatStyle = FlatStyle.Flat,
-                                TabIndex = 10,
-                                Text = _DT.Rows[i].Field<string>("Name"),
-                                Size = new Size(919, 30),
-                            };
-
-                            linklbl.Click += new EventHandler((sender, args) =>
-                            {
-                                Properties.Settings.Default["ChoosingContest"] = linklbl.Text;
-                                Properties.Settings.Default.Save();
-
-                                MessageBox.Show(Properties.Settings.Default.ChoosingContest, "Success", MessageBoxButtons.OK);
-                            });
-
-                            this.Controls.Add(linklbl);
-                        }
-                    }
-                }
-                else
-                    throw new Exception();
-            } catch (Exception ex) {
-                MessageBox.Show("Can't load your contest file!\n" + ex, "Error", MessageBoxButtons.OK);
-            }
         }
 
         private DataProcessing questionData = new();
@@ -71,7 +30,7 @@ namespace Learning_System
 
         private void ExportForm_ExportBtn_Click(object sender, EventArgs e)
         {
-            if(questionData.ImportedColumns == false)
+            if (questionData.ImportedColumns == false)
             {
                 JArray? _questionData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
                 if (_questionData != null)
@@ -90,28 +49,43 @@ namespace Learning_System
             SaveFileDialog dlg = new SaveFileDialog
             {
                 Title = "Save your exported PDF file at:",
-                Filter = "PDF (*.pdf)|*.pdf"
+                Filter = "PDF (*.pdf)|*.pdf",
+                RestoreDirectory = true
             };
             dlg.ShowDialog();
+
+            ExportForm_progressLabel.Text = "Processing... ";
 
             string? pdfPassword = null;
             if (ExportForm_EnablePWCbx.CheckState == CheckState.Checked)
                 pdfPassword = ExportForm_PasswordTxt.Text;
 
-            try
+            using (FileStream stream = new(dlg.FileName, FileMode.Create))
             {
-                using (FileStream stream = new(dlg.FileName, FileMode.Create, FileAccess.Write, FileShare.None))
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+                Encoding.GetEncoding("utf-32");
+                PdfWriter writer;
+
+                if (pdfPassword != null)
                 {
-                    Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-                    Encoding.GetEncoding("windows-1252");
+                    WriterProperties writerProperties = new WriterProperties();
+                    byte[] PASS = Encoding.Default.GetBytes(pdfPassword);
+                    writerProperties.SetStandardEncryption(PASS, PASS, EncryptionConstants.ALLOW_PRINTING, EncryptionConstants.ENCRYPTION_AES_128);
 
-                    Document pdfDoc = new();
-                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
-                    writer.SetEncryption(PdfWriter.STRENGTH40BITS, pdfPassword, null, 0);
-                    pdfDoc.Open();
+                    writer = new PdfWriter(stream, writerProperties);
+                }
+                else
+                {
+                    writer = new PdfWriter(stream);
+                }
 
-                    pdfDoc.AddCreationDate();
-                    pdfDoc.AddTitle("Problems");
+                PdfDocument pdf = new PdfDocument(writer);
+                iText.Layout.Document pdfDoc = new iText.Layout.Document(pdf, pageSize: iText.Kernel.Geom.PageSize.A4);
+
+                try
+                {
+                    // pdfDoc.AddCreationDate();
+                    // pdfDoc.AddTitle("Problems");
 
                     UserFont userFont = new();
                     NumberFormatInfo setPrecision = new()
@@ -122,38 +96,34 @@ namespace Learning_System
                     if (DataTable == null)
                         throw new Exception();
 
+                    ExportForm_progressBar.Maximum = DataTable.Rows.Count;
+                    ExportForm_progressBar.Value = 0;
+
                     for (int i = 0; i < DataTable.Rows.Count; i++)
                     {
                         DataRow row = DataTable.Rows[i];
 
                         string headerLine = "Question " + i.ToString() + ":";
-                        Paragraph header = new(headerLine, userFont.setFont("BIG ITALIC BOLD"))
-                        {
-                            Alignment = Element.ALIGN_JUSTIFIED
-                        };
+                        Paragraph header = new(new Text(headerLine));
+                        header.SetFont(userFont.GetFont("BOLD")).SetFontSize(14).SetTextAlignment(iText.Layout.Properties.TextAlignment.JUSTIFIED);
                         pdfDoc.Add(header);
 
                         string? questionLine = row.Field<string>("Content");
+
                         if (questionLine != null)
                         {
-                            Paragraph question = new(questionLine, userFont.setFont("REGULAR"))
-                            {
-                                Alignment = Element.ALIGN_JUSTIFIED
-                            };
-                            pdfDoc.Add(question);
+                            Task task = AddRTFToPdf(pdfDoc, questionLine);
+                            task.Wait();
                         }
 
                         JArray? choiceArray = row.Field<JArray>("Choice");
-                        if(choiceArray != null)
+                        if (choiceArray != null)
                         {
                             foreach (var choiceLine in choiceArray)
                             {
                                 QuestionChoice qc = choiceLine.ToObject<QuestionChoice>();
-                                Paragraph choice = new(qc.choice, userFont.setFont("REGULAR"))
-                                {
-                                    Alignment = Element.ALIGN_JUSTIFIED
-                                };
-                                pdfDoc.Add(choice);
+                                Task task = AddRTFToPdf(pdfDoc, qc.choice);
+                                task.Wait();
                             }
 
                             string weightLine = "";
@@ -167,26 +137,27 @@ namespace Learning_System
                                 weightLine += qc.mark.ToString("N", setPrecision);
                             }
 
-                            pdfDoc.Add(Chunk.NEWLINE);
-
-                            weightLine = "Trọng số điểm của các đáp án lần lượt: " + weightLine;
-                            Paragraph weight = new(weightLine, userFont.setFont("REGULAR ITALIC"))
-                            {
-                                Alignment = Element.ALIGN_JUSTIFIED
-                            };
+                            Paragraph weight = new();
+                            weight.Add(new Text("Trọng số điểm của các đáp án lần lượt: " + weightLine));
+                            weight.SetFont(userFont.GetFont("ITALIC")).SetFontSize(14).SetTextAlignment(iText.Layout.Properties.TextAlignment.JUSTIFIED); ;
                             pdfDoc.Add(weight);
                         }
 
-                        pdfDoc.Add(Chunk.NEWLINE);
+                        ExportForm_progressBar.Increment(1);
+                        ExportForm_progressLabel.Text = "Processing... " + ExportForm_progressBar.Value + "/" + ExportForm_progressBar.Maximum;
                     }
 
-                    pdfDoc.Close();
-                    stream.Close();
+                    ExportForm_progressLabel.Text = "Completed!";
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Can't save your pdf file!\n" + ex, "Error", MessageBoxButtons.OK);
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Can't save your pdf file!\n" + ex, "Error", MessageBoxButtons.OK);
+                    ExportForm_progressLabel.Text = "Error";
+                }
+                finally
+                {
+                    pdfDoc.Close();
+                }
             }
         }
 
@@ -196,6 +167,65 @@ namespace Learning_System
                 ExportForm_PasswordTxt.ReadOnly = false;
             else
                 ExportForm_PasswordTxt.ReadOnly = true;
+        }
+
+        [Obsolete]
+        private Task AddRTFToPdf(iText.Layout.Document pdfDoc, string rtfString)
+        {
+            RichTextBox rtb = new();
+            try
+            {
+                rtb.Rtf = rtfString;
+            }
+            catch
+            {
+                rtb.Rtf = null;
+                UserFont userFont = new();
+                Paragraph par = new(new Text(rtfString));
+                par.SetFont(userFont.GetFont("REGULAR")).SetFontSize(14).SetTextAlignment(iText.Layout.Properties.TextAlignment.JUSTIFIED);
+                pdfDoc.Add(par);
+                return Task.CompletedTask;
+            }
+
+            const string fileLocation = "tempRTF.rtf";
+            rtb.SaveFile(fileLocation);
+
+            var htmlDoc = Rtf.ToHtml(rtfString);
+            File.WriteAllText("tempHTML.html", htmlDoc);
+
+            if (htmlDoc.Contains("data"))
+            {
+                Console.WriteLine(1);
+            }
+
+            try
+            {
+                using (var stream = File.Open("tempHTML.html", FileMode.Open))
+                {
+                    UserFont userFont = new UserFont();
+
+                    StreamReader tr = new StreamReader(stream);
+                    ConverterProperties properties = new ConverterProperties();
+                    properties.SetFontProvider(new DefaultFontProvider(true, true, true));
+
+                    IList<IElement> list = HtmlConverter.ConvertToElements(stream, properties);
+                    foreach (var listElement in list)
+                    {
+                        /*
+                        if (i < 2 || list.Count - i < 2)
+                            continue;
+                        */
+                        pdfDoc.Add((IBlockElement)listElement).SetFont(userFont.GetFont("REGULAR"));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                ExportForm_progressLabel.Text = "Error";
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

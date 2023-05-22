@@ -31,6 +31,10 @@
             ExportForm_ExportBtn = new Button();
             ExportForm_PasswordTxt = new TextBox();
             ExportForm_EnablePWCbx = new CheckBox();
+            statusStrip1 = new StatusStrip();
+            ExportForm_progressBar = new ToolStripProgressBar();
+            ExportForm_progressLabel = new ToolStripStatusLabel();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // ExportForm_ExportBtn
@@ -51,14 +55,15 @@
             // 
             ExportForm_PasswordTxt.Location = new Point(90, 66);
             ExportForm_PasswordTxt.Name = "ExportForm_PasswordTxt";
+            ExportForm_PasswordTxt.PasswordChar = '*';
+            ExportForm_PasswordTxt.PlaceholderText = "Set your password here...";
+            ExportForm_PasswordTxt.ReadOnly = true;
             ExportForm_PasswordTxt.Size = new Size(275, 27);
             ExportForm_PasswordTxt.TabIndex = 11;
             // 
             // ExportForm_EnablePWCbx
             // 
             ExportForm_EnablePWCbx.AutoSize = true;
-            ExportForm_EnablePWCbx.Checked = true;
-            ExportForm_EnablePWCbx.CheckState = CheckState.Checked;
             ExportForm_EnablePWCbx.Location = new Point(90, 99);
             ExportForm_EnablePWCbx.Name = "ExportForm_EnablePWCbx";
             ExportForm_EnablePWCbx.Size = new Size(143, 24);
@@ -67,15 +72,42 @@
             ExportForm_EnablePWCbx.UseVisualStyleBackColor = true;
             ExportForm_EnablePWCbx.CheckedChanged += ExportForm_EnablePWCbx_CheckedChanged;
             // 
+            // statusStrip1
+            // 
+            statusStrip1.ImageScalingSize = new Size(20, 20);
+            statusStrip1.Items.AddRange(new ToolStripItem[] { ExportForm_progressBar, ExportForm_progressLabel });
+            statusStrip1.Location = new Point(0, 529);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(919, 26);
+            statusStrip1.TabIndex = 13;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // ExportForm_progressBar
+            // 
+            ExportForm_progressBar.Name = "ExportForm_progressBar";
+            ExportForm_progressBar.Size = new Size(100, 18);
+            // 
+            // ExportForm_progressLabel
+            // 
+            ExportForm_progressLabel.BackgroundImageLayout = ImageLayout.None;
+            ExportForm_progressLabel.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            ExportForm_progressLabel.ImageTransparentColor = SystemColors.Control;
+            ExportForm_progressLabel.Name = "ExportForm_progressLabel";
+            ExportForm_progressLabel.Size = new Size(50, 20);
+            ExportForm_progressLabel.Text = "Ready";
+            // 
             // ExportForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(statusStrip1);
             Controls.Add(ExportForm_EnablePWCbx);
             Controls.Add(ExportForm_PasswordTxt);
             Controls.Add(ExportForm_ExportBtn);
             Name = "ExportForm";
             Size = new Size(919, 555);
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -85,5 +117,8 @@
         private Button ExportForm_ExportBtn;
         private TextBox ExportForm_PasswordTxt;
         private CheckBox ExportForm_EnablePWCbx;
+        private StatusStrip statusStrip1;
+        private ToolStripProgressBar ExportForm_progressBar;
+        private ToolStripStatusLabel ExportForm_progressLabel;
     }
 }
