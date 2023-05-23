@@ -65,6 +65,8 @@
             RandomQuestion_CategoryCbo.Name = "RandomQuestion_CategoryCbo";
             RandomQuestion_CategoryCbo.Size = new Size(190, 31);
             RandomQuestion_CategoryCbo.TabIndex = 20;
+            RandomQuestion_CategoryCbo.SelectedIndexChanged += RandomQuestion_CategoryCbo_SelectedIndexChanged;
+            RandomQuestion_CategoryCbo.Click += RandomQuestion_CategoryCbo_Click;
             // 
             // RandomQuestion_SubcategoriesCbx
             // 
