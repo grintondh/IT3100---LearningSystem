@@ -34,6 +34,8 @@
             statusStrip1 = new StatusStrip();
             ExportForm_progressBar = new ToolStripProgressBar();
             ExportForm_progressLabel = new ToolStripStatusLabel();
+            ExportForm_ShowPwdCbx = new CheckBox();
+            ExportForm_OpenAfterExportCbx = new CheckBox();
             statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -43,7 +45,7 @@
             ExportForm_ExportBtn.FlatStyle = FlatStyle.Flat;
             ExportForm_ExportBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             ExportForm_ExportBtn.ForeColor = Color.White;
-            ExportForm_ExportBtn.Location = new Point(427, 66);
+            ExportForm_ExportBtn.Location = new Point(509, 66);
             ExportForm_ExportBtn.Name = "ExportForm_ExportBtn";
             ExportForm_ExportBtn.Size = new Size(185, 57);
             ExportForm_ExportBtn.TabIndex = 10;
@@ -53,20 +55,22 @@
             // 
             // ExportForm_PasswordTxt
             // 
+            ExportForm_PasswordTxt.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             ExportForm_PasswordTxt.Location = new Point(90, 66);
             ExportForm_PasswordTxt.Name = "ExportForm_PasswordTxt";
             ExportForm_PasswordTxt.PasswordChar = '*';
             ExportForm_PasswordTxt.PlaceholderText = "Set your password here...";
             ExportForm_PasswordTxt.ReadOnly = true;
-            ExportForm_PasswordTxt.Size = new Size(275, 27);
+            ExportForm_PasswordTxt.Size = new Size(275, 32);
             ExportForm_PasswordTxt.TabIndex = 11;
             // 
             // ExportForm_EnablePWCbx
             // 
             ExportForm_EnablePWCbx.AutoSize = true;
-            ExportForm_EnablePWCbx.Location = new Point(90, 99);
+            ExportForm_EnablePWCbx.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            ExportForm_EnablePWCbx.Location = new Point(90, 104);
             ExportForm_EnablePWCbx.Name = "ExportForm_EnablePWCbx";
-            ExportForm_EnablePWCbx.Size = new Size(143, 24);
+            ExportForm_EnablePWCbx.Size = new Size(176, 29);
             ExportForm_EnablePWCbx.TabIndex = 12;
             ExportForm_EnablePWCbx.Text = "Enable password";
             ExportForm_EnablePWCbx.UseVisualStyleBackColor = true;
@@ -96,10 +100,36 @@
             ExportForm_progressLabel.Size = new Size(50, 20);
             ExportForm_progressLabel.Text = "Ready";
             // 
+            // ExportForm_ShowPwdCbx
+            // 
+            ExportForm_ShowPwdCbx.AutoSize = true;
+            ExportForm_ShowPwdCbx.Enabled = false;
+            ExportForm_ShowPwdCbx.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            ExportForm_ShowPwdCbx.Location = new Point(90, 139);
+            ExportForm_ShowPwdCbx.Name = "ExportForm_ShowPwdCbx";
+            ExportForm_ShowPwdCbx.Size = new Size(165, 29);
+            ExportForm_ShowPwdCbx.TabIndex = 14;
+            ExportForm_ShowPwdCbx.Text = "Show password";
+            ExportForm_ShowPwdCbx.UseVisualStyleBackColor = true;
+            ExportForm_ShowPwdCbx.CheckedChanged += ExportForm_ShowPwdCbx_CheckedChanged;
+            // 
+            // ExportForm_OpenAfterExportCbx
+            // 
+            ExportForm_OpenAfterExportCbx.AutoSize = true;
+            ExportForm_OpenAfterExportCbx.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            ExportForm_OpenAfterExportCbx.Location = new Point(90, 174);
+            ExportForm_OpenAfterExportCbx.Name = "ExportForm_OpenAfterExportCbx";
+            ExportForm_OpenAfterExportCbx.Size = new Size(241, 29);
+            ExportForm_OpenAfterExportCbx.TabIndex = 15;
+            ExportForm_OpenAfterExportCbx.Text = "Open file after exporting";
+            ExportForm_OpenAfterExportCbx.UseVisualStyleBackColor = true;
+            // 
             // ExportForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(ExportForm_OpenAfterExportCbx);
+            Controls.Add(ExportForm_ShowPwdCbx);
             Controls.Add(statusStrip1);
             Controls.Add(ExportForm_EnablePWCbx);
             Controls.Add(ExportForm_PasswordTxt);
@@ -120,5 +150,7 @@
         private StatusStrip statusStrip1;
         private ToolStripProgressBar ExportForm_progressBar;
         private ToolStripStatusLabel ExportForm_progressLabel;
+        private CheckBox ExportForm_ShowPwdCbx;
+        private CheckBox ExportForm_OpenAfterExportCbx;
     }
 }

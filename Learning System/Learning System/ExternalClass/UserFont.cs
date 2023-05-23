@@ -5,7 +5,7 @@ namespace Learning_System.ExternalClass
 {
     internal class UserFont
     {
-        public PdfFont GetFont(string userFont)
+        public static PdfFont GetFont(string userFont)
         {
             try
             {
