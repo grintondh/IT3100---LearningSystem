@@ -1,4 +1,5 @@
 ﻿using Learning_System.ExternalClass;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,14 +16,16 @@ namespace Learning_System
     {
         public DataProcessing questionsData = new();
         public DataProcessing categoriesData = new();
+        public JArray _categoriesDataJarray = new();
         public RandomQuestion()
         {
             InitializeComponent();
         }
-        public void addData(DataProcessing _questionData, DataProcessing _categoriesData)
+        public void addData(DataProcessing _questionData, DataProcessing _categoriesData, JArray _categoriesDataJarray)
         {
             questionsData = _questionData;
             categoriesData = _categoriesData;
+            this._categoriesDataJarray = _categoriesDataJarray;
         }
 
         private void RandomQuestion_AddBtn_Click(object sender, EventArgs e)

@@ -21,8 +21,8 @@ namespace Learning_System
             loadCategoryData();
             loadContestData();
             editQuiz.addData(questionsData, categoriesData);
-            editQuiz.fromQuestionBank.addData(questionsData, categoriesData);
-            editQuiz.randomQuestion.addData(questionsData, categoriesData);
+            editQuiz.fromQuestionBank.addData(questionsData, categoriesData, _categoriesDataJarray);
+            editQuiz.randomQuestion.addData(questionsData, categoriesData, _categoriesDataJarray);
         }
 
         private void ContestForm_EditPic_Click(object sender, EventArgs e)
@@ -33,6 +33,7 @@ namespace Learning_System
 
         private DataProcessing questionsData = new();
         private DataProcessing categoriesData = new();
+        private JArray _categoriesDataJarray = new();
         private DataTable contestDataTable = new();
 
         private void loadQuestionData()
@@ -47,12 +48,12 @@ namespace Learning_System
 
         private void loadCategoryData()
         {
-            JArray _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
+            _categoriesDataJarray = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
             List<string> showColumns = new() { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
             List<Type> showType = new() { typeof(int), typeof(string), typeof(JArray), typeof(JArray), typeof(string), typeof(string) };
             List<string> showKey = new() { "PRIMARY KEY", "", "", "", "", "" };
             categoriesData.Import(showColumns, showType, showKey);
-            categoriesData.Import(_categoriesData);
+            categoriesData.Import(_categoriesDataJarray);
         }
 
         private void loadContestData()
