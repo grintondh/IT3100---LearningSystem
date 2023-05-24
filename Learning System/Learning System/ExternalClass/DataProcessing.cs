@@ -1,4 +1,4 @@
-﻿// DataProcessing.cs v3.0.3
+// DataProcessing.cs v3.0.3
 // Last modified: 13.5.2023 by DH
 // Add ImportedColumns & Modified 2nd Import to load only selected columns
 
@@ -10,7 +10,6 @@ namespace Learning_System.ExternalClass
     public class DataProcessing
     {
         private JArray ListElements { get; set; } = new JArray();
-
         /// <summary>
         /// Lưu ListElements ngay trước đó. Cập nhật trước khi thực hiện hàm Get(), GetFirstRow(), Insert(), Update(), DeleteAll(), Delete()
         /// </summary>
@@ -30,7 +29,7 @@ namespace Learning_System.ExternalClass
 
         public bool ImportedColumns = false;
 
-        /// <summary>
+      /// <summary>
         /// Nhập dữ liệu (cột)
         /// </summary>
         /// <param name="_columns">Tên các cột</param>
@@ -40,7 +39,6 @@ namespace Learning_System.ExternalClass
         public int Import(List<string> _columns, List<Type> _columnsType, List<string> _columnsKey)
         {
             ImportedColumns = true;
-
             if (_columnsKey.Contains("PRIMARY KEY") == false)
             {
                 MessageBox.Show("Cần có ít nhất một cột có tính chất Primary (Unique + Not null) trong bảng!\n", "Error");
@@ -263,6 +261,7 @@ namespace Learning_System.ExternalClass
                 }
 
                 /// Add DataTable rows
+
                 foreach (int _index in getIndex)
                 {
                     DataRow _dataRow = _dataTable.NewRow();
@@ -372,7 +371,6 @@ namespace Learning_System.ExternalClass
         public DataRow? GetFirstRow()
         {
             DataTable? _dt = Get();
-
             if (_dt == null)
                 return null;
             else
@@ -440,7 +438,7 @@ namespace Learning_System.ExternalClass
             PrevListElements = ListElements;
             ListElements.Clear();
         }
-        
+      
         /// <summary>
         /// Xóa (các) bản ghi thỏa mãn điều kiện (kết hợp với Offset(), Limit(), Query(), Select(), Sort())
         /// </summary>

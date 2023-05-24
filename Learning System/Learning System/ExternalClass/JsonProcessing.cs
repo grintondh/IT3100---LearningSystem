@@ -1,4 +1,4 @@
-﻿// DataProcessing.cs v3.0.1
+// DataProcessing.cs v3.0.1
 // Last modified: 4.5.2023 by DH
 
 using Newtonsoft.Json.Linq;
@@ -23,6 +23,7 @@ namespace Learning_System.ExternalClass
             }
             return _fileReader;
         }
+      
         private static StreamReader? CreateFileJsonInDefaultFolder(string JsonPath, string? sampleJsonWebPath, string? sampleContent)
         {
             try
@@ -53,6 +54,7 @@ namespace Learning_System.ExternalClass
                 return null;
             }
         }
+
         private static StreamReader? GetFileJsonInDefaultFolder(string JsonPath, string? sampleJsonWebPath, string? sampleContent)
         {
             try
@@ -96,6 +98,7 @@ namespace Learning_System.ExternalClass
                 {
                     if (_JsonFile == null)
                         throw new Exception();
+
                     JArray _JsonData = JArray.Parse(_JsonFile.ReadToEnd());
                     return _JsonData;
                 }
