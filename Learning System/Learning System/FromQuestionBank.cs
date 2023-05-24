@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace Learning_System
 {
@@ -220,6 +221,9 @@ namespace Learning_System
                 }
             }
             this.SendToBack();
+            FromQuestionBank_SelectCategoryCbo.Text = "  Default";
+            if (FromQuestionBank_SubcategoriesCbx.Checked == true)
+            { FromQuestionBank_SubcategoriesCbx.Checked = false; }
         }
     }
 }
