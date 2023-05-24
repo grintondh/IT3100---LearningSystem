@@ -130,10 +130,5 @@ namespace Learning_System
             PopUpForm.Visible = true;
             PopUpForm.Show_Export();
         }
-
-        private void HomePageForm_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

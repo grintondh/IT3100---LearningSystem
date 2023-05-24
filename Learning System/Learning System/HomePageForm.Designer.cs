@@ -80,6 +80,7 @@
             HomePageForm_UserNameLbl.Name = "HomePageForm_UserNameLbl";
             HomePageForm_UserNameLbl.Size = new Size(108, 28);
             HomePageForm_UserNameLbl.TabIndex = 2;
+            HomePageForm_UserNameLbl.Text = "User Name";
             // 
             // HomePageForm_AvatarPic
             // 
@@ -136,6 +137,7 @@
             HomePageForm_PathLbl.Name = "HomePageForm_PathLbl";
             HomePageForm_PathLbl.Size = new Size(291, 23);
             HomePageForm_PathLbl.TabIndex = 1;
+            HomePageForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ";
             // 
             // HomePageForm_ITLbl
             // 
@@ -146,6 +148,7 @@
             HomePageForm_ITLbl.Name = "HomePageForm_ITLbl";
             HomePageForm_ITLbl.Size = new Size(60, 60);
             HomePageForm_ITLbl.TabIndex = 0;
+            HomePageForm_ITLbl.Text = "IT";
             // 
             // panel3
             // 
@@ -252,6 +255,7 @@
             HomePageForm_QuestionsBankLbl.Name = "HomePageForm_QuestionsBankLbl";
             HomePageForm_QuestionsBankLbl.Size = new Size(209, 38);
             HomePageForm_QuestionsBankLbl.TabIndex = 0;
+            HomePageForm_QuestionsBankLbl.Text = "Question Bank";
             // 
             // panel2
             // 
@@ -284,8 +288,8 @@
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "HomePageForm";
+            Text = "Home Page";
             WindowState = FormWindowState.Maximized;
-            Load += HomePageForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)HomePageForm_AvatarPic).EndInit();

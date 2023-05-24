@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="ChoosingContest" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">123023</Value>
+      <Value Profile="(Default)">DefaultContest</Value>
     </Setting>
   </Settings>
 </SettingsFile>
