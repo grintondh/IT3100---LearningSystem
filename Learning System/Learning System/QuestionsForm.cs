@@ -1,4 +1,4 @@
-﻿using Learning_System.ExternalClass;
+using Learning_System.ExternalClass;
 using Microsoft.Office.Interop.Word;
 using Newtonsoft.Json.Linq;
 using System;
@@ -173,10 +173,10 @@ namespace Learning_System
 
         private void QuestionsForm_CreateNewQuestionBtn_Click(object sender, EventArgs e)
         {
-            /*
-            var val = QuestionsForm_SelectCategoryCbo.SelectedValue.ToString();
-            MessageBox.Show(val, "?");
-            */
+            AddNewQuestionForm addNewQuestionForm = new AddNewQuestionForm();
+            addNewQuestionForm.ShowDialog();
+            // Hàm ngay bên dưới này dùng để load lại datagridview, khi nào merge code vào thì ông bỏ // đi hộ tôi nhá
+            // showQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
         }
 
         private void QuestionsForm_SelectCategoryCbo_SelectedIndexChanged(object sender, EventArgs e)
