@@ -1,4 +1,4 @@
-﻿// DataProcessing.cs v3.0.1
+// DataProcessing.cs v3.0.1
 // Last modified: 4.5.2023 by DH
 
 using Newtonsoft.Json.Linq;
