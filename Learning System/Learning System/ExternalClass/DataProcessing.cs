@@ -1,4 +1,4 @@
-﻿// DataProcessing.cs v3.0.3
+// DataProcessing.cs v3.0.3
 // Last modified: 13.5.2023 by DH
 // Add ImportedColumns & Modified 2nd Import to load only selected columns
 

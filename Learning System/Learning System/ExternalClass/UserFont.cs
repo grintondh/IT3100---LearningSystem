@@ -1,4 +1,4 @@
-﻿using iText.Kernel.Font;
+using iText.Kernel.Font;
 
 
 namespace Learning_System.ExternalClass
