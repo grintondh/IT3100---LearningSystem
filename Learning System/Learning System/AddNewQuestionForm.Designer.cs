@@ -32,6 +32,7 @@
             AddNewQuestionForm_HeadingLbl = new Label();
             panel_heading = new Panel();
             panel1 = new Panel();
+            AddNewQuestionForm_ExpandPic = new PictureBox();
             AddNewQuestionForm_CancelBtn = new Button();
             AddNewQuestionForm_SaveAndContinueBtn = new Button();
             AddNewQuestionForm_SaveBtn = new Button();
@@ -45,7 +46,6 @@
             AddNewQuestionForm_NameLbl = new Label();
             AddNewQuestionForm_CategoryLbl = new Label();
             AddNewQuestionForm_GeneralBtn = new Button();
-            AddNewQuestionForm_ExpandPic = new PictureBox();
             panel_heading.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)AddNewQuestionForm_ExpandPic).BeginInit();
@@ -92,6 +92,16 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1251, 899);
             panel1.TabIndex = 10;
+            // 
+            // AddNewQuestionForm_ExpandPic
+            // 
+            AddNewQuestionForm_ExpandPic.Image = (Image)resources.GetObject("AddNewQuestionForm_ExpandPic.Image");
+            AddNewQuestionForm_ExpandPic.Location = new Point(32, 17);
+            AddNewQuestionForm_ExpandPic.Name = "AddNewQuestionForm_ExpandPic";
+            AddNewQuestionForm_ExpandPic.Size = new Size(15, 10);
+            AddNewQuestionForm_ExpandPic.SizeMode = PictureBoxSizeMode.Zoom;
+            AddNewQuestionForm_ExpandPic.TabIndex = 16;
+            AddNewQuestionForm_ExpandPic.TabStop = false;
             // 
             // AddNewQuestionForm_CancelBtn
             // 
@@ -223,16 +233,6 @@
             AddNewQuestionForm_GeneralBtn.TabIndex = 3;
             AddNewQuestionForm_GeneralBtn.Text = "General";
             AddNewQuestionForm_GeneralBtn.UseVisualStyleBackColor = true;
-            // 
-            // AddNewQuestionForm_ExpandPic
-            // 
-            AddNewQuestionForm_ExpandPic.Image = (Image)resources.GetObject("AddNewQuestionForm_ExpandPic.Image");
-            AddNewQuestionForm_ExpandPic.Location = new Point(32, 17);
-            AddNewQuestionForm_ExpandPic.Name = "AddNewQuestionForm_ExpandPic";
-            AddNewQuestionForm_ExpandPic.Size = new Size(15, 10);
-            AddNewQuestionForm_ExpandPic.SizeMode = PictureBoxSizeMode.Zoom;
-            AddNewQuestionForm_ExpandPic.TabIndex = 16;
-            AddNewQuestionForm_ExpandPic.TabStop = false;
             // 
             // AddNewQuestionForm
             // 

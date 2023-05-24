@@ -11,15 +11,37 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.Office.Interop.Word;
+using System.Reflection;
+using Microsoft.VisualBasic.Devices;
+using static System.Windows.Forms.DataFormats;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Learning_System
 {
     public partial class ImportForm : UserControl
     {
         private string? ImportPath;
+
+        private string? selectedImage;
+
+        private Paragraph? paragraph;
+
+        private int lineIndex = 0;
+
+        private const long SIZE_OF_MB = 1024 * 1024;
+
+        private const int MAX_OF_SIZE = 200;
+
+        private double maximumSizeForNewFiles = MAX_OF_SIZE;
+
+        const int MAX_OF_LINES = 2000;
+
+        private RichTextBox[] lineTextBoxes = new RichTextBox[MAX_OF_LINES];
+
         public ImportForm()
         {
             InitializeComponent();
+            ImportForm_StatusLbl.Text = $"Maximum size for new files: {Math.Round(maximumSizeForNewFiles, 2)} MB";
         }
 
         private void ImportForm_SelectFileBtn_Click(object sender, EventArgs e)
@@ -32,12 +54,20 @@ namespace Learning_System
             }
         }
 
+        /// <summary>
+        /// Check Aiken format của dòng lựa chọn ("A. Choice's content")
+        /// </summary>
         private char CheckChoicesAikenFormat(string choice)
         {
             if (choice.Length < 4) return ' ';
             return choice[0] < 'A' || choice[0] > 'Z' || choice[1] != '.' || choice[2] != ' ' || choice[3] == ' ' ? ' ' : choice[0];
         }
 
+        /// <summary>
+        /// Check Aiken format của dòng đáp án ("ANSWER: A")
+        /// </summary>
+        /// <param name="answer"> Dòng đáp án</param>
+        /// <param name="_listAnswers"> Danh sách các lựa chọn của câu hỏi</param>
         private bool CheckAnswerAikenFormat(string answer, List<char> _listAnswers)
         {
             if (_listAnswers.Count < 2) return false;
@@ -49,6 +79,11 @@ namespace Learning_System
             }
             return false;
         }
+        /// <summary>
+        /// Check Aiken format của file
+        /// </summary>
+        /// <param name="lines"> Các dòng text trong file</param>
+        /// <returns> Số âm: Đúng format và trả về số câu hỏi trong file; Số dương: Sai format và trả về dòng đầu tiên bị sai format </returns>
         private int CheckAikenFormat(List<string> lines)
         {
             int i = 0;
@@ -91,7 +126,12 @@ namespace Learning_System
             return -questionCount;
         }
 
-        private void ImportQuestionsFile(List<string> lines)
+        /// <summary>
+        /// Import câu hỏi vào file json
+        /// </summary>
+        /// <param name="lines"> Các dòng text trong file</param>
+        /// <param name="_ImportPath"> Đường dẫn của file được chọn</param>
+        private void ImportQuestionsFile(List<string> lines, string _ImportPath)
         {
             DataProcessing questionsData = new();
             List<string> _showQuestionsColumns = new() { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
@@ -107,7 +147,12 @@ namespace Learning_System
 
             try
             {
-                JArray _questionsData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
+                JArray? _questionsData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
+                if (_questionsData == null)
+                {
+                    MessageBox.Show("Can't get questions data:\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 questionsData.Import(_showQuestionsColumns, _showQuestionsType, _showQuestionsKey);
                 questionsData.Import(_questionsData);
             }
@@ -121,7 +166,12 @@ namespace Learning_System
 
             try
             {
-                JArray _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
+                JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
+                if (_categoriesData == null)
+                {
+                    MessageBox.Show("Can't get categories data:\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 categoriesData.Import(_showCategoryColumns, _showCategoryType, _showCategoryKey);
                 categoriesData.Import(_categoriesData);
             }
@@ -153,7 +203,10 @@ namespace Learning_System
             {
                 if (lines[i].Length > 0)
                 {
-                    string questionContent = lines[i];
+                    string _stringContent;
+                    if (Path.GetExtension(ImportPath) != ".txt") _stringContent = lineTextBoxes[i].Rtf;
+                    else _stringContent = lines[i];
+                    string questionContent = _stringContent;
                     questionIDCount++;
                     i++;
                     List<QuestionChoice> _questionChoices = new List<QuestionChoice>();
@@ -161,9 +214,11 @@ namespace Learning_System
                     {
                         if (lines[i][1] == '.')
                         {
+                            if (Path.GetExtension(ImportPath) != ".txt") _stringContent = lineTextBoxes[i].Rtf;
+                            else _stringContent = lines[i];
                             QuestionChoice _questionChoice = new QuestionChoice()
                             {
-                                choice = lines[i],
+                                choice = _stringContent,
                                 mark = 0
                             };
                             _questionChoices.Add(_questionChoice);
@@ -171,9 +226,11 @@ namespace Learning_System
                         }
                         else
                         {
+                            int j = 0;
                             foreach (QuestionChoice _questionChoice in _questionChoices)
                             {
-                                if (lines[i].EndsWith(_questionChoice.choice[0])) _questionChoice.mark = 1;
+                                if (lines[i].EndsWith(lines[i - _questionChoices.Count + j][0])) _questionChoice.mark = 1;
+                                j++;
                             }
                             i += 2;
                             break;
@@ -190,7 +247,11 @@ namespace Learning_System
                     };
 
                     questionsData.Insert(JObject.FromObject(newQuestions));
-
+                    if (_parentCategory.Field<JArray>("QuestionArray") == null)
+                    {
+                        MessageBox.Show("Can't get parents categories data:\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    }
                     _parentCategory.Field<JArray>("QuestionArray").Add(newQuestions.ID);
                 }
             }
@@ -216,6 +277,48 @@ namespace Learning_System
             else return true;
         }
 
+        /// <summary>
+        /// Copy dòng đang được selected từ file .doc hoặc .docx để paste vào Rich Text Box.
+        /// </summary>
+        protected void CopyFromClipboardInlineShape()
+        {
+            if (paragraph == null) return;
+            //InlineShape inlineShape = paragraph.Range.InlineShapes[selectedImageIndex];
+            paragraph.Range.Select();
+            paragraph.Range.Copy();
+            Computer computer = new Computer();
+            //Image img = computer.Clipboard.GetImage();
+            if (computer.Clipboard.GetDataObject() != null)
+            {
+                RichTextBox t = new RichTextBox();
+                lineTextBoxes[lineIndex] = new RichTextBox();
+                t.Paste();
+                selectedImage = t.Rtf;
+                //System.Windows.Forms.IDataObject data = computer.Clipboard.GetDataObject();
+                //if (data.GetDataPresent(System.Windows.Forms.DataFormats.Bitmap))
+                //{
+                //    Image image = (Image)data.GetData(System.Windows.Forms.DataFormats.Bitmap, true);
+                //    RichTextBox textBox = new RichTextBox();
+                //    DataFormats.Format format = DataFormats.GetFormat(System.Windows.Forms.DataFormats.Bitmap);
+                //    textBox.Paste(format);
+                //    selectedImage = textBox.Rtf;
+                //}
+                //else
+                //{
+                //    selectedImage = "";
+                //}
+            }
+            else
+            {
+                selectedImage = "";
+            }
+        }
+
+        /// <summary>
+        /// Đọc file .txt, .doc, .docx được chọn
+        /// </summary>
+        /// <param name="_ImportPath"> Đường dẫn của file được chọn </param>
+        /// <returns>Trả về list các dòng text trong file, nếu là file doc thì paste content vào mảng Rich Text Box </returns>
         private List<string> ReadFromDocumentFile(string _ImportPath)
         {
             List<string> _lines = new List<string>();
@@ -229,20 +332,35 @@ namespace Learning_System
                 object miss = System.Reflection.Missing.Value;
                 object path = _ImportPath;
                 object readOnly = true;
+                object save = false;
                 Document docs = application.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
                 if (docs != null)
                 {
-                    string totaltext = "";
-
+                    if (docs.Paragraphs.Count > MAX_OF_LINES)
+                    {
+                        MessageBox.Show($"Maximum {MAX_OF_LINES} lines on .doc and .docx files!");
+                        return _lines;
+                    }
+                    lineIndex = 0;
                     foreach (Paragraph p in docs.Paragraphs)
                     {
-                        totaltext += p.Range.Text;
+                        paragraph = p;
+                        //_lines.Add(CopyFromClipboardInlineShape());
+                        Thread thread = new Thread(CopyFromClipboardInlineShape);
+                        thread.SetApartmentState(ApartmentState.STA);
+                        thread.Start();
+                        thread.Join();
+                        lineTextBoxes[lineIndex] = new RichTextBox();
+                        lineTextBoxes[lineIndex].Rtf = selectedImage;
+                        _lines.Add(lineTextBoxes[lineIndex].Text.Trim());
+                        lineIndex++;
+                        //totaltext += p.Range.Text;
                     }
-                    string[] _totaltext = totaltext.Split('\r');
-                    _lines.AddRange(_totaltext);
+                    //string[] _totaltext = totaltext.Split('\r');
+                    //_lines.AddRange(_totaltext);
+                    docs.Close(ref save, ref miss, ref miss);
                 }
-                docs.Close();
-                application.Quit();
+                application.Quit(ref save, ref miss, ref miss);
             }
             return _lines;
         }
@@ -258,7 +376,14 @@ namespace Learning_System
             }
             else
             {
+                double fileSize = new System.IO.FileInfo(ImportPath).Length;
+                if (fileSize >= MAX_OF_SIZE * SIZE_OF_MB)
+                {
+                    MessageBox.Show($"File's size must be smaller than {MAX_OF_SIZE} MB!");
+                    return;
+                }
                 List<string> lines = ReadFromDocumentFile(ImportPath);
+                if (lines == null) { return; }
                 int checkAikenFormat = CheckAikenFormat(lines);
                 if (checkAikenFormat >= 0)
                 {
@@ -267,15 +392,22 @@ namespace Learning_System
                 else
                 {
                     MessageBox.Show($"OK. Successfully imported {-checkAikenFormat} question(s)!");
-                    ImportQuestionsFile(lines);
-                    ImportForm_StatusLbl.Text = "Maximum size for new files: ___";
-                    ImportPath = null;
+                    ImportQuestionsFile(lines, ImportPath);
+                    maximumSizeForNewFiles = maximumSizeForNewFiles - fileSize / SIZE_OF_MB;
+                    ImportForm_StatusLbl.Text = $"Maximum size for new files: {Math.Round(maximumSizeForNewFiles, 2)} MB";
                 }
+                ImportPath = null;
+                selectedImage = null;
+                paragraph = null;
             }
         }
 
         private void panel_drop_file_DragDrop(object sender, DragEventArgs e)
         {
+            if (e.Data == null) {
+                MessageBox.Show("Please dragdrop a file here");
+                return; 
+            }
             string[] FileList = (string[])e.Data.GetData(DataFormats.FileDrop);
             ImportPath = FileList[0];
             ImportForm_StatusLbl.Text = "File choosen: " + Path.GetFileName(ImportPath);
@@ -283,6 +415,11 @@ namespace Learning_System
 
         private void panel_drop_file_DragEnter(object sender, DragEventArgs e)
         {
+            if (e.Data == null)
+            {
+                MessageBox.Show("Please dragdrop a file here");
+                return;
+            }
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 e.Effect = DragDropEffects.All;
