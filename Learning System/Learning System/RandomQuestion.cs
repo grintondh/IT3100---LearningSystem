@@ -153,7 +153,7 @@ namespace Learning_System
                 selectedQuestionsContent.RemoveAt(index);
             }
             MessageBox.Show(text, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            ParentEditQuiz.loadDatagridview(randomSelectedQuestions);
+            ParentEditQuiz.loadQuestionID(randomSelectedQuestions);
             this.SendToBack();
         }
 

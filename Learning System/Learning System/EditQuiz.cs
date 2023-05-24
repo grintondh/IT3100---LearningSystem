@@ -13,12 +13,21 @@ namespace Learning_System
 {
     public partial class EditQuiz : UserControl
     {
+        public RandomQuestion randomQuestion;
+        public FromQuestionBank fromQuestionBank;
+
         public DataProcessing questionsData = new();
         public DataProcessing categoriesData = new();
-        private List<int> questionID = new();
+        public List<int> questionID = new();
         public EditQuiz()
         {
             InitializeComponent();
+            randomQuestion = new RandomQuestion(this);
+            fromQuestionBank = new FromQuestionBank(this);
+            Controls.Add(randomQuestion);
+            Controls.Add(fromQuestionBank);
+            randomQuestion.Dock = DockStyle.Fill;
+            fromQuestionBank.Dock = DockStyle.Fill;
         }
         public void addData(DataProcessing _questionData, DataProcessing _categoriesData)
         {
@@ -54,7 +63,7 @@ namespace Learning_System
             this.SendToBack();
         }
 
-        public void loadDatagridview(List<int> selectedQuestions)
+        public void loadQuestionID(List<int> selectedQuestions)
         {
             if (selectedQuestions.Count == 0) return;
             for (int i = 0; i < selectedQuestions.Count; i++)
@@ -62,6 +71,11 @@ namespace Learning_System
                 if (!questionID.Contains(selectedQuestions[i]))
                     questionID.Add(selectedQuestions[i]);
             }
+            loadDatagridview();
+        }
+        public void loadDatagridview()
+        {
+            if (questionID.Count == 0) return;
             EditQuiz_QuestionDtg.Rows.Clear();
             for (int i = 0; i < questionID.Count; i++)
             {
@@ -70,7 +84,21 @@ namespace Learning_System
                 var index = EditQuiz_QuestionDtg.Rows.Add();
                 DataGridViewRow DtgRow = EditQuiz_QuestionDtg.Rows[index];
                 DtgRow.Cells[0].Value = row.Field<string>("Name") + " " + row.Field<string>("Content");
+                DtgRow.Cells[2].Value = row.Field<int>("ID");
+            }
+            EditQuiz_NumberofQuestionLbl.Text = $"Question: {questionID.Count} | This quiz is open";
+            EditQuiz_TotalofMarkLbl.Text = $"Total of mark: {questionID.Count}.00";
+        }
+
+        private void EditQuiz_QuestionDtg_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (EditQuiz_QuestionDtg.Columns[e.ColumnIndex].Name == "Delete")
+            {
+                questionID.Remove(Convert.ToInt32(EditQuiz_QuestionDtg.Rows[e.RowIndex].Cells[2].Value));
+                EditQuiz_QuestionDtg.Rows.RemoveAt(e.RowIndex);
+                loadDatagridview();
             }
         }
+
     }
 }

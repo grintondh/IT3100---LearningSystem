@@ -19,10 +19,10 @@ namespace Learning_System
             InitializeComponent();
             loadQuestionData();
             loadCategoryData();
-            loadContestData();
             editQuiz.addData(questionsData, categoriesData);
             editQuiz.fromQuestionBank.addData(questionsData, categoriesData, _categoriesDataJarray);
             editQuiz.randomQuestion.addData(questionsData, categoriesData, _categoriesDataJarray);
+            loadContestData();
         }
 
         private void ContestForm_EditPic_Click(object sender, EventArgs e)
@@ -35,6 +35,8 @@ namespace Learning_System
         private DataProcessing categoriesData = new();
         private JArray _categoriesDataJarray = new();
         private DataTable contestDataTable = new();
+        private DataProcessing contestData = new();
+        private int ContestID = 0;
 
         private void loadQuestionData()
         {
@@ -58,7 +60,25 @@ namespace Learning_System
 
         private void loadContestData()
         {
-            contestDataTable.Clear();
+            JArray _contestData = JsonProcessing.ImportJsonContentInDefaultFolder("Contests.json", null, null);
+            List<string> showColumns = new List<string>() { "Id", "Name", "Description", "DescriptionShow", "QuestionArray", 
+                "ShuffleAnswer", "DayStart", "MonthStart", "YearStart", "HourStart", "MinuteStart", "StartEnable", "DayEnd", 
+                "MonthEnd", "YearEnd", "HourEnd", "MinuteEnd", "EndEnable", "TimeLimit", "TimeLimitEnable" };
+            List<Type> showType = new() { typeof(int), typeof(string), typeof(string), typeof(bool), typeof(JArray), 
+                typeof(bool), typeof(int), typeof(string), typeof(int), typeof(int), typeof(int), typeof(bool), typeof(int), 
+                typeof(string), typeof(int), typeof(int), typeof(int), typeof(bool), typeof(int), typeof(bool) };
+            List<string> showKey = new() { "PRIMARY KEY", "", "", "" , "" , "" , "" , "" , "" , "" , "" , "" , "" , "" , "" , "" , "",
+                "","","" };
+            contestData.Import(showColumns, showType, showKey);
+            contestData.Import(_contestData);
+            List<string> query = new() { "Id", ContestID.ToString() };
+            DataRow row = contestData.Init().Offset(0).Limit(1).Query(query).GetFirstRow();
+            ContestForm_ContestNameLbl.Text = row.Field<string>("Name");
+            ContestForm_TimeLbl.Text = "Time limit: " + row.Field<int>("TimeLimit") + " minutes";
+            editQuiz.EditQuiz_ContestNameLbl.Text = "Editing quiz: " + row.Field<string>("Name");
+            editQuiz.EditQuiz_ShuffleCbx.Checked = row.Field<bool>("ShuffleAnswer");
+            var x = row.Field<JArray>("QuestionArray").ToObject<List<int>>();
+            editQuiz.loadQuestionID(x);
         }
     }
 }

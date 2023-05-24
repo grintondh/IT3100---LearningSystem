@@ -223,7 +223,7 @@ namespace Learning_System
                 }
             }
             this.SendToBack();
-            ParentEditQuiz.loadDatagridview(questionSelectedList);
+            ParentEditQuiz.loadQuestionID(questionSelectedList);
             FromQuestionBank_SelectCategoryCbo.Text = "  Default";
             if (FromQuestionBank_SubcategoriesCbx.Checked == true)
             { FromQuestionBank_SubcategoriesCbx.Checked = false; }

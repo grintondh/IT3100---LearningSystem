@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditQuiz));
             panel_edit = new Panel();
-            EditQuiz_QuestionDtg = new DataGridView();
             flowLayoutPanel_popup = new FlowLayoutPanel();
             EditForm_NewQuestionBtn = new Button();
             EditQuiz_BankBtn = new Button();
@@ -44,13 +44,13 @@
             EditQuiz_RepaginateBtn = new Button();
             EditQuiz_NumberofQuestionLbl = new Label();
             EditQuiz_ContestNameLbl = new Label();
+            EditQuiz_QuestionDtg = new DataGridView();
             Content = new DataGridViewTextBoxColumn();
             Delete = new DataGridViewImageColumn();
-            randomQuestion = new RandomQuestion(this);
-            fromQuestionBank = new FromQuestionBank(this);
+            QuestionID = new DataGridViewTextBoxColumn();
             panel_edit.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)EditQuiz_QuestionDtg).BeginInit();
             flowLayoutPanel_popup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)EditQuiz_QuestionDtg).BeginInit();
             SuspendLayout();
             // 
             // panel_edit
@@ -70,28 +70,8 @@
             panel_edit.Dock = DockStyle.Fill;
             panel_edit.Location = new Point(0, 0);
             panel_edit.Name = "panel_edit";
-            panel_edit.Size = new Size(1379, 651);
+            panel_edit.Size = new Size(1379, 804);
             panel_edit.TabIndex = 0;
-            // 
-            // EditQuiz_QuestionDtg
-            // 
-            EditQuiz_QuestionDtg.AllowUserToAddRows = false;
-            EditQuiz_QuestionDtg.AllowUserToDeleteRows = false;
-            EditQuiz_QuestionDtg.AllowUserToResizeColumns = false;
-            EditQuiz_QuestionDtg.AllowUserToResizeRows = false;
-            EditQuiz_QuestionDtg.BackgroundColor = SystemColors.Control;
-            EditQuiz_QuestionDtg.BorderStyle = BorderStyle.Fixed3D;
-            EditQuiz_QuestionDtg.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            EditQuiz_QuestionDtg.ColumnHeadersVisible = false;
-            EditQuiz_QuestionDtg.Columns.AddRange(new DataGridViewColumn[] { Content, Delete });
-            EditQuiz_QuestionDtg.GridColor = SystemColors.Control;
-            EditQuiz_QuestionDtg.Location = new Point(14, 258);
-            EditQuiz_QuestionDtg.Name = "EditQuiz_QuestionDtg";
-            EditQuiz_QuestionDtg.ReadOnly = true;
-            EditQuiz_QuestionDtg.RowHeadersWidth = 51;
-            EditQuiz_QuestionDtg.RowTemplate.Height = 29;
-            EditQuiz_QuestionDtg.Size = new Size(1305, 374);
-            EditQuiz_QuestionDtg.TabIndex = 27;
             // 
             // flowLayoutPanel_popup
             // 
@@ -273,6 +253,27 @@
             EditQuiz_ContestNameLbl.TabIndex = 16;
             EditQuiz_ContestNameLbl.Text = "Editing Quiz: Thi giữa kỳ 2 môn Công nghệ";
             // 
+            // EditQuiz_QuestionDtg
+            // 
+            EditQuiz_QuestionDtg.AllowUserToAddRows = false;
+            EditQuiz_QuestionDtg.AllowUserToDeleteRows = false;
+            EditQuiz_QuestionDtg.AllowUserToResizeColumns = false;
+            EditQuiz_QuestionDtg.AllowUserToResizeRows = false;
+            EditQuiz_QuestionDtg.BackgroundColor = SystemColors.Control;
+            EditQuiz_QuestionDtg.BorderStyle = BorderStyle.Fixed3D;
+            EditQuiz_QuestionDtg.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            EditQuiz_QuestionDtg.ColumnHeadersVisible = false;
+            EditQuiz_QuestionDtg.Columns.AddRange(new DataGridViewColumn[] { Content, Delete, QuestionID });
+            EditQuiz_QuestionDtg.GridColor = SystemColors.Control;
+            EditQuiz_QuestionDtg.Location = new Point(14, 258);
+            EditQuiz_QuestionDtg.Name = "EditQuiz_QuestionDtg";
+            EditQuiz_QuestionDtg.ReadOnly = true;
+            EditQuiz_QuestionDtg.RowHeadersWidth = 51;
+            EditQuiz_QuestionDtg.RowTemplate.Height = 29;
+            EditQuiz_QuestionDtg.Size = new Size(1305, 374);
+            EditQuiz_QuestionDtg.TabIndex = 27;
+            EditQuiz_QuestionDtg.CellContentClick += EditQuiz_QuestionDtg_CellContentClick;
+            // 
             // Content
             // 
             Content.HeaderText = "Content";
@@ -284,24 +285,33 @@
             // Delete
             // 
             Delete.HeaderText = "Delete";
+            Delete.Image = (Image)resources.GetObject("Delete.Image");
+            Delete.ImageLayout = DataGridViewImageCellLayout.Zoom;
             Delete.MinimumWidth = 6;
             Delete.Name = "Delete";
             Delete.ReadOnly = true;
             Delete.Width = 50;
+            // 
+            // QuestionID
+            // 
+            QuestionID.HeaderText = "QuestionID";
+            QuestionID.MinimumWidth = 6;
+            QuestionID.Name = "QuestionID";
+            QuestionID.ReadOnly = true;
+            QuestionID.Visible = false;
+            QuestionID.Width = 50;
             // 
             // EditQuiz
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(panel_edit);
-            Controls.Add(fromQuestionBank);
-            Controls.Add(randomQuestion);
             Name = "EditQuiz";
-            Size = new Size(1379, 651);
+            Size = new Size(1379, 804);
             panel_edit.ResumeLayout(false);
             panel_edit.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)EditQuiz_QuestionDtg).EndInit();
             flowLayoutPanel_popup.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)EditQuiz_QuestionDtg).EndInit();
             ResumeLayout(false);
         }
 
@@ -309,7 +319,7 @@
 
         private Panel panel_edit;
         private Button EditQuiz_AddBtn;
-        private CheckBox EditQuiz_ShuffleCbx;
+        public CheckBox EditQuiz_ShuffleCbx;
         private Label EditQuiz_TotalofMarkLbl;
         private TextBox EditQuiz_MaxGradeTxt;
         private Button EditQuiz_SaveBtn;
@@ -317,15 +327,14 @@
         private Button EditQuiz_MultipleItemsBtn;
         private Button EditQuiz_RepaginateBtn;
         private Label EditQuiz_NumberofQuestionLbl;
-        private Label EditQuiz_ContestNameLbl;
+        public Label EditQuiz_ContestNameLbl;
         private FlowLayoutPanel flowLayoutPanel_popup;
         private Button EditForm_NewQuestionBtn;
         private Button EditQuiz_BankBtn;
         private Button EditQuiz_RandomBtn;
-        public RandomQuestion randomQuestion;
-        public FromQuestionBank fromQuestionBank;
         private DataGridView EditQuiz_QuestionDtg;
         private DataGridViewTextBoxColumn Content;
         private DataGridViewImageColumn Delete;
+        private DataGridViewTextBoxColumn QuestionID;
     }
 }
