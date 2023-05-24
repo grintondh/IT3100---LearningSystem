@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace Learning_System
         public int CategoryID { get; set; }
         public string? Content { get; set; }
         public double DefaultMark { get; set; }
+
+        [JsonProperty("Choice")]
         public List<QuestionChoice> Choice { get; set; } = new List<QuestionChoice>();
     }
 
@@ -20,5 +23,6 @@ namespace Learning_System
     {
         public string? choice { get; set; }
         public double mark { get; set; }
+
     }
 }
