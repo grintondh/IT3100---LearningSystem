@@ -30,9 +30,6 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.FromQuestionBank_ShowQuestionsDtg = new System.Windows.Forms.DataGridView();
-            this.Checkbox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Content = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QuestionID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FromQuestionBank_AddBtn = new System.Windows.Forms.Button();
             this.FromQuestionBank_OldQuestionCbx = new System.Windows.Forms.CheckBox();
             this.FromQuestionBank_SubcategoriesCbx = new System.Windows.Forms.CheckBox();
@@ -40,6 +37,9 @@
             this.FromQuestionBank_SelectCategoryCbo = new System.Windows.Forms.ComboBox();
             this.FromQuestionBank_CategoryLbl = new System.Windows.Forms.Label();
             this.FromQuestionBank_Header = new System.Windows.Forms.Label();
+            this.Checkbox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Content = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QuestionID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FromQuestionBank_ShowQuestionsDtg)).BeginInit();
             this.SuspendLayout();
@@ -73,38 +73,10 @@
             this.QuestionID});
             this.FromQuestionBank_ShowQuestionsDtg.Location = new System.Drawing.Point(18, 489);
             this.FromQuestionBank_ShowQuestionsDtg.Name = "FromQuestionBank_ShowQuestionsDtg";
-            this.FromQuestionBank_ShowQuestionsDtg.ReadOnly = true;
             this.FromQuestionBank_ShowQuestionsDtg.RowHeadersWidth = 4;
             this.FromQuestionBank_ShowQuestionsDtg.RowTemplate.Height = 33;
             this.FromQuestionBank_ShowQuestionsDtg.Size = new System.Drawing.Size(1083, 303);
             this.FromQuestionBank_ShowQuestionsDtg.TabIndex = 36;
-            // 
-            // Checkbox
-            // 
-            this.Checkbox.HeaderText = "";
-            this.Checkbox.MinimumWidth = 8;
-            this.Checkbox.Name = "Checkbox";
-            this.Checkbox.ReadOnly = true;
-            this.Checkbox.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Checkbox.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Checkbox.Width = 60;
-            // 
-            // Content
-            // 
-            this.Content.HeaderText = "Câu hỏi";
-            this.Content.MinimumWidth = 8;
-            this.Content.Name = "Content";
-            this.Content.ReadOnly = true;
-            this.Content.Width = 1019;
-            // 
-            // QuestionID
-            // 
-            this.QuestionID.HeaderText = "QuestionID";
-            this.QuestionID.MinimumWidth = 8;
-            this.QuestionID.Name = "QuestionID";
-            this.QuestionID.ReadOnly = true;
-            this.QuestionID.Visible = false;
-            this.QuestionID.Width = 150;
             // 
             // FromQuestionBank_AddBtn
             // 
@@ -194,6 +166,31 @@
             this.FromQuestionBank_Header.TabIndex = 29;
             this.FromQuestionBank_Header.Text = "Add from a question bank at the end";
             // 
+            // Checkbox
+            // 
+            this.Checkbox.HeaderText = "";
+            this.Checkbox.MinimumWidth = 8;
+            this.Checkbox.Name = "Checkbox";
+            this.Checkbox.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Checkbox.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Checkbox.Width = 60;
+            // 
+            // Content
+            // 
+            this.Content.HeaderText = "Câu hỏi";
+            this.Content.MinimumWidth = 8;
+            this.Content.Name = "Content";
+            this.Content.ReadOnly = true;
+            this.Content.Width = 1019;
+            // 
+            // QuestionID
+            // 
+            this.QuestionID.HeaderText = "QuestionID";
+            this.QuestionID.MinimumWidth = 8;
+            this.QuestionID.Name = "QuestionID";
+            this.QuestionID.Visible = false;
+            this.QuestionID.Width = 150;
+            // 
             // FromQuestionBank
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
@@ -214,9 +211,6 @@
 
         private Panel panel1;
         private DataGridView FromQuestionBank_ShowQuestionsDtg;
-        private DataGridViewCheckBoxColumn Checkbox;
-        private DataGridViewTextBoxColumn Content;
-        private DataGridViewTextBoxColumn QuestionID;
         private Button FromQuestionBank_AddBtn;
         private CheckBox FromQuestionBank_OldQuestionCbx;
         private CheckBox FromQuestionBank_SubcategoriesCbx;
@@ -224,5 +218,8 @@
         private ComboBox FromQuestionBank_SelectCategoryCbo;
         private Label FromQuestionBank_CategoryLbl;
         private Label FromQuestionBank_Header;
+        private DataGridViewCheckBoxColumn Checkbox;
+        private DataGridViewTextBoxColumn Content;
+        private DataGridViewTextBoxColumn QuestionID;
     }
 }

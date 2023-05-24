@@ -40,7 +40,7 @@ namespace Learning_System
         }
 
         //bien dung de gui id cua category dang duoc chon sang form edit question
-        private int SendParentIdToEditForm;
+        //private int SendParentIdToEditForm;
         //bien luu cac category duoc hien tren datagridview
         private List<int> selectedCategoriesIdList = new List<int>();
         // bien co hien cau hoi tu category con hay khong
@@ -187,8 +187,16 @@ namespace Learning_System
 
         private void FromQuestionBank_SubcategoriesCbx_CheckedChanged(object sender, EventArgs e)
         {
-            showQuestionsFromSubcategories = FromQuestionBank_SubcategoriesCbx.Checked;
-            showQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
+            if (FromQuestionBank_SelectCategoryCbo.SelectedIndex == -1) 
+            {
+                FromQuestionBank_SubcategoriesCbx.Checked = false;
+                return;
+            }
+            else
+            {
+                showQuestionsFromSubcategories = FromQuestionBank_SubcategoriesCbx.Checked;
+                showQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
+            }
         }
 
         private void FromQuestionBank_SelectCategoryCbo_MouseClick(object sender, MouseEventArgs e)
