@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Learning_System
 {
-    internal class Categories
+    public class Categories
     {
         public int Id { get; set; }
         public string? Name { get; set; }
