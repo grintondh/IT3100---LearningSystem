@@ -1,12 +1,9 @@
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.IO;
-using System.Net;
-using System.Text;
-using System.Windows.Forms;
+// JsonProcessing.cs v3.0.1
+// Last modified: 4.5.2023 by DH
 
-namespace Calculator
+using Newtonsoft.Json.Linq;
+
+namespace Learning_System.ExternalClass
 {
     /// <summary>
     /// Methods for processing Json file
@@ -26,7 +23,7 @@ namespace Calculator
             }
             return _fileReader;
         }
-        private static StreamReader CreateFileJsonInDefaultFolder(string JsonPath, string sampleJsonWebPath, string sampleContent)
+        private static StreamReader? CreateFileJsonInDefaultFolder(string JsonPath, string? sampleJsonWebPath, string? sampleContent)
         {
             try
             {
@@ -34,38 +31,14 @@ namespace Calculator
                 if (File.Exists(_fileName))
                     File.Delete(_fileName);
 
-                try
+                if (sampleContent != null)
+                    File.WriteAllText(JsonPath, sampleContent + "\n");
+                else
                 {
-                    var _webRequest = (HttpWebRequest)HttpWebRequest.Create(sampleJsonWebPath);
-                    _webRequest.UserAgent = "Simple Calculator";
+                    DialogResult _userReturnDialog = MessageBox.Show("Can't find your request file in default folders. We couldn't create a sample one for you. Please check your internet connection and try again.\nPath: " + JsonPath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                    var _response = _webRequest.GetResponse();
-                    var _content = _response.GetResponseStream();
-
-                    using (var _reader = new StreamReader(_content))
-                    {
-                        string _stringContent = _reader.ReadToEnd();
-                        byte[] _info = new UTF8Encoding(true).GetBytes(_stringContent);
-
-                        FileStream _fs = File.Create(_fileName);
-                        _fs.Write(_info, 0, _info.Length);
-                        _fs.Close();
-                        DialogResult _userReturnDialog = MessageBox.Show("Can't find your request file in default folders. We created a sample one for you.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-                catch
-                {
-                    if (sampleContent != null)
-                        File.WriteAllText(JsonPath, sampleContent + "\n");
-                    else
-                    {
-                        DialogResult _userReturnDialog = MessageBox.Show("Can't find your request file in default folders. We couldn't create a sample one for you. Please check your internet connection and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                        if (_userReturnDialog == DialogResult.OK)
-                        {
-                            Application.Exit();
-                        }
-                    }
+                    if (_userReturnDialog == DialogResult.OK)
+                        Application.Exit();
                 }
 
                 return SetFileJsonInDefaultFolder(JsonPath);
@@ -80,11 +53,11 @@ namespace Calculator
                 return null;
             }
         }
-        private static StreamReader GetFileJsonInDefaultFolder(string JsonPath, string sampleJsonWebPath, string sampleContent)
+        private static StreamReader? GetFileJsonInDefaultFolder(string JsonPath, string? sampleJsonWebPath, string? sampleContent)
         {
             try
             {
-                StreamReader _readFile;
+                StreamReader? _readFile;
                 try
                 {
                     _readFile = SetFileJsonInDefaultFolder(JsonPath);
@@ -99,7 +72,7 @@ namespace Calculator
             }
             catch
             {
-                DialogResult userReturnDialog = MessageBox.Show("Error in getting users info! ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogResult userReturnDialog = MessageBox.Show("Error in getting file information! ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 if (userReturnDialog == DialogResult.OK)
                     Application.Exit();
@@ -115,12 +88,14 @@ namespace Calculator
         /// <param name="sampleJsonWebPath">The json url you want to import if we need to create a new one for you.</param>
         /// <param name="sampleContent">The content you want to import if we need to create a new one for you (provided that you can't access to your web path)</param>
         /// <returns>Your data in JArray format. If something get error, it will return a null value.</returns>
-        public static JArray ImportJsonContentInDefaultFolder(string JsonPath, string sampleJsonWebPath, string sampleContent)
+        public static JArray? ImportJsonContentInDefaultFolder(string JsonPath, string? sampleJsonWebPath, string? sampleContent)
         {
             try
             {
-                using (var _JsonFile = JsonProcessing.GetFileJsonInDefaultFolder(JsonPath, sampleJsonWebPath, sampleContent))
+                using (var _JsonFile = GetFileJsonInDefaultFolder(JsonPath, sampleJsonWebPath, sampleContent))
                 {
+                    if (_JsonFile == null)
+                        throw new Exception();
                     JArray _JsonData = JArray.Parse(_JsonFile.ReadToEnd());
                     return _JsonData;
                 }
@@ -137,12 +112,12 @@ namespace Calculator
         /// <param name="JsonPath">The relative path of your json file. The root folder is where you put for running application file (or bin folder if you are debugging).</param>
         /// <param name="JsonData">Your data which you want to import to json file in JArray format.</param>
         /// <returns>Your new data in JArray format. If something get error, it will return a null value.</returns>
-        public static JArray ExportJsonContentInDefaultFolder(string JsonPath, JArray JsonData)
+        public static JArray? ExportJsonContentInDefaultFolder(string JsonPath, JArray JsonData)
         {
             try
             {
                 var _convertedJson = JsonData.ToString();
-                
+
                 string _fileName = JsonPath;
                 if (File.Exists(_fileName))
                 {
