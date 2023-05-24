@@ -40,6 +40,7 @@
             AddNewQuestionForm_CancelBtn = new Button();
             panel_ = new Panel();
             AddNewQuestionForm_CategoryLbl = new Label();
+
             AddNewQuestionForm_TextRtb = new RichTextBox();
             AddNewQuestionForm_NameLbl = new Label();
             AddNewQuestionForm_TextLbl = new Label();

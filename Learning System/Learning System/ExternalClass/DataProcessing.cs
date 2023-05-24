@@ -1,5 +1,6 @@
-// DataProcessing.cs v3.0.0
-// Last modified: 26.4.2023 by DH
+// DataProcessing.cs v3.0.3
+// Last modified: 13.5.2023 by DH
+// Add ImportedColumns & Modified 2nd Import to load only selected columns
 
 using Newtonsoft.Json.Linq;
 using System.Data;
@@ -9,7 +10,6 @@ namespace Learning_System.ExternalClass
     public class DataProcessing
     {
         private JArray ListElements { get; set; } = new JArray();
-        
         /// <summary>
         /// Lưu ListElements ngay trước đó. Cập nhật trước khi thực hiện hàm Get(), GetFirstRow(), Insert(), Update(), DeleteAll(), Delete()
         /// </summary>
@@ -27,7 +27,9 @@ namespace Learning_System.ExternalClass
             public const int Unset = 0;
         }
 
-        /// <summary>
+        public bool ImportedColumns = false;
+
+      /// <summary>
         /// Nhập dữ liệu (cột)
         /// </summary>
         /// <param name="_columns">Tên các cột</param>
@@ -36,12 +38,13 @@ namespace Learning_System.ExternalClass
         /// <returns>StatusCode: OK (1): Thành công; Error (2): Thất bại</returns>
         public int Import(List<string> _columns, List<Type> _columnsType, List<string> _columnsKey)
         {
+            ImportedColumns = true;
             if (_columnsKey.Contains("PRIMARY KEY") == false)
             {
                 MessageBox.Show("Cần có ít nhất một cột có tính chất Primary (Unique + Not null) trong bảng!\n", "Error");
                 return StatusCode.Error;
             }
-            
+
             if (_columns.Count != _columnsType.Count || _columns.Count != _columnsKey.Count)
             {
                 MessageBox.Show("Số lượng các trường danh sách của cột không tương thích với nhau!\n", "Error");
@@ -71,7 +74,31 @@ namespace Learning_System.ExternalClass
                     ListElements.Clear();
 
                     foreach (JObject _jsonObj in _jsonDataList.Cast<JObject>())
-                        ListElements.Add(_jsonObj);
+                    {
+                        JObject _newObj = new();
+
+                        foreach (var _col in ColumnsSetting)
+                        {
+                            if ((_col.Key.Contains("NOT NULL") == true || _col.Key.Contains("PRIMARY KEY") == true) && _jsonObj[_col.Name] == null)
+                            {
+                                MessageBox.Show("Không thể nhập dữ liệu: " + _col.Name + " chứa giá trị NULL trong khi cột được đặt là NOT NULL!", "Error");
+                                return StatusCode.Error;
+                            }
+                            else if (_col.Key.Contains("PRIMARY KEY") == true || _col.Key.Contains("UNIQUE") == true)
+                            {
+                                foreach (var _row in ListElements)
+                                    if (_jsonObj[_col.Name].ToString().ToLower() == _row[_col.Name].ToString().ToLower())
+                                    {
+                                        MessageBox.Show("Không thể thêm phần tử mới: " + _col.Name + " chứa giá trị trùng lặp trong khi cột được đặt là UNIQUE!", "Error");
+                                        return StatusCode.Error;
+                                    }
+                            }
+
+                            _newObj.Add(_col.Name, _jsonObj[_col.Name]);
+                        }
+
+                        ListElements.Add(_newObj);
+                    }
 
                     return StatusCode.OK;
                 }
@@ -123,8 +150,10 @@ namespace Learning_System.ExternalClass
                         break;
                     }
 
+                /*
                 if (_existPrimaryKeyOrUnique == false)
                     MessageBox.Show("Nên có ít nhất một cột PRIMARY KEY hoặc UNIQUE trong danh sách cột!", "Warning!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                */
 
                 List<int> _choseIndex = new();
                 int length = ListElements.Count;
@@ -195,7 +224,7 @@ namespace Learning_System.ExternalClass
             {
                 List<int>? getIndex = GetAllSatisfy();
 
-                if (getIndex == null)    
+                if (getIndex == null)
                     return null;
 
                 DataTable _dataTable = new();
@@ -232,7 +261,8 @@ namespace Learning_System.ExternalClass
                 }
 
                 /// Add DataTable rows
-                foreach(int _index in getIndex)
+
+                foreach (int _index in getIndex)
                 {
                     DataRow _dataRow = _dataTable.NewRow();
 
@@ -341,7 +371,6 @@ namespace Learning_System.ExternalClass
         public DataRow? GetFirstRow()
         {
             DataTable? _dt = Get();
-            
             if (_dt == null)
                 return null;
             else
@@ -365,7 +394,7 @@ namespace Learning_System.ExternalClass
         {
             PrevListElements = ListElements;
 
-            if(_element == null)
+            if (_element == null)
             {
                 MessageBox.Show("Không thể thêm phần tử mới: Phần tử mới rỗng (null)!", "Error");
                 return StatusCode.Error;
@@ -392,7 +421,6 @@ namespace Learning_System.ExternalClass
                 }
 
                 ListElements.Add(_element);
-                MessageBox.Show("Đã thêm phần tử mới!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return StatusCode.OK;
             }
             catch (Exception ex)
@@ -410,7 +438,7 @@ namespace Learning_System.ExternalClass
             PrevListElements = ListElements;
             ListElements.Clear();
         }
-
+      
         /// <summary>
         /// Xóa (các) bản ghi thỏa mãn điều kiện (kết hợp với Offset(), Limit(), Query(), Select(), Sort())
         /// </summary>
@@ -419,7 +447,7 @@ namespace Learning_System.ExternalClass
         {
             PrevListElements = ListElements;
 
-            if(this == null)
+            if (this == null)
                 return StatusCode.Error;
 
             try
@@ -433,7 +461,6 @@ namespace Learning_System.ExternalClass
                 foreach (var item in removeList)
                     ListElements.RemoveAt(item);
 
-                MessageBox.Show("Đã xóa thành công (các) phần tử!", "Success");
                 return StatusCode.OK;
             }
             catch (Exception ex)
@@ -452,10 +479,10 @@ namespace Learning_System.ExternalClass
         {
             PrevListElements = ListElements;
 
-            if(this == null)
+            if (this == null)
                 return StatusCode.Error;
 
-            if(_newValue == null)
+            if (_newValue == null)
             {
                 MessageBox.Show("Không thể cập nhật phần tử: Phần tử cập nhật rỗng!", "Error");
                 return StatusCode.Error;
@@ -464,7 +491,7 @@ namespace Learning_System.ExternalClass
             {
                 List<int>? updateList = GetAllSatisfy();
 
-                if(updateList == null)
+                if (updateList == null)
                     return StatusCode.Error;
 
                 foreach (var _col in ColumnsSetting)
@@ -481,7 +508,7 @@ namespace Learning_System.ExternalClass
                             {
                                 MessageBox.Show("Không thể cập nhật phần tử: " + _col.Name + " chứa giá trị trùng lặp trong khi cột được đặt là UNIQUE!", "Error");
                                 return StatusCode.Error;
-                            }                                
+                            }
                     }
                 }
 
@@ -489,7 +516,6 @@ namespace Learning_System.ExternalClass
                     foreach (JProperty jProperty in _newValue.Properties())
                         ListElements[item][jProperty.Name] = jProperty.Value;
 
-                MessageBox.Show("Đã cập nhật thành công (các) phần tử!", "Success");
                 return StatusCode.OK;
             }
             catch (Exception ex)
@@ -526,7 +552,7 @@ namespace Learning_System.ExternalClass
         /// </summary>
         public void Undo()
         {
-             ListElements = PrevListElements;
+            ListElements = PrevListElements;
         }
     }
 }
