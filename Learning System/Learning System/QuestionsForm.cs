@@ -1,4 +1,5 @@
 ﻿using Learning_System.ExternalClass;
+using Microsoft.Office.Interop.Word;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -10,19 +11,114 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Learning_System
 {
     public partial class QuestionsForm : UserControl
     {
+        //bien dung de gui id cua category dang duoc chon sang form edit question
+        private int SendParentIdToEditForm;
+        //bien luu cac category duoc hien tren datagridview
+        private List<int> selectedCategoriesIdList = new List<int>();
+        // bien co hien cau hoi tu category con hay khong
+        private bool showQuestionsFromSubcategories = false;
+        private void GetSubCategories(int _parentCategories, ref List<int> _subCategories, ref List<Categories> categories)
+        {
+            foreach (int x in categories[_parentCategories].SubArray)
+            {
+                _subCategories.Add(x);
+                GetSubCategories(x, ref _subCategories, ref categories);
+            }
+        }
+
+        public void showQuestions(List<int> showQuestionsFromCategoriesID, bool _showQuestionsFromSubcategories)
+        {
+            QuestionForm_ShowQuestionsDtg.Rows.Clear();
+            DataProcessing questionsData = new();
+            List<string> _showQuestionsColumns = new() { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
+            List<Type> _showQuestionsType = new() { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
+            List<string> _showQuestionsKey = new() { "PRIMARY KEY", "", "", "", "", "" };
+            try
+            {
+                JArray? jArray = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
+                if (jArray == null) {
+
+                    DialogResult dialogResult = MessageBox.Show("Can't get questions data:\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    if (dialogResult == DialogResult.OK)
+                    System.Windows.Forms.Application.Exit();
+                    return;
+                }
+                JArray _questionsData = jArray;
+                questionsData.Import(_showQuestionsColumns, _showQuestionsType, _showQuestionsKey);
+                questionsData.Import(_questionsData);
+
+                if (questionsData.Length() == 0) MessageBox.Show("Không có câu hỏi nào trong Categories này!");
+                else
+                {
+                    //var index = QuestionForm_ShowQuestionsDtg.Rows.Add();
+                    //QuestionForm_ShowQuestionsDtg.Rows[index].Cells[1].Value = "Question name / ID number";
+                    for (int i = 0; i < questionsData.Length(); i++)
+                    {
+                        DataRow? Question = questionsData.Init().Offset(i).Limit(1).Sort("ID desc").GetFirstRow();
+                        if (Question == null)
+                        {
+                            DialogResult dialogResult = MessageBox.Show("Can't get questions data:\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                            if (dialogResult == DialogResult.OK)
+                                System.Windows.Forms.Application.Exit();
+                            return;
+                        }
+                        int inCategories = Question.Field<int>("CategoryID");
+                        int QuestionID = Question.Field<int>("ID");
+                        if ((showQuestionsFromCategoriesID.Contains(inCategories) && _showQuestionsFromSubcategories) || (showQuestionsFromCategoriesID[0] == inCategories && !showQuestionsFromSubcategories))
+                        {
+                            string? _QuestionName = Question.Field<string>("Content");
+
+                            //                            DataGridViewRow row = (DataGridViewRow)QuestionForm_ShowQuestionsDtg.Rows[0].Clone();
+                            var index = QuestionForm_ShowQuestionsDtg.Rows.Add();
+                            DataGridViewRow row = QuestionForm_ShowQuestionsDtg.Rows[index];
+                            //
+                            RichTextBox tmp = new RichTextBox();
+                            tmp.Visible = false;
+                            try
+                            {
+                                tmp.Rtf = _QuestionName;
+                                row.Cells[1].Value = tmp.Text;
+                            }
+                            catch
+                            {
+                                row.Cells[1].Value = _QuestionName;
+                            }
+                            row.Cells[2].Value = "Edit";
+                            row.Cells[3].Value = QuestionID;
+                            if (i % 2 == 0) row.DefaultCellStyle.BackColor = Color.White;
+                            else row.DefaultCellStyle.BackColor = Color.AliceBlue;
+
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                DialogResult dialogResult = MessageBox.Show("Can't get questions data:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                if (dialogResult == DialogResult.OK)
+                    System.Windows.Forms.Application.Exit();
+            }
+        }
         public void loadCategoriesData()
         {
-            List<Categories> listCategories = new List<Categories>();
+            List<Categories>? listCategories = new List<Categories>();
             List<Categories> newListCategories = new List<Categories>();
             try
             {
-                JArray _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
+                JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
+                if (_categoriesData == null) return;
                 listCategories = _categoriesData.ToObject<List<Categories>>();
+                if (listCategories == null) return;
                 AddSpace(ref newListCategories, ref listCategories, 0, "  ");
                 newListCategories.Reverse();
             }
@@ -31,7 +127,7 @@ namespace Learning_System
                 DialogResult dialog = MessageBox.Show("Can't get categories data:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 if (dialog == DialogResult.OK)
-                    Application.Exit();
+                    System.Windows.Forms.Application.Exit();
             }
 
 
@@ -60,32 +156,11 @@ namespace Learning_System
             loadCategoriesData();
             QuestionsForm_SelectCategoryCbo.SelectedIndex = -1;
             QuestionsForm_SelectCategoryCbo.SelectedText = "  Default";
-
-
-            //JArray jarrayCategories = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
-            //List<Categories> listCategories = jarrayCategories.ToObject<List<Categories>>();
-            //List<Categories> newListCategories = new List<Categories>();
-            //AddSpace(ref newListCategories, listCategories, 0, "  ");
-            //newListCategories.Reverse();
-
-            //QuestionsForm_SelectCategoryCbo.DataSource = newListCategories;
-            //QuestionsForm_SelectCategoryCbo.DisplayMember = "Name";
-
-            ////Set gia tri ban dau la Default 
-
-            //QuestionsForm_SelectCategoryCbo.SelectedIndex = -1;
-            //QuestionsForm_SelectCategoryCbo.SelectedText = "  Default";
-
-            //Categories ct = new Categories();
-            //ct = (Categories)QuestionsForm_SelectCategoryCbo.Items[0];
-            ////DrawItemEventArgs newItem = (DrawItemEventArgs)ct;
-            //Font font = ct.Font;
-            //font = new System.Drawing.Font(font, FontStyle.Bold);
-
         }
 
         private void QuestionsForm_SelectCategoryCbo_Click(object sender, EventArgs e)
         {
+
             loadCategoriesData();
         }
 
@@ -100,6 +175,54 @@ namespace Learning_System
             var val = QuestionsForm_SelectCategoryCbo.SelectedValue.ToString();
             MessageBox.Show(val, "?");
             */
+        }
+
+        private void QuestionsForm_SelectCategoryCbo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (QuestionsForm_SelectCategoryCbo.SelectedItem == null) return;
+            var a = (Categories)QuestionsForm_SelectCategoryCbo.SelectedItem;
+            selectedCategoriesIdList.Clear();
+            int _parentCategories = a.Id;
+            //
+            SendParentIdToEditForm = _parentCategories;
+            //
+            try
+            {
+                JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
+                if (_categoriesData == null) return;
+                List<Categories>? categories = _categoriesData.ToObject<List<Categories>>();
+                if (categories == null || _categoriesData == null) return;
+                if (_parentCategories >= 0)
+                {
+                    selectedCategoriesIdList.Add(_parentCategories);
+                    GetSubCategories(_parentCategories, ref selectedCategoriesIdList, ref categories);
+                    showQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
+                }
+            }
+            catch (Exception ex)
+            {
+                DialogResult dialog = MessageBox.Show("Can't get categories data:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                if (dialog == DialogResult.OK)
+                    System.Windows.Forms.Application.Exit();
+            }
+        }
+
+        private void QuestionsForm_ShowFromSubcategoriesCb_CheckedChanged(object sender, EventArgs e)
+        {
+            showQuestionsFromSubcategories = QuestionsForm_ShowFromSubcategoriesCb.Checked;
+            showQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
+        }
+
+        private void QuestionForm_ShowQuestionsDtg_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (QuestionForm_ShowQuestionsDtg.Columns[e.ColumnIndex].Name == "Edit" && e.RowIndex >= 0)
+            {
+                var a = QuestionForm_ShowQuestionsDtg.Rows[e.RowIndex];
+                EditQuestionForm editQuestionForm = new EditQuestionForm(Convert.ToInt32(a.Cells[3].Value), SendParentIdToEditForm);
+                editQuestionForm.ShowDialog();
+                showQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
+            }
         }
     }
 }
