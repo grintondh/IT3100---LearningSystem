@@ -16,6 +16,8 @@ namespace Learning_System
 {
     public partial class RandomQuestion : UserControl
     {
+        private EditQuiz ParentEditQuiz;
+
         public DataProcessing questionsData = new();
         public DataProcessing categoriesData = new();
         public JArray _categoriesDataJarray = new();
@@ -89,10 +91,10 @@ namespace Learning_System
                 GetSubCategories(x, ref _subCategories, ref categories);
             }
         }
-        public RandomQuestion()
+        public RandomQuestion(EditQuiz _EditQuiz)
         {
             InitializeComponent();
-
+            ParentEditQuiz = _EditQuiz;
             RandomQuestion_CategoryCbo.SelectedIndex = -1;
             RandomQuestion_CategoryCbo.SelectedText = "  Default";
 
@@ -151,6 +153,7 @@ namespace Learning_System
                 selectedQuestionsContent.RemoveAt(index);
             }
             MessageBox.Show(text, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ParentEditQuiz.loadDatagridview(randomSelectedQuestions);
             this.SendToBack();
         }
 

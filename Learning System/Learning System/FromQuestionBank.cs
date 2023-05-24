@@ -16,17 +16,19 @@ namespace Learning_System
 {
     public partial class FromQuestionBank : UserControl
     {
+        private EditQuiz ParentEditQuiz;
 
         private bool isLoad = false;
-        public List<int> questionSelectedList= new List<int>();
+        public List<int> questionSelectedList = new List<int>();
 
         public DataProcessing questionsData = new();
         public DataProcessing categoriesData = new();
         public JArray _categoriesDataJarray = new();
-        public FromQuestionBank()
+        public FromQuestionBank(EditQuiz _EditQuiz)
         {
             InitializeComponent();
             FromQuestionBank_SelectCategoryCbo.Text = "  Default";
+            ParentEditQuiz = _EditQuiz;
         }
         public void addData(DataProcessing _questionData, DataProcessing _categoriesData, JArray __categoriesDataJarray)
         {
@@ -37,7 +39,7 @@ namespace Learning_System
 
         private void FromQuestionBank_CategoryCbo_DropDown(object sender, EventArgs e)
         {
-            
+
         }
 
         //bien dung de gui id cua category dang duoc chon sang form edit question
@@ -58,7 +60,7 @@ namespace Learning_System
         public void showQuestions(List<int> showQuestionsFromCategoriesID, bool _showQuestionsFromSubcategories)
         {
             FromQuestionBank_ShowQuestionsDtg.Rows.Clear();
-           
+
             try
             {
                 if (questionsData.Length() == 0) MessageBox.Show("Không có câu hỏi nào trong Categories này!");
@@ -143,11 +145,11 @@ namespace Learning_System
             List.Add(addList[begin]);
         }
 
-        
 
-        
 
-       
+
+
+
 
         private void FromQuestionBank_SelectCategoryCbo_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -188,7 +190,7 @@ namespace Learning_System
 
         private void FromQuestionBank_SubcategoriesCbx_CheckedChanged(object sender, EventArgs e)
         {
-            if (FromQuestionBank_SelectCategoryCbo.SelectedIndex == -1) 
+            if (FromQuestionBank_SelectCategoryCbo.SelectedIndex == -1)
             {
                 FromQuestionBank_SubcategoriesCbx.Checked = false;
                 return;
@@ -221,6 +223,7 @@ namespace Learning_System
                 }
             }
             this.SendToBack();
+            ParentEditQuiz.loadDatagridview(questionSelectedList);
             FromQuestionBank_SelectCategoryCbo.Text = "  Default";
             if (FromQuestionBank_SubcategoriesCbx.Checked == true)
             { FromQuestionBank_SubcategoriesCbx.Checked = false; }
