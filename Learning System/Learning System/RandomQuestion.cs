@@ -183,6 +183,7 @@ namespace Learning_System
         private void RandomQuestion_SubcategoriesCbx_CheckedChanged(object sender, EventArgs e)
         {
             selectQuestionsFromSubcategories = RandomQuestion_SubcategoriesCbx.Checked;
+            if (selectedCategoriesIdList.Count == 0) return;
             SelectQuestionsFromCategories(selectedCategoriesIdList, selectQuestionsFromSubcategories);
             //            showQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
         }
@@ -283,8 +284,9 @@ namespace Learning_System
             }
             RandomQuestion_ShowQuestionDgv.AutoResizeRows(DataGridViewAutoSizeRowsMode.DisplayedCells);
         }
-        private void PageButtonHandler(object sender, EventArgs e)
+        private void PageButtonHandler(object? sender, EventArgs e)
         {
+            if (sender == null) return;
             var b = sender as Button;
             if (b == null || b.Text == " " || pageSelectedIndex < 1 || pageSelectedIndex > numberOfPage) return;
             if (b.Text == "<")
