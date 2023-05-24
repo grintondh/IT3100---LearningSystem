@@ -35,7 +35,7 @@ namespace Learning_System.ExternalClass
                     File.WriteAllText(JsonPath, sampleContent + "\n");
                 else
                 {
-                    DialogResult _userReturnDialog = MessageBox.Show("Can't find your request file in default folders. We couldn't create a sample one for you. Please check your internet connection and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DialogResult _userReturnDialog = MessageBox.Show("Can't find your request file in default folders. We couldn't create a sample one for you. Please check your internet connection and try again.\nPath: " + JsonPath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     if (_userReturnDialog == DialogResult.OK)
                         Application.Exit();
