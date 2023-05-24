@@ -1,18 +1,6 @@
-﻿using Calculator;
-using Learning_System.ExternalClass;
+﻿using Learning_System.ExternalClass;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Buffers;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Learning_System
 {
