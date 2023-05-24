@@ -9,6 +9,7 @@ using iText.Layout.Element;
 using iText.Html2pdf;
 using iText.Html2pdf.Resolver.Font;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace Learning_System
 {
@@ -20,8 +21,8 @@ namespace Learning_System
         }
 
         private DataProcessing questionData = new();
-        private List<string> showColumns = new() { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
-        private List<Type> showType = new() { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
+        private readonly List<string> showColumns = new() { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
+        private readonly List<Type> showType = new() { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
         private readonly List<string> showKey = new() { "PRIMARY KEY", "", "", "", "", "" };
         private DataTable? DataTable = new();
 
@@ -45,7 +46,7 @@ namespace Learning_System
                 }
             }
 
-            SaveFileDialog dlg = new SaveFileDialog
+            SaveFileDialog dlg = new()
             {
                 Title = "Save your exported PDF file at:",
                 Filter = "PDF (*.pdf)|*.pdf",
@@ -69,7 +70,7 @@ namespace Learning_System
 
                     if (pdfPassword != null)
                     {
-                        WriterProperties writerProperties = new WriterProperties();
+                        WriterProperties writerProperties = new();
                         byte[] PASS = Encoding.Default.GetBytes(pdfPassword);
                         writerProperties.SetStandardEncryption(PASS, PASS, EncryptionConstants.ALLOW_PRINTING, EncryptionConstants.ENCRYPTION_AES_128);
                         writer = new PdfWriter(stream, writerProperties);
@@ -79,8 +80,8 @@ namespace Learning_System
                         writer = new PdfWriter(stream);
                     }
 
-                    PdfDocument pdf = new PdfDocument(writer);
-                    iText.Layout.Document pdfDoc = new iText.Layout.Document(pdf, pageSize: iText.Kernel.Geom.PageSize.A4);
+                    PdfDocument pdf = new(writer);
+                    iText.Layout.Document pdfDoc = new(pdf, pageSize: iText.Kernel.Geom.PageSize.A4);
 
                     try
                     {
@@ -158,7 +159,7 @@ namespace Learning_System
                         pdfDoc.Close();
                         if (ExportForm_OpenAfterExportCbx.Checked == true)
                         {
-                            using (Process openPdf = new Process())
+                            using (Process openPdf = new())
                             {
                                 openPdf.StartInfo = new ProcessStartInfo()
                                 {
@@ -239,8 +240,8 @@ namespace Learning_System
             {
                 using (var stream = File.Open("tempHTML" + RandomGUID + ".html", FileMode.Open))
                 {
-                    StreamReader tr = new StreamReader(stream);
-                    ConverterProperties properties = new ConverterProperties();
+                    StreamReader tr = new(stream);
+                    ConverterProperties properties = new();
                     properties.SetFontProvider(new DefaultFontProvider(true, true, true));
 
                     IList<IElement> list = HtmlConverter.ConvertToElements(stream, properties);

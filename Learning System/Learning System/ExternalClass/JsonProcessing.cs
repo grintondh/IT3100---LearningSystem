@@ -57,7 +57,7 @@ namespace Learning_System.ExternalClass
         {
             try
             {
-                StreamReader _readFile;
+                StreamReader? _readFile;
                 try
                 {
                     _readFile = SetFileJsonInDefaultFolder(JsonPath);

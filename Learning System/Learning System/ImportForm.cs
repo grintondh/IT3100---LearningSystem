@@ -94,7 +94,7 @@ namespace Learning_System
                 {
                     questionCount++;
                     i++;
-                    List<char> listAnswers = new List<char>();
+                    List<char> listAnswers = new();
                     try
                     {
                         while (lines[i] != null)
@@ -183,8 +183,8 @@ namespace Learning_System
                     System.Windows.Forms.Application.Exit();
             }
 
-            List<string> _query = new List<string> { "Id", "0" };
-            DataRow _parentCategory = categoriesData.Init().Offset(0).Limit(1).Query(_query).Sort("Id desc").GetFirstRow();
+            List<string> _query = new() { "Id", "0" };
+            DataRow? _parentCategory = categoriesData.Init().Offset(0).Limit(1).Query(_query).Sort("Id desc").GetFirstRow();
             if (_parentCategory == null)
             {
                 MessageBox.Show("Thêm thất bại do không tồn tại category thoả mãn", "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -209,14 +209,14 @@ namespace Learning_System
                     string questionContent = _stringContent;
                     questionIDCount++;
                     i++;
-                    List<QuestionChoice> _questionChoices = new List<QuestionChoice>();
+                    List<QuestionChoice> _questionChoices = new();
                     while (lines[i].Length > 0)
                     {
                         if (lines[i][1] == '.')
                         {
                             if (Path.GetExtension(ImportPath) != ".txt") _stringContent = lineTextBoxes[i].Rtf;
                             else _stringContent = lines[i];
-                            QuestionChoice _questionChoice = new QuestionChoice()
+                            QuestionChoice _questionChoice = new()
                             {
                                 choice = _stringContent,
                                 mark = 0
@@ -236,7 +236,7 @@ namespace Learning_System
                             break;
                         }
                     }
-                    Questions newQuestions = new Questions()
+                    Questions newQuestions = new()
                     {
                         ID = questionIDCount,
                         Name = "",
@@ -286,11 +286,11 @@ namespace Learning_System
             //InlineShape inlineShape = paragraph.Range.InlineShapes[selectedImageIndex];
             paragraph.Range.Select();
             paragraph.Range.Copy();
-            Computer computer = new Computer();
+            Computer computer = new();
             //Image img = computer.Clipboard.GetImage();
             if (computer.Clipboard.GetDataObject() != null)
             {
-                RichTextBox t = new RichTextBox();
+                RichTextBox t = new();
                 lineTextBoxes[lineIndex] = new RichTextBox();
                 t.Paste();
                 selectedImage = t.Rtf;
@@ -321,15 +321,15 @@ namespace Learning_System
         /// <returns>Trả về list các dòng text trong file, nếu là file doc thì paste content vào mảng Rich Text Box </returns>
         private List<string> ReadFromDocumentFile(string _ImportPath)
         {
-            List<string> _lines = new List<string>();
+            List<string> _lines = new();
             if (Path.GetExtension(_ImportPath) == ".txt")
             {
                 _lines = File.ReadAllLines(_ImportPath).ToList();
             }
             else
             {
-                Microsoft.Office.Interop.Word.Application application = new Microsoft.Office.Interop.Word.Application();
-                object miss = System.Reflection.Missing.Value;
+                Microsoft.Office.Interop.Word.Application application = new();
+                object miss = Missing.Value;
                 object path = _ImportPath;
                 object readOnly = true;
                 object save = false;
@@ -346,12 +346,14 @@ namespace Learning_System
                     {
                         paragraph = p;
                         //_lines.Add(CopyFromClipboardInlineShape());
-                        Thread thread = new Thread(CopyFromClipboardInlineShape);
+                        Thread thread = new(CopyFromClipboardInlineShape);
                         thread.SetApartmentState(ApartmentState.STA);
                         thread.Start();
                         thread.Join();
-                        lineTextBoxes[lineIndex] = new RichTextBox();
-                        lineTextBoxes[lineIndex].Rtf = selectedImage;
+                        lineTextBoxes[lineIndex] = new RichTextBox
+                        {
+                            Rtf = selectedImage
+                        };
                         _lines.Add(lineTextBoxes[lineIndex].Text.Trim());
                         lineIndex++;
                         //totaltext += p.Range.Text;
@@ -393,7 +395,7 @@ namespace Learning_System
                 {
                     MessageBox.Show($"OK. Successfully imported {-checkAikenFormat} question(s)!");
                     ImportQuestionsFile(lines, ImportPath);
-                    maximumSizeForNewFiles = maximumSizeForNewFiles - fileSize / SIZE_OF_MB;
+                    maximumSizeForNewFiles -= fileSize / SIZE_OF_MB;
                     ImportForm_StatusLbl.Text = $"Maximum size for new files: {Math.Round(maximumSizeForNewFiles, 2)} MB";
                 }
                 ImportPath = null;
@@ -402,7 +404,7 @@ namespace Learning_System
             }
         }
 
-        private void panel_drop_file_DragDrop(object sender, DragEventArgs e)
+        private void Panel_drop_file_DragDrop(object sender, DragEventArgs e)
         {
             if (e.Data == null) {
                 MessageBox.Show("Please dragdrop a file here");
@@ -413,7 +415,7 @@ namespace Learning_System
             ImportForm_StatusLbl.Text = "File choosen: " + Path.GetFileName(ImportPath);
         }
 
-        private void panel_drop_file_DragEnter(object sender, DragEventArgs e)
+        private void Panel_drop_file_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data == null)
             {

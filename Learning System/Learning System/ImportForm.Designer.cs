@@ -193,8 +193,8 @@
             panel_drop_file.Name = "panel_drop_file";
             panel_drop_file.Size = new Size(522, 141);
             panel_drop_file.TabIndex = 18;
-            panel_drop_file.DragDrop += panel_drop_file_DragDrop;
-            panel_drop_file.DragEnter += panel_drop_file_DragEnter;
+            panel_drop_file.DragDrop += Panel_drop_file_DragDrop;
+            panel_drop_file.DragEnter += Panel_drop_file_DragEnter;
             // 
             // ImportForm_DropLbl
             // 

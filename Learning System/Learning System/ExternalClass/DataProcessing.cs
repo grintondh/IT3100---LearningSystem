@@ -67,7 +67,7 @@ namespace Learning_System.ExternalClass
         /// </summary>
         /// <param name="_jsonDataList">Danh sách dữ liệu đã xuất ra từ file JSON</param>
         /// <returns>StatusCode: OK (1): Thành công; Error (2): Thất bại</returns>
-        public int Import(JArray _jsonDataList)
+        public int Import(JArray? _jsonDataList)
         {
             try
             {

@@ -1,30 +1,19 @@
 ﻿using Learning_System.ExternalClass;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Learning_System
 {
     public partial class CategoriesForm : UserControl
     {
-        private DataProcessing categoriesData = new DataProcessing();
+        private DataProcessing categoriesData = new();
         private List<string> showColumns = new() { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
         private List<Type> showType = new() { typeof(int), typeof(string), typeof(JArray), typeof(JArray), typeof(string), typeof(string) };
         private readonly List<string> showKey = new() { "PRIMARY KEY", "", "", "", "", "" };
         private DataTable? categoriesDataTable = new();
         private int currentLimit = 50;
         private int currentOffset = 0;
-        public void loadCombobox()
+        public void LoadCombobox()
         {
             try
             {
@@ -53,7 +42,7 @@ namespace Learning_System
         public CategoriesForm()
         {
             InitializeComponent();
-            loadCombobox();
+            LoadCombobox();
         }
 
         private void CategoriesForm_AddCategoryBtn_Click(object sender, EventArgs e)

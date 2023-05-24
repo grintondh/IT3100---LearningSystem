@@ -20,7 +20,7 @@ namespace Learning_System
         //bien dung de gui id cua category dang duoc chon sang form edit question
         private int SendParentIdToEditForm;
         //bien luu cac category duoc hien tren datagridview
-        private List<int> selectedCategoriesIdList = new List<int>();
+        private List<int> selectedCategoriesIdList = new();
         // bien co hien cau hoi tu category con hay khong
         private bool showQuestionsFromSubcategories = false;
         private void GetSubCategories(int _parentCategories, ref List<int> _subCategories, ref List<Categories> categories)
@@ -32,7 +32,7 @@ namespace Learning_System
             }
         }
 
-        public void showQuestions(List<int> showQuestionsFromCategoriesID, bool _showQuestionsFromSubcategories)
+        public void ShowQuestions(List<int> showQuestionsFromCategoriesID, bool _showQuestionsFromSubcategories)
         {
             QuestionForm_ShowQuestionsDtg.Rows.Clear();
             DataProcessing questionsData = new();
@@ -80,8 +80,10 @@ namespace Learning_System
                             var index = QuestionForm_ShowQuestionsDtg.Rows.Add();
                             DataGridViewRow row = QuestionForm_ShowQuestionsDtg.Rows[index];
                             //
-                            RichTextBox tmp = new RichTextBox();
-                            tmp.Visible = false;
+                            RichTextBox tmp = new()
+                            {
+                                Visible = false
+                            };
                             try
                             {
                                 tmp.Rtf = _QuestionName;
@@ -109,10 +111,10 @@ namespace Learning_System
                     System.Windows.Forms.Application.Exit();
             }
         }
-        public void loadCategoriesData()
+        public void LoadCategoriesData()
         {
-            List<Categories>? listCategories = new List<Categories>();
-            List<Categories> newListCategories = new List<Categories>();
+            List<Categories>? listCategories = new();
+            List<Categories> newListCategories = new();
             try
             {
                 JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
@@ -153,7 +155,7 @@ namespace Learning_System
         public QuestionsForm()
         {
             InitializeComponent();
-            loadCategoriesData();
+            LoadCategoriesData();
             QuestionsForm_SelectCategoryCbo.SelectedIndex = -1;
             QuestionsForm_SelectCategoryCbo.SelectedText = "  Default";
         }
@@ -161,12 +163,12 @@ namespace Learning_System
         private void QuestionsForm_SelectCategoryCbo_Click(object sender, EventArgs e)
         {
 
-            loadCategoriesData();
+            LoadCategoriesData();
         }
 
         private void QuestionsForm_SelectCategoryCbo_DropDown(object sender, EventArgs e)
         {
-            loadCategoriesData();
+            LoadCategoriesData();
         }
 
         private void QuestionsForm_CreateNewQuestionBtn_Click(object sender, EventArgs e)
@@ -196,7 +198,7 @@ namespace Learning_System
                 {
                     selectedCategoriesIdList.Add(_parentCategories);
                     GetSubCategories(_parentCategories, ref selectedCategoriesIdList, ref categories);
-                    showQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
+                    ShowQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
                 }
             }
             catch (Exception ex)
@@ -211,7 +213,7 @@ namespace Learning_System
         private void QuestionsForm_ShowFromSubcategoriesCb_CheckedChanged(object sender, EventArgs e)
         {
             showQuestionsFromSubcategories = QuestionsForm_ShowFromSubcategoriesCb.Checked;
-            showQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
+            ShowQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
         }
 
         private void QuestionForm_ShowQuestionsDtg_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -219,9 +221,9 @@ namespace Learning_System
             if (QuestionForm_ShowQuestionsDtg.Columns[e.ColumnIndex].Name == "Edit" && e.RowIndex >= 0)
             {
                 var a = QuestionForm_ShowQuestionsDtg.Rows[e.RowIndex];
-                EditQuestionForm editQuestionForm = new EditQuestionForm(Convert.ToInt32(a.Cells[3].Value), SendParentIdToEditForm);
+                EditQuestionForm editQuestionForm = new(Convert.ToInt32(a.Cells[3].Value), SendParentIdToEditForm);
                 editQuestionForm.ShowDialog();
-                showQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
+                ShowQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
             }
         }
     }
