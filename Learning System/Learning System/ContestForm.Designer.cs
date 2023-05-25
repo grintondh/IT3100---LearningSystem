@@ -41,7 +41,6 @@
             ContestForm_TimeLbl = new Label();
             ContestForm_EditPic = new PictureBox();
             ContestForm_ContestNameLbl = new Label();
-            editQuiz = new EditQuiz();
             panel_heading.SuspendLayout();
             panel_body.SuspendLayout();
             panel_main.SuspendLayout();
@@ -93,7 +92,6 @@
             // panel_body
             // 
             panel_body.Controls.Add(panel_main);
-            panel_body.Controls.Add(editQuiz);
             panel_body.Dock = DockStyle.Fill;
             panel_body.Location = new Point(0, 210);
             panel_body.Name = "panel_body";
@@ -184,14 +182,6 @@
             ContestForm_ContestNameLbl.TabIndex = 0;
             ContestForm_ContestNameLbl.Text = "Thi giữa kỳ 2 môn Công nghệ";
             // 
-            // editQuiz
-            // 
-            editQuiz.Dock = DockStyle.Fill;
-            editQuiz.Location = new Point(0, 0);
-            editQuiz.Name = "editQuiz";
-            editQuiz.Size = new Size(1409, 501);
-            editQuiz.TabIndex = 1;
-            // 
             // ContestForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -226,6 +216,5 @@
         private Label ContestForm_GradingMethodLbl;
         private Label ContestForm_TimeLbl;
         private PictureBox ContestForm_EditPic;
-        private EditQuiz editQuiz;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Learning_System.ExternalClass;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,13 +14,16 @@ namespace Learning_System
 {
     public partial class EditQuiz : UserControl
     {
+        public ContestForm parentContestForm;
+
         public RandomQuestion randomQuestion;
         public FromQuestionBank fromQuestionBank;
 
         public DataProcessing questionsData = new();
         public DataProcessing categoriesData = new();
+        public DataProcessing contestData = new();
         public List<int> questionID = new();
-        public EditQuiz()
+        public EditQuiz(ContestForm parentContestForm)
         {
             InitializeComponent();
             randomQuestion = new RandomQuestion(this);
@@ -28,11 +32,16 @@ namespace Learning_System
             Controls.Add(fromQuestionBank);
             randomQuestion.Dock = DockStyle.Fill;
             fromQuestionBank.Dock = DockStyle.Fill;
+            this.parentContestForm = parentContestForm;
         }
         public void addData(DataProcessing _questionData, DataProcessing _categoriesData)
         {
             questionsData = _questionData;
             categoriesData = _categoriesData;
+        }
+        public void addContestData(DataProcessing _contestData)
+        {
+            contestData = _contestData;
         }
 
         private void EditQuiz_AddBtn_Click(object sender, EventArgs e)
@@ -60,6 +69,16 @@ namespace Learning_System
 
         private void EditQuiz_SaveBtn_Click(object sender, EventArgs e)
         {
+            List<string> query = new() { "Id", parentContestForm.ContestID.ToString()};
+            DataRow row = contestData.Init().Offset(0).Limit(1).Query(query).GetFirstRow();
+            row.Field<JArray>("QuestionArray").Clear();
+            row.Field<JArray>("QuestionArray").Add(JArray.FromObject(questionID));
+            //questionArray.Clear();
+            //questionArray = JArray.FromObject(questionID);
+            JObject x = DataProcessing.ConvertDataRowToJObject(row);
+            if (contestData.Init().Offset(0).Limit(1).Query(query).Update(x) == DataProcessing.StatusCode.Error)
+                throw new Exception();
+            parentContestForm.saveContestData(contestData, questionID);
             this.SendToBack();
         }
 
