@@ -41,7 +41,7 @@ namespace Learning_System
         private List<string> selectedQuestionsContent = new List<string>();
 
         //RandomQuestionData
-        private List<int> randomSelectedQuestions = new List<int>();
+        public List<int> randomSelectedQuestions = new List<int>();
         public void AddSpace(ref List<Categories> List, ref List<Categories> addList, int begin, string space)
         {
             foreach (int x in addList[begin].SubArray)
@@ -130,7 +130,7 @@ namespace Learning_System
 
         private void RandomQuestion_AddBtn_Click(object sender, EventArgs e)
         {
-            if (RandomQuestions_NumberOfRdQuestionsCbo.SelectedItem == null)
+            if (RandomQuestions_NumberOfRdQuestionsCbo.SelectedItem == null || RandomQuestions_NumberOfRdQuestionsCbo.SelectedIndex < 0)
             {
                 MessageBox.Show("Chưa chọn số câu hỏi cần được thêm", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -141,13 +141,13 @@ namespace Learning_System
                 return;
             }
             string text = "Đã thêm thành công những câu hỏi có ID sau vào contest: ";
-            for (int i = 0; i <= RandomQuestions_NumberOfRdQuestionsCbo.SelectedIndex; i++)
+            for (int i = 0; i < RandomQuestions_NumberOfRdQuestionsCbo.SelectedIndex; i++)
             {
                 Random rd = new Random();
                 int index = rd.Next(0, selectedQuestions.Count - 1);
                 randomSelectedQuestions.Add(selectedQuestions[index]);
                 text += selectedQuestions[index].ToString();
-                if (i == RandomQuestions_NumberOfRdQuestionsCbo.SelectedIndex) text += ".";
+                if (i == RandomQuestions_NumberOfRdQuestionsCbo.SelectedIndex - 1) text += ".";
                 else text += ", ";
                 selectedQuestions.RemoveAt(index);
                 selectedQuestionsContent.RemoveAt(index);
@@ -229,7 +229,7 @@ namespace Learning_System
                 }
                 if (selectedQuestions.Count % NUMBER_OF_QUESTIONS_PER_PAGE == 0) numberOfPage = selectedQuestions.Count / NUMBER_OF_QUESTIONS_PER_PAGE;
                 else numberOfPage = selectedQuestions.Count / NUMBER_OF_QUESTIONS_PER_PAGE + 1;
-                if (numberOfPage <= 0) return;
+                if (numberOfPage < 0) return;
                 if (numberOfPage % (NUMBER_OF_PAGES_PER_GROUP) == 0) numberOfGroup = numberOfPage / (NUMBER_OF_PAGES_PER_GROUP);
                 else numberOfGroup = (numberOfPage / (NUMBER_OF_PAGES_PER_GROUP)) + 1;
                 groupSelectedIndex = 1;
@@ -238,7 +238,9 @@ namespace Learning_System
                 ShowQuestion(pageSelectedIndex, selectedQuestions);
 
                 RandomQuestions_NumberOfRdQuestionsCbo.Items.Clear();
-                for (int i = 1; i <= selectedQuestions.Count; i++)
+                RandomQuestions_NumberOfRdQuestionsCbo.SelectedIndex = -1;
+                RandomQuestions_NumberOfRdQuestionsCbo.Text = " ";
+                for (int i = 0; i <= selectedQuestions.Count; i++)
                 {
                     RandomQuestions_NumberOfRdQuestionsCbo.Items.Add(i);
                 }
@@ -278,6 +280,7 @@ namespace Learning_System
         private void ShowQuestion(int pageSelectedIndex, List<int> selectedQuestions)
         {
             RandomQuestion_ShowQuestionDgv.Rows.Clear();
+            if (pageSelectedIndex <= 0 || pageSelectedIndex > numberOfPage) return;
             for (int i = (pageSelectedIndex - 1) * (NUMBER_OF_QUESTIONS_PER_PAGE); i < pageSelectedIndex * NUMBER_OF_QUESTIONS_PER_PAGE; i++)
             {
                 if (i >= selectedQuestions.Count) break;
@@ -346,6 +349,11 @@ namespace Learning_System
                 ShowQuestion(pageSelectedIndex, selectedQuestions);
             }
             return;
+        }
+
+        private void RandomQuestion_ExitBtn_Click(object sender, EventArgs e)
+        {
+            this.SendToBack();
         }
     }
 }

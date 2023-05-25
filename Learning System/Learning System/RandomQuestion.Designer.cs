@@ -40,6 +40,7 @@
             Content = new DataGridViewTextBoxColumn();
             textBox1 = new TextBox();
             RandomQuestions_NumberOfRdQuestionsCbo = new ComboBox();
+            RandomQuestion_ExitBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)RandomQuestion_ShowQuestionDgv).BeginInit();
             SuspendLayout();
             // 
@@ -100,6 +101,7 @@
             // RandomQuestion_AddBtn
             // 
             RandomQuestion_AddBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            RandomQuestion_AddBtn.AutoSize = true;
             RandomQuestion_AddBtn.BackColor = Color.FromArgb(0, 115, 165);
             RandomQuestion_AddBtn.FlatStyle = FlatStyle.Flat;
             RandomQuestion_AddBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
@@ -177,10 +179,24 @@
             RandomQuestions_NumberOfRdQuestionsCbo.Size = new Size(151, 28);
             RandomQuestions_NumberOfRdQuestionsCbo.TabIndex = 32;
             // 
+            // RandomQuestion_ExitBtn
+            // 
+            RandomQuestion_ExitBtn.AutoSize = true;
+            RandomQuestion_ExitBtn.BackColor = SystemColors.ControlLight;
+            RandomQuestion_ExitBtn.ForeColor = SystemColors.ControlDarkDark;
+            RandomQuestion_ExitBtn.Location = new Point(1590, 10);
+            RandomQuestion_ExitBtn.Name = "RandomQuestion_ExitBtn";
+            RandomQuestion_ExitBtn.Size = new Size(28, 30);
+            RandomQuestion_ExitBtn.TabIndex = 33;
+            RandomQuestion_ExitBtn.Text = "X";
+            RandomQuestion_ExitBtn.UseVisualStyleBackColor = false;
+            RandomQuestion_ExitBtn.Click += RandomQuestion_ExitBtn_Click;
+            // 
             // RandomQuestion
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(RandomQuestion_ExitBtn);
             Controls.Add(RandomQuestions_NumberOfRdQuestionsCbo);
             Controls.Add(textBox1);
             Controls.Add(RandomQuestion_ShowQuestionDgv);
@@ -212,5 +228,6 @@
         private DataGridViewTextBoxColumn Content;
         private TextBox textBox1;
         private ComboBox RandomQuestions_NumberOfRdQuestionsCbo;
+        private Button RandomQuestion_ExitBtn;
     }
 }
