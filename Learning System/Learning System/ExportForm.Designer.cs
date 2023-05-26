@@ -129,6 +129,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
+            BackColor = SystemColors.ControlLightLight;
             Controls.Add(ExportForm_OpenAfterExportCbx);
             Controls.Add(ExportForm_ShowPwdCbx);
             Controls.Add(statusStrip1);

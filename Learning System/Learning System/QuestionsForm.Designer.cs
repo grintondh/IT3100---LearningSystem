@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             QuestionsForm_CreateNewQuestionBtn = new Button();
             QuestionsForm_ShowOldQuestionsCb = new CheckBox();
             QuestionsForm_ShowFromSubcategoriesCb = new CheckBox();
@@ -128,6 +130,7 @@
             QuestionsForm_QuestionsBankLbl.Size = new Size(251, 46);
             QuestionsForm_QuestionsBankLbl.TabIndex = 7;
             QuestionsForm_QuestionsBankLbl.Text = "Questions Bank";
+            QuestionsForm_QuestionsBankLbl.Click += QuestionsForm_QuestionsBankLbl_Click;
             // 
             // QuestionForm_ShowQuestionsDtg
             // 
@@ -135,20 +138,36 @@
             QuestionForm_ShowQuestionsDtg.AllowUserToDeleteRows = false;
             QuestionForm_ShowQuestionsDtg.AllowUserToResizeColumns = false;
             QuestionForm_ShowQuestionsDtg.AllowUserToResizeRows = false;
-            QuestionForm_ShowQuestionsDtg.BackgroundColor = SystemColors.ButtonFace;
+            QuestionForm_ShowQuestionsDtg.BackgroundColor = SystemColors.ControlLightLight;
             QuestionForm_ShowQuestionsDtg.BorderStyle = BorderStyle.None;
             QuestionForm_ShowQuestionsDtg.CellBorderStyle = DataGridViewCellBorderStyle.None;
             QuestionForm_ShowQuestionsDtg.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            QuestionForm_ShowQuestionsDtg.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             QuestionForm_ShowQuestionsDtg.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             QuestionForm_ShowQuestionsDtg.Columns.AddRange(new DataGridViewColumn[] { CheckBoxes, QuestionName, Edit, ID });
             QuestionForm_ShowQuestionsDtg.GridColor = SystemColors.ButtonFace;
-            QuestionForm_ShowQuestionsDtg.Location = new Point(51, 337);
+            QuestionForm_ShowQuestionsDtg.Location = new Point(52, 337);
             QuestionForm_ShowQuestionsDtg.Name = "QuestionForm_ShowQuestionsDtg";
             QuestionForm_ShowQuestionsDtg.ReadOnly = true;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Control;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            QuestionForm_ShowQuestionsDtg.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             QuestionForm_ShowQuestionsDtg.RowHeadersVisible = false;
             QuestionForm_ShowQuestionsDtg.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             QuestionForm_ShowQuestionsDtg.RowTemplate.Height = 29;
-            QuestionForm_ShowQuestionsDtg.Size = new Size(1597, 400);
+            QuestionForm_ShowQuestionsDtg.Size = new Size(1640, 400);
             QuestionForm_ShowQuestionsDtg.TabIndex = 15;
             QuestionForm_ShowQuestionsDtg.CellContentClick += QuestionForm_ShowQuestionsDtg_CellContentClick;
             QuestionForm_ShowQuestionsDtg.CellMouseEnter += QuestionForm_ShowQuestionsDtg_CellMouseEnter;
@@ -169,7 +188,7 @@
             QuestionName.Name = "QuestionName";
             QuestionName.ReadOnly = true;
             QuestionName.SortMode = DataGridViewColumnSortMode.NotSortable;
-            QuestionName.Width = 1400;
+            QuestionName.Width = 1450;
             // 
             // Edit
             // 
@@ -202,6 +221,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
+            BackColor = SystemColors.ControlLightLight;
             Controls.Add(QuestionForm_ShowQuestionsDtg);
             Controls.Add(QuestionsForm_CreateNewQuestionBtn);
             Controls.Add(QuestionsForm_ShowOldQuestionsCb);
@@ -211,7 +231,7 @@
             Controls.Add(QuestionsForm_SelectCategoryLbl);
             Controls.Add(QuestionsForm_QuestionsBankLbl);
             Name = "QuestionsForm";
-            Size = new Size(1691, 738);
+            Size = new Size(1720, 696);
             ((System.ComponentModel.ISupportInitialize)QuestionForm_ShowQuestionsDtg).EndInit();
             ResumeLayout(false);
             PerformLayout();

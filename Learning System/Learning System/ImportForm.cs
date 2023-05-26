@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using Microsoft.Office.Interop.Word;
 using System.Reflection;
 using Microsoft.VisualBasic.Devices;
+using Learning_System.Class;
 
 namespace Learning_System
 {
@@ -120,65 +121,56 @@ namespace Learning_System
         /// </summary>
         /// <param name="lines"> Các dòng text trong file</param>
         /// <param name="_ImportPath"> Đường dẫn của file được chọn</param>
-        private void ImportQuestionsFile(List<string> lines, string _ImportPath)
+        private int ImportQuestionsFile(List<string> lines, string _ImportPath)
         {
             DataProcessing questionsData = new();
             List<string> _showQuestionsColumns = new() { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
             List<Type> _showQuestionsType = new() { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
-            List<string> _showQuestionsKey = new() { "PRIMARY KEY", "", "", "", "", "" };
+            List<string> _showQuestionsKey = new() { "PRIMARY KEY", "NOT NULL", "", "NOT NULL", "NOT NULL", "" };
 
 
             DataProcessing categoriesData = new();
             List<string> _showCategoryColumns = new() { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
             List<Type> _showCategoryType = new() { typeof(int), typeof(string), typeof(JArray), typeof(JArray), typeof(string), typeof(string) };
-            List<string> _showCategoryKey = new() { "PRIMARY KEY", "", "", "", "", "" };
+            List<string> _showCategoryKey = new() { "PRIMARY KEY", "NOT NULL", "", "", "", "" };
 
 
             try
             {
                 JArray? _questionsData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
                 if (_questionsData == null)
-                {
-                    MessageBox.Show("Can't get questions data:\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                    throw new E01CantFindFile("Question.json");
+
                 questionsData.Import(_showQuestionsColumns, _showQuestionsType, _showQuestionsKey);
                 questionsData.Import(_questionsData);
+
             }
             catch (Exception ex)
             {
-                DialogResult dialogResult = MessageBox.Show("Can't get questions data:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                if (dialogResult == DialogResult.OK)
-                    System.Windows.Forms.Application.Exit();
+                MessageBox.Show("Can't get questions data!\nDescription: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return DataProcessing.StatusCode.Error;
             }
 
             try
             {
                 JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
                 if (_categoriesData == null)
-                {
-                    MessageBox.Show("Can't get categories data:\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                    throw new E01CantFindFile("Category.json");
+
                 categoriesData.Import(_showCategoryColumns, _showCategoryType, _showCategoryKey);
                 categoriesData.Import(_categoriesData);
             }
             catch (Exception ex)
             {
-                DialogResult dialogResult = MessageBox.Show("Can't get categories data:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                if (dialogResult == DialogResult.OK)
-                    System.Windows.Forms.Application.Exit();
+                MessageBox.Show("Can't get categories data!\nDescription: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return DataProcessing.StatusCode.Error;
             }
 
             List<string> _query = new() { "Id", "0" };
             DataRow? _parentCategory = categoriesData.Init().Offset(0).Limit(1).Query(_query).Sort("Id desc").GetFirstRow();
             if (_parentCategory == null)
-            {
-                MessageBox.Show("Thêm thất bại do không tồn tại category thoả mãn", "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+                throw new E02CantProcessQuery();
+
             DataRow? _maxQuestionIdRow = questionsData.Init()
                                                        .Offset(0)
                                                        .Limit(questionsData.Length())
@@ -198,6 +190,7 @@ namespace Learning_System
                     string questionContent = _stringContent;
                     questionIDCount++;
                     i++;
+
                     List<QuestionChoice> _questionChoices = new();
                     while (lines[i].Length > 0)
                     {
@@ -225,6 +218,7 @@ namespace Learning_System
                             break;
                         }
                     }
+
                     Questions newQuestions = new()
                     {
                         ID = questionIDCount,
@@ -236,12 +230,11 @@ namespace Learning_System
                     };
 
                     questionsData.Insert(JObject.FromObject(newQuestions));
-                    if (_parentCategory.Field<JArray>("QuestionArray") == null)
-                    {
-                        MessageBox.Show("Can't get parents categories data:\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    }
-                    _parentCategory.Field<JArray>("QuestionArray").Add(newQuestions.ID);
+
+                    JArray? parentCtg = _parentCategory.Field<JArray>("QuestionArray");
+                    if (parentCtg == null)
+                        throw new E03NotExistColumn("QuestionArray");
+                    parentCtg.Add(newQuestions.ID);
                 }
             }
 
@@ -249,13 +242,21 @@ namespace Learning_System
 
             categoriesData.Init().Query(_query).Update(JObject.FromObject(x));
 
-            JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export());
+            try
+            {
+                if (JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export()) == null)
+                    throw new E04CantExportProperly();
+                if (JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export()) == null)
+                    throw new E04CantExportProperly();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error in exporting data!\nDescription: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return DataProcessing.StatusCode.Error;
+            }
 
-            JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export());
-            return;
+            return DataProcessing.StatusCode.OK;
         }
-
-
 
         private bool CheckFileFormat(string _ImportPath)
         {
@@ -382,10 +383,12 @@ namespace Learning_System
                 }
                 else
                 {
-                    MessageBox.Show($"OK. Successfully imported {-checkAikenFormat} question(s)!");
-                    ImportQuestionsFile(lines, ImportPath);
-                    maximumSizeForNewFiles -= fileSize / SIZE_OF_MB;
-                    ImportForm_StatusLbl.Text = $"Maximum size for new files: {Math.Round(maximumSizeForNewFiles, 2)} MB";
+                    if (ImportQuestionsFile(lines, ImportPath) == DataProcessing.StatusCode.OK)
+                    {
+                        MessageBox.Show($"OK. Successfully imported {-checkAikenFormat} question(s)!");
+                        maximumSizeForNewFiles -= fileSize / SIZE_OF_MB;
+                        ImportForm_StatusLbl.Text = $"Maximum size for new files: {Math.Round(maximumSizeForNewFiles, 2)} MB";
+                    }
                 }
                 ImportPath = null;
                 selectedImage = null;

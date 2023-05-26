@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CategoriesForm));
             CategoriesForm_HeadingLbl = new Label();
             CategoriesForm_ParentCategoryLbl = new Label();
             CategoriesForm_ParentCategoryCbo = new ComboBox();
@@ -38,8 +40,14 @@
             CategoriesForm_CategoryInfoLbl = new Label();
             CategoriesForm_IDNumberLbl = new Label();
             CategoriesForm_AddCategoryBtn = new Button();
-            CategoriesForm_errorTextLbl = new Label();
             label1 = new Label();
+            CategoriesForm_RequiredTooltip = new ToolTip(components);
+            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
+            pictureBox3 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // CategoriesForm_HeadingLbl
@@ -59,9 +67,9 @@
             CategoriesForm_ParentCategoryLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             CategoriesForm_ParentCategoryLbl.Location = new Point(46, 88);
             CategoriesForm_ParentCategoryLbl.Name = "CategoriesForm_ParentCategoryLbl";
-            CategoriesForm_ParentCategoryLbl.Size = new Size(172, 25);
+            CategoriesForm_ParentCategoryLbl.Size = new Size(147, 25);
             CategoriesForm_ParentCategoryLbl.TabIndex = 1;
-            CategoriesForm_ParentCategoryLbl.Text = "Parent Category (*)";
+            CategoriesForm_ParentCategoryLbl.Text = "Parent Category";
             // 
             // CategoriesForm_ParentCategoryCbo
             // 
@@ -69,7 +77,7 @@
             CategoriesForm_ParentCategoryCbo.FormattingEnabled = true;
             CategoriesForm_ParentCategoryCbo.IntegralHeight = false;
             CategoriesForm_ParentCategoryCbo.Items.AddRange(new object[] { "1", "2", "3", "4", "5" });
-            CategoriesForm_ParentCategoryCbo.Location = new Point(262, 85);
+            CategoriesForm_ParentCategoryCbo.Location = new Point(345, 88);
             CategoriesForm_ParentCategoryCbo.Name = "CategoriesForm_ParentCategoryCbo";
             CategoriesForm_ParentCategoryCbo.Size = new Size(721, 33);
             CategoriesForm_ParentCategoryCbo.TabIndex = 2;
@@ -78,16 +86,16 @@
             // 
             CategoriesForm_NameLbl.AutoSize = true;
             CategoriesForm_NameLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            CategoriesForm_NameLbl.Location = new Point(45, 146);
+            CategoriesForm_NameLbl.Location = new Point(45, 149);
             CategoriesForm_NameLbl.Name = "CategoriesForm_NameLbl";
-            CategoriesForm_NameLbl.Size = new Size(87, 25);
+            CategoriesForm_NameLbl.Size = new Size(62, 25);
             CategoriesForm_NameLbl.TabIndex = 3;
-            CategoriesForm_NameLbl.Text = "Name (*)";
+            CategoriesForm_NameLbl.Text = "Name";
             // 
             // CategoriesForm_NameTxt
             // 
             CategoriesForm_NameTxt.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            CategoriesForm_NameTxt.Location = new Point(262, 143);
+            CategoriesForm_NameTxt.Location = new Point(345, 146);
             CategoriesForm_NameTxt.Name = "CategoriesForm_NameTxt";
             CategoriesForm_NameTxt.Size = new Size(721, 32);
             CategoriesForm_NameTxt.TabIndex = 4;
@@ -95,7 +103,7 @@
             // CategoriesForm_CategoryInfoTxt
             // 
             CategoriesForm_CategoryInfoTxt.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            CategoriesForm_CategoryInfoTxt.Location = new Point(262, 213);
+            CategoriesForm_CategoryInfoTxt.Location = new Point(345, 216);
             CategoriesForm_CategoryInfoTxt.MaxLength = 100;
             CategoriesForm_CategoryInfoTxt.Multiline = true;
             CategoriesForm_CategoryInfoTxt.Name = "CategoriesForm_CategoryInfoTxt";
@@ -105,7 +113,7 @@
             // CategoriesForm_IDNumberTxt
             // 
             CategoriesForm_IDNumberTxt.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            CategoriesForm_IDNumberTxt.Location = new Point(262, 417);
+            CategoriesForm_IDNumberTxt.Location = new Point(345, 420);
             CategoriesForm_IDNumberTxt.Name = "CategoriesForm_IDNumberTxt";
             CategoriesForm_IDNumberTxt.Size = new Size(721, 32);
             CategoriesForm_IDNumberTxt.TabIndex = 6;
@@ -126,9 +134,9 @@
             CategoriesForm_IDNumberLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             CategoriesForm_IDNumberLbl.Location = new Point(45, 420);
             CategoriesForm_IDNumberLbl.Name = "CategoriesForm_IDNumberLbl";
-            CategoriesForm_IDNumberLbl.Size = new Size(126, 25);
+            CategoriesForm_IDNumberLbl.Size = new Size(101, 25);
             CategoriesForm_IDNumberLbl.TabIndex = 8;
-            CategoriesForm_IDNumberLbl.Text = "ID number (*)";
+            CategoriesForm_IDNumberLbl.Text = "ID number";
             // 
             // CategoriesForm_AddCategoryBtn
             // 
@@ -136,7 +144,7 @@
             CategoriesForm_AddCategoryBtn.FlatStyle = FlatStyle.Flat;
             CategoriesForm_AddCategoryBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             CategoriesForm_AddCategoryBtn.ForeColor = Color.White;
-            CategoriesForm_AddCategoryBtn.Location = new Point(509, 526);
+            CategoriesForm_AddCategoryBtn.Location = new Point(507, 487);
             CategoriesForm_AddCategoryBtn.Name = "CategoriesForm_AddCategoryBtn";
             CategoriesForm_AddCategoryBtn.Size = new Size(185, 51);
             CategoriesForm_AddCategoryBtn.TabIndex = 9;
@@ -144,32 +152,58 @@
             CategoriesForm_AddCategoryBtn.UseVisualStyleBackColor = false;
             CategoriesForm_AddCategoryBtn.Click += CategoriesForm_AddCategoryBtn_Click;
             // 
-            // CategoriesForm_errorTextLbl
-            // 
-            CategoriesForm_errorTextLbl.AutoSize = true;
-            CategoriesForm_errorTextLbl.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            CategoriesForm_errorTextLbl.Location = new Point(46, 469);
-            CategoriesForm_errorTextLbl.Name = "CategoriesForm_errorTextLbl";
-            CategoriesForm_errorTextLbl.Size = new Size(0, 25);
-            CategoriesForm_errorTextLbl.TabIndex = 18;
-            // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(870, 469);
+            label1.Location = new Point(359, 551);
             label1.Name = "label1";
-            label1.Size = new Size(113, 25);
+            label1.Size = new Size(388, 25);
             label1.TabIndex = 19;
-            label1.Text = "(*): required";
+            label1.Text = "There are required fields in this form marked";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(314, 88);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(25, 25);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 23;
+            pictureBox1.TabStop = false;
+            CategoriesForm_RequiredTooltip.SetToolTip(pictureBox1, "Required");
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(314, 149);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(25, 25);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 24;
+            pictureBox2.TabStop = false;
+            CategoriesForm_RequiredTooltip.SetToolTip(pictureBox2, "Required");
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(753, 551);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(25, 25);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 25;
+            pictureBox3.TabStop = false;
             // 
             // CategoriesForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
+            BackColor = SystemColors.ControlLightLight;
+            Controls.Add(pictureBox3);
+            Controls.Add(pictureBox2);
+            Controls.Add(pictureBox1);
             Controls.Add(label1);
-            Controls.Add(CategoriesForm_errorTextLbl);
             Controls.Add(CategoriesForm_AddCategoryBtn);
             Controls.Add(CategoriesForm_IDNumberLbl);
             Controls.Add(CategoriesForm_CategoryInfoLbl);
@@ -182,6 +216,9 @@
             Controls.Add(CategoriesForm_HeadingLbl);
             Name = "CategoriesForm";
             Size = new Size(1178, 585);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -198,7 +235,10 @@
         private Label CategoriesForm_CategoryInfoLbl;
         private Label CategoriesForm_IDNumberLbl;
         private Button CategoriesForm_AddCategoryBtn;
-        private Label CategoriesForm_errorTextLbl;
         private Label label1;
+        private ToolTip CategoriesForm_RequiredTooltip;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox3;
     }
 }

@@ -34,7 +34,9 @@ namespace Learning_System
 
                     DataTable? _DT = contestData.Init().Sort("TimeStart asc").Get();
 
-                    if (_DT != null)
+                    if (_DT == null)
+                        throw new E02CantProcessQuery();
+                    else
                     {
                         for (int i = 0; i < _DT.Rows.Count; i++)
                         {
@@ -85,13 +87,9 @@ namespace Learning_System
                     }
                 }
             }
-            catch (E01CantFindFile ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
             catch (Exception ex)
             {
-                MessageBox.Show("Something got error when we were getting your information!\nDescription: " + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Something got error when we were getting your information!\nDescription: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -161,6 +159,13 @@ namespace Learning_System
             }
             PopUpForm.Visible = true;
             PopUpForm.Show_Export();
+        }
+        
+        private void HomePageForm_MenuPic_Click(object sender, EventArgs e)
+        {
+            panel_popup.Visible = false;
+            PopUpForm.Visible = false;
+            LoadContestList();
         }
     }
 }

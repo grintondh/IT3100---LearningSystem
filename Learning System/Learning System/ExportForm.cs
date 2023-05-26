@@ -9,6 +9,7 @@ using iText.Layout.Element;
 using iText.Html2pdf;
 using iText.Html2pdf.Resolver.Font;
 using System.Diagnostics;
+using Learning_System.Class;
 
 namespace Learning_System
 {
@@ -33,18 +34,18 @@ namespace Learning_System
             if (questionData.ImportedColumns == false)
             {
                 JArray? _questionData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
-                if (_questionData != null)
+                if (_questionData == null)
+                    throw new E01CantFindFile("Question.json");
+                else
                 {
                     questionData.Import(showColumns, showType, showKey);
                     questionData.Import(_questionData);
                     DataTable = questionData.Init().Limit(questionData.Length()).Get();
                 }
-                else
-                {
-                    MessageBox.Show("Can't load your question file!", "Error", MessageBoxButtons.OK);
-                    return;
-                }
             }
+
+            if (DataTable == null)
+                throw new E02CantProcessQuery();
 
             SaveFileDialog dlg = new()
             {
@@ -90,9 +91,6 @@ namespace Learning_System
                             NumberDecimalDigits = 2
                         };
 
-                        if (DataTable == null)
-                            throw new Exception();
-
                         ExportForm_progressBar.Maximum = DataTable.Rows.Count;
                         ExportForm_progressBar.Value = 0;
 
@@ -119,8 +117,11 @@ namespace Learning_System
                                 foreach (var choiceLine in choiceArray)
                                 {
                                     QuestionChoice? qc = choiceLine.ToObject<QuestionChoice>();
-                                    Task task = AddRTFToPdf(pdfDoc, qc.choice, RandomGUIDForTempFile);
-                                    task.Wait();
+                                    if (qc != null)
+                                    {
+                                        Task task = AddRTFToPdf(pdfDoc, qc.choice, RandomGUIDForTempFile);
+                                        task.Wait();
+                                    }
                                 }
 
                                 string weightLine = "";
@@ -130,8 +131,11 @@ namespace Learning_System
                                     if (weightLine.Length > 0)
                                         weightLine += "; ";
 
-                                    QuestionChoice qc = choiceLine.ToObject<QuestionChoice>();
-                                    weightLine += qc.mark.ToString("N", setPrecision);
+                                    QuestionChoice? qc = choiceLine.ToObject<QuestionChoice>();
+                                    if (qc != null)
+                                    {
+                                        weightLine += qc.mark.ToString("N", setPrecision);
+                                    }
                                 }
 
                                 Paragraph weight = new();
@@ -141,7 +145,7 @@ namespace Learning_System
                             }
 
                             if (ExportForm_progressLabel.Text == "Error")
-                                throw new Exception();
+                                throw new E99OtherException("Can't export PDF file.");
 
                             ExportForm_progressBar.Increment(1);
                             ExportForm_progressLabel.Text = "Processing... " + ExportForm_progressBar.Value + "/" + ExportForm_progressBar.Maximum;
@@ -151,7 +155,7 @@ namespace Learning_System
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Can't save your pdf file!\n" + ex, "Error", MessageBoxButtons.OK);
+                        MessageBox.Show("Can't save your pdf file!\nDescription: " + ex.Message, "Error", MessageBoxButtons.OK);
                         ExportForm_progressLabel.Text = "Error";
                     }
                     finally
@@ -187,7 +191,7 @@ namespace Learning_System
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Can't save your pdf file!\n" + ex, "Error", MessageBoxButtons.OK);
+                MessageBox.Show("Can't save your pdf file!\nDescription: " + ex.Message, "Error", MessageBoxButtons.OK);
                 ExportForm_progressLabel.Text = "Error";
             }
         }
@@ -253,8 +257,9 @@ namespace Learning_System
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Can't save your pdf file!\n" + ex, "Error", MessageBoxButtons.OK);
+                MessageBox.Show("Can't save your pdf file!\nDescription: " + ex.Message, "Error", MessageBoxButtons.OK);
                 ExportForm_progressLabel.Text = "Error";
+                return Task.CompletedTask;
             }
 
             return Task.CompletedTask;

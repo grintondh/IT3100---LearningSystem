@@ -20,6 +20,104 @@
             base.Dispose(disposing);
         }
 
+        private static global::System.Resources.ResourceManager resourceMan;
+
+        private static global::System.Globalization.CultureInfo resourceCulture;
+
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
+        public static global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if (object.ReferenceEquals(resourceMan, null))
+                {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Learning_System.HomePageForm", typeof(HomePageForm).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
+        public static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
+                return resourceCulture;
+            }
+            set
+            {
+                resourceCulture = value;
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap checked_file
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("checked_file", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap checked_file_blur
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("checked_file_blur", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap HomePageForm_AvatarPic_Image
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("HomePageForm_AvatarPic.Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap HomePageForm_GearPic_Image
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("HomePageForm_GearPic.Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap HomePageForm_MenuPic_Image
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("HomePageForm_MenuPic.Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -102,6 +200,7 @@
             HomePageForm_MenuPic.SizeMode = PictureBoxSizeMode.Zoom;
             HomePageForm_MenuPic.TabIndex = 0;
             HomePageForm_MenuPic.TabStop = false;
+            HomePageForm_MenuPic.Click += HomePageForm_MenuPic_Click;
             // 
             // HomePageForm_GearPic
             // 

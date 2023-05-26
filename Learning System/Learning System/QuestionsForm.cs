@@ -48,7 +48,7 @@ namespace Learning_System
                     {
                         DataRow? Question = questionsData.Init().Offset(i).Limit(1).Sort("ID desc").GetFirstRow();
                         if (Question == null)
-                            throw new E03EmptyData();
+                            throw new E02CantProcessQuery();
 
                         int inCategories = Question.Field<int>("CategoryID");
                         int QuestionID = Question.Field<int>("ID");
@@ -93,7 +93,6 @@ namespace Learning_System
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                QuestionsForm_SelectCategoryCbo.Enabled = false;
                 QuestionForm_ShowQuestionsDtg.Enabled = false;
                 QuestionsForm_CreateNewQuestionBtn.Enabled = false;
                 QuestionsForm_ShowFromSubcategoriesCb.Enabled = false;
@@ -117,7 +116,6 @@ namespace Learning_System
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                QuestionsForm_SelectCategoryCbo.Enabled = false;
                 QuestionForm_ShowQuestionsDtg.Enabled = false;
                 QuestionsForm_CreateNewQuestionBtn.Enabled = false;
                 QuestionsForm_ShowFromSubcategoriesCb.Enabled = false;
@@ -129,7 +127,7 @@ namespace Learning_System
             QuestionsForm_SelectCategoryCbo.DrawItem += new DrawItemEventHandler((sender, args) =>
             {
                 System.Drawing.Font font;
-                System.Drawing.FontFamily ffm = QuestionsForm_SelectCategoryCbo.Font.FontFamily;
+                FontFamily ffm = QuestionsForm_SelectCategoryCbo.Font.FontFamily;
                 float fsz = QuestionsForm_SelectCategoryCbo.Font.Size;
 
                 if (args.Index == 0)
@@ -137,15 +135,18 @@ namespace Learning_System
                 else
                     font = new System.Drawing.Font(ffm, fsz, FontStyle.Regular);
 
-                if ((args.State & DrawItemState.Selected) == DrawItemState.Selected)
+                if (newListCategories.Count > args.Index)
                 {
-                    args.DrawBackground();
-                    args.Graphics.DrawString(newListCategories[args.Index].Name, font, SystemBrushes.Window, args.Bounds);
-                }
-                else
-                {
-                    args.DrawBackground();
-                    args.Graphics.DrawString(newListCategories[args.Index].Name, font, SystemBrushes.WindowText, args.Bounds);
+                    if ((args.State & DrawItemState.Selected) == DrawItemState.Selected)
+                    {
+                        args.DrawBackground();
+                        args.Graphics.DrawString(newListCategories[args.Index].Name, font, SystemBrushes.Window, args.Bounds);
+                    }
+                    else
+                    {
+                        args.DrawBackground();
+                        args.Graphics.DrawString(newListCategories[args.Index].Name, font, SystemBrushes.WindowText, args.Bounds);
+                    }
                 }
             });
         }
@@ -184,7 +185,7 @@ namespace Learning_System
 
         private void QuestionsForm_CreateNewQuestionBtn_Click(object sender, EventArgs e)
         {
-            AddNewQuestionForm addNewQuestionForm = new AddNewQuestionForm();
+            AddNewQuestionForm addNewQuestionForm = new();
             addNewQuestionForm.ShowDialog();
             ShowQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
         }
@@ -201,9 +202,12 @@ namespace Learning_System
             try
             {
                 JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
-                if (_categoriesData == null) return;
+                if (_categoriesData == null)
+                    throw new E01CantFindFile("Category.json");
+
                 List<Categories>? categories = _categoriesData.ToObject<List<Categories>>();
-                if (categories == null || _categoriesData == null) return;
+                if (categories == null) return;
+
                 if (_parentCategories >= 0)
                 {
                     selectedCategoriesIdList.Add(_parentCategories);
@@ -213,10 +217,7 @@ namespace Learning_System
             }
             catch (Exception ex)
             {
-                DialogResult dialog = MessageBox.Show("Can't get categories data:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                if (dialog == DialogResult.OK)
-                    System.Windows.Forms.Application.Exit();
+                MessageBox.Show("Can't get categories data!\nDescription: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -269,6 +270,11 @@ namespace Learning_System
                 gridCell.Style.ForeColor = Color.FromArgb(30, 170, 232);
                 gridCell.Style.Font = new("Segoe UI", 10, FontStyle.Bold);
             }
+        }
+
+        private void QuestionsForm_QuestionsBankLbl_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

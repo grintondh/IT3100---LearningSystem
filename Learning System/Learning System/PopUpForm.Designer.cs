@@ -104,6 +104,8 @@
             // 
             // ExportForm
             // 
+            ExportForm.AutoScroll = true;
+            ExportForm.BackColor = SystemColors.ControlLightLight;
             ExportForm.Dock = DockStyle.Fill;
             ExportForm.Location = new Point(0, 0);
             ExportForm.Name = "ExportForm";
@@ -114,6 +116,7 @@
             // 
             // panel_chuc_nang
             // 
+            panel_chuc_nang.BackColor = SystemColors.ControlLightLight;
             panel_chuc_nang.BorderStyle = BorderStyle.FixedSingle;
             panel_chuc_nang.Controls.Add(PopUpForm_QuestionsBtn);
             panel_chuc_nang.Controls.Add(PopUpForm_ImportBtn);
@@ -127,6 +130,8 @@
             // 
             // QuestionsForm
             // 
+            QuestionsForm.AutoScroll = true;
+            QuestionsForm.BackColor = SystemColors.ControlLightLight;
             QuestionsForm.Dock = DockStyle.Fill;
             QuestionsForm.Location = new Point(0, 0);
             QuestionsForm.Name = "QuestionsForm";
@@ -137,6 +142,7 @@
             // CategoriesForm
             // 
             CategoriesForm.AutoScroll = true;
+            CategoriesForm.BackColor = SystemColors.ControlLightLight;
             CategoriesForm.Dock = DockStyle.Fill;
             CategoriesForm.Location = new Point(0, 0);
             CategoriesForm.Name = "CategoriesForm";
@@ -147,6 +153,7 @@
             // 
             // ImportForm
             // 
+            ImportForm.AutoScroll = true;
             ImportForm.Dock = DockStyle.Fill;
             ImportForm.Location = new Point(0, 0);
             ImportForm.Name = "ImportForm";

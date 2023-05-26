@@ -62,6 +62,7 @@
             // 
             // panel1
             // 
+            panel1.BackColor = SystemColors.ControlLightLight;
             panel1.Controls.Add(ImportForm_HeadingLbl);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
@@ -82,6 +83,7 @@
             // 
             // panel2
             // 
+            panel2.BackColor = SystemColors.ControlLightLight;
             panel2.Controls.Add(ImportForm_ExpandPic1);
             panel2.Controls.Add(ImportForm_FileFormatLbl);
             panel2.Controls.Add(ImportForm_FileFormatBtn);
@@ -126,6 +128,7 @@
             // 
             // panel3
             // 
+            panel3.BackColor = SystemColors.ControlLightLight;
             panel3.Controls.Add(ImportForm_ExpandPic2);
             panel3.Controls.Add(ImportForm_GeneralBtn);
             panel3.Dock = DockStyle.Top;
@@ -160,6 +163,7 @@
             // panel4
             // 
             panel4.AutoScroll = true;
+            panel4.BackColor = SystemColors.ControlLightLight;
             panel4.Controls.Add(ImportForm_StatusLbl);
             panel4.Controls.Add(panel_drop_file);
             panel4.Controls.Add(ImportForm_ExpandPic3);

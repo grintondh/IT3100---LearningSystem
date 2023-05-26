@@ -28,10 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditQuestionForm));
             AddNewQuestionForm_HeadingLbl = new Label();
             panel_heading = new Panel();
             panel_body = new Panel();
             panel_ = new Panel();
+            pictureBox2 = new PictureBox();
+            pictureBox1 = new PictureBox();
+            pictureBox3 = new PictureBox();
             AddNewQuestionForm_CategoryLbl = new Label();
             AddNewQuestionForm_TextRtb = new RichTextBox();
             AddNewQuestionForm_NameLbl = new Label();
@@ -48,9 +53,13 @@
             AddNewQuestionForm_SaveAndContinueBtn = new Button();
             AddNewQuestionForm_SaveBtn = new Button();
             AddNewQuestionForm_CancelBtn = new Button();
+            EditQuestionForm_Tooltip = new ToolTip(components);
             panel_heading.SuspendLayout();
             panel_body.SuspendLayout();
             panel_.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AddNewQuestionForm_ExpandPic).BeginInit();
             panel_button.SuspendLayout();
             SuspendLayout();
@@ -68,6 +77,7 @@
             // 
             // panel_heading
             // 
+            panel_heading.BackColor = SystemColors.ControlLightLight;
             panel_heading.BorderStyle = BorderStyle.FixedSingle;
             panel_heading.Controls.Add(AddNewQuestionForm_HeadingLbl);
             panel_heading.Dock = DockStyle.Top;
@@ -79,6 +89,7 @@
             // panel_body
             // 
             panel_body.AutoScroll = true;
+            panel_body.BackColor = SystemColors.ControlLightLight;
             panel_body.Controls.Add(panel_);
             panel_body.Controls.Add(AddNewQuestionForm_ExpandPic);
             panel_body.Controls.Add(AddNewQuestionForm_GeneralBtn);
@@ -91,6 +102,10 @@
             // 
             // panel_
             // 
+            panel_.BackColor = SystemColors.ControlLightLight;
+            panel_.Controls.Add(pictureBox2);
+            panel_.Controls.Add(pictureBox1);
+            panel_.Controls.Add(pictureBox3);
             panel_.Controls.Add(AddNewQuestionForm_CategoryLbl);
             panel_.Controls.Add(AddNewQuestionForm_TextRtb);
             panel_.Controls.Add(AddNewQuestionForm_NameLbl);
@@ -104,6 +119,39 @@
             panel_.Name = "panel_";
             panel_.Size = new Size(1233, 474);
             panel_.TabIndex = 20;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(429, 437);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(25, 25);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 30;
+            pictureBox2.TabStop = false;
+            EditQuestionForm_Tooltip.SetToolTip(pictureBox2, "Required");
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(429, 178);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(25, 25);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 29;
+            pictureBox1.TabStop = false;
+            EditQuestionForm_Tooltip.SetToolTip(pictureBox1, "Required");
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(429, 102);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(25, 25);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 28;
+            pictureBox3.TabStop = false;
+            EditQuestionForm_Tooltip.SetToolTip(pictureBox3, "Required");
             // 
             // AddNewQuestionForm_CategoryLbl
             // 
@@ -130,9 +178,9 @@
             AddNewQuestionForm_NameLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_NameLbl.Location = new Point(33, 104);
             AddNewQuestionForm_NameLbl.Name = "AddNewQuestionForm_NameLbl";
-            AddNewQuestionForm_NameLbl.Size = new Size(149, 23);
+            AddNewQuestionForm_NameLbl.Size = new Size(127, 23);
             AddNewQuestionForm_NameLbl.TabIndex = 5;
-            AddNewQuestionForm_NameLbl.Text = "Question name (*)";
+            AddNewQuestionForm_NameLbl.Text = "Question name";
             // 
             // AddNewQuestionForm_TextLbl
             // 
@@ -140,9 +188,9 @@
             AddNewQuestionForm_TextLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_TextLbl.Location = new Point(33, 180);
             AddNewQuestionForm_TextLbl.Name = "AddNewQuestionForm_TextLbl";
-            AddNewQuestionForm_TextLbl.Size = new Size(135, 23);
+            AddNewQuestionForm_TextLbl.Size = new Size(113, 23);
             AddNewQuestionForm_TextLbl.TabIndex = 6;
-            AddNewQuestionForm_TextLbl.Text = "Question text (*)";
+            AddNewQuestionForm_TextLbl.Text = "Question text";
             // 
             // AddNewQuestionForm_MarkLbl
             // 
@@ -150,9 +198,9 @@
             AddNewQuestionForm_MarkLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_MarkLbl.Location = new Point(33, 439);
             AddNewQuestionForm_MarkLbl.Name = "AddNewQuestionForm_MarkLbl";
-            AddNewQuestionForm_MarkLbl.Size = new Size(130, 23);
+            AddNewQuestionForm_MarkLbl.Size = new Size(108, 23);
             AddNewQuestionForm_MarkLbl.TabIndex = 7;
-            AddNewQuestionForm_MarkLbl.Text = "Default mark (*)";
+            AddNewQuestionForm_MarkLbl.Text = "Default mark";
             // 
             // AddNewQuestionForm_CategoryCbo
             // 
@@ -162,7 +210,6 @@
             AddNewQuestionForm_CategoryCbo.Name = "AddNewQuestionForm_CategoryCbo";
             AddNewQuestionForm_CategoryCbo.Size = new Size(281, 31);
             AddNewQuestionForm_CategoryCbo.TabIndex = 8;
-            AddNewQuestionForm_CategoryCbo.DropDown += AddNewQuestionForm_CategoryCbo_DropDown;
             // 
             // AddNewQuestionForm_NameTxt
             // 
@@ -289,12 +336,14 @@
             Controls.Add(panel_heading);
             Name = "EditQuestionForm";
             WindowState = FormWindowState.Maximized;
-            Load += AddNewQuestionForm_Load;
             panel_heading.ResumeLayout(false);
             panel_heading.PerformLayout();
             panel_body.ResumeLayout(false);
             panel_.ResumeLayout(false);
             panel_.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)AddNewQuestionForm_ExpandPic).EndInit();
             panel_button.ResumeLayout(false);
             panel_button.PerformLayout();
@@ -323,5 +372,9 @@
         private Panel panel_;
         private Panel panel_button;
         private Label AddNewQuestionForm_ErrorLbl;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox3;
+        private ToolTip EditQuestionForm_Tooltip;
     }
 }

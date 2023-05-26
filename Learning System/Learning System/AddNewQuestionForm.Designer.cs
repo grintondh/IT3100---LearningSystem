@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddNewQuestionForm));
             AddNewQuestionForm_HeadingLbl = new Label();
             panel_heading = new Panel();
@@ -39,6 +40,9 @@
             AddNewQuestionForm_SaveBtn = new Button();
             AddNewQuestionForm_CancelBtn = new Button();
             panel_ = new Panel();
+            pictureBox3 = new PictureBox();
+            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
             AddNewQuestionForm_CategoryLbl = new Label();
             AddNewQuestionForm_TextRtb = new RichTextBox();
             AddNewQuestionForm_NameLbl = new Label();
@@ -49,10 +53,14 @@
             AddNewQuestionForm_MarkTxt = new TextBox();
             AddNewQuestionForm_ExpandPic = new PictureBox();
             AddNewQuestionForm_GeneralBtn = new Button();
+            AddNewQuestionForm_ToolTip = new ToolTip(components);
             panel_heading.SuspendLayout();
             panel_body.SuspendLayout();
             panel_button.SuspendLayout();
             panel_.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AddNewQuestionForm_ExpandPic).BeginInit();
             SuspendLayout();
             // 
@@ -69,6 +77,7 @@
             // 
             // panel_heading
             // 
+            panel_heading.BackColor = SystemColors.ControlLightLight;
             panel_heading.BorderStyle = BorderStyle.FixedSingle;
             panel_heading.Controls.Add(AddNewQuestionForm_HeadingLbl);
             panel_heading.Dock = DockStyle.Top;
@@ -80,6 +89,7 @@
             // panel_body
             // 
             panel_body.AutoScroll = true;
+            panel_body.BackColor = SystemColors.ControlLightLight;
             panel_body.Controls.Add(panel_button);
             panel_body.Controls.Add(panel_);
             panel_body.Controls.Add(AddNewQuestionForm_ExpandPic);
@@ -88,7 +98,7 @@
             panel_body.Location = new Point(0, 71);
             panel_body.Name = "panel_body";
             panel_body.Size = new Size(1233, 769);
-            panel_body.TabIndex = 10;
+            panel_body.TabIndex = 104;
             // 
             // panel_button
             // 
@@ -101,7 +111,7 @@
             panel_button.Margin = new Padding(2);
             panel_button.Name = "panel_button";
             panel_button.Size = new Size(1233, 258);
-            panel_button.TabIndex = 22;
+            panel_button.TabIndex = 103;
             // 
             // AddNewQuestionForm_ErrorLbl
             // 
@@ -119,8 +129,8 @@
             AddNewQuestionForm_MoreChoicesBtn.ForeColor = Color.White;
             AddNewQuestionForm_MoreChoicesBtn.Location = new Point(316, 21);
             AddNewQuestionForm_MoreChoicesBtn.Name = "AddNewQuestionForm_MoreChoicesBtn";
-            AddNewQuestionForm_MoreChoicesBtn.Size = new Size(340, 51);
-            AddNewQuestionForm_MoreChoicesBtn.TabIndex = 12;
+            AddNewQuestionForm_MoreChoicesBtn.Size = new Size(328, 51);
+            AddNewQuestionForm_MoreChoicesBtn.TabIndex = 0;
             AddNewQuestionForm_MoreChoicesBtn.Text = "BLANKS FOR 3 MORE CHOICES ";
             AddNewQuestionForm_MoreChoicesBtn.UseVisualStyleBackColor = false;
             AddNewQuestionForm_MoreChoicesBtn.Click += AddNewQuestionForm_MoreChoicesBtn_Click;
@@ -133,8 +143,8 @@
             AddNewQuestionForm_SaveAndContinueBtn.ForeColor = Color.White;
             AddNewQuestionForm_SaveAndContinueBtn.Location = new Point(316, 126);
             AddNewQuestionForm_SaveAndContinueBtn.Name = "AddNewQuestionForm_SaveAndContinueBtn";
-            AddNewQuestionForm_SaveAndContinueBtn.Size = new Size(386, 51);
-            AddNewQuestionForm_SaveAndContinueBtn.TabIndex = 14;
+            AddNewQuestionForm_SaveAndContinueBtn.Size = new Size(407, 51);
+            AddNewQuestionForm_SaveAndContinueBtn.TabIndex = 0;
             AddNewQuestionForm_SaveAndContinueBtn.Text = "SAVE CHANGES AND CONTINUE EDITING";
             AddNewQuestionForm_SaveAndContinueBtn.UseVisualStyleBackColor = false;
             AddNewQuestionForm_SaveAndContinueBtn.Click += AddNewQuestionForm_SaveAndContinueBtn_Click;
@@ -148,7 +158,7 @@
             AddNewQuestionForm_SaveBtn.Location = new Point(316, 183);
             AddNewQuestionForm_SaveBtn.Name = "AddNewQuestionForm_SaveBtn";
             AddNewQuestionForm_SaveBtn.Size = new Size(181, 53);
-            AddNewQuestionForm_SaveBtn.TabIndex = 13;
+            AddNewQuestionForm_SaveBtn.TabIndex = 0;
             AddNewQuestionForm_SaveBtn.Text = "SAVE CHANGES";
             AddNewQuestionForm_SaveBtn.UseVisualStyleBackColor = false;
             AddNewQuestionForm_SaveBtn.Click += AddNewQuestionForm_SaveBtn_Click;
@@ -162,13 +172,17 @@
             AddNewQuestionForm_CancelBtn.Location = new Point(530, 183);
             AddNewQuestionForm_CancelBtn.Name = "AddNewQuestionForm_CancelBtn";
             AddNewQuestionForm_CancelBtn.Size = new Size(135, 53);
-            AddNewQuestionForm_CancelBtn.TabIndex = 15;
+            AddNewQuestionForm_CancelBtn.TabIndex = 0;
             AddNewQuestionForm_CancelBtn.Text = "CANCEL";
             AddNewQuestionForm_CancelBtn.UseVisualStyleBackColor = false;
             AddNewQuestionForm_CancelBtn.Click += AddNewQuestionForm_CancelBtn_Click;
             // 
             // panel_
             // 
+            panel_.BackColor = SystemColors.ControlLightLight;
+            panel_.Controls.Add(pictureBox3);
+            panel_.Controls.Add(pictureBox1);
+            panel_.Controls.Add(pictureBox2);
             panel_.Controls.Add(AddNewQuestionForm_CategoryLbl);
             panel_.Controls.Add(AddNewQuestionForm_TextRtb);
             panel_.Controls.Add(AddNewQuestionForm_NameLbl);
@@ -181,7 +195,40 @@
             panel_.Location = new Point(0, 0);
             panel_.Name = "panel_";
             panel_.Size = new Size(1233, 474);
-            panel_.TabIndex = 20;
+            panel_.TabIndex = 0;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(429, 437);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(25, 25);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 27;
+            pictureBox3.TabStop = false;
+            AddNewQuestionForm_ToolTip.SetToolTip(pictureBox3, "Required");
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(429, 178);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(25, 25);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 26;
+            pictureBox1.TabStop = false;
+            AddNewQuestionForm_ToolTip.SetToolTip(pictureBox1, "Required");
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(429, 102);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(25, 25);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 25;
+            pictureBox2.TabStop = false;
+            AddNewQuestionForm_ToolTip.SetToolTip(pictureBox2, "Required");
             // 
             // AddNewQuestionForm_CategoryLbl
             // 
@@ -195,11 +242,12 @@
             // 
             // AddNewQuestionForm_TextRtb
             // 
+            AddNewQuestionForm_TextRtb.EnableAutoDragDrop = true;
             AddNewQuestionForm_TextRtb.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_TextRtb.Location = new Point(460, 180);
             AddNewQuestionForm_TextRtb.Name = "AddNewQuestionForm_TextRtb";
             AddNewQuestionForm_TextRtb.Size = new Size(568, 235);
-            AddNewQuestionForm_TextRtb.TabIndex = 17;
+            AddNewQuestionForm_TextRtb.TabIndex = 10;
             AddNewQuestionForm_TextRtb.Text = "";
             // 
             // AddNewQuestionForm_NameLbl
@@ -208,9 +256,9 @@
             AddNewQuestionForm_NameLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_NameLbl.Location = new Point(33, 104);
             AddNewQuestionForm_NameLbl.Name = "AddNewQuestionForm_NameLbl";
-            AddNewQuestionForm_NameLbl.Size = new Size(149, 23);
+            AddNewQuestionForm_NameLbl.Size = new Size(127, 23);
             AddNewQuestionForm_NameLbl.TabIndex = 5;
-            AddNewQuestionForm_NameLbl.Text = "Question name (*)";
+            AddNewQuestionForm_NameLbl.Text = "Question name";
             // 
             // AddNewQuestionForm_TextLbl
             // 
@@ -218,9 +266,9 @@
             AddNewQuestionForm_TextLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_TextLbl.Location = new Point(33, 180);
             AddNewQuestionForm_TextLbl.Name = "AddNewQuestionForm_TextLbl";
-            AddNewQuestionForm_TextLbl.Size = new Size(135, 23);
+            AddNewQuestionForm_TextLbl.Size = new Size(113, 23);
             AddNewQuestionForm_TextLbl.TabIndex = 6;
-            AddNewQuestionForm_TextLbl.Text = "Question text (*)";
+            AddNewQuestionForm_TextLbl.Text = "Question text";
             // 
             // AddNewQuestionForm_MarkLbl
             // 
@@ -228,9 +276,9 @@
             AddNewQuestionForm_MarkLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_MarkLbl.Location = new Point(33, 439);
             AddNewQuestionForm_MarkLbl.Name = "AddNewQuestionForm_MarkLbl";
-            AddNewQuestionForm_MarkLbl.Size = new Size(130, 23);
+            AddNewQuestionForm_MarkLbl.Size = new Size(108, 23);
             AddNewQuestionForm_MarkLbl.TabIndex = 7;
-            AddNewQuestionForm_MarkLbl.Text = "Default mark (*)";
+            AddNewQuestionForm_MarkLbl.Text = "Default mark";
             // 
             // AddNewQuestionForm_CategoryCbo
             // 
@@ -266,7 +314,7 @@
             AddNewQuestionForm_ExpandPic.Name = "AddNewQuestionForm_ExpandPic";
             AddNewQuestionForm_ExpandPic.Size = new Size(15, 10);
             AddNewQuestionForm_ExpandPic.SizeMode = PictureBoxSizeMode.Zoom;
-            AddNewQuestionForm_ExpandPic.TabIndex = 16;
+            AddNewQuestionForm_ExpandPic.TabIndex = 0;
             AddNewQuestionForm_ExpandPic.TabStop = false;
             // 
             // AddNewQuestionForm_GeneralBtn
@@ -292,7 +340,6 @@
             Controls.Add(panel_heading);
             Name = "AddNewQuestionForm";
             WindowState = FormWindowState.Maximized;
-            Load += AddNewQuestionForm_Load;
             panel_heading.ResumeLayout(false);
             panel_heading.PerformLayout();
             panel_body.ResumeLayout(false);
@@ -300,6 +347,9 @@
             panel_button.PerformLayout();
             panel_.ResumeLayout(false);
             panel_.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)AddNewQuestionForm_ExpandPic).EndInit();
             ResumeLayout(false);
         }
@@ -326,5 +376,9 @@
         private Panel panel_;
         private Panel panel_button;
         private Label AddNewQuestionForm_ErrorLbl;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox3;
+        private PictureBox pictureBox1;
+        private ToolTip AddNewQuestionForm_ToolTip;
     }
 }
