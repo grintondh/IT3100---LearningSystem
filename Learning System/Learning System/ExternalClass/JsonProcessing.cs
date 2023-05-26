@@ -2,6 +2,7 @@
 // Last modified: 4.5.2023 by DH
 
 using Newtonsoft.Json.Linq;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Learning_System.ExternalClass
 {
@@ -23,60 +24,16 @@ namespace Learning_System.ExternalClass
             }
             return _fileReader;
         }
-        private static StreamReader? CreateFileJsonInDefaultFolder(string JsonPath, string? sampleJsonWebPath, string? sampleContent)
-        {
-            try
-            {
-                string _fileName = JsonPath;
-                if (File.Exists(_fileName))
-                    File.Delete(_fileName);
-
-                if (sampleContent != null)
-                    File.WriteAllText(JsonPath, sampleContent + "\n");
-                else
-                {
-                    DialogResult _userReturnDialog = MessageBox.Show("Can't find your request file in default folders. We couldn't create a sample one for you. Please check your internet connection and try again.\nPath: " + JsonPath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    if (_userReturnDialog == DialogResult.OK)
-                        Application.Exit();
-                }
-
-                return SetFileJsonInDefaultFolder(JsonPath);
-            }
-            catch (Exception _ex)
-            {
-                DialogResult _userReturnDialog = MessageBox.Show("Error in creating Json file! " + _ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                if (_userReturnDialog == DialogResult.OK)
-                    Application.Exit();
-
-                return null;
-            }
-        }
         private static StreamReader? GetFileJsonInDefaultFolder(string JsonPath, string? sampleJsonWebPath, string? sampleContent)
         {
             try
             {
                 StreamReader? _readFile;
-                try
-                {
-                    _readFile = SetFileJsonInDefaultFolder(JsonPath);
-                }
-                catch
-                {
-                    // Can't find Json file in default folder => Create a new Json file
-                    _readFile = CreateFileJsonInDefaultFolder(JsonPath, sampleJsonWebPath, sampleContent);
-                }
-
+                _readFile = SetFileJsonInDefaultFolder(JsonPath);
                 return _readFile;
             }
             catch
             {
-                DialogResult userReturnDialog = MessageBox.Show("Error in getting file information! ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                if (userReturnDialog == DialogResult.OK)
-                    Application.Exit();
-
                 return null;
             }
         }

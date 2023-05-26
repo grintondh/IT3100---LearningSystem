@@ -96,6 +96,7 @@
             // 
             // QuestionsForm_SelectCategoryCbo
             // 
+            QuestionsForm_SelectCategoryCbo.DrawMode = DrawMode.OwnerDrawFixed;
             QuestionsForm_SelectCategoryCbo.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             QuestionsForm_SelectCategoryCbo.FormattingEnabled = true;
             QuestionsForm_SelectCategoryCbo.Location = new Point(217, 76);
@@ -147,9 +148,11 @@
             QuestionForm_ShowQuestionsDtg.RowHeadersVisible = false;
             QuestionForm_ShowQuestionsDtg.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             QuestionForm_ShowQuestionsDtg.RowTemplate.Height = 29;
-            QuestionForm_ShowQuestionsDtg.Size = new Size(1800, 400);
+            QuestionForm_ShowQuestionsDtg.Size = new Size(1597, 400);
             QuestionForm_ShowQuestionsDtg.TabIndex = 15;
             QuestionForm_ShowQuestionsDtg.CellContentClick += QuestionForm_ShowQuestionsDtg_CellContentClick;
+            QuestionForm_ShowQuestionsDtg.CellMouseEnter += QuestionForm_ShowQuestionsDtg_CellMouseEnter;
+            QuestionForm_ShowQuestionsDtg.CellMouseLeave += QuestionForm_ShowQuestionsDtg_CellMouseLeave;
             // 
             // CheckBoxes
             // 
@@ -165,7 +168,8 @@
             QuestionName.MinimumWidth = 6;
             QuestionName.Name = "QuestionName";
             QuestionName.ReadOnly = true;
-            QuestionName.Width = 1600;
+            QuestionName.SortMode = DataGridViewColumnSortMode.NotSortable;
+            QuestionName.Width = 1400;
             // 
             // Edit
             // 
@@ -173,7 +177,9 @@
             Edit.MinimumWidth = 6;
             Edit.Name = "Edit";
             Edit.ReadOnly = true;
-            Edit.Width = 160;
+            Edit.Text = "";
+            Edit.ToolTipText = "Edit question";
+            Edit.Width = 150;
             // 
             // ID
             // 
@@ -205,7 +211,7 @@
             Controls.Add(QuestionsForm_SelectCategoryLbl);
             Controls.Add(QuestionsForm_QuestionsBankLbl);
             Name = "QuestionsForm";
-            Size = new Size(1881, 801);
+            Size = new Size(1691, 738);
             ((System.ComponentModel.ISupportInitialize)QuestionForm_ShowQuestionsDtg).EndInit();
             ResumeLayout(false);
             PerformLayout();

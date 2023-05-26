@@ -195,7 +195,7 @@
             // 
             // AddNewQuestionForm_TextRtb
             // 
-            AddNewQuestionForm_TextRtb.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_TextRtb.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_TextRtb.Location = new Point(460, 180);
             AddNewQuestionForm_TextRtb.Name = "AddNewQuestionForm_TextRtb";
             AddNewQuestionForm_TextRtb.Size = new Size(568, 235);

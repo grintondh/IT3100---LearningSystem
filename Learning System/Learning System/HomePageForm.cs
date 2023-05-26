@@ -1,4 +1,5 @@
-﻿using Learning_System.ExternalClass;
+﻿using Learning_System.Class;
+using Learning_System.ExternalClass;
 using Learning_System.Properties;
 using Newtonsoft.Json.Linq;
 using System.Data;
@@ -15,11 +16,13 @@ namespace Learning_System
 
         private void LoadContestList()
         {
-            JArray? contestJson = JsonProcessing.ImportJsonContentInDefaultFolder("contest.json", null, null);
-
             try
             {
-                if (contestJson != null)
+                JArray? contestJson = JsonProcessing.ImportJsonContentInDefaultFolder("contest.json", null, null);
+
+                if (contestJson == null)
+                    throw new E01CantFindFile("contest.json");
+                else
                 {
                     DataProcessing contestData = new();
                     List<string> contestColumns = new() { "Name", "TimeStart", "TimeEnd" };
@@ -81,12 +84,14 @@ namespace Learning_System
                         }
                     }
                 }
-                else
-                    throw new Exception();
+            }
+            catch (E01CantFindFile ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Can't load your contest file!\n" + ex, "Error", MessageBoxButtons.OK);
+                MessageBox.Show("Something got error when we were getting your information!\nDescription: " + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

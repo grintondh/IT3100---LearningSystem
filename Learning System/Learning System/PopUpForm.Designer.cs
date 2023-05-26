@@ -32,9 +32,14 @@
             PopUpForm_ImportBtn = new Button();
             PopUpForm_CategoriesBtn = new Button();
             PopUpForm_QuestionsBtn = new Button();
+            ExportForm = new ExportForm();
             panel_chuc_nang = new Panel();
+            QuestionsForm = new QuestionsForm();
+            CategoriesForm = new CategoriesForm();
+            ImportForm = new ImportForm();
             panel_giao_dien = new Panel();
             panel_chuc_nang.SuspendLayout();
+            panel_giao_dien.SuspendLayout();
             SuspendLayout();
             // 
             // PopUpForm_ExportBtn
@@ -95,7 +100,17 @@
             PopUpForm_QuestionsBtn.TabIndex = 0;
             PopUpForm_QuestionsBtn.Text = "Questions";
             PopUpForm_QuestionsBtn.UseVisualStyleBackColor = true;
-            PopUpForm_QuestionsBtn.Click += button_Questions_Click;
+            PopUpForm_QuestionsBtn.Click += Button_Questions_Click;
+            // 
+            // ExportForm
+            // 
+            ExportForm.Dock = DockStyle.Fill;
+            ExportForm.Location = new Point(0, 0);
+            ExportForm.Name = "ExportForm";
+            ExportForm.Size = new Size(1089, 555);
+            ExportForm.TabIndex = 4;
+            ExportForm.Visible = false;
+            ExportForm.Load += Giao_dien_Export_Load;
             // 
             // panel_chuc_nang
             // 
@@ -110,8 +125,42 @@
             panel_chuc_nang.Size = new Size(1089, 70);
             panel_chuc_nang.TabIndex = 4;
             // 
+            // QuestionsForm
+            // 
+            QuestionsForm.Dock = DockStyle.Fill;
+            QuestionsForm.Location = new Point(0, 0);
+            QuestionsForm.Name = "QuestionsForm";
+            QuestionsForm.Size = new Size(1089, 555);
+            QuestionsForm.TabIndex = 0;
+            QuestionsForm.Load += Giao_dien_xem_danh_sach_cau_hoi_Load;
+            // 
+            // CategoriesForm
+            // 
+            CategoriesForm.AutoScroll = true;
+            CategoriesForm.Dock = DockStyle.Fill;
+            CategoriesForm.Location = new Point(0, 0);
+            CategoriesForm.Name = "CategoriesForm";
+            CategoriesForm.Size = new Size(1089, 555);
+            CategoriesForm.TabIndex = 4;
+            CategoriesForm.Visible = false;
+            CategoriesForm.Load += Giao_dien_Categories_Load;
+            // 
+            // ImportForm
+            // 
+            ImportForm.Dock = DockStyle.Fill;
+            ImportForm.Location = new Point(0, 0);
+            ImportForm.Name = "ImportForm";
+            ImportForm.Size = new Size(1089, 555);
+            ImportForm.TabIndex = 4;
+            ImportForm.Visible = false;
+            ImportForm.Load += Giao_dien_Import_Load;
+            // 
             // panel_giao_dien
             // 
+            panel_giao_dien.Controls.Add(QuestionsForm);
+            panel_giao_dien.Controls.Add(ImportForm);
+            panel_giao_dien.Controls.Add(ExportForm);
+            panel_giao_dien.Controls.Add(CategoriesForm);
             panel_giao_dien.Dock = DockStyle.Fill;
             panel_giao_dien.Location = new Point(0, 70);
             panel_giao_dien.Name = "panel_giao_dien";
@@ -122,12 +171,12 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoScroll = true;
             Controls.Add(panel_giao_dien);
             Controls.Add(panel_chuc_nang);
             Name = "PopUpForm";
             Size = new Size(1089, 625);
             panel_chuc_nang.ResumeLayout(false);
+            panel_giao_dien.ResumeLayout(false);
             ResumeLayout(false);
         }
 

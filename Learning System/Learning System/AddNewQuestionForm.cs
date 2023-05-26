@@ -74,26 +74,26 @@ namespace Learning_System
                 panel[i].Controls.Add(labelChoice[i]);
                 panel[i].Controls.Add(labelGrade[i]);
                 // combobox
-                combobox[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                combobox[i].Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
                 combobox[i].FormattingEnabled = true;
                 combobox[i].Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
                 combobox[i].Location = new Point(106, 201);
                 combobox[i].Size = new Size(151, 31);
                 combobox[i].Text = "None";
                 // richtextbox
-                richTextBoxes[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                richTextBoxes[i].Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
                 richTextBoxes[i].Location = new Point(106, 14);
                 richTextBoxes[i].Size = new Size(568, 162);
                 richTextBoxes[i].Text = "";
                 // label choice
                 labelChoice[i].AutoSize = true;
-                labelChoice[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                labelChoice[i].Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
                 labelChoice[i].Location = new Point(12, 14);
                 labelChoice[i].Size = new Size(71, 23);
                 labelChoice[i].Text = "Choice" + (i + 1).ToString();
                 // label grade
                 labelGrade[i].AutoSize = true;
-                labelGrade[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                labelGrade[i].Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
                 labelGrade[i].Location = new Point(12, 201);
                 labelGrade[i].Size = new Size(56, 23);
                 labelGrade[i].Text = "Grade";
