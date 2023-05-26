@@ -113,7 +113,7 @@
             HomePageForm_GearPic.SizeMode = PictureBoxSizeMode.Zoom;
             HomePageForm_GearPic.TabIndex = 2;
             HomePageForm_GearPic.TabStop = false;
-            HomePageForm_GearPic.Click += picture_setting_Click;
+            HomePageForm_GearPic.Click += Picture_setting_Click;
             // 
             // HomePageForm_EditingBtn
             // 
@@ -198,7 +198,7 @@
             HomePageForm_QuestionsBtn.TabIndex = 5;
             HomePageForm_QuestionsBtn.Text = "Questions";
             HomePageForm_QuestionsBtn.UseVisualStyleBackColor = true;
-            HomePageForm_QuestionsBtn.Click += button_Questions_Click;
+            HomePageForm_QuestionsBtn.Click += Button_Questions_Click;
             // 
             // HomePageForm_CategoriesBtn
             // 
@@ -213,7 +213,7 @@
             HomePageForm_CategoriesBtn.TabIndex = 6;
             HomePageForm_CategoriesBtn.Text = "Categories";
             HomePageForm_CategoriesBtn.UseVisualStyleBackColor = true;
-            HomePageForm_CategoriesBtn.Click += button_Categories_Click;
+            HomePageForm_CategoriesBtn.Click += Button_Categories_Click;
             // 
             // HomePageForm_ImportBtn
             // 
@@ -228,7 +228,7 @@
             HomePageForm_ImportBtn.TabIndex = 7;
             HomePageForm_ImportBtn.Text = "Import";
             HomePageForm_ImportBtn.UseVisualStyleBackColor = true;
-            HomePageForm_ImportBtn.Click += button_Import_Click;
+            HomePageForm_ImportBtn.Click += Button_Import_Click;
             // 
             // HomePageForm_ExportBtn
             // 
@@ -243,7 +243,7 @@
             HomePageForm_ExportBtn.TabIndex = 8;
             HomePageForm_ExportBtn.Text = "Export";
             HomePageForm_ExportBtn.UseVisualStyleBackColor = true;
-            HomePageForm_ExportBtn.Click += button_Export_Click;
+            HomePageForm_ExportBtn.Click += Button_Export_Click;
             // 
             // HomePageForm_QuestionsBankLbl
             // 

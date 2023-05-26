@@ -1,4 +1,64 @@
-﻿<root>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -364,6 +424,42 @@
         FhT9SJJUorSk6EeSpBKlJUU/kiSVKC0p+pEkqUxpUdGeJEmlSsuK9iRJKlVaVrQnSVK50sKiHUmSSpaW
         Fu1IklS0P+Li4rz3dytJUtnS8uI8SZLKlxYYx0mSNExpkbGfJEnDlRYa20mSNGxpsfGaJElTlJYcX0mS
         NGFvcenxvvjfPl6RpP49Hv8PrqwJEQml6e4AAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="checked_file" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAYCAIAAAB1KUohAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        cgAAEnIBXmVb4wAAAvxJREFUOE/V0M1P02AcwHH/AI1eJMaDUQ+aaJSoQS/GRGLQiycPHjQRDSSEkGwy
+        QdRED4aIiXCBmAgagpjxIhjehjBgL+0Ga7eOMRwbW9nWbmPCNl62dX3aUvAZm9uAm5z85ZvmWdPPs6c9
+        sLWP2TcGwqbCyskxsLcODBBeXhA3U0/vmiRmOXHICvxRnl7f0XyI78QTzRrGQvEc3GB7RHEDBhdZPDgD
+        XCuc6fffggBeDQGgsCX6pplujJnz8zwkAseHaSEWgZukcYITByysM8IZgzvCAmDYxqgcCa2L7cHjLl80
+        SgxFTf0iiEOVxf1mdj7C4UGAL2ab9IGh2fgkyS6sCBpbRNnabKl7yIf9qTNncR+RcESS58y2CFCK/Y7H
+        RmcZvS2Ed38mnhe2tKqtFEhJOGn8w8TYw9xUAOSGUGyXMdaD+sfaWow1RarWxnbtqoJInxlOGvcaGXuI
+        0/vB5HbJRQDofQCxBw1fG2ZrbhBNEr3N61jmh81MSsLZxkDsnVq1BeM6P8jmA3rXMt723vn0ou3N7SlU
+        q6OZhYiwA8O3Z0JBdcNrolGmm/MhNIvAP6RZFMquj/OyS54XBfi3BtQVQmgAsSIXC+uRgPytW3qerLqC
+        falFrG6ESiCzFCZvJF9ep6vzp+seoWaHlgYwMiIM5b4zWKbd9Y9p6dlQ9RnnswJDSy2i1RnqJaTscrDq
+        3K9Xd1ClUuONaygAI8PCoCkHb25srFl1psoif/mJJelJe8UFXHKTLDsVqjxNSvP17U0ad1xNgVSusDBg
+        3PW1Wb6nfdQqK6RKjy+WHaNL8kLleXAv7F2pyuKZ8IJMTojxXRiIHcjKDKrFq+96io8uPTm0VHJ4puKa
+        ekw97k6Me0AmiPvxWErCSWIGiHI0agmyqpEJTHKLenDQfv+I5tOHcVc0V8LmIcb24HbNmiXAmWkGGx7R
+        F1/VSu+Z3atmP9gdzfUZoikJJ4kBv/mTiHeh67BOdH20S/ljhIQLWOZm5qfRmUhJOEn8z/Nf4q2tP/5l
+        6s3DtAmaAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="checked_file_blur" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABcAAAAZCAIAAABVQiKHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        cwAAEnMBjCK5BwAAAoVJREFUOE/Nk+1vk0AYwP3jjfF1m8sWjTFmMdFonFnXunbFxWyTzdcP7Vxb6NYC
+        BweUl/JSKHAHzGtL5uiKH4wfdvlxOeB5fjy5e7h18T/GjbWkaeqH6ShYTIjI+yxybuQsOE7PB7E4nACu
+        zLyBWxCfqdiPkoWmeQujYnMcq14O6OK2jBoAEVEwrYhcaRKnOCvvmkVBhh/DEQFPmSxEB59p6FxDp1LE
+        aZiEpThCFoyD0QILIhZ5YpFGBDxlsiAWVo04HckOPhFDoDhemw6kdpoks8R5S0dGuo9FN4dgY0aNgIkM
+        D4uqydHVPr0bhWGWtsACkU5C8xbOQk0QtKWgyxvgqAb2XtEnw76KsrTrlrYUaR4Gbg7eJrsbdHoq92UP
+        Uhs9lmXkkIFRlnbd0ppZnDx2BCRJ/lbVqOewQQPTG47jrlxUC46ZjqDwPcGOBAdn2AiIUDkumdRThd4C
+        UCFPiIUtsoSGDKmX8qc3gij9sQyG8nHZ/vhEp56BbluwQmIhPbXYgj3LPHzrUGsEeLDJi5C3Il7WIF1y
+        6utWfV38SvGGx9mYYPoxCxdZYt+1f+wOa2tefcWqrkqHJaHVhLsb9s6yS63J++94qM0UM0vh7kauxe1X
+        zcrKaOfRsLKsbq/alYdebWlQf8F3mb6NCURBZtKZjFR0Rjg5YQ2F/qCXltzy/VH5nle5S3TC94O+7vct
+        fMnUUtR1OPklhKpmCp9remnZ3brtbN0Rqdc9SetZ+Cp/s0SkFj4ckN6FA0hXtc0H6vvHYpcF5LDzHUQs
+        HbHY8vMsaApBkx83TpXWznZj/6jJ+ZMnV2hMAsJCC/nNA5SMo4xwHAQBurydg3wyS5uz/PO4OZaLi98N
+        nF27R2Sn4gAAAABJRU5ErkJggg==
 </value>
   </data>
 </root>

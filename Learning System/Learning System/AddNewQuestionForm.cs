@@ -1,18 +1,6 @@
-﻿using Calculator;
-using Learning_System.ExternalClass;
+﻿using Learning_System.ExternalClass;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Buffers;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Learning_System
 {
@@ -29,11 +17,11 @@ namespace Learning_System
         Panel[] panelParent = new Panel[MAXOFCHOICE];
         Panel[] panel = new Panel[MAXOFCHOICE];
         RichTextBox[] richTextBoxes = new RichTextBox[MAXOFCHOICE];
-        System.Windows.Forms.ComboBox[] combobox = new System.Windows.Forms.ComboBox[MAXOFCHOICE];
+        ComboBox[] combobox = new ComboBox[MAXOFCHOICE];
         Label[] labelChoice = new Label[MAXOFCHOICE];
         Label[] labelGrade = new Label[MAXOFCHOICE];
         // Data cho category
-        private DataProcessing categoriesData = new DataProcessing();
+        private DataProcessing categoriesData = new();
         private List<string> showColumns = new() { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
         private List<Type> showType = new() { typeof(int), typeof(string), typeof(JArray), typeof(JArray), typeof(string), typeof(string) };
         private readonly List<string> showKey = new() { "PRIMARY KEY", "", "", "", "", "" };
@@ -42,10 +30,10 @@ namespace Learning_System
         private int currentOffset = 0;
 
         // Data cho question
-        private DataProcessing questionsData = new DataProcessing();
-        private List<string> showColumns_questions = new List<string> { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
-        private List<Type> showType_questions = new List<Type> { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
-        private readonly List<string> showKey_questions = new List<string>() { "PRIMARY KEY", "", "", "", "", "" };
+        private DataProcessing questionsData = new();
+        private List<string> showColumns_questions = new() { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
+        private List<Type> showType_questions = new() { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
+        private readonly List<string> showKey_questions = new() { "PRIMARY KEY", "", "", "", "", "" };
         private DataTable? questionsDataTable = new();
 
         public AddNewQuestionForm()
@@ -59,7 +47,7 @@ namespace Learning_System
             }
             catch (Exception ex)
             {
-                DialogResult dialog = MessageBox.Show("Can't get categories data:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Can't get categories data:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
             InitializeComponent();
@@ -70,13 +58,17 @@ namespace Learning_System
                 labelChoice[i] = new Label();
                 labelGrade[i] = new Label();
                 //panel Parent
-                panelParent[i] = new Panel();
-                panelParent[i].Location = new Point(0, panel_.Height + i * 258);
-                panelParent[i].Size = new Size(1212, 258);
+                panelParent[i] = new Panel
+                {
+                    Location = new Point(0, panel_.Height + i * 258),
+                    Size = new Size(1212, 258)
+                };
                 //panel
-                panel[i] = new Panel();
-                panel[i].Location = new Point(354, 6);
-                panel[i].Size = new Size(800, 243);
+                panel[i] = new Panel
+                {
+                    Location = new Point(354, 6),
+                    Size = new Size(800, 243)
+                };
                 panel[i].Controls.Add(richTextBoxes[i]);
                 panel[i].Controls.Add(combobox[i]);
                 panel[i].Controls.Add(labelChoice[i]);
@@ -213,7 +205,7 @@ namespace Learning_System
                 try
                 {
                     DataRow _maxIDRow = questionsData.Init().Offset(0).Limit(questionsData.Length()).Sort("ID desc").GetFirstRow();
-                    Questions _newQuestion = new Questions()
+                    Questions _newQuestion = new()
                     {
                         ID = (_maxIDRow == null) ? 0 : (_maxIDRow.Field<int>("ID") + 1),
                         CategoryID = Convert.ToInt32(_parentId.ToString()),
@@ -223,7 +215,7 @@ namespace Learning_System
                         Choice = _choice
                     };
 
-                    List<string> _query = new List<string> { "Id", _parentId.ToString() };
+                    List<string> _query = new() { "Id", _parentId.ToString() };
                     DataRow? _parentRow = categoriesData.Init().Offset(currentOffset).Limit(currentLimit).Query(_query).GetFirstRow();
 
                     if (_parentRow != null)
@@ -335,7 +327,7 @@ namespace Learning_System
                 {
                     DataRow _maxIDRow = questionsData.Init().Offset(0).Limit(questionsData.Length()).Sort("ID desc").GetFirstRow();
 
-                    Questions _newQuestion = new Questions()
+                    Questions _newQuestion = new()
                     {
                         ID = _maxIDRow.Field<int>("ID") + 1,
                         CategoryID = Convert.ToInt32(_parentId.ToString()),
@@ -345,7 +337,7 @@ namespace Learning_System
                         Choice = _choice
                     };
 
-                    List<string> _query = new List<string> { "Id", _parentId.ToString() };
+                    List<string> _query = new() { "Id", _parentId.ToString() };
                     DataRow _parentRow = categoriesData.Init().Offset(currentOffset).Limit(currentLimit).Query(_query).GetFirstRow();
 
                     if (_parentRow != null)
@@ -383,13 +375,17 @@ namespace Learning_System
                 labelChoice[i] = new Label();
                 labelGrade[i] = new Label();
                 //panel Parent
-                panelParent[i] = new Panel();
-                panelParent[i].Location = new Point(0, panelParent[i - 1].Location.Y + 258);
-                panelParent[i].Size = new Size(1212, 258);
+                panelParent[i] = new Panel
+                {
+                    Location = new Point(0, panelParent[i - 1].Location.Y + 258),
+                    Size = new Size(1212, 258)
+                };
                 //panel
-                panel[i] = new Panel();
-                panel[i].Location = new Point(354, 6);
-                panel[i].Size = new Size(800, 243);
+                panel[i] = new Panel
+                {
+                    Location = new Point(354, 6),
+                    Size = new Size(800, 243)
+                };
                 panel[i].Controls.Add(richTextBoxes[i]);
                 panel[i].Controls.Add(combobox[i]);
                 panel[i].Controls.Add(labelChoice[i]);

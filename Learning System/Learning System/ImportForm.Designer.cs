@@ -280,6 +280,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
             Controls.Add(panel4);
             Controls.Add(panel3);
             Controls.Add(panel2);

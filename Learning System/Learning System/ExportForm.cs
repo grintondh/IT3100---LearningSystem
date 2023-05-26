@@ -9,7 +9,6 @@ using iText.Layout.Element;
 using iText.Html2pdf;
 using iText.Html2pdf.Resolver.Font;
 using System.Diagnostics;
-using System.Collections.Generic;
 
 namespace Learning_System
 {
@@ -26,6 +25,7 @@ namespace Learning_System
         private readonly List<string> showKey = new() { "PRIMARY KEY", "", "", "", "", "" };
         private DataTable? DataTable = new();
 
+        [Obsolete]
         private void ExportForm_ExportBtn_Click(object sender, EventArgs e)
         {
             ExportForm_progressLabel.Text = "Processing... ";
@@ -118,7 +118,7 @@ namespace Learning_System
                             {
                                 foreach (var choiceLine in choiceArray)
                                 {
-                                    QuestionChoice qc = choiceLine.ToObject<QuestionChoice>();
+                                    QuestionChoice? qc = choiceLine.ToObject<QuestionChoice>();
                                     Task task = AddRTFToPdf(pdfDoc, qc.choice, RandomGUIDForTempFile);
                                     task.Wait();
                                 }
@@ -177,7 +177,7 @@ namespace Learning_System
                         {
                             File.Delete("tempRTF" + RandomGUIDForTempFile + ".rtf");
                             File.Delete("tempHTML" + RandomGUIDForTempFile + ".html");
-                        } 
+                        }
                         finally
                         {
                             MessageBox.Show("Your pdf file is exported successfully!", "Success", MessageBoxButtons.OK);

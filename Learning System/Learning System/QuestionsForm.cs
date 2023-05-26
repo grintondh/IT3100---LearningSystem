@@ -1,17 +1,7 @@
 ﻿using Learning_System.ExternalClass;
 using Microsoft.Office.Interop.Word;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
-using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Learning_System
 {
@@ -42,12 +32,13 @@ namespace Learning_System
             try
             {
                 JArray? jArray = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
-                if (jArray == null) {
+                if (jArray == null)
+                {
 
                     DialogResult dialogResult = MessageBox.Show("Can't get questions data:\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     if (dialogResult == DialogResult.OK)
-                    System.Windows.Forms.Application.Exit();
+                        System.Windows.Forms.Application.Exit();
                     return;
                 }
                 JArray _questionsData = jArray;

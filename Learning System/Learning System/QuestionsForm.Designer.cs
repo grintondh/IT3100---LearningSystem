@@ -195,6 +195,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
             Controls.Add(QuestionForm_ShowQuestionsDtg);
             Controls.Add(QuestionsForm_CreateNewQuestionBtn);
             Controls.Add(QuestionsForm_ShowOldQuestionsCb);

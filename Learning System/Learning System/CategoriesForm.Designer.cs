@@ -167,6 +167,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
             Controls.Add(label1);
             Controls.Add(CategoriesForm_errorTextLbl);
             Controls.Add(CategoriesForm_AddCategoryBtn);

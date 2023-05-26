@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Learning_System
+﻿namespace Learning_System
 {
     public partial class PopUpForm : UserControl
     {
@@ -100,7 +90,7 @@ namespace Learning_System
             PopUpForm_ExportBtn.BackColor = Color.FromArgb(224, 224, 224);
         }
 
-        private void giao_dien_xem_danh_sach_cau_hoi_Load(object sender, EventArgs e)
+        private void Giao_dien_xem_danh_sach_cau_hoi_Load(object sender, EventArgs e)
         {
             if (PopUpForm_QuestionsBtn.Focused == true)
             {
@@ -115,7 +105,7 @@ namespace Learning_System
             }
         }
 
-        private void button_Categories_Click(object sender, EventArgs e)
+        private void Button_Categories_Click(object sender, EventArgs e)
         {
             if (PopUpForm_CategoriesBtn.Focused == true)
             {
@@ -134,7 +124,7 @@ namespace Learning_System
             CategoriesForm.Visible = true;
         }
 
-        private void giao_dien_Categories_Load(object sender, EventArgs e)
+        private void Giao_dien_Categories_Load(object sender, EventArgs e)
         {
             if (PopUpForm_CategoriesBtn.Focused == true)
             {
@@ -149,7 +139,7 @@ namespace Learning_System
             }
         }
 
-        private void button_Import_Click(object sender, EventArgs e)
+        private void Button_Import_Click(object sender, EventArgs e)
         {
             if (PopUpForm_ImportBtn.Focused == true)
             {
@@ -168,7 +158,7 @@ namespace Learning_System
             ImportForm.Visible = true;
         }
 
-        private void giao_dien_Import_Load(object sender, EventArgs e)
+        private void Giao_dien_Import_Load(object sender, EventArgs e)
         {
             if (PopUpForm_ImportBtn.Focused == true)
             {
@@ -183,7 +173,7 @@ namespace Learning_System
             }
         }
 
-        private void button_Export_Click(object sender, EventArgs e)
+        private void Button_Export_Click(object sender, EventArgs e)
         {
             if (PopUpForm_ExportBtn.Focused == true)
             {
@@ -202,7 +192,7 @@ namespace Learning_System
             ExportForm.Visible = true;
         }
 
-        private void giao_dien_Export_Load(object sender, EventArgs e)
+        private void Giao_dien_Export_Load(object sender, EventArgs e)
         {
             if (PopUpForm_ExportBtn.Focused == true)
             {

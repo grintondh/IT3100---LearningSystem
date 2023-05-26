@@ -1,20 +1,6 @@
-﻿//using Calculator;
-using Learning_System.ExternalClass;
+﻿using Learning_System.ExternalClass;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Buffers;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
-using System.Diagnostics.Tracing;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Learning_System
 {
@@ -417,7 +403,7 @@ namespace Learning_System
             if (Count_Choices + 3 > MAXOFCHOICE)
             {
                 MessageBox.Show($"Max of choice is {MAXOFCHOICE}");
-                AddNewQuestionForm_MoreChoicesBtn.Visible = false ;
+                AddNewQuestionForm_MoreChoicesBtn.Visible = false;
                 return;
             }
             for (int i = Count_Choices; i < Count_Choices + 3; i++)

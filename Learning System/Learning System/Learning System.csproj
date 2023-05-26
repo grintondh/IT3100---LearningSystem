@@ -46,6 +46,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="HomePageForm.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

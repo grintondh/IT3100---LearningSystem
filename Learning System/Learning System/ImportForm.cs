@@ -1,20 +1,9 @@
 ﻿using Learning_System.ExternalClass;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.Office.Interop.Word;
 using System.Reflection;
 using Microsoft.VisualBasic.Devices;
-using static System.Windows.Forms.DataFormats;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Learning_System
 {
@@ -406,9 +395,10 @@ namespace Learning_System
 
         private void Panel_drop_file_DragDrop(object sender, DragEventArgs e)
         {
-            if (e.Data == null) {
+            if (e.Data == null)
+            {
                 MessageBox.Show("Please dragdrop a file here");
-                return; 
+                return;
             }
             string[] FileList = (string[])e.Data.GetData(DataFormats.FileDrop);
             ImportPath = FileList[0];

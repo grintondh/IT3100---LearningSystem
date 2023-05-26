@@ -1,4 +1,5 @@
 ﻿using Learning_System.ExternalClass;
+using Learning_System.Properties;
 using Newtonsoft.Json.Linq;
 using System.Data;
 
@@ -9,10 +10,10 @@ namespace Learning_System
         public HomePageForm()
         {
             InitializeComponent();
-            loadContestList();
+            LoadContestList();
         }
 
-	    private void loadContestList() 
+        private void LoadContestList()
         {
             JArray? contestJson = JsonProcessing.ImportJsonContentInDefaultFolder("contest.json", null, null);
 
@@ -21,23 +22,28 @@ namespace Learning_System
                 if (contestJson != null)
                 {
                     DataProcessing contestData = new();
-                    List<string> contestColumns = new() { "Name", "TimeStart" };
-                    List<Type> contestType = new() { typeof(string), typeof(DateTime) };
-                    List<string> contestKey = new() { "PRIMARY KEY", "" };
+                    List<string> contestColumns = new() { "Name", "TimeStart", "TimeEnd" };
+                    List<Type> contestType = new() { typeof(string), typeof(DateTime), typeof(DateTime) };
+                    List<string> contestKey = new() { "PRIMARY KEY", "", "" };
 
                     contestData.Import(contestColumns, contestType, contestKey);
                     contestData.Import(contestJson);
 
                     DataTable? _DT = contestData.Init().Sort("TimeStart asc").Get();
 
-                    if(_DT != null)
+                    if (_DT != null)
                     {
                         for (int i = 0; i < _DT.Rows.Count; i++)
                         {
-                            LinkLabel linklbl = new LinkLabel {
+                            LinkLabel linklbl = new()
+                            {
                                 Name = "ExportForm_Linklbl" + i.ToString(),
-                                Location = new Point(90, 150 + i * 45),
-                                Font = new System.Drawing.Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point),
+                                Location = new Point(120, 150 + i * 45),
+                                Font = new Font("Arvoregular", 12F, FontStyle.Regular, GraphicsUnit.Point),
+                                ActiveLinkColor = Color.Black,
+                                VisitedLinkColor = Color.Black,
+                                LinkColor = Color.Black,
+                                LinkBehavior = LinkBehavior.HoverUnderline,
                                 FlatStyle = FlatStyle.Flat,
                                 TabIndex = 10,
                                 Text = _DT.Rows[i].Field<string>("Name"),
@@ -46,24 +52,45 @@ namespace Learning_System
 
                             linklbl.Click += new EventHandler((sender, args) =>
                             {
-                                Properties.Settings.Default["ChoosingContest"] = linklbl.Text;
-                                Properties.Settings.Default.Save();
+                                Settings.Default["ChoosingContest"] = linklbl.Text;
+                                Settings.Default.Save();
 
-                                MessageBox.Show(Properties.Settings.Default.ChoosingContest, "Success", MessageBoxButtons.OK);
+                                MessageBox.Show(Settings.Default.ChoosingContest, "Success", MessageBoxButtons.OK);
                             });
 
+                            System.ComponentModel.ComponentResourceManager resources = new(typeof(HomePageForm));
+
+                            PictureBox pictureBox = new()
+                            {
+                                Name = "ExportForm_PictureBox" + i.ToString(),
+                                Location = new Point(90, 150 + i * 45),
+                                Size = new Size(20, 20),
+                                SizeMode = PictureBoxSizeMode.AutoSize,
+                                TabIndex = 0,
+                                TabStop = false
+                            };
+
+                            DateTime endTime = _DT.Rows[i].Field<DateTime>("TimeEnd");
+                            if (DateTime.Compare(endTime, DateTime.Now) < 0)
+                                pictureBox.Image = resources.GetObject("checked_file_blur") as Image;
+                            else
+                                pictureBox.Image = resources.GetObject("checked_file") as Image;
+
                             panel2.Controls.Add(linklbl);
+                            panel2.Controls.Add(pictureBox);
                         }
                     }
                 }
                 else
                     throw new Exception();
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 MessageBox.Show("Can't load your contest file!\n" + ex, "Error", MessageBoxButtons.OK);
             }
         }
 
-        private void picture_setting_Click(object sender, EventArgs e)
+        private void Picture_setting_Click(object sender, EventArgs e)
         {
             if (panel_popup.Visible == false)
             {
@@ -75,7 +102,7 @@ namespace Learning_System
             }
         }
 
-        private void button_Import_Click(object sender, EventArgs e)
+        private void Button_Import_Click(object sender, EventArgs e)
         {
             if (panel_popup.Visible == false)
             {
@@ -89,7 +116,7 @@ namespace Learning_System
             PopUpForm.Show_Import();
         }
 
-        private void button_Categories_Click(object sender, EventArgs e)
+        private void Button_Categories_Click(object sender, EventArgs e)
         {
             if (panel_popup.Visible == false)
             {
@@ -103,7 +130,7 @@ namespace Learning_System
             PopUpForm.Show_Categories();
         }
 
-        private void button_Questions_Click(object sender, EventArgs e)
+        private void Button_Questions_Click(object sender, EventArgs e)
         {
             if (panel_popup.Visible == false)
             {
@@ -117,7 +144,7 @@ namespace Learning_System
             PopUpForm.Show_Questions();
         }
 
-        private void button_Export_Click(object sender, EventArgs e)
+        private void Button_Export_Click(object sender, EventArgs e)
         {
             if (panel_popup.Visible == false)
             {
