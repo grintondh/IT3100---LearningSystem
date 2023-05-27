@@ -96,6 +96,8 @@ namespace Learning_System
         {
             if (questionID.Count == 0) return;
             EditQuiz_QuestionDtg.Rows.Clear();
+            EditQuiz_QuestionDtg.AutoGenerateColumns = false;
+            EditQuiz_QuestionDtg.RowPostPaint += AutoNumberInDtg;
             for (int i = 0; i < questionID.Count; i++)
             {
                 List<string> query = new List<string> { "ID", questionID[i].ToString() };
@@ -107,6 +109,14 @@ namespace Learning_System
             }
             EditQuiz_NumberofQuestionLbl.Text = $"Question: {questionID.Count} | This quiz is open";
             EditQuiz_TotalofMarkLbl.Text = $"Total of mark: {questionID.Count}.00";
+        }
+
+        private void AutoNumberInDtg(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            using (SolidBrush b = new SolidBrush(Color.Black))
+            {
+                e.Graphics.DrawString((e.RowIndex + 1).ToString(), e.InheritedRowStyle.Font, b, e.RowBounds.Location.X + 15, e.RowBounds.Location.Y + 4);
+            }
         }
 
         private void EditQuiz_QuestionDtg_CellContentClick(object sender, DataGridViewCellEventArgs e)
