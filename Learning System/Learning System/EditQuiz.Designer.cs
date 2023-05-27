@@ -46,6 +46,7 @@
             EditQuiz_ContestNameLbl = new Label();
             EditQuiz_QuestionDtg = new DataGridView();
             Content = new DataGridViewTextBoxColumn();
+            DefaultMark = new DataGridViewTextBoxColumn();
             Delete = new DataGridViewImageColumn();
             QuestionID = new DataGridViewTextBoxColumn();
             panel_edit.SuspendLayout();
@@ -260,10 +261,10 @@
             EditQuiz_QuestionDtg.AllowUserToResizeColumns = false;
             EditQuiz_QuestionDtg.AllowUserToResizeRows = false;
             EditQuiz_QuestionDtg.BackgroundColor = SystemColors.Control;
-            EditQuiz_QuestionDtg.BorderStyle = BorderStyle.Fixed3D;
+            EditQuiz_QuestionDtg.BorderStyle = BorderStyle.None;
             EditQuiz_QuestionDtg.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             EditQuiz_QuestionDtg.ColumnHeadersVisible = false;
-            EditQuiz_QuestionDtg.Columns.AddRange(new DataGridViewColumn[] { Content, Delete, QuestionID });
+            EditQuiz_QuestionDtg.Columns.AddRange(new DataGridViewColumn[] { Content, Delete, QuestionID, DefaultMark });
             EditQuiz_QuestionDtg.GridColor = SystemColors.Control;
             EditQuiz_QuestionDtg.Location = new Point(14, 258);
             EditQuiz_QuestionDtg.Name = "EditQuiz_QuestionDtg";
@@ -281,6 +282,14 @@
             Content.Name = "Content";
             Content.ReadOnly = true;
             Content.Width = 1200;
+            // 
+            // DefaultMark
+            // 
+            DefaultMark.HeaderText = "DefaultMark";
+            DefaultMark.MinimumWidth = 6;
+            DefaultMark.Name = "DefaultMark";
+            DefaultMark.ReadOnly = true;
+            DefaultMark.Width = 50;
             // 
             // Delete
             // 
@@ -336,5 +345,6 @@
         private DataGridViewTextBoxColumn Content;
         private DataGridViewImageColumn Delete;
         private DataGridViewTextBoxColumn QuestionID;
+        private DataGridViewTextBoxColumn DefaultMark;
     }
 }

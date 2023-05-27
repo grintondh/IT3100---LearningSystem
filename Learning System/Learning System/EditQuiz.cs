@@ -96,6 +96,8 @@ namespace Learning_System
         {
             if (questionID.Count == 0) return;
             EditQuiz_QuestionDtg.Rows.Clear();
+            EditQuiz_QuestionDtg.Width = Screen.PrimaryScreen.WorkingArea.Width - 30;
+            EditQuiz_QuestionDtg.Columns[0].Width = EditQuiz_QuestionDtg.Width - 51 - 150;
             EditQuiz_QuestionDtg.AutoGenerateColumns = false;
             EditQuiz_QuestionDtg.RowPostPaint += AutoNumberInDtg;
             for (int i = 0; i < questionID.Count; i++)
@@ -105,7 +107,10 @@ namespace Learning_System
                 var index = EditQuiz_QuestionDtg.Rows.Add();
                 DataGridViewRow DtgRow = EditQuiz_QuestionDtg.Rows[index];
                 DtgRow.Cells[0].Value = row.Field<string>("Name") + " " + row.Field<string>("Content");
+                List<QuestionChoice> choices = row.Field<JArray>("Choice").ToObject<List<QuestionChoice>>();
+                for (int j = 0; j < choices.Count; j++) DtgRow.Cells[0].Value += " " + choices[j].choice;
                 DtgRow.Cells[2].Value = row.Field<int>("ID");
+                DtgRow.Cells[3].Value = row.Field<double>("DefaultMark");
             }
             EditQuiz_NumberofQuestionLbl.Text = $"Question: {questionID.Count} | This quiz is open";
             EditQuiz_TotalofMarkLbl.Text = $"Total of mark: {questionID.Count}.00";

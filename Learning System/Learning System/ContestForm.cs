@@ -48,7 +48,7 @@ namespace Learning_System
             JArray _questionsData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
             List<string> showColumns_questions = new List<string> { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
             List<Type> showType_questions = new List<Type> { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
-            List<string> showKey_questions = new List<string>() { "PRIMARY KEY", "", "", "", "", "" };
+            List<string> showKey_questions = new List<string>() { "PRIMARY KEY", "NOT NULL", "", "NOT NULL", "NOT NULL", "" };
             questionsData.Import(showColumns_questions, showType_questions, showKey_questions);
             questionsData.Import(_questionsData);
         }
@@ -58,7 +58,7 @@ namespace Learning_System
             _categoriesDataJarray = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
             List<string> showColumns = new() { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
             List<Type> showType = new() { typeof(int), typeof(string), typeof(JArray), typeof(JArray), typeof(string), typeof(string) };
-            List<string> showKey = new() { "PRIMARY KEY", "", "", "", "", "" };
+            List<string> showKey = new() { "PRIMARY KEY", "NOT NULL", "", "", "", "" };
             categoriesData.Import(showColumns, showType, showKey);
             categoriesData.Import(_categoriesDataJarray);
         }
