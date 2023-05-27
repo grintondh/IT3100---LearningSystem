@@ -46,9 +46,9 @@
             EditQuiz_ContestNameLbl = new Label();
             EditQuiz_QuestionDtg = new DataGridView();
             Content = new DataGridViewTextBoxColumn();
-            DefaultMark = new DataGridViewTextBoxColumn();
             Delete = new DataGridViewImageColumn();
             QuestionID = new DataGridViewTextBoxColumn();
+            DefaultMark = new DataGridViewTextBoxColumn();
             panel_edit.SuspendLayout();
             flowLayoutPanel_popup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)EditQuiz_QuestionDtg).BeginInit();
@@ -56,6 +56,7 @@
             // 
             // panel_edit
             // 
+            panel_edit.BackColor = Color.White;
             panel_edit.Controls.Add(flowLayoutPanel_popup);
             panel_edit.Controls.Add(EditQuiz_AddBtn);
             panel_edit.Controls.Add(EditQuiz_ShuffleCbx);
@@ -134,7 +135,7 @@
             // EditQuiz_AddBtn
             // 
             EditQuiz_AddBtn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            EditQuiz_AddBtn.BackColor = SystemColors.Control;
+            EditQuiz_AddBtn.BackColor = Color.White;
             EditQuiz_AddBtn.FlatAppearance.BorderColor = SystemColors.Control;
             EditQuiz_AddBtn.FlatStyle = FlatStyle.Flat;
             EditQuiz_AddBtn.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
@@ -260,7 +261,7 @@
             EditQuiz_QuestionDtg.AllowUserToDeleteRows = false;
             EditQuiz_QuestionDtg.AllowUserToResizeColumns = false;
             EditQuiz_QuestionDtg.AllowUserToResizeRows = false;
-            EditQuiz_QuestionDtg.BackgroundColor = SystemColors.Control;
+            EditQuiz_QuestionDtg.BackgroundColor = Color.White;
             EditQuiz_QuestionDtg.BorderStyle = BorderStyle.None;
             EditQuiz_QuestionDtg.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             EditQuiz_QuestionDtg.ColumnHeadersVisible = false;
@@ -274,6 +275,7 @@
             EditQuiz_QuestionDtg.Size = new Size(1349, 524);
             EditQuiz_QuestionDtg.TabIndex = 27;
             EditQuiz_QuestionDtg.CellContentClick += EditQuiz_QuestionDtg_CellContentClick;
+            EditQuiz_QuestionDtg.RowPostPaint += AutoNumberInDtg;
             // 
             // Content
             // 
@@ -282,14 +284,6 @@
             Content.Name = "Content";
             Content.ReadOnly = true;
             Content.Width = 1200;
-            // 
-            // DefaultMark
-            // 
-            DefaultMark.HeaderText = "DefaultMark";
-            DefaultMark.MinimumWidth = 6;
-            DefaultMark.Name = "DefaultMark";
-            DefaultMark.ReadOnly = true;
-            DefaultMark.Width = 50;
             // 
             // Delete
             // 
@@ -309,6 +303,14 @@
             QuestionID.ReadOnly = true;
             QuestionID.Visible = false;
             QuestionID.Width = 50;
+            // 
+            // DefaultMark
+            // 
+            DefaultMark.HeaderText = "DefaultMark";
+            DefaultMark.MinimumWidth = 6;
+            DefaultMark.Name = "DefaultMark";
+            DefaultMark.ReadOnly = true;
+            DefaultMark.Width = 50;
             // 
             // EditQuiz
             // 

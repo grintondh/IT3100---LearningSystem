@@ -72,9 +72,10 @@ namespace Learning_System
             List<string> query = new() { "Id", parentContestForm.ContestID.ToString() };
             DataRow row = contestData.Init().Offset(0).Limit(1).Query(query).GetFirstRow();
             row.Field<JArray>("QuestionArray").Clear();
-            row.Field<JArray>("QuestionArray").Add(JArray.FromObject(questionID));
-            //questionArray.Clear();
-            //questionArray = JArray.FromObject(questionID);
+            row.Field<JArray>("QuestionArray").Add(questionID);
+            row.BeginEdit();
+            row["ShuffleAnswer"] = EditQuiz_ShuffleCbx.Checked;
+            row.EndEdit();
             JObject x = DataProcessing.ConvertDataRowToJObject(row);
             if (contestData.Init().Offset(0).Limit(1).Query(query).Update(x) == DataProcessing.StatusCode.Error)
                 throw new Exception();
@@ -99,7 +100,8 @@ namespace Learning_System
             EditQuiz_QuestionDtg.Width = Screen.PrimaryScreen.WorkingArea.Width - 30;
             EditQuiz_QuestionDtg.Columns[0].Width = EditQuiz_QuestionDtg.Width - 51 - 150;
             EditQuiz_QuestionDtg.AutoGenerateColumns = false;
-            EditQuiz_QuestionDtg.RowPostPaint += AutoNumberInDtg;
+            EditQuiz_QuestionDtg.DefaultCellStyle.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            EditQuiz_QuestionDtg.RowTemplate.Height = 35;
             for (int i = 0; i < questionID.Count; i++)
             {
                 List<string> query = new List<string> { "ID", questionID[i].ToString() };
@@ -111,6 +113,8 @@ namespace Learning_System
                 for (int j = 0; j < choices.Count; j++) DtgRow.Cells[0].Value += " " + choices[j].choice;
                 DtgRow.Cells[2].Value = row.Field<int>("ID");
                 DtgRow.Cells[3].Value = row.Field<double>("DefaultMark");
+                if (i % 2 == 0) DtgRow.DefaultCellStyle.BackColor = Color.White;
+                else DtgRow.DefaultCellStyle.BackColor = Color.AliceBlue;
             }
             EditQuiz_NumberofQuestionLbl.Text = $"Question: {questionID.Count} | This quiz is open";
             EditQuiz_TotalofMarkLbl.Text = $"Total of mark: {questionID.Count}.00";

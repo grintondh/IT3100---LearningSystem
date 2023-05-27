@@ -29,6 +29,12 @@ namespace Learning_System
             InitializeComponent();
             FromQuestionBank_SelectCategoryCbo.Text = "  Default";
             ParentEditQuiz = _EditQuiz;
+            FromQuestionBank_ShowQuestionsDtg.BorderStyle = BorderStyle.None;
+            FromQuestionBank_ShowQuestionsDtg.Width = Screen.PrimaryScreen.WorkingArea.Width - 30;
+            FromQuestionBank_ShowQuestionsDtg.Columns[1].Width = FromQuestionBank_ShowQuestionsDtg.Width - 100;
+            FromQuestionBank_ShowQuestionsDtg.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            FromQuestionBank_ShowQuestionsDtg.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            FromQuestionBank_ShowQuestionsDtg.RowTemplate.Height = 35;
         }
         public void addData(DataProcessing _questionData, DataProcessing _categoriesData, JArray __categoriesDataJarray)
         {
@@ -144,12 +150,6 @@ namespace Learning_System
                 addList[begin].Name = addList[begin].Name + " (" + addList[begin].QuestionArray.Count + ")";
             List.Add(addList[begin]);
         }
-
-
-
-
-
-
 
         private void FromQuestionBank_SelectCategoryCbo_SelectedIndexChanged(object sender, EventArgs e)
         {

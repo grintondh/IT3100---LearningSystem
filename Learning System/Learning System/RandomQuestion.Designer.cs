@@ -38,9 +38,9 @@
             RandomQuestion_ShowQuestionDgv = new DataGridView();
             Icon = new DataGridViewImageColumn();
             Content = new DataGridViewTextBoxColumn();
-            textBox1 = new TextBox();
             RandomQuestions_NumberOfRdQuestionsCbo = new ComboBox();
             RandomQuestion_ExitBtn = new Button();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)RandomQuestion_ShowQuestionDgv).BeginInit();
             SuspendLayout();
             // 
@@ -129,7 +129,7 @@
             RandomQuestion_ShowQuestionDgv.AllowUserToResizeColumns = false;
             RandomQuestion_ShowQuestionDgv.AllowUserToResizeRows = false;
             RandomQuestion_ShowQuestionDgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            RandomQuestion_ShowQuestionDgv.BackgroundColor = SystemColors.Control;
+            RandomQuestion_ShowQuestionDgv.BackgroundColor = Color.White;
             RandomQuestion_ShowQuestionDgv.BorderStyle = BorderStyle.Fixed3D;
             RandomQuestion_ShowQuestionDgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             RandomQuestion_ShowQuestionDgv.ColumnHeadersVisible = false;
@@ -160,17 +160,6 @@
             Content.ReadOnly = true;
             Content.Width = 1350;
             // 
-            // textBox1
-            // 
-            textBox1.BackColor = SystemColors.Control;
-            textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.Location = new Point(13, 218);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(339, 23);
-            textBox1.TabIndex = 31;
-            textBox1.Text = "Questions matching this filter";
-            // 
             // RandomQuestions_NumberOfRdQuestionsCbo
             // 
             RandomQuestions_NumberOfRdQuestionsCbo.FormattingEnabled = true;
@@ -193,13 +182,24 @@
             RandomQuestion_ExitBtn.UseVisualStyleBackColor = false;
             RandomQuestion_ExitBtn.Click += RandomQuestion_ExitBtn_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(13, 212);
+            label1.Name = "label1";
+            label1.Size = new Size(234, 23);
+            label1.TabIndex = 34;
+            label1.Text = "Questions matching this filter";
+            // 
             // RandomQuestion
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
+            Controls.Add(label1);
             Controls.Add(RandomQuestion_ExitBtn);
             Controls.Add(RandomQuestions_NumberOfRdQuestionsCbo);
-            Controls.Add(textBox1);
             Controls.Add(RandomQuestion_ShowQuestionDgv);
             Controls.Add(RandomQuestion_ButtonPanelPnl);
             Controls.Add(RandomQuestion_AddBtn);
@@ -227,8 +227,8 @@
         private DataGridView RandomQuestion_ShowQuestionDgv;
         private DataGridViewImageColumn Icon;
         private DataGridViewTextBoxColumn Content;
-        private TextBox textBox1;
         private ComboBox RandomQuestions_NumberOfRdQuestionsCbo;
         private Button RandomQuestion_ExitBtn;
+        private Label label1;
     }
 }

@@ -97,6 +97,11 @@ namespace Learning_System
             ParentEditQuiz = _EditQuiz;
             RandomQuestion_CategoryCbo.SelectedIndex = -1;
             RandomQuestion_CategoryCbo.SelectedText = "  Default";
+            RandomQuestion_ShowQuestionDgv.BorderStyle = BorderStyle.None;
+            RandomQuestion_ShowQuestionDgv.Width = Screen.PrimaryScreen.WorkingArea.Width - 30;
+            RandomQuestion_ShowQuestionDgv.Columns[1].Width = RandomQuestion_ShowQuestionDgv.Width - 170;
+            RandomQuestion_ShowQuestionDgv.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            RandomQuestion_ShowQuestionDgv.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
 
             for (int i = 0; i < NUMBER_OF_PAGES_PER_GROUP + 4; i++)
             {
@@ -287,6 +292,8 @@ namespace Learning_System
                 var index = RandomQuestion_ShowQuestionDgv.Rows.Add();
                 DataGridViewRow row = RandomQuestion_ShowQuestionDgv.Rows[index];
                 row.Cells[1].Value = selectedQuestionsContent[i];
+                if (i % 2 == 0) row.DefaultCellStyle.BackColor = Color.White;
+                else row.DefaultCellStyle.BackColor = Color.AliceBlue;
             }
             RandomQuestion_ShowQuestionDgv.AutoResizeRows(DataGridViewAutoSizeRowsMode.DisplayedCells);
         }

@@ -92,10 +92,11 @@ namespace Learning_System
             this.contestData = contestData;
             editQuiz.loadQuestionID(questionID);
         }
-        
+
         public void updateContestData(DataProcessing contestData)
         {
             this.contestData = contestData;
         }
+
     }
 }

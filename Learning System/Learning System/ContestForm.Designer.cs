@@ -59,6 +59,7 @@
             // 
             // panel_heading
             // 
+            panel_heading.BackColor = Color.White;
             panel_heading.BorderStyle = BorderStyle.FixedSingle;
             panel_heading.Controls.Add(ContestForm_PathLbl);
             panel_heading.Controls.Add(ContestForm_ITLbl);
@@ -100,6 +101,7 @@
             // 
             // panel_main
             // 
+            panel_main.BackColor = Color.White;
             panel_main.Controls.Add(ContestForm_PreviewQuizBtn);
             panel_main.Controls.Add(ContestForm_SummaryLbl);
             panel_main.Controls.Add(ContestForm_GradingMethodLbl);
