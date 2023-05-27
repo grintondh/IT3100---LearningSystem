@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportForm));
             panel1 = new Panel();
             ImportForm_HeadingLbl = new Label();
@@ -39,6 +40,9 @@
             ImportForm_ExpandPic2 = new PictureBox();
             ImportForm_GeneralBtn = new Button();
             panel4 = new Panel();
+            pictureBox3 = new PictureBox();
+            label1 = new Label();
+            pictureBox1 = new PictureBox();
             ImportForm_StatusLbl = new Label();
             panel_drop_file = new Panel();
             ImportForm_DropLbl = new Label();
@@ -49,12 +53,15 @@
             ImportForm_ImportLbl = new Label();
             ImportForm_ShowImportBtn = new Button();
             openFileDialog = new OpenFileDialog();
+            ImportForm_Tooltip = new ToolTip(components);
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic1).BeginInit();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic2).BeginInit();
             panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel_drop_file.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ImportForm_DropPic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic3).BeginInit();
@@ -75,7 +82,7 @@
             ImportForm_HeadingLbl.AutoSize = true;
             ImportForm_HeadingLbl.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point);
             ImportForm_HeadingLbl.ForeColor = Color.FromArgb(194, 36, 36);
-            ImportForm_HeadingLbl.Location = new Point(42, 18);
+            ImportForm_HeadingLbl.Location = new Point(42, 19);
             ImportForm_HeadingLbl.Name = "ImportForm_HeadingLbl";
             ImportForm_HeadingLbl.Size = new Size(410, 46);
             ImportForm_HeadingLbl.TabIndex = 3;
@@ -164,6 +171,9 @@
             // 
             panel4.AutoScroll = true;
             panel4.BackColor = SystemColors.ControlLightLight;
+            panel4.Controls.Add(pictureBox3);
+            panel4.Controls.Add(label1);
+            panel4.Controls.Add(pictureBox1);
             panel4.Controls.Add(ImportForm_StatusLbl);
             panel4.Controls.Add(panel_drop_file);
             panel4.Controls.Add(ImportForm_ExpandPic3);
@@ -174,8 +184,39 @@
             panel4.Dock = DockStyle.Fill;
             panel4.Location = new Point(0, 202);
             panel4.Name = "panel4";
-            panel4.Size = new Size(1112, 383);
+            panel4.Size = new Size(1112, 448);
             panel4.TabIndex = 5;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Image = Properties.Resources.exclaimation_removebg_preview;
+            pictureBox3.Location = new Point(745, 398);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(20, 20);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 27;
+            pictureBox3.TabStop = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(351, 393);
+            label1.Name = "label1";
+            label1.Size = new Size(388, 25);
+            label1.TabIndex = 26;
+            label1.Text = "There are required fields in this form marked";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.exclaimation_removebg_preview;
+            pictureBox1.Location = new Point(351, 81);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(20, 20);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 19;
+            pictureBox1.TabStop = false;
+            ImportForm_Tooltip.SetToolTip(pictureBox1, "Required");
             // 
             // ImportForm_StatusLbl
             // 
@@ -235,7 +276,7 @@
             ImportForm_ImportBtn.FlatStyle = FlatStyle.Flat;
             ImportForm_ImportBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             ImportForm_ImportBtn.ForeColor = Color.White;
-            ImportForm_ImportBtn.Location = new Point(476, 312);
+            ImportForm_ImportBtn.Location = new Point(497, 325);
             ImportForm_ImportBtn.Name = "ImportForm_ImportBtn";
             ImportForm_ImportBtn.Size = new Size(159, 53);
             ImportForm_ImportBtn.TabIndex = 4;
@@ -290,7 +331,7 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "ImportForm";
-            Size = new Size(1112, 585);
+            Size = new Size(1112, 650);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -300,6 +341,8 @@
             ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic2).EndInit();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel_drop_file.ResumeLayout(false);
             panel_drop_file.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)ImportForm_DropPic).EndInit();
@@ -329,5 +372,9 @@
         private Label ImportForm_DropLbl;
         private PictureBox ImportForm_DropPic;
         private Label ImportForm_StatusLbl;
+        private PictureBox pictureBox1;
+        private ToolTip ImportForm_Tooltip;
+        private PictureBox pictureBox3;
+        private Label label1;
     }
 }

@@ -32,7 +32,7 @@ namespace Learning_System
                     contestData.Import(contestColumns, contestType, contestKey);
                     contestData.Import(contestJson);
 
-                    DataTable? _DT = contestData.Init().Sort("TimeStart asc").Get();
+                    DataTable? _DT = contestData.Init().Sort("TimeStart desc").Get();
 
                     if (_DT == null)
                         throw new E02CantProcessQuery();

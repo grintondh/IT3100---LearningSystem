@@ -36,7 +36,7 @@
     <Compile Update="HomePageForm.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>HomePageForm.resx</DependentUpon>
+      <DependentUpon>HomePageForm.cs</DependentUpon>
     </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>

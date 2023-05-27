@@ -125,7 +125,7 @@
             QuestionsForm_QuestionsBankLbl.AutoSize = true;
             QuestionsForm_QuestionsBankLbl.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point);
             QuestionsForm_QuestionsBankLbl.ForeColor = Color.FromArgb(194, 36, 36);
-            QuestionsForm_QuestionsBankLbl.Location = new Point(40, 21);
+            QuestionsForm_QuestionsBankLbl.Location = new Point(42, 19);
             QuestionsForm_QuestionsBankLbl.Name = "QuestionsForm_QuestionsBankLbl";
             QuestionsForm_QuestionsBankLbl.Size = new Size(251, 46);
             QuestionsForm_QuestionsBankLbl.TabIndex = 7;
@@ -231,7 +231,7 @@
             Controls.Add(QuestionsForm_SelectCategoryLbl);
             Controls.Add(QuestionsForm_QuestionsBankLbl);
             Name = "QuestionsForm";
-            Size = new Size(1720, 696);
+            Size = new Size(1699, 696);
             ((System.ComponentModel.ISupportInitialize)QuestionForm_ShowQuestionsDtg).EndInit();
             ResumeLayout(false);
             PerformLayout();

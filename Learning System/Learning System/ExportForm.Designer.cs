@@ -36,6 +36,7 @@
             ExportForm_progressLabel = new ToolStripStatusLabel();
             ExportForm_ShowPwdCbx = new CheckBox();
             ExportForm_OpenAfterExportCbx = new CheckBox();
+            CategoriesForm_HeadingLbl = new Label();
             statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -45,7 +46,7 @@
             ExportForm_ExportBtn.FlatStyle = FlatStyle.Flat;
             ExportForm_ExportBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             ExportForm_ExportBtn.ForeColor = Color.White;
-            ExportForm_ExportBtn.Location = new Point(509, 66);
+            ExportForm_ExportBtn.Location = new Point(360, 316);
             ExportForm_ExportBtn.Name = "ExportForm_ExportBtn";
             ExportForm_ExportBtn.Size = new Size(185, 57);
             ExportForm_ExportBtn.TabIndex = 10;
@@ -56,19 +57,19 @@
             // ExportForm_PasswordTxt
             // 
             ExportForm_PasswordTxt.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            ExportForm_PasswordTxt.Location = new Point(90, 66);
+            ExportForm_PasswordTxt.Location = new Point(75, 99);
             ExportForm_PasswordTxt.Name = "ExportForm_PasswordTxt";
             ExportForm_PasswordTxt.PasswordChar = '*';
             ExportForm_PasswordTxt.PlaceholderText = "Set your password here...";
             ExportForm_PasswordTxt.ReadOnly = true;
-            ExportForm_PasswordTxt.Size = new Size(275, 32);
+            ExportForm_PasswordTxt.Size = new Size(498, 32);
             ExportForm_PasswordTxt.TabIndex = 11;
             // 
             // ExportForm_EnablePWCbx
             // 
             ExportForm_EnablePWCbx.AutoSize = true;
             ExportForm_EnablePWCbx.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            ExportForm_EnablePWCbx.Location = new Point(90, 104);
+            ExportForm_EnablePWCbx.Location = new Point(75, 137);
             ExportForm_EnablePWCbx.Name = "ExportForm_EnablePWCbx";
             ExportForm_EnablePWCbx.Size = new Size(176, 29);
             ExportForm_EnablePWCbx.TabIndex = 12;
@@ -105,7 +106,7 @@
             ExportForm_ShowPwdCbx.AutoSize = true;
             ExportForm_ShowPwdCbx.Enabled = false;
             ExportForm_ShowPwdCbx.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            ExportForm_ShowPwdCbx.Location = new Point(90, 139);
+            ExportForm_ShowPwdCbx.Location = new Point(75, 172);
             ExportForm_ShowPwdCbx.Name = "ExportForm_ShowPwdCbx";
             ExportForm_ShowPwdCbx.Size = new Size(165, 29);
             ExportForm_ShowPwdCbx.TabIndex = 14;
@@ -117,12 +118,23 @@
             // 
             ExportForm_OpenAfterExportCbx.AutoSize = true;
             ExportForm_OpenAfterExportCbx.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            ExportForm_OpenAfterExportCbx.Location = new Point(90, 174);
+            ExportForm_OpenAfterExportCbx.Location = new Point(75, 207);
             ExportForm_OpenAfterExportCbx.Name = "ExportForm_OpenAfterExportCbx";
             ExportForm_OpenAfterExportCbx.Size = new Size(241, 29);
             ExportForm_OpenAfterExportCbx.TabIndex = 15;
             ExportForm_OpenAfterExportCbx.Text = "Open file after exporting";
             ExportForm_OpenAfterExportCbx.UseVisualStyleBackColor = true;
+            // 
+            // CategoriesForm_HeadingLbl
+            // 
+            CategoriesForm_HeadingLbl.AutoSize = true;
+            CategoriesForm_HeadingLbl.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point);
+            CategoriesForm_HeadingLbl.ForeColor = Color.FromArgb(194, 36, 36);
+            CategoriesForm_HeadingLbl.Location = new Point(42, 19);
+            CategoriesForm_HeadingLbl.Name = "CategoriesForm_HeadingLbl";
+            CategoriesForm_HeadingLbl.Size = new Size(380, 46);
+            CategoriesForm_HeadingLbl.TabIndex = 16;
+            CategoriesForm_HeadingLbl.Text = "Export questions to PDF";
             // 
             // ExportForm
             // 
@@ -130,6 +142,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = SystemColors.ControlLightLight;
+            Controls.Add(CategoriesForm_HeadingLbl);
             Controls.Add(ExportForm_OpenAfterExportCbx);
             Controls.Add(ExportForm_ShowPwdCbx);
             Controls.Add(statusStrip1);
@@ -154,5 +167,6 @@
         private ToolStripStatusLabel ExportForm_progressLabel;
         private CheckBox ExportForm_ShowPwdCbx;
         private CheckBox ExportForm_OpenAfterExportCbx;
+        private Label CategoriesForm_HeadingLbl;
     }
 }

@@ -57,6 +57,7 @@ namespace Learning_System
             }
 
             InitializeComponent();
+            this.ActiveControl = AddNewQuestionForm_CategoryCbo;
 
             for (int i = 0; i < 2; i++)
             {
@@ -88,13 +89,13 @@ namespace Learning_System
                 combobox[i].Location = new Point(106, 201);
                 combobox[i].Size = new Size(151, 31);
                 combobox[i].Text = "None";
-                combobox[i].TabIndex = i + 13;
+                combobox[i].TabIndex = (i * 2 + 1) + 12;
                 // richtextbox
                 richTextBoxes[i].Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
                 richTextBoxes[i].Location = new Point(106, 14);
                 richTextBoxes[i].Size = new Size(568, 162);
                 richTextBoxes[i].Text = "";
-                combobox[i].TabIndex = i + 12;
+                combobox[i].TabIndex = (i * 2) + 12;
                 // label choice
                 labelChoice[i].AutoSize = true;
                 labelChoice[i].Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
@@ -494,14 +495,14 @@ namespace Learning_System
                 combobox[i].Items.AddRange(new object[] { "None", "100%", "90%", "83.33333%", "80%", "75%", "70%", "66.66667%", "60%", "50%", "40%", "33.33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "-5%", "-10%", "-11.11111%", "-12.5%", "-14.28571%", "-16.66667%", "-20%", "-25%", "-30%", "-33.33333%", "-40%", "-50%", "-60%", "-66.66667%", "-70%", "-75%", "-80%", "-83.33333%" });
                 combobox[i].Location = new Point(106, 201);
                 combobox[i].Size = new Size(151, 31);
-                combobox[i].TabIndex = i + 13;
+                combobox[i].TabIndex = (i * 2 + 1) + 12;
                 combobox[i].Text = "None";
                 // richtextbox
                 richTextBoxes[i].Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
                 richTextBoxes[i].Location = new Point(106, 14);
                 richTextBoxes[i].Size = new Size(568, 162);
                 richTextBoxes[i].Text = "";
-                combobox[i].TabIndex = i + 12;
+                combobox[i].TabIndex = (i * 2) + 12;
                 // label choice
                 labelChoice[i].AutoSize = true;
                 labelChoice[i].Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);

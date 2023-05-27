@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditQuestionForm));
             AddNewQuestionForm_HeadingLbl = new Label();
             panel_heading = new Panel();
             panel_body = new Panel();
@@ -118,38 +117,38 @@
             panel_.Location = new Point(0, 0);
             panel_.Name = "panel_";
             panel_.Size = new Size(1233, 474);
-            panel_.TabIndex = 20;
+            panel_.TabIndex = 0;
             // 
             // pictureBox2
             // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(429, 437);
+            pictureBox2.Image = Properties.Resources.exclaimation_removebg_preview;
+            pictureBox2.Location = new Point(429, 442);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(25, 25);
+            pictureBox2.Size = new Size(20, 20);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 30;
+            pictureBox2.TabIndex = 0;
             pictureBox2.TabStop = false;
             EditQuestionForm_Tooltip.SetToolTip(pictureBox2, "Required");
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(429, 178);
+            pictureBox1.Image = Properties.Resources.exclaimation_removebg_preview;
+            pictureBox1.Location = new Point(429, 183);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(25, 25);
+            pictureBox1.Size = new Size(20, 20);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 29;
+            pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             EditQuestionForm_Tooltip.SetToolTip(pictureBox1, "Required");
             // 
             // pictureBox3
             // 
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(429, 102);
+            pictureBox3.Image = Properties.Resources.exclaimation_removebg_preview;
+            pictureBox3.Location = new Point(429, 107);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(25, 25);
+            pictureBox3.Size = new Size(20, 20);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.TabIndex = 28;
+            pictureBox3.TabIndex = 0;
             pictureBox3.TabStop = false;
             EditQuestionForm_Tooltip.SetToolTip(pictureBox3, "Required");
             // 
@@ -169,7 +168,7 @@
             AddNewQuestionForm_TextRtb.Location = new Point(460, 180);
             AddNewQuestionForm_TextRtb.Name = "AddNewQuestionForm_TextRtb";
             AddNewQuestionForm_TextRtb.Size = new Size(568, 235);
-            AddNewQuestionForm_TextRtb.TabIndex = 17;
+            AddNewQuestionForm_TextRtb.TabIndex = 10;
             AddNewQuestionForm_TextRtb.Text = "";
             // 
             // AddNewQuestionForm_NameLbl
@@ -233,7 +232,7 @@
             AddNewQuestionForm_ExpandPic.Name = "AddNewQuestionForm_ExpandPic";
             AddNewQuestionForm_ExpandPic.Size = new Size(15, 10);
             AddNewQuestionForm_ExpandPic.SizeMode = PictureBoxSizeMode.Zoom;
-            AddNewQuestionForm_ExpandPic.TabIndex = 16;
+            AddNewQuestionForm_ExpandPic.TabIndex = 0;
             AddNewQuestionForm_ExpandPic.TabStop = false;
             // 
             // AddNewQuestionForm_GeneralBtn
@@ -260,7 +259,7 @@
             panel_button.Margin = new Padding(2);
             panel_button.Name = "panel_button";
             panel_button.Size = new Size(1212, 258);
-            panel_button.TabIndex = 22;
+            panel_button.TabIndex = 0;
             // 
             // AddNewQuestionForm_ErrorLbl
             // 
@@ -268,7 +267,7 @@
             AddNewQuestionForm_ErrorLbl.Location = new Point(316, 88);
             AddNewQuestionForm_ErrorLbl.Name = "AddNewQuestionForm_ErrorLbl";
             AddNewQuestionForm_ErrorLbl.Size = new Size(0, 20);
-            AddNewQuestionForm_ErrorLbl.TabIndex = 20;
+            AddNewQuestionForm_ErrorLbl.TabIndex = 0;
             // 
             // AddNewQuestionForm_MoreChoicesBtn
             // 
@@ -279,7 +278,7 @@
             AddNewQuestionForm_MoreChoicesBtn.Location = new Point(316, 21);
             AddNewQuestionForm_MoreChoicesBtn.Name = "AddNewQuestionForm_MoreChoicesBtn";
             AddNewQuestionForm_MoreChoicesBtn.Size = new Size(340, 51);
-            AddNewQuestionForm_MoreChoicesBtn.TabIndex = 12;
+            AddNewQuestionForm_MoreChoicesBtn.TabIndex = 99;
             AddNewQuestionForm_MoreChoicesBtn.Text = "BLANKS FOR 3 MORE CHOICES ";
             AddNewQuestionForm_MoreChoicesBtn.UseVisualStyleBackColor = false;
             AddNewQuestionForm_MoreChoicesBtn.Click += AddNewQuestionForm_MoreChoicesBtn_Click;
@@ -292,8 +291,8 @@
             AddNewQuestionForm_SaveAndContinueBtn.ForeColor = Color.White;
             AddNewQuestionForm_SaveAndContinueBtn.Location = new Point(316, 126);
             AddNewQuestionForm_SaveAndContinueBtn.Name = "AddNewQuestionForm_SaveAndContinueBtn";
-            AddNewQuestionForm_SaveAndContinueBtn.Size = new Size(386, 51);
-            AddNewQuestionForm_SaveAndContinueBtn.TabIndex = 14;
+            AddNewQuestionForm_SaveAndContinueBtn.Size = new Size(407, 51);
+            AddNewQuestionForm_SaveAndContinueBtn.TabIndex = 100;
             AddNewQuestionForm_SaveAndContinueBtn.Text = "SAVE CHANGES AND CONTINUE EDITING";
             AddNewQuestionForm_SaveAndContinueBtn.UseVisualStyleBackColor = false;
             AddNewQuestionForm_SaveAndContinueBtn.Click += AddNewQuestionForm_SaveAndContinueBtn_Click;
@@ -307,7 +306,7 @@
             AddNewQuestionForm_SaveBtn.Location = new Point(316, 183);
             AddNewQuestionForm_SaveBtn.Name = "AddNewQuestionForm_SaveBtn";
             AddNewQuestionForm_SaveBtn.Size = new Size(181, 53);
-            AddNewQuestionForm_SaveBtn.TabIndex = 13;
+            AddNewQuestionForm_SaveBtn.TabIndex = 101;
             AddNewQuestionForm_SaveBtn.Text = "SAVE CHANGES";
             AddNewQuestionForm_SaveBtn.UseVisualStyleBackColor = false;
             AddNewQuestionForm_SaveBtn.Click += AddNewQuestionForm_SaveBtn_Click;
@@ -321,7 +320,7 @@
             AddNewQuestionForm_CancelBtn.Location = new Point(530, 183);
             AddNewQuestionForm_CancelBtn.Name = "AddNewQuestionForm_CancelBtn";
             AddNewQuestionForm_CancelBtn.Size = new Size(135, 53);
-            AddNewQuestionForm_CancelBtn.TabIndex = 15;
+            AddNewQuestionForm_CancelBtn.TabIndex = 102;
             AddNewQuestionForm_CancelBtn.Text = "CANCEL";
             AddNewQuestionForm_CancelBtn.UseVisualStyleBackColor = false;
             AddNewQuestionForm_CancelBtn.Click += AddNewQuestionForm_CancelBtn_Click;

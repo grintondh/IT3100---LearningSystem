@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CategoriesForm));
             CategoriesForm_HeadingLbl = new Label();
             CategoriesForm_ParentCategoryLbl = new Label();
             CategoriesForm_ParentCategoryCbo = new ComboBox();
@@ -44,9 +43,11 @@
             CategoriesForm_RequiredTooltip = new ToolTip(components);
             pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
+            pictureBox4 = new PictureBox();
             pictureBox3 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
@@ -144,7 +145,7 @@
             CategoriesForm_AddCategoryBtn.FlatStyle = FlatStyle.Flat;
             CategoriesForm_AddCategoryBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             CategoriesForm_AddCategoryBtn.ForeColor = Color.White;
-            CategoriesForm_AddCategoryBtn.Location = new Point(507, 487);
+            CategoriesForm_AddCategoryBtn.Location = new Point(500, 487);
             CategoriesForm_AddCategoryBtn.Name = "CategoriesForm_AddCategoryBtn";
             CategoriesForm_AddCategoryBtn.Size = new Size(185, 51);
             CategoriesForm_AddCategoryBtn.TabIndex = 9;
@@ -164,32 +165,43 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(314, 88);
+            pictureBox1.Image = Properties.Resources.question_removebg_preview;
+            pictureBox1.Location = new Point(314, 93);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(25, 25);
+            pictureBox1.Size = new Size(20, 20);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 23;
             pictureBox1.TabStop = false;
-            CategoriesForm_RequiredTooltip.SetToolTip(pictureBox1, "Required");
+            CategoriesForm_RequiredTooltip.SetToolTip(pictureBox1, "Parent category");
             // 
             // pictureBox2
             // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(314, 149);
+            pictureBox2.Image = Properties.Resources.exclaimation_removebg_preview;
+            pictureBox2.Location = new Point(314, 154);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(25, 25);
+            pictureBox2.Size = new Size(20, 20);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 24;
             pictureBox2.TabStop = false;
             CategoriesForm_RequiredTooltip.SetToolTip(pictureBox2, "Required");
             // 
+            // pictureBox4
+            // 
+            pictureBox4.Image = Properties.Resources.question_removebg_preview;
+            pictureBox4.Location = new Point(314, 425);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(20, 20);
+            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox4.TabIndex = 26;
+            pictureBox4.TabStop = false;
+            CategoriesForm_RequiredTooltip.SetToolTip(pictureBox4, "ID Number");
+            // 
             // pictureBox3
             // 
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(753, 551);
+            pictureBox3.Image = Properties.Resources.exclaimation_removebg_preview;
+            pictureBox3.Location = new Point(753, 556);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(25, 25);
+            pictureBox3.Size = new Size(20, 20);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox3.TabIndex = 25;
             pictureBox3.TabStop = false;
@@ -200,6 +212,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = SystemColors.ControlLightLight;
+            Controls.Add(pictureBox4);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
@@ -218,6 +231,7 @@
             Size = new Size(1178, 585);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -240,5 +254,6 @@
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
         private PictureBox pictureBox3;
+        private PictureBox pictureBox4;
     }
 }
