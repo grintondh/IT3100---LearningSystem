@@ -228,5 +228,11 @@ namespace Learning_System
             if (FromQuestionBank_SubcategoriesCbx.Checked == true)
             { FromQuestionBank_SubcategoriesCbx.Checked = false; }
         }
+
+        private void RandomQuestion_ExitBtn_Click(object sender, EventArgs e)
+        {
+            questionSelectedList.Clear();
+            this.SendToBack();
+        }
     }
 }

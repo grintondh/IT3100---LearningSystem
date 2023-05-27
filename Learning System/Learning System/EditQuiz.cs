@@ -69,7 +69,7 @@ namespace Learning_System
 
         private void EditQuiz_SaveBtn_Click(object sender, EventArgs e)
         {
-            List<string> query = new() { "Id", parentContestForm.ContestID.ToString()};
+            List<string> query = new() { "Id", parentContestForm.ContestID.ToString() };
             DataRow row = contestData.Init().Offset(0).Limit(1).Query(query).GetFirstRow();
             row.Field<JArray>("QuestionArray").Clear();
             row.Field<JArray>("QuestionArray").Add(JArray.FromObject(questionID));

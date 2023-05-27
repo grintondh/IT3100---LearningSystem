@@ -270,7 +270,7 @@
             EditQuiz_QuestionDtg.ReadOnly = true;
             EditQuiz_QuestionDtg.RowHeadersWidth = 51;
             EditQuiz_QuestionDtg.RowTemplate.Height = 29;
-            EditQuiz_QuestionDtg.Size = new Size(1305, 374);
+            EditQuiz_QuestionDtg.Size = new Size(1349, 524);
             EditQuiz_QuestionDtg.TabIndex = 27;
             EditQuiz_QuestionDtg.CellContentClick += EditQuiz_QuestionDtg_CellContentClick;
             // 

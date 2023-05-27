@@ -181,6 +181,7 @@
             // 
             // RandomQuestion_ExitBtn
             // 
+            RandomQuestion_ExitBtn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             RandomQuestion_ExitBtn.AutoSize = true;
             RandomQuestion_ExitBtn.BackColor = SystemColors.ControlLight;
             RandomQuestion_ExitBtn.ForeColor = SystemColors.ControlDarkDark;

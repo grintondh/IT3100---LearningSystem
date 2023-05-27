@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            RandomQuestion_ExitBtn = new Button();
             FromQuestionBank_ShowQuestionsDtg = new DataGridView();
             Checkbox = new DataGridViewCheckBoxColumn();
             Content = new DataGridViewTextBoxColumn();
@@ -47,6 +48,7 @@
             // panel1
             // 
             panel1.AutoScroll = true;
+            panel1.Controls.Add(RandomQuestion_ExitBtn);
             panel1.Controls.Add(FromQuestionBank_ShowQuestionsDtg);
             panel1.Controls.Add(FromQuestionBank_AddBtn);
             panel1.Controls.Add(FromQuestionBank_OldQuestionCbx);
@@ -61,6 +63,20 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1411, 661);
             panel1.TabIndex = 0;
+            // 
+            // RandomQuestion_ExitBtn
+            // 
+            RandomQuestion_ExitBtn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            RandomQuestion_ExitBtn.AutoSize = true;
+            RandomQuestion_ExitBtn.BackColor = SystemColors.ControlLight;
+            RandomQuestion_ExitBtn.ForeColor = SystemColors.ControlDarkDark;
+            RandomQuestion_ExitBtn.Location = new Point(1370, 17);
+            RandomQuestion_ExitBtn.Name = "RandomQuestion_ExitBtn";
+            RandomQuestion_ExitBtn.Size = new Size(28, 30);
+            RandomQuestion_ExitBtn.TabIndex = 34;
+            RandomQuestion_ExitBtn.Text = "X";
+            RandomQuestion_ExitBtn.UseVisualStyleBackColor = false;
+            RandomQuestion_ExitBtn.Click += RandomQuestion_ExitBtn_Click;
             // 
             // FromQuestionBank_ShowQuestionsDtg
             // 
@@ -211,5 +227,6 @@
         private DataGridViewCheckBoxColumn Checkbox;
         private DataGridViewTextBoxColumn Content;
         private DataGridViewTextBoxColumn QuestionID;
+        private Button RandomQuestion_ExitBtn;
     }
 }
