@@ -65,7 +65,7 @@ namespace Learning_System
 
             InitializeComponent();
             this.ActiveControl = AddNewQuestionForm_CategoryCbo;
-
+            AddNewQuestionForm_MarkTxt.ReadOnly = true;
             //Doc du lieu Category
             try
             {
@@ -234,11 +234,14 @@ namespace Learning_System
                     List<int>? questionArray = _x.ToObject<List<int>>();
                     if (questionArray == null)
                         throw new E99OtherException("Can't get data from null!");
-                    _x.RemoveAt(questionArray.IndexOf(QuestionID));
-
-                    JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
-                    if (categoriesData.Init().Offset(0).Limit(1).Query(_query1).Update(x) == DataProcessing.StatusCode.Error)
-                        throw new E02CantProcessQuery();
+                    try
+                    {
+                        _x.RemoveAt(questionArray.IndexOf(QuestionID));
+                        JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
+                        if (categoriesData.Init().Offset(0).Limit(1).Query(_query1).Update(x) == DataProcessing.StatusCode.Error)
+                            throw new E02CantProcessQuery();
+                    }
+                    catch { }
                 }
                 AddNewQuestionForm_ErrorLbl.Text = "";
                 if (AddNewQuestionForm_CategoryCbo.SelectedValue == null)
@@ -305,7 +308,18 @@ namespace Learning_System
                             throw new E04CantExportProperly();
 
                         CurrentParentId = Convert.ToInt32(_parentId.ToString());
-                        questionsData.Insert(JObject.FromObject(_newQuestion));
+                        List<string> query = new() { "ID", QuestionID.ToString() };
+                        DataRow _questionRow = questionsData.Init().Offset(0).Limit(1).Query(query).GetFirstRow();
+                        _questionRow.BeginEdit();
+                        _questionRow["Name"] = _name;
+                        _questionRow["CategoryID"] = CurrentParentId;
+                        _questionRow["Content"] = _content;
+                        _questionRow["DefaultMark"] = _defaultmark;
+                        _questionRow["Choice"] = JArray.FromObject(_choice);
+                        _questionRow.EndEdit();
+                        JObject _ = DataProcessing.ConvertDataRowToJObject(_questionRow);
+                        if (questionsData.Init().Offset(0).Limit(1).Query(query).Update(_) == DataProcessing.StatusCode.Error)
+                            throw new E02CantProcessQuery();
                         if (JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export()) == null)
                             throw new E04CantExportProperly();
                     }
@@ -366,11 +380,14 @@ namespace Learning_System
                     List<int>? questionArray = _x.ToObject<List<int>>();
                     if (questionArray == null)
                         throw new E99OtherException("Can't get data from null!");
-                    _x.RemoveAt(questionArray.IndexOf(QuestionID));
-
-                    JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
-                    if (categoriesData.Init().Offset(0).Limit(1).Query(_query1).Update(x) == DataProcessing.StatusCode.Error)
-                        throw new E02CantProcessQuery();
+                    try
+                    {
+                        _x.RemoveAt(questionArray.IndexOf(QuestionID));
+                        JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
+                        if (categoriesData.Init().Offset(0).Limit(1).Query(_query1).Update(x) == DataProcessing.StatusCode.Error)
+                            throw new E02CantProcessQuery();
+                    }
+                    catch { }
                 }
 
                 AddNewQuestionForm_ErrorLbl.Text = "";
@@ -444,9 +461,18 @@ namespace Learning_System
                             throw new E04CantExportProperly();
 
                         CurrentParentId = Convert.ToInt32(_parentId.ToString());
-                        if (questionsData.Insert(JObject.FromObject(_newQuestion)) == DataProcessing.StatusCode.Error)
-                            throw new E05CantInsertProperly();
-
+                        List<string> query = new() { "ID", QuestionID.ToString() };
+                        DataRow _questionRow = questionsData.Init().Offset(0).Limit(1).Query(query).GetFirstRow();
+                        _questionRow.BeginEdit();
+                        _questionRow["Name"] = _name;
+                        _questionRow["CategoryID"] = CurrentParentId;
+                        _questionRow["Content"] = _content;
+                        _questionRow["DefaultMark"] = _defaultmark;
+                        _questionRow["Choice"] = JArray.FromObject(_choice);
+                        _questionRow.EndEdit();
+                        JObject _ = DataProcessing.ConvertDataRowToJObject(_questionRow);
+                        if (questionsData.Init().Offset(0).Limit(1).Query(query).Update(_) == DataProcessing.StatusCode.Error)
+                            throw new E02CantProcessQuery();
                         if (JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export()) == null)
                             throw new E04CantExportProperly();
                     }

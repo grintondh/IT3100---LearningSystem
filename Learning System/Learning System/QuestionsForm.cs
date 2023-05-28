@@ -8,8 +8,6 @@ namespace Learning_System
 {
     public partial class QuestionsForm : UserControl
     {
-        //bien dung de gui id cua category dang duoc chon sang form edit question
-        private int SendParentIdToEditForm;
         //bien luu cac category duoc hien tren datagridview
         private List<int> selectedCategoriesIdList = new();
         // bien co hien cau hoi tu category con hay khong
@@ -72,7 +70,7 @@ namespace Learning_System
                                 row.Cells[1].Value = _QuestionName;
                             }
                             row.Cells[2].Value = "Edit";
-
+                            
                             DataGridViewButtonCell c = (DataGridViewButtonCell)row.Cells[2];
                             c.FlatStyle = FlatStyle.Flat;
                             if (i % 2 == 0)
@@ -83,6 +81,7 @@ namespace Learning_System
                             c.Style.Font = new("Segoe UI", 10, FontStyle.Bold);
 
                             row.Cells[3].Value = QuestionID;
+                            row.Cells[4].Value = inCategories;
                             if (i % 2 == 0) row.DefaultCellStyle.BackColor = Color.White;
                             else row.DefaultCellStyle.BackColor = Color.AliceBlue;
                         }
@@ -196,9 +195,6 @@ namespace Learning_System
             var a = (Categories)QuestionsForm_SelectCategoryCbo.SelectedItem;
             selectedCategoriesIdList.Clear();
             int _parentCategories = a.Id;
-            //
-            SendParentIdToEditForm = _parentCategories;
-            //
             try
             {
                 JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
@@ -232,7 +228,7 @@ namespace Learning_System
             if (QuestionForm_ShowQuestionsDtg.Columns[e.ColumnIndex].Name == "Edit" && e.RowIndex >= 0)
             {
                 var a = QuestionForm_ShowQuestionsDtg.Rows[e.RowIndex];
-                EditQuestionForm editQuestionForm = new(Convert.ToInt32(a.Cells[3].Value), SendParentIdToEditForm);
+                EditQuestionForm editQuestionForm = new(Convert.ToInt32(a.Cells[3].Value), Convert.ToInt32(a.Cells[4].Value));
                 editQuestionForm.ShowDialog();
                 ShowQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
             }

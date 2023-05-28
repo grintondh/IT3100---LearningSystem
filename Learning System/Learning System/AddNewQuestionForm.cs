@@ -10,7 +10,6 @@ namespace Learning_System
         const int MAXOFCHOICE = 20;
         private int Count_Choices = 2;
         private int Count_Button = 0;
-        private int Count_Line = 0;
         private bool IsInitial = true;
         private int CurrentParentId;
         // dynamic control
@@ -58,7 +57,8 @@ namespace Learning_System
 
             InitializeComponent();
             this.ActiveControl = AddNewQuestionForm_CategoryCbo;
-
+            AddNewQuestionForm_MarkTxt.ReadOnly = true;
+            AddNewQuestionForm_MarkTxt.Text = "1";
             for (int i = 0; i < 2; i++)
             {
                 richTextBoxes[i] = new RichTextBox();
