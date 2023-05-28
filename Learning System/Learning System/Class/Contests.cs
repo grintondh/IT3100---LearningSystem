@@ -28,5 +28,6 @@ namespace Learning_System
         public bool EndEnable { get; set; }
         public int TimeLimit { get; set; }
         public bool TimeLimitEnable { get; set; }
+        public double MaximumGrade { get; set; }
     }
 }

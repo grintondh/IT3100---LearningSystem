@@ -75,11 +75,13 @@ namespace Learning_System
             row.Field<JArray>("QuestionArray").Add(questionID);
             row.BeginEdit();
             row["ShuffleAnswer"] = EditQuiz_ShuffleCbx.Checked;
+            row["MaximumGrade"] = Convert.ToDouble(EditQuiz_MaxGradeTxt.Text);
             row.EndEdit();
             JObject x = DataProcessing.ConvertDataRowToJObject(row);
             if (contestData.Init().Offset(0).Limit(1).Query(query).Update(x) == DataProcessing.StatusCode.Error)
                 throw new Exception();
             parentContestForm.saveContestData(contestData, questionID);
+            parentContestForm.ContestForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ  /  General  /  " + parentContestForm.nameContest;
             this.SendToBack();
         }
 

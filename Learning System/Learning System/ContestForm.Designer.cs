@@ -208,7 +208,7 @@
 
         private Panel panel1;
         private Panel panel_heading;
-        private Label ContestForm_PathLbl;
+        public Label ContestForm_PathLbl;
         private Label ContestForm_ITLbl;
         private Panel panel_body;
         private Panel panel_main;

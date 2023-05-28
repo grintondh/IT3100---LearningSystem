@@ -19,6 +19,7 @@
     "MinuteEnd": 20,
     "EndEnable": true,
     "TimeLimit": 45,
-    "TimeLimitEnable": true
+    "TimeLimitEnable": true,
+    "MaximumGrade":  10.00
   }
 ]

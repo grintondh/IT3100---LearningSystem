@@ -1,4 +1,6 @@
-﻿using Learning_System.ExternalClass;
+﻿using Learning_System.Class;
+using Learning_System.ExternalClass;
+using Microsoft.Office.Interop.Word;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,7 @@ namespace Learning_System
     public partial class ContestForm : Form
     {
         public EditQuiz editQuiz;
+        public string nameContest;
         public ContestForm()
         {
             InitializeComponent();
@@ -34,18 +37,21 @@ namespace Learning_System
         {
             panel_main.SendToBack();
             editQuiz.BringToFront();
+            ContestForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ  /  General  /  " + nameContest + "  /  Edit quiz";
         }
 
         private DataProcessing questionsData = new();
         private DataProcessing categoriesData = new();
         private JArray _categoriesDataJarray = new();
-        private DataTable contestDataTable = new();
+        private System.Data.DataTable contestDataTable = new();
         private DataProcessing contestData = new();
         public int ContestID = 0;
 
         private void loadQuestionData()
         {
             JArray _questionsData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
+            if (_questionsData == null)
+                throw new E01CantFindFile();
             List<string> showColumns_questions = new List<string> { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
             List<Type> showType_questions = new List<Type> { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
             List<string> showKey_questions = new List<string>() { "PRIMARY KEY", "NOT NULL", "", "NOT NULL", "NOT NULL", "" };
@@ -56,6 +62,8 @@ namespace Learning_System
         private void loadCategoryData()
         {
             _categoriesDataJarray = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
+            if (_categoriesDataJarray == null)
+                throw new E01CantFindFile();
             List<string> showColumns = new() { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
             List<Type> showType = new() { typeof(int), typeof(string), typeof(JArray), typeof(JArray), typeof(string), typeof(string) };
             List<string> showKey = new() { "PRIMARY KEY", "NOT NULL", "", "", "", "" };
@@ -66,29 +74,37 @@ namespace Learning_System
         private void loadContestData()
         {
             JArray _contestData = JsonProcessing.ImportJsonContentInDefaultFolder("Contests.json", null, null);
+            if (_contestData == null)
+                throw new E01CantFindFile();
             List<string> showColumns = new List<string>() { "Id", "Name", "Description", "DescriptionShow", "QuestionArray",
                 "ShuffleAnswer", "DayStart", "MonthStart", "YearStart", "HourStart", "MinuteStart", "StartEnable", "DayEnd",
-                "MonthEnd", "YearEnd", "HourEnd", "MinuteEnd", "EndEnable", "TimeLimit", "TimeLimitEnable" };
+                "MonthEnd", "YearEnd", "HourEnd", "MinuteEnd", "EndEnable", "TimeLimit", "TimeLimitEnable", "MaximumGrade" };
             List<Type> showType = new() { typeof(int), typeof(string), typeof(string), typeof(bool), typeof(JArray),
                 typeof(bool), typeof(int), typeof(string), typeof(int), typeof(int), typeof(int), typeof(bool), typeof(int),
-                typeof(string), typeof(int), typeof(int), typeof(int), typeof(bool), typeof(int), typeof(bool) };
+                typeof(string), typeof(int), typeof(int), typeof(int), typeof(bool), typeof(int), typeof(bool), typeof(double) };
             List<string> showKey = new() { "PRIMARY KEY", "", "", "" , "" , "" , "" , "" , "" , "" , "" , "" , "" , "" , "" , "" , "",
-                "","","" };
+                "","","","" };
             contestData.Import(showColumns, showType, showKey);
             contestData.Import(_contestData);
             List<string> query = new() { "Id", ContestID.ToString() };
             DataRow row = contestData.Init().Offset(0).Limit(1).Query(query).GetFirstRow();
-            ContestForm_ContestNameLbl.Text = row.Field<string>("Name");
+            nameContest = row.Field<string>("Name");
+            ContestForm_ContestNameLbl.Text = nameContest;
             ContestForm_TimeLbl.Text = "Time limit: " + row.Field<int>("TimeLimit") + " minutes";
-            editQuiz.EditQuiz_ContestNameLbl.Text = "Editing quiz: " + row.Field<string>("Name");
+            editQuiz.EditQuiz_ContestNameLbl.Text = "Editing quiz: " + nameContest;
             editQuiz.EditQuiz_ShuffleCbx.Checked = row.Field<bool>("ShuffleAnswer");
+            if (row.Field<double>("MaximumGrade").ToString() == null || row.Field<double>("MaximumGrade").ToString() == "")
+                editQuiz.EditQuiz_MaxGradeTxt.Text = "10.00";
+            else editQuiz.EditQuiz_MaxGradeTxt.Text = row.Field<double>("MaximumGrade").ToString();
+            ContestForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ  /  General  /  " + nameContest;
             var x = row.Field<JArray>("QuestionArray").ToObject<List<int>>();
             editQuiz.loadQuestionID(x);
         }
 
         public void saveContestData(DataProcessing contestData, List<int> questionID)
         {
-            JsonProcessing.ExportJsonContentInDefaultFolder("Contests.json", contestData.Export());
+            if (JsonProcessing.ExportJsonContentInDefaultFolder("Contests.json", contestData.Export()) == null)
+                throw new E04CantExportProperly();
             this.contestData = contestData;
             editQuiz.loadQuestionID(questionID);
         }

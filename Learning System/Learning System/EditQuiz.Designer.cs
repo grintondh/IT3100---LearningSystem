@@ -332,7 +332,7 @@
         private Button EditQuiz_AddBtn;
         public CheckBox EditQuiz_ShuffleCbx;
         private Label EditQuiz_TotalofMarkLbl;
-        private TextBox EditQuiz_MaxGradeTxt;
+        public TextBox EditQuiz_MaxGradeTxt;
         private Button EditQuiz_SaveBtn;
         private Label EditQuiz_MaxGradeLbl;
         private Button EditQuiz_MultipleItemsBtn;
