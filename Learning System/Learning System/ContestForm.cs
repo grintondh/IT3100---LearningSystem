@@ -18,6 +18,7 @@ namespace Learning_System
     {
         public EditQuiz editQuiz;
         public string nameContest;
+        public int timeLimit;
         public ContestForm()
         {
             InitializeComponent();
@@ -91,6 +92,7 @@ namespace Learning_System
             nameContest = row.Field<string>("Name");
             ContestForm_ContestNameLbl.Text = nameContest;
             ContestForm_TimeLbl.Text = "Time limit: " + row.Field<int>("TimeLimit") + " minutes";
+            timeLimit = row.Field<int>("TimeLimit");
             editQuiz.EditQuiz_ContestNameLbl.Text = "Editing quiz: " + nameContest;
             editQuiz.EditQuiz_ShuffleCbx.Checked = row.Field<bool>("ShuffleAnswer");
             if (row.Field<double>("MaximumGrade").ToString() == null || row.Field<double>("MaximumGrade").ToString() == "")
@@ -114,5 +116,10 @@ namespace Learning_System
             this.contestData = contestData;
         }
 
+        private void ContestForm_PreviewQuizBtn_Click(object sender, EventArgs e)
+        {
+            StartAttemptForm startAttemptForm = new StartAttemptForm(timeLimit, questionsData, editQuiz.questionID);
+            startAttemptForm.ShowDialog();
+        }
     }
 }

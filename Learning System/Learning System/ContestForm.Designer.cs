@@ -127,6 +127,7 @@
             ContestForm_PreviewQuizBtn.TabIndex = 6;
             ContestForm_PreviewQuizBtn.Text = "PREVIEW QUIZ NOW";
             ContestForm_PreviewQuizBtn.UseVisualStyleBackColor = false;
+            ContestForm_PreviewQuizBtn.Click += ContestForm_PreviewQuizBtn_Click;
             // 
             // ContestForm_SummaryLbl
             // 
