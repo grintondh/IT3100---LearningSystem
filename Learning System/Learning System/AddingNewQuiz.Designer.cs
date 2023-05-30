@@ -67,6 +67,15 @@ partial class AddingNewQuiz
             this.AddingNewQuizForm_errorTextLbl = new System.Windows.Forms.Label();
             this.ImportForm_ExpandPic1 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
             btn_Cancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.AddingNewQuizForm_openDayNud)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AddingNewQuizForm_closeDayNud)).BeginInit();
@@ -78,6 +87,15 @@ partial class AddingNewQuiz
             ((System.ComponentModel.ISupportInitialize)(this.AddingNewQuizForm_closeMinuteNud)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImportForm_ExpandPic1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_Cancel
@@ -225,6 +243,7 @@ partial class AddingNewQuiz
             // 
             // AddingNewQuizForm_openMonthCbo
             // 
+            this.AddingNewQuizForm_openMonthCbo.Enabled = false;
             this.AddingNewQuizForm_openMonthCbo.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.AddingNewQuizForm_openMonthCbo.Items.AddRange(new object[] {
             "January",
@@ -335,6 +354,7 @@ partial class AddingNewQuiz
             // 
             // AddingNewQuizForm_openDayNud
             // 
+            this.AddingNewQuizForm_openDayNud.Enabled = false;
             this.AddingNewQuizForm_openDayNud.Location = new System.Drawing.Point(269, 512);
             this.AddingNewQuizForm_openDayNud.Maximum = new decimal(new int[] {
             31,
@@ -357,6 +377,7 @@ partial class AddingNewQuiz
             // 
             // AddingNewQuizForm_closeDayNud
             // 
+            this.AddingNewQuizForm_closeDayNud.Enabled = false;
             this.AddingNewQuizForm_closeDayNud.Location = new System.Drawing.Point(269, 562);
             this.AddingNewQuizForm_closeDayNud.Maximum = new decimal(new int[] {
             31,
@@ -379,6 +400,7 @@ partial class AddingNewQuiz
             // 
             // AddingNewQuizForm_closeMonthCbo
             // 
+            this.AddingNewQuizForm_closeMonthCbo.Enabled = false;
             this.AddingNewQuizForm_closeMonthCbo.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.AddingNewQuizForm_closeMonthCbo.Items.AddRange(new object[] {
             "January",
@@ -402,6 +424,7 @@ partial class AddingNewQuiz
             // 
             // AddingNewQuizForm_openYearNud
             // 
+            this.AddingNewQuizForm_openYearNud.Enabled = false;
             this.AddingNewQuizForm_openYearNud.Location = new System.Drawing.Point(481, 512);
             this.AddingNewQuizForm_openYearNud.Maximum = new decimal(new int[] {
             2100,
@@ -424,6 +447,7 @@ partial class AddingNewQuiz
             // 
             // AddingNewQuizForm_closeYearNud
             // 
+            this.AddingNewQuizForm_closeYearNud.Enabled = false;
             this.AddingNewQuizForm_closeYearNud.Location = new System.Drawing.Point(481, 562);
             this.AddingNewQuizForm_closeYearNud.Maximum = new decimal(new int[] {
             2100,
@@ -446,6 +470,7 @@ partial class AddingNewQuiz
             // 
             // AddingNewQuizForm_openHourNud
             // 
+            this.AddingNewQuizForm_openHourNud.Enabled = false;
             this.AddingNewQuizForm_openHourNud.Location = new System.Drawing.Point(587, 512);
             this.AddingNewQuizForm_openHourNud.Maximum = new decimal(new int[] {
             23,
@@ -463,6 +488,7 @@ partial class AddingNewQuiz
             // 
             // AddingNewQuizForm_openMinuteNud
             // 
+            this.AddingNewQuizForm_openMinuteNud.Enabled = false;
             this.AddingNewQuizForm_openMinuteNud.Location = new System.Drawing.Point(681, 512);
             this.AddingNewQuizForm_openMinuteNud.Maximum = new decimal(new int[] {
             59,
@@ -480,6 +506,7 @@ partial class AddingNewQuiz
             // 
             // AddingNewQuizForm_closeHourNud
             // 
+            this.AddingNewQuizForm_closeHourNud.Enabled = false;
             this.AddingNewQuizForm_closeHourNud.Location = new System.Drawing.Point(587, 566);
             this.AddingNewQuizForm_closeHourNud.Maximum = new decimal(new int[] {
             23,
@@ -497,6 +524,7 @@ partial class AddingNewQuiz
             // 
             // AddingNewQuizForm_closeMinuteNud
             // 
+            this.AddingNewQuizForm_closeMinuteNud.Enabled = false;
             this.AddingNewQuizForm_closeMinuteNud.Location = new System.Drawing.Point(681, 566);
             this.AddingNewQuizForm_closeMinuteNud.Maximum = new decimal(new int[] {
             59,
@@ -549,120 +577,102 @@ partial class AddingNewQuiz
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 53;
             this.pictureBox1.TabStop = false;
-            //
-            // Picturebox2 
-            //
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2.Image = System.Drawing.Image.FromFile(@"D:\icon4.png");
-            this.pictureBox2.Location = new System.Drawing.Point(3,35);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(3, 35);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox2.Name = "pictureBox1";
-            this.pictureBox2.Size = new System.Drawing.Size(20,35);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(20, 35);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 54;
             this.pictureBox2.TabStop = false;
-            //
-            // Picturebox3 
-            //
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3.Image = System.Drawing.Image.FromFile(@"D:\icon1.png");
-            this.pictureBox3.Location = new System.Drawing.Point(374,42);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Location = new System.Drawing.Point(374, 42);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox3.Name = "pictureBox1";
-            this.pictureBox3.Size = new System.Drawing.Size(16,16);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(16, 16);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 55;
             this.pictureBox3.TabStop = false;
-            //
-            // Picturebox4 
-            //
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4.Image = System.Drawing.Image.FromFile(@"D:\icon2.png");
-            this.pictureBox4.Location = new System.Drawing.Point(235,135);
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Location = new System.Drawing.Point(235, 135);
             this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox4.Name = "pictureBox1";
-            this.pictureBox4.Size = new System.Drawing.Size(16,16);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(16, 16);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox4.TabIndex = 56;
             this.pictureBox4.TabStop = false;
-            //
-            // Picturebox5 
-            //
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5.Image = System.Drawing.Image.FromFile(@"D:\icon1.png");
-            this.pictureBox5.Location = new System.Drawing.Point(245,525);
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Location = new System.Drawing.Point(245, 525);
             this.pictureBox5.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox5.Name = "pictureBox1";
-            this.pictureBox5.Size = new System.Drawing.Size(16,16);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(16, 16);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox5.TabIndex = 57;
             this.pictureBox5.TabStop = false;
-            //
-            // Picturebox6 
-            //
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6.Image = System.Drawing.Image.FromFile(@"D:\icon1.png");
-            this.pictureBox6.Location = new System.Drawing.Point(245,633);
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Location = new System.Drawing.Point(245, 633);
             this.pictureBox6.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox6.Name = "pictureBox1";
-            this.pictureBox6.Size = new System.Drawing.Size(16,16);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(16, 16);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox6.TabIndex = 58;
             this.pictureBox6.TabStop = false;
-            //
-            // Picturebox7 
-            //
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pictureBox7.Image = System.Drawing.Image.FromFile(@"D:\icon1.png");
-            this.pictureBox7.Location = new System.Drawing.Point(245,685);
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Location = new System.Drawing.Point(245, 685);
             this.pictureBox7.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox7.Name = "pictureBox1";
-            this.pictureBox7.Size = new System.Drawing.Size(16,16);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(16, 16);
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox7.TabIndex = 59;
             this.pictureBox7.TabStop = false;
-            //
-            // Picturebox8
-            //
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.pictureBox8.Image = System.Drawing.Image.FromFile(@"D:\icon1.png");
-            this.pictureBox8.Location = new System.Drawing.Point(577,440);
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Location = new System.Drawing.Point(577, 440);
             this.pictureBox8.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(16,16);
+            this.pictureBox8.Size = new System.Drawing.Size(16, 16);
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox8.TabIndex = 60;
             this.pictureBox8.TabStop = false;
-            //
-            // Picturebox9
-            //
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.pictureBox9.Image = System.Drawing.Image.FromFile(@"D:\icon3.png");
-            this.pictureBox9.Location = new System.Drawing.Point(760,530);
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Location = new System.Drawing.Point(760, 530);
             this.pictureBox9.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(25,20);
+            this.pictureBox9.Size = new System.Drawing.Size(25, 20);
             this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox9.TabIndex = 61;
             this.pictureBox9.TabStop = false;
-            //
-            // Picturebox10
-            //
-            this.pictureBox10 = new System.Windows.Forms.PictureBox();
-            this.pictureBox10.Image = System.Drawing.Image.FromFile(@"D:\icon3.png");
-            this.pictureBox10.Location = new System.Drawing.Point(760,580);
+            // 
+            // pictureBox10
+            // 
+            this.pictureBox10.Location = new System.Drawing.Point(760, 580);
             this.pictureBox10.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(25,20);
+            this.pictureBox10.Size = new System.Drawing.Size(25, 20);
             this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox10.TabIndex = 62;
             this.pictureBox10.TabStop = false;
-        
             // 
             // AddingNewQuiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1040, 882);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox3);
@@ -709,7 +719,6 @@ partial class AddingNewQuiz
             this.Controls.Add(this.AddNewQuizForm_TimeexpiresCloseCbo);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AddingNewQuiz";
-            this.Size = new System.Drawing.Size(1062, 938);
             ((System.ComponentModel.ISupportInitialize)(this.AddingNewQuizForm_openDayNud)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AddingNewQuizForm_closeDayNud)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AddingNewQuizForm_openYearNud)).EndInit();
@@ -731,6 +740,7 @@ partial class AddingNewQuiz
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
     }
     #endregion
 
