@@ -16,12 +16,14 @@ namespace Learning_System
         private int timeLimit;
         private DataProcessing questionsData;
         private List<int> questionID;
-        public StartAttemptForm(int timeLimit, DataProcessing questionsData, List<int> questionID)
+        private string nameContest;
+        public StartAttemptForm(int timeLimit, DataProcessing questionsData, List<int> questionID, string nameContest)
         {
             InitializeComponent();
             this.timeLimit = timeLimit;
             this.questionsData = questionsData;
             this.questionID = questionID;
+            this.nameContest = nameContest;
             NotiLbl.Text = $"Your attempt will have a time limit of {timeLimit} minutes. When you start, the timer will begin \r\nto count down and cannot be paused. You must finish your attempt before it \r\nexpires. Are you sure you wish to start now?";
         }
 
@@ -38,7 +40,7 @@ namespace Learning_System
         private void StartBtn_Click_1(object sender, EventArgs e)
         {
             this.Close();
-            PreviewQuizForm previewQuizForm = new PreviewQuizForm(timeLimit, questionsData, questionID);
+            PreviewQuizForm previewQuizForm = new PreviewQuizForm(timeLimit, questionsData, questionID, nameContest);
             previewQuizForm.ShowDialog();
         }
     }

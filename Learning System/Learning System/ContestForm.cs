@@ -118,7 +118,7 @@ namespace Learning_System
 
         private void ContestForm_PreviewQuizBtn_Click(object sender, EventArgs e)
         {
-            StartAttemptForm startAttemptForm = new StartAttemptForm(timeLimit, questionsData, editQuiz.questionID);
+            StartAttemptForm startAttemptForm = new StartAttemptForm(timeLimit, questionsData, editQuiz.questionID, nameContest);
             startAttemptForm.ShowDialog();
         }
     }

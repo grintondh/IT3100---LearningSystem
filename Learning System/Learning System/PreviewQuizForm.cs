@@ -23,7 +23,7 @@ namespace Learning_System
         private DataProcessing questionsData;
         private Panel[] panel_Page = new Panel[100];
 
-        public PreviewQuizForm(int timeLimit, DataProcessing questionsData, List<int> questionID)
+        public PreviewQuizForm(int timeLimit, DataProcessing questionsData, List<int> questionID, string nameContest)
         {
             InitializeComponent();
             panel_right.Width = 300;
@@ -32,6 +32,7 @@ namespace Learning_System
             this.timeLimit = timeLimit;
             this.questionsData = questionsData;
             this.questionID = questionID;
+            PathLbl.Text += "  /  " + nameContest + "  /  Preview";
             numberOfQuestion = questionID.Count;
             //
             DataRow[] dataRow = new DataRow[numberOfQuestion];
@@ -50,10 +51,9 @@ namespace Learning_System
                 panel_Page[i].AutoScroll = true;
                 for (int j = questionPerPage - 1; j >= 0; j--)
                 {
-                    var numberOfChoice = dataRow[questionPerPage * i + j].Field<JArray>("Choice").ToObject<List<QuestionChoice>>().Count;
                     var questionsChoices = dataRow[questionPerPage * i + j].Field<JArray>("Choice").ToObject<List<QuestionChoice>>();
                     var content = dataRow[questionPerPage * i + j].Field<string>("Content");
-                    PageOfPreviewQuiz quiz = new PageOfPreviewQuiz(questionPerPage * i + j, numberOfChoice, questionsChoices, content);
+                    PageOfPreviewQuiz quiz = new PageOfPreviewQuiz(questionPerPage * i + j, questionsChoices, content);
                     quiz.Dock = DockStyle.Top;
                     panel_Page[i].Controls.Add(quiz);
                 }
@@ -69,7 +69,7 @@ namespace Learning_System
                     var numberOfChoice = dataRow[j].Field<JArray>("Choice").ToObject<List<QuestionChoice>>().Count;
                     var questionsChoices = dataRow[j].Field<JArray>("Choice").ToObject<List<QuestionChoice>>();
                     var content = dataRow[j].Field<string>("Content");
-                    PageOfPreviewQuiz quiz = new PageOfPreviewQuiz(j, numberOfChoice, questionsChoices, content);
+                    PageOfPreviewQuiz quiz = new PageOfPreviewQuiz(j, questionsChoices, content);
                     quiz.Dock = DockStyle.Top;
                     panel_Page[numberOfPage - 1].Controls.Add(quiz);
                 }

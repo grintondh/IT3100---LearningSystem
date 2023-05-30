@@ -18,11 +18,12 @@ namespace Learning_System
         private RadioButton[] radioChoice = new RadioButton[MAXOFCHOICE];
         private CheckBox[] checkboxChoice = new CheckBox[MAXOFCHOICE];
         private List<QuestionChoice> questionChoices = new List<QuestionChoice>();
+        private RichTextBox[] richTextBoxes = new RichTextBox[MAXOFCHOICE];
         private string content;
-        public PageOfPreviewQuiz(int STT, int numberOfChocie, List<QuestionChoice> questionChoices, string content)
+        public PageOfPreviewQuiz(int STT, List<QuestionChoice> questionChoices, string content)
         {
             InitializeComponent();
-            this.numberOfChoice = numberOfChocie;
+            this.numberOfChoice = questionChoices.Count;
             this.questionChoices = questionChoices;
             this.content = content;
             for (int i = 0; i < questionChoices.Count; i++)
@@ -36,16 +37,48 @@ namespace Learning_System
             }
             if (IsMultipleChoiceQuestion == false)
             {
-                for (int i = 0; i < numberOfChoice; i++)
+                for (int i = numberOfChoice - 1; i >= 0; i--)
                 {
+                    richTextBoxes[i] = new RichTextBox();
+                    this.panel_richTextboxes.Controls.Add(richTextBoxes[i]);
+                    richTextBoxes[i].BackColor = Color.White;
+                    richTextBoxes[i].BorderStyle = BorderStyle.None;
+                    richTextBoxes[i].Dock = DockStyle.Top;
+                    richTextBoxes[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                    if (i == numberOfChoice - 1)
+                        richTextBoxes[i].Location = new Point(50, 0);
+                    else richTextBoxes[i].Location = new Point(50, richTextBoxes[i + 1].Height + 10);
+                    richTextBoxes[i].ReadOnly = true;
+                    richTextBoxes[i].Size = new Size(1000, 217);
+                    try
+                    {
+                        richTextBoxes[i].Rtf = questionChoices[i].choice;
+                        using (Graphics g = CreateGraphics())
+                        {
+                            richTextBoxes[i].Height = (int)g.MeasureString(richTextBoxes[i].Rtf,
+                                richTextBoxes[i].Font, richTextBoxes[i].Width).Height;
+                        }
+                    }
+                    catch
+                    {
+                        richTextBoxes[i].Text = questionChoices[i].choice;
+                        using (Graphics g = CreateGraphics())
+                        {
+                            richTextBoxes[i].Height = (int)g.MeasureString(richTextBoxes[i].Text,
+                                richTextBoxes[i].Font, richTextBoxes[i].Width).Height;
+                        }
+                    }
+                    //
                     radioChoice[i] = new RadioButton();
-                    this.QuestionChoiceGrb.Controls.Add(radioChoice[i]);
+                    this.panel_button.Controls.Add(radioChoice[i]);
                     radioChoice[i].AutoSize = true;
                     radioChoice[i].Size = new Size(131, 27);
-                    radioChoice[i].Location = new Point(10, 20 + i * 27);
+                    if (i == numberOfChoice - 1)
+                        radioChoice[i].Location = new Point(10, 0);
+                    else radioChoice[i].Location = new Point(10, richTextBoxes[i + 1].Height * (numberOfChoice - 1 - i));
                     radioChoice[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
                     radioChoice[i].UseVisualStyleBackColor = true;
-                    radioChoice[i].Text = questionChoices[i].choice;
+                    radioChoice[i].Text = "";
                 }
             }
             else
@@ -66,11 +99,22 @@ namespace Learning_System
             try
             {
                 ContentRtb.Rtf = content;
+                using (Graphics g = CreateGraphics())
+                {
+                    ContentRtb.Height = (int)g.MeasureString(ContentRtb.Rtf,
+                        ContentRtb.Font, ContentRtb.Width).Height;
+                }
             }
             catch
             {
                 ContentRtb.Text = content;
+                using (Graphics g = CreateGraphics())
+                {
+                    ContentRtb.Height = (int)g.MeasureString(ContentRtb.Text,
+                        ContentRtb.Font, ContentRtb.Width).Height;
+                }
             }
+
         }
 
     }

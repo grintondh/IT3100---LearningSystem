@@ -36,8 +36,11 @@
             panel2 = new Panel();
             QuestionChoiceGrb = new GroupBox();
             ContentRtb = new RichTextBox();
+            panel_button = new Panel();
+            panel_richTextboxes = new Panel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            QuestionChoiceGrb.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -90,7 +93,7 @@
             NumberLbl.AutoSize = true;
             NumberLbl.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             NumberLbl.ForeColor = Color.FromArgb(194, 36, 36);
-            NumberLbl.Location = new Point(73, -4);
+            NumberLbl.Location = new Point(82, -4);
             NumberLbl.Name = "NumberLbl";
             NumberLbl.Size = new Size(35, 41);
             NumberLbl.TabIndex = 4;
@@ -98,6 +101,7 @@
             // 
             // panel2
             // 
+            panel2.AutoScroll = true;
             panel2.BackColor = Color.Gainsboro;
             panel2.Controls.Add(QuestionChoiceGrb);
             panel2.Controls.Add(ContentRtb);
@@ -108,9 +112,12 @@
             // 
             // QuestionChoiceGrb
             // 
-            QuestionChoiceGrb.Location = new Point(6, 229);
+            QuestionChoiceGrb.Controls.Add(panel_richTextboxes);
+            QuestionChoiceGrb.Controls.Add(panel_button);
+            QuestionChoiceGrb.Dock = DockStyle.Fill;
+            QuestionChoiceGrb.Location = new Point(0, 217);
             QuestionChoiceGrb.Name = "QuestionChoiceGrb";
-            QuestionChoiceGrb.Size = new Size(1093, 171);
+            QuestionChoiceGrb.Size = new Size(1104, 189);
             QuestionChoiceGrb.TabIndex = 1;
             QuestionChoiceGrb.TabStop = false;
             QuestionChoiceGrb.Text = "Choice";
@@ -119,13 +126,30 @@
             // 
             ContentRtb.BackColor = Color.White;
             ContentRtb.BorderStyle = BorderStyle.None;
+            ContentRtb.Dock = DockStyle.Top;
             ContentRtb.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            ContentRtb.Location = new Point(6, 6);
+            ContentRtb.Location = new Point(0, 0);
             ContentRtb.Name = "ContentRtb";
             ContentRtb.ReadOnly = true;
-            ContentRtb.Size = new Size(1093, 217);
+            ContentRtb.Size = new Size(1104, 217);
             ContentRtb.TabIndex = 0;
             ContentRtb.Text = "";
+            // 
+            // panel_button
+            // 
+            panel_button.Dock = DockStyle.Left;
+            panel_button.Location = new Point(3, 23);
+            panel_button.Name = "panel_button";
+            panel_button.Size = new Size(38, 163);
+            panel_button.TabIndex = 0;
+            // 
+            // panel_richTextboxes
+            // 
+            panel_richTextboxes.Dock = DockStyle.Fill;
+            panel_richTextboxes.Location = new Point(41, 23);
+            panel_richTextboxes.Name = "panel_richTextboxes";
+            panel_richTextboxes.Size = new Size(1060, 163);
+            panel_richTextboxes.TabIndex = 1;
             // 
             // PageOfPreviewQuiz
             // 
@@ -139,6 +163,7 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
+            QuestionChoiceGrb.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -152,5 +177,7 @@
         private Panel panel2;
         private RichTextBox ContentRtb;
         private GroupBox QuestionChoiceGrb;
+        private Panel panel_richTextboxes;
+        private Panel panel_button;
     }
 }
