@@ -91,7 +91,7 @@ namespace Learning_System
                     panel_Page[numberOfPage - 1].Controls.Add(quiz[j]);
                 }
             }
-            //panel_Page[0].BringToFront();
+            panel_Page[0].BringToFront();
             PreviousPageBtn.Visible = false;
             //
             Button[] button = new Button[numberOfQuestion];
