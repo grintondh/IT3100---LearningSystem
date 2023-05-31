@@ -33,19 +33,19 @@
             panel1 = new Panel();
             CancelBtn = new Button();
             StartBtn = new Button();
-            NotiLbl = new Label();
             TimeLbl = new Label();
             HeaderLbl = new Label();
+            NotiTxt = new TextBox();
             panel_main.SuspendLayout();
             SuspendLayout();
             // 
             // panel_main
             // 
             panel_main.BorderStyle = BorderStyle.FixedSingle;
+            panel_main.Controls.Add(NotiTxt);
             panel_main.Controls.Add(panel1);
             panel_main.Controls.Add(CancelBtn);
             panel_main.Controls.Add(StartBtn);
-            panel_main.Controls.Add(NotiLbl);
             panel_main.Controls.Add(TimeLbl);
             panel_main.Controls.Add(HeaderLbl);
             panel_main.Dock = DockStyle.Fill;
@@ -92,16 +92,6 @@
             StartBtn.UseVisualStyleBackColor = false;
             StartBtn.Click += StartBtn_Click_1;
             // 
-            // NotiLbl
-            // 
-            NotiLbl.AutoSize = true;
-            NotiLbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            NotiLbl.Location = new Point(22, 182);
-            NotiLbl.Name = "NotiLbl";
-            NotiLbl.Size = new Size(718, 84);
-            NotiLbl.TabIndex = 11;
-            NotiLbl.Text = resources.GetString("NotiLbl.Text");
-            // 
             // TimeLbl
             // 
             TimeLbl.AutoSize = true;
@@ -123,6 +113,19 @@
             HeaderLbl.TabIndex = 9;
             HeaderLbl.Text = "Start attempt";
             // 
+            // NotiTxt
+            // 
+            NotiTxt.BackColor = Color.White;
+            NotiTxt.BorderStyle = BorderStyle.None;
+            NotiTxt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            NotiTxt.Location = new Point(22, 171);
+            NotiTxt.Multiline = true;
+            NotiTxt.Name = "NotiTxt";
+            NotiTxt.ReadOnly = true;
+            NotiTxt.Size = new Size(707, 108);
+            NotiTxt.TabIndex = 15;
+            NotiTxt.Text = resources.GetString("NotiTxt.Text");
+            // 
             // StartAttemptForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -134,7 +137,6 @@
             Name = "StartAttemptForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "StartAttemptForm";
-            Load += StartAttemptForm_Load;
             panel_main.ResumeLayout(false);
             panel_main.PerformLayout();
             ResumeLayout(false);
@@ -146,8 +148,8 @@
         private Panel panel1;
         private Button CancelBtn;
         private Button StartBtn;
-        private Label NotiLbl;
         private Label TimeLbl;
         private Label HeaderLbl;
+        private TextBox NotiTxt;
     }
 }

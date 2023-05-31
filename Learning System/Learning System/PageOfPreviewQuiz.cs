@@ -21,6 +21,7 @@ namespace Learning_System
         private List<QuestionChoice> questionChoices = new List<QuestionChoice>();
         private RichTextBox[] richTextBoxes = new RichTextBox[MAXOFCHOICE];
         private string content;
+        private int STT;
         public PageOfPreviewQuiz(int STT, List<QuestionChoice> questionChoices, string content, PreviewQuizForm previewQuizForm)
         {
             InitializeComponent();
@@ -28,6 +29,7 @@ namespace Learning_System
             this.questionChoices = questionChoices;
             this.content = content;
             this.parentForm = previewQuizForm;
+            this.STT = STT;
             // set width
             this.Width = Screen.PrimaryScreen.WorkingArea.Width - parentForm.panel_right.Width;
             panel2.Width = this.Width - panel2.Location.X - 10;
@@ -106,13 +108,14 @@ namespace Learning_System
                     if (IsMultipleChoiceQuestion == true)
                     {
                         checkboxChoice[i] = new CheckBox();
-                        this.QuestionChoiceGrb.Controls.Add(checkboxChoice[i]);
+                        this.panel_button.Controls.Add(checkboxChoice[i]);
                         checkboxChoice[i].AutoSize = true;
                         checkboxChoice[i].Size = new Size(131, 27);
                         checkboxChoice[i].UseVisualStyleBackColor = true;
                         checkboxChoice[i].Text = "";
                         checkboxChoice[i].Location = new Point(0, richTextBoxes[i].Location.Y);
                         checkboxChoice[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                        checkboxChoice[i].Click += checkBoxClick;
                     }
                     else
                     {
@@ -124,6 +127,7 @@ namespace Learning_System
                         radioChoice[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
                         radioChoice[i].UseVisualStyleBackColor = true;
                         radioChoice[i].Text = "";
+                        radioChoice[i].Click += radionButtonClick;
                     }
                 }
             NumberLbl.Text = (STT + 1).ToString();
@@ -144,6 +148,31 @@ namespace Learning_System
             panel2.Height = panel3.Height + ContentRtb.Height;
             panel1.Height = panel2.Height;
             this.Height = panel2.Height + panel2.Location.Y + 10;
+        }
+
+        private void radionButtonClick(object sender, EventArgs e)
+        {
+            parentForm.button[STT].BackColor = Color.DimGray;
+            AnswerLbl.Text = "Answer saved";
+        }
+
+        private void checkBoxClick(object sender, EventArgs e)
+        {
+            bool check = false;
+            for (int i = 0; i < numberOfChoice; i++) 
+            {
+                if (checkboxChoice[i].Checked == true) check = true;
+            }
+            if (check == true)
+            {
+                parentForm.button[STT].BackColor = Color.DimGray;
+                AnswerLbl.Text = "Answer saved";
+            }
+            else
+            {
+                parentForm.button[STT].BackColor = Color.FromArgb(0, 159, 229);
+                AnswerLbl.Text = "Not yet answered";
+            }
         }
     }
 }

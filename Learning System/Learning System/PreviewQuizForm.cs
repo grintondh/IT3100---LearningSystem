@@ -22,6 +22,7 @@ namespace Learning_System
         private List<int> questionID;
         private DataProcessing questionsData;
         private Panel[] panel_Page = new Panel[100];
+        public Button[] button = new Button[100/questionPerPage];
 
         public PreviewQuizForm(int timeLimit, DataProcessing questionsData, List<int> questionID, string nameContest)
         {
@@ -94,7 +95,6 @@ namespace Learning_System
             panel_Page[0].BringToFront();
             PreviousPageBtn.Visible = false;
             //
-            Button[] button = new Button[numberOfQuestion];
             for (int i = 0; i < numberOfQuestion; i++)
             {
                 button[i] = new Button();
@@ -137,7 +137,7 @@ namespace Learning_System
         private void pageButtonClick(object sender, EventArgs e)
         {
             var text = ((Button)sender).Text;
-            int x = (Convert.ToInt32(text) - 1) / 3;
+            int x = (Convert.ToInt32(text) - 1) / questionPerPage;
             currentPage = x;
             panel_Page[x].BringToFront();
             if (currentPage == numberOfPage - 1)

@@ -733,11 +733,11 @@
     "Choice": [
       {
         "choice": "A. giữa dân tộc Việt Nam với thực dân Pháp.",
-        "mark": 1
+        "mark": 0.5
       },
       {
         "choice": "B. giữa giai cấp tư sản với giai cấp vô sản.",
-        "mark": 0
+        "mark": 0.5
       },
       {
         "choice": "C. giữa  giai cấp nông dân với phong kiến.",
