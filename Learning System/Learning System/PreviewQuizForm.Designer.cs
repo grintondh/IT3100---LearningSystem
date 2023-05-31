@@ -42,6 +42,7 @@
             panel_time = new Panel();
             panel_changePage = new Panel();
             panel_heading.SuspendLayout();
+            panel_left.SuspendLayout();
             panel_right.SuspendLayout();
             panel_changePage.SuspendLayout();
             SuspendLayout();
@@ -107,6 +108,7 @@
             // panel_left
             // 
             panel_left.BackColor = Color.White;
+            panel_left.Controls.Add(panel_changePage);
             panel_left.Dock = DockStyle.Fill;
             panel_left.Location = new Point(0, 241);
             panel_left.Name = "panel_left";
@@ -184,7 +186,7 @@
             panel_changePage.Controls.Add(PreviousPageBtn);
             panel_changePage.Controls.Add(NextPageBtn);
             panel_changePage.Dock = DockStyle.Bottom;
-            panel_changePage.Location = new Point(0, 663);
+            panel_changePage.Location = new Point(0, 422);
             panel_changePage.Name = "panel_changePage";
             panel_changePage.Size = new Size(1000, 52);
             panel_changePage.TabIndex = 8;
@@ -194,7 +196,6 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1366, 715);
-            Controls.Add(panel_changePage);
             Controls.Add(panel_left);
             Controls.Add(panel_time);
             Controls.Add(panel_right);
@@ -205,6 +206,7 @@
             WindowState = FormWindowState.Maximized;
             panel_heading.ResumeLayout(false);
             panel_heading.PerformLayout();
+            panel_left.ResumeLayout(false);
             panel_right.ResumeLayout(false);
             panel_right.PerformLayout();
             panel_changePage.ResumeLayout(false);

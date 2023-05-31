@@ -86,7 +86,7 @@ namespace Learning_System
                     }
                     else
                     {
-                        quiz[j].Location = new Point(0, quiz[j - 1].Height + quiz[j-1].Location.Y);
+                        quiz[j].Location = new Point(0, quiz[j - 1].Height + quiz[j - 1].Location.Y);
                     }
                     panel_Page[numberOfPage - 1].Controls.Add(quiz[j]);
                 }
