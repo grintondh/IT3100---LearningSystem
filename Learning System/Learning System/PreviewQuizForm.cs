@@ -27,7 +27,7 @@ namespace Learning_System
         {
             InitializeComponent();
             panel_right.Width = 300;
-            panel_left.Width = Screen.PrimaryScreen.WorkingArea.Width - 300;
+            panel_left.Width = Screen.PrimaryScreen.WorkingArea.Width - panel_right.Width;
             panel_QuestionBtn.AutoScroll = true;
             this.timeLimit = timeLimit;
             this.questionsData = questionsData;
@@ -43,20 +43,30 @@ namespace Learning_System
             }
             numberOfPage = Convert.ToInt32(Math.Ceiling((decimal)numberOfQuestion / questionPerPage));
             var x = numberOfQuestion / questionPerPage;
+            PageOfPreviewQuiz[] quiz = new PageOfPreviewQuiz[numberOfQuestion];
             for (int i = 0; i < x; i++)
             {
                 panel_Page[i] = new Panel();
                 panel_left.Controls.Add(panel_Page[i]);
                 panel_Page[i].Dock = DockStyle.Fill;
-                panel_Page[i].AutoScroll = true;
-                for (int j = questionPerPage - 1; j >= 0; j--)
+                for (int j = 0; j < questionPerPage; j++)
                 {
                     var questionsChoices = dataRow[questionPerPage * i + j].Field<JArray>("Choice").ToObject<List<QuestionChoice>>();
                     var content = dataRow[questionPerPage * i + j].Field<string>("Content");
-                    PageOfPreviewQuiz quiz = new PageOfPreviewQuiz(questionPerPage * i + j, questionsChoices, content);
-                    quiz.Dock = DockStyle.Top;
-                    panel_Page[i].Controls.Add(quiz);
+                    quiz[questionPerPage * i + j] = new PageOfPreviewQuiz(questionPerPage * i + j, questionsChoices, content, this);
+                    quiz[questionPerPage * i + j].resize();
+                    if (j == 0)
+                    {
+                        quiz[questionPerPage * i + j].Location = new Point(0, 0);
+                    }
+                    else
+                    {
+                        quiz[questionPerPage * i + j].Location = new Point(0, quiz[questionPerPage * i + j - 1].Height + quiz[questionPerPage * i + j - 1].Location.Y);
+                    }
+                    panel_Page[i].Controls.Add(quiz[questionPerPage * i + j]);
                 }
+                panel_Page[i].AutoScroll = true;
+                panel_Page[i].AutoSize = true;
             }
             if (x < numberOfPage)
             {
@@ -64,17 +74,24 @@ namespace Learning_System
                 panel_left.Controls.Add(panel_Page[numberOfPage - 1]);
                 panel_Page[numberOfPage - 1].Dock = DockStyle.Fill;
                 panel_Page[numberOfPage - 1].AutoScroll = true;
-                for (int j = numberOfQuestion - 1; j >= questionPerPage * x; j--)
+                for (int j = questionPerPage * x; j < numberOfQuestion; j++)
                 {
-                    var numberOfChoice = dataRow[j].Field<JArray>("Choice").ToObject<List<QuestionChoice>>().Count;
                     var questionsChoices = dataRow[j].Field<JArray>("Choice").ToObject<List<QuestionChoice>>();
                     var content = dataRow[j].Field<string>("Content");
-                    PageOfPreviewQuiz quiz = new PageOfPreviewQuiz(j, questionsChoices, content);
-                    quiz.Dock = DockStyle.Top;
-                    panel_Page[numberOfPage - 1].Controls.Add(quiz);
+                    quiz[j] = new PageOfPreviewQuiz(j, questionsChoices, content, this);
+                    quiz[j].resize();
+                    if (j == questionPerPage * x)
+                    {
+                        quiz[j].Location = new Point(0, 0);
+                    }
+                    else
+                    {
+                        quiz[j].Location = new Point(0, quiz[j - 1].Height + quiz[j-1].Location.Y);
+                    }
+                    panel_Page[numberOfPage - 1].Controls.Add(quiz[j]);
                 }
             }
-            panel_Page[0].BringToFront();
+            //panel_Page[0].BringToFront();
             PreviousPageBtn.Visible = false;
             //
             Button[] button = new Button[numberOfQuestion];

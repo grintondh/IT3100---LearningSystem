@@ -217,8 +217,6 @@
         private Panel panel_heading;
         public Label PathLbl;
         private Label ITLbl;
-        private Panel panel_left;
-        private Panel panel_right;
         private Label QuizNavigationLbl;
         private Label label1;
         private Panel panel_QuestionBtn;
@@ -226,5 +224,7 @@
         private Button PreviousPageBtn;
         private Panel panel_time;
         private Panel panel_changePage;
+        public Panel panel_left;
+        public Panel panel_right;
     }
 }
