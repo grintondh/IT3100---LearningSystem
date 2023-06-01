@@ -39,6 +39,7 @@
             panel_richTextboxes = new Panel();
             panel_button = new Panel();
             ContentRtb = new RichTextBox();
+            KeyRtb = new RichTextBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -166,15 +167,28 @@
             ContentRtb.TabIndex = 0;
             ContentRtb.Text = "";
             // 
+            // KeyRtb
+            // 
+            KeyRtb.BackColor = Color.Gainsboro;
+            KeyRtb.BorderStyle = BorderStyle.None;
+            KeyRtb.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            KeyRtb.Location = new Point(226, 441);
+            KeyRtb.Name = "KeyRtb";
+            KeyRtb.Size = new Size(1101, 217);
+            KeyRtb.TabIndex = 3;
+            KeyRtb.Text = "";
+            KeyRtb.Visible = false;
+            // 
             // PageOfPreviewQuiz
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
+            Controls.Add(KeyRtb);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "PageOfPreviewQuiz";
-            Size = new Size(1340, 441);
+            Size = new Size(1340, 680);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -191,11 +205,12 @@
         private Label AnswerLbl;
         private Label QuestionLbl;
         private Label NumberLbl;
-        private Panel panel2;
         private RichTextBox ContentRtb;
         private GroupBox QuestionChoiceGrb;
         private Panel panel_richTextboxes;
         private Panel panel_button;
         private Panel panel3;
+        public RichTextBox KeyRtb;
+        public Panel panel2;
     }
 }

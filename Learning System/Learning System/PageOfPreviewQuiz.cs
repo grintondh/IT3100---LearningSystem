@@ -12,14 +12,15 @@ namespace Learning_System
 {
     public partial class PageOfPreviewQuiz : UserControl
     {
+        public double mark = 0;
         private PreviewQuizForm parentForm;
-        private bool IsMultipleChoiceQuestion;
-        private int numberOfChoice;
+        public bool IsMultipleChoiceQuestion;
+        public int numberOfChoice;
         const int MAXOFCHOICE = 10;
-        private RadioButton[] radioChoice = new RadioButton[MAXOFCHOICE];
-        private CheckBox[] checkboxChoice = new CheckBox[MAXOFCHOICE];
-        private List<QuestionChoice> questionChoices = new List<QuestionChoice>();
-        private RichTextBox[] richTextBoxes = new RichTextBox[MAXOFCHOICE];
+        public RadioButton[] radioChoice = new RadioButton[MAXOFCHOICE];
+        public CheckBox[] checkboxChoice = new CheckBox[MAXOFCHOICE];
+        public List<QuestionChoice> questionChoices = new List<QuestionChoice>();
+        public RichTextBox[] richTextBoxes = new RichTextBox[MAXOFCHOICE];
         private string content;
         private int STT;
         public PageOfPreviewQuiz(int STT, List<QuestionChoice> questionChoices, string content, PreviewQuizForm previewQuizForm)
@@ -32,7 +33,7 @@ namespace Learning_System
             this.STT = STT;
             // set width
             this.Width = Screen.PrimaryScreen.WorkingArea.Width - parentForm.panel_right.Width;
-            panel2.Width = this.Width - panel2.Location.X - 10;
+            panel2.Width = this.Width - panel2.Location.X - 50;
             try
             {
                 ContentRtb.Rtf = content;
@@ -73,63 +74,63 @@ namespace Learning_System
                 }
                 IsMultipleChoiceQuestion = false;
             }
-                for (int i = 0; i < numberOfChoice; i++)
+            for (int i = 0; i < numberOfChoice; i++)
+            {
+                richTextBoxes[i] = new RichTextBox();
+                this.panel_richTextboxes.Controls.Add(richTextBoxes[i]);
+                richTextBoxes[i].BackColor = Color.White;
+                richTextBoxes[i].BorderStyle = BorderStyle.None;
+                richTextBoxes[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                if (i == 0)
+                    richTextBoxes[i].Location = new Point(0, 0);
+                else richTextBoxes[i].Location = new Point(0, richTextBoxes[i - 1].Height + richTextBoxes[i - 1].Location.Y);
+                richTextBoxes[i].Width = panel_richTextboxes.Width;
+                try
                 {
-                    richTextBoxes[i] = new RichTextBox();
-                    this.panel_richTextboxes.Controls.Add(richTextBoxes[i]);
-                    richTextBoxes[i].BackColor = Color.White;
-                    richTextBoxes[i].BorderStyle = BorderStyle.None;
-                    richTextBoxes[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-                    if (i == 0)
-                        richTextBoxes[i].Location = new Point(0, 0);
-                    else richTextBoxes[i].Location = new Point(0, richTextBoxes[i - 1].Height + richTextBoxes[i - 1].Location.Y);
-                    richTextBoxes[i].Width = panel_richTextboxes.Width;
-                    try
+                    richTextBoxes[i].Rtf = questionChoices[i].choice;
+                    using (Graphics g = CreateGraphics())
                     {
-                        richTextBoxes[i].Rtf = questionChoices[i].choice;
-                        using (Graphics g = CreateGraphics())
-                        {
-                            //richTextBoxes[i].Height = (int)g.MeasureString(richTextBoxes[i].Rtf,
-                            //    richTextBoxes[i].Font, richTextBoxes[i].Width).Height;
-                            richTextBoxes[i].GetPreferredSize(richTextBoxes[i].Size);
-                        }
-                    }
-                    catch
-                    {
-                        richTextBoxes[i].Text = questionChoices[i].choice;
-                        using (Graphics g = CreateGraphics())
-                        {
-                            richTextBoxes[i].Height = (int)g.MeasureString(richTextBoxes[i].Text,
-                                richTextBoxes[i].Font, richTextBoxes[i].Width).Height;
-                        }
-                    }
-                    richTextBoxes[i].ReadOnly = true;
-                    //
-                    if (IsMultipleChoiceQuestion == true)
-                    {
-                        checkboxChoice[i] = new CheckBox();
-                        this.panel_button.Controls.Add(checkboxChoice[i]);
-                        checkboxChoice[i].AutoSize = true;
-                        checkboxChoice[i].Size = new Size(131, 27);
-                        checkboxChoice[i].UseVisualStyleBackColor = true;
-                        checkboxChoice[i].Text = "";
-                        checkboxChoice[i].Location = new Point(0, richTextBoxes[i].Location.Y);
-                        checkboxChoice[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-                        checkboxChoice[i].Click += checkBoxClick;
-                    }
-                    else
-                    {
-                        radioChoice[i] = new RadioButton();
-                        this.panel_button.Controls.Add(radioChoice[i]);
-                        radioChoice[i].AutoSize = true;
-                        radioChoice[i].Size = new Size(131, 27);
-                        radioChoice[i].Location = new Point(0, richTextBoxes[i].Location.Y);
-                        radioChoice[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-                        radioChoice[i].UseVisualStyleBackColor = true;
-                        radioChoice[i].Text = "";
-                        radioChoice[i].Click += radionButtonClick;
+                        //richTextBoxes[i].Height = (int)g.MeasureString(richTextBoxes[i].Rtf,
+                        //    richTextBoxes[i].Font, richTextBoxes[i].Width).Height;
+                        richTextBoxes[i].GetPreferredSize(richTextBoxes[i].Size);
                     }
                 }
+                catch
+                {
+                    richTextBoxes[i].Text = questionChoices[i].choice;
+                    using (Graphics g = CreateGraphics())
+                    {
+                        richTextBoxes[i].Height = (int)g.MeasureString(richTextBoxes[i].Text,
+                            richTextBoxes[i].Font, richTextBoxes[i].Width).Height;
+                    }
+                }
+                richTextBoxes[i].ReadOnly = true;
+                //
+                if (IsMultipleChoiceQuestion == true)
+                {
+                    checkboxChoice[i] = new CheckBox();
+                    this.panel_button.Controls.Add(checkboxChoice[i]);
+                    checkboxChoice[i].AutoSize = true;
+                    checkboxChoice[i].Size = new Size(131, 27);
+                    checkboxChoice[i].UseVisualStyleBackColor = true;
+                    checkboxChoice[i].Text = "";
+                    checkboxChoice[i].Location = new Point(0, richTextBoxes[i].Location.Y);
+                    checkboxChoice[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                    checkboxChoice[i].Click += checkBoxClick;
+                }
+                else
+                {
+                    radioChoice[i] = new RadioButton();
+                    this.panel_button.Controls.Add(radioChoice[i]);
+                    radioChoice[i].AutoSize = true;
+                    radioChoice[i].Size = new Size(131, 27);
+                    radioChoice[i].Location = new Point(0, richTextBoxes[i].Location.Y);
+                    radioChoice[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                    radioChoice[i].UseVisualStyleBackColor = true;
+                    radioChoice[i].Text = "";
+                    radioChoice[i].Click += radionButtonClick;
+                }
+            }
             NumberLbl.Text = (STT + 1).ToString();
         }
 
@@ -150,16 +151,16 @@ namespace Learning_System
             this.Height = panel2.Height + panel2.Location.Y + 10;
         }
 
-        private void radionButtonClick(object sender, EventArgs e)
+        public void radionButtonClick(object sender, EventArgs e)
         {
             parentForm.button[STT].BackColor = Color.DimGray;
             AnswerLbl.Text = "Answer saved";
         }
 
-        private void checkBoxClick(object sender, EventArgs e)
+        public void checkBoxClick(object sender, EventArgs e)
         {
             bool check = false;
-            for (int i = 0; i < numberOfChoice; i++) 
+            for (int i = 0; i < numberOfChoice; i++)
             {
                 if (checkboxChoice[i].Checked == true) check = true;
             }

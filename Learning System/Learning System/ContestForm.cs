@@ -16,12 +16,14 @@ namespace Learning_System
 {
     public partial class ContestForm : Form
     {
+        public DateTime timeStart;
         public EditQuiz editQuiz;
         public string nameContest;
         public int timeLimit;
         public ContestForm()
         {
             InitializeComponent();
+            timeStart = DateTime.Now;
             loadQuestionData();
             loadCategoryData();
             editQuiz = new EditQuiz(this);
@@ -41,7 +43,7 @@ namespace Learning_System
             ContestForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ  /  General  /  " + nameContest + "  /  Edit quiz";
         }
 
-        private DataProcessing questionsData = new();
+        public DataProcessing questionsData = new();
         private DataProcessing categoriesData = new();
         private JArray _categoriesDataJarray = new();
         private System.Data.DataTable contestDataTable = new();
@@ -118,7 +120,7 @@ namespace Learning_System
 
         private void ContestForm_PreviewQuizBtn_Click(object sender, EventArgs e)
         {
-            StartAttemptForm startAttemptForm = new StartAttemptForm(timeLimit, questionsData, editQuiz.questionID, nameContest);
+            StartAttemptForm startAttemptForm = new StartAttemptForm(this, editQuiz.questionID);
             startAttemptForm.ShowDialog();
         }
     }
