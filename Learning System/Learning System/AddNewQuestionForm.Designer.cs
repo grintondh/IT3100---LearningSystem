@@ -40,11 +40,11 @@
             AddNewQuestionForm_SaveBtn = new Button();
             AddNewQuestionForm_CancelBtn = new Button();
             panel_ = new Panel();
+            AddNewQuestionForm_TextRtb = new RichTextBox();
             pictureBox3 = new PictureBox();
             pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
             AddNewQuestionForm_CategoryLbl = new Label();
-            AddNewQuestionForm_TextRtb = new RichTextBox();
             AddNewQuestionForm_NameLbl = new Label();
             AddNewQuestionForm_TextLbl = new Label();
             AddNewQuestionForm_MarkLbl = new Label();
@@ -54,6 +54,9 @@
             AddNewQuestionForm_ExpandPic = new PictureBox();
             AddNewQuestionForm_GeneralBtn = new Button();
             AddNewQuestionForm_ToolTip = new ToolTip(components);
+            HomePageForm_PathLbl = new Label();
+            HomePageForm_ITLbl = new Label();
+            panel3 = new Panel();
             panel_heading.SuspendLayout();
             panel_body.SuspendLayout();
             panel_button.SuspendLayout();
@@ -62,6 +65,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AddNewQuestionForm_ExpandPic).BeginInit();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // AddNewQuestionForm_HeadingLbl
@@ -78,10 +82,9 @@
             // panel_heading
             // 
             panel_heading.BackColor = SystemColors.ControlLightLight;
-            panel_heading.BorderStyle = BorderStyle.FixedSingle;
             panel_heading.Controls.Add(AddNewQuestionForm_HeadingLbl);
             panel_heading.Dock = DockStyle.Top;
-            panel_heading.Location = new Point(0, 0);
+            panel_heading.Location = new Point(0, 146);
             panel_heading.Name = "panel_heading";
             panel_heading.Size = new Size(1233, 71);
             panel_heading.TabIndex = 9;
@@ -95,9 +98,9 @@
             panel_body.Controls.Add(AddNewQuestionForm_ExpandPic);
             panel_body.Controls.Add(AddNewQuestionForm_GeneralBtn);
             panel_body.Dock = DockStyle.Fill;
-            panel_body.Location = new Point(0, 71);
+            panel_body.Location = new Point(0, 217);
             panel_body.Name = "panel_body";
-            panel_body.Size = new Size(1233, 769);
+            panel_body.Size = new Size(1233, 623);
             panel_body.TabIndex = 0;
             // 
             // panel_button
@@ -180,11 +183,11 @@
             // panel_
             // 
             panel_.BackColor = SystemColors.ControlLightLight;
+            panel_.Controls.Add(AddNewQuestionForm_TextRtb);
             panel_.Controls.Add(pictureBox3);
             panel_.Controls.Add(pictureBox1);
             panel_.Controls.Add(pictureBox2);
             panel_.Controls.Add(AddNewQuestionForm_CategoryLbl);
-            panel_.Controls.Add(AddNewQuestionForm_TextRtb);
             panel_.Controls.Add(AddNewQuestionForm_NameLbl);
             panel_.Controls.Add(AddNewQuestionForm_TextLbl);
             panel_.Controls.Add(AddNewQuestionForm_MarkLbl);
@@ -196,6 +199,17 @@
             panel_.Name = "panel_";
             panel_.Size = new Size(1233, 474);
             panel_.TabIndex = 0;
+            // 
+            // AddNewQuestionForm_TextRtb
+            // 
+            AddNewQuestionForm_TextRtb.AutoSize = true;
+            AddNewQuestionForm_TextRtb.EnableAutoDragDrop = true;
+            AddNewQuestionForm_TextRtb.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_TextRtb.Location = new Point(460, 172);
+            AddNewQuestionForm_TextRtb.Name = "AddNewQuestionForm_TextRtb";
+            AddNewQuestionForm_TextRtb.Size = new Size(565, 225);
+            AddNewQuestionForm_TextRtb.TabIndex = 10;
+            AddNewQuestionForm_TextRtb.Text = "";
             // 
             // pictureBox3
             // 
@@ -239,16 +253,6 @@
             AddNewQuestionForm_CategoryLbl.Size = new Size(79, 23);
             AddNewQuestionForm_CategoryLbl.TabIndex = 4;
             AddNewQuestionForm_CategoryLbl.Text = "Category";
-            // 
-            // AddNewQuestionForm_TextRtb
-            // 
-            AddNewQuestionForm_TextRtb.EnableAutoDragDrop = true;
-            AddNewQuestionForm_TextRtb.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            AddNewQuestionForm_TextRtb.Location = new Point(460, 180);
-            AddNewQuestionForm_TextRtb.Name = "AddNewQuestionForm_TextRtb";
-            AddNewQuestionForm_TextRtb.Size = new Size(568, 235);
-            AddNewQuestionForm_TextRtb.TabIndex = 10;
-            AddNewQuestionForm_TextRtb.Text = "";
             // 
             // AddNewQuestionForm_NameLbl
             // 
@@ -330,6 +334,39 @@
             AddNewQuestionForm_GeneralBtn.Text = "General";
             AddNewQuestionForm_GeneralBtn.UseVisualStyleBackColor = true;
             // 
+            // HomePageForm_PathLbl
+            // 
+            HomePageForm_PathLbl.AutoSize = true;
+            HomePageForm_PathLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            HomePageForm_PathLbl.Location = new Point(23, 83);
+            HomePageForm_PathLbl.Name = "HomePageForm_PathLbl";
+            HomePageForm_PathLbl.Size = new Size(291, 23);
+            HomePageForm_PathLbl.TabIndex = 1;
+            HomePageForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ / Question bank / Questions / Editing a Multiple choice question";
+            // 
+            // HomePageForm_ITLbl
+            // 
+            HomePageForm_ITLbl.AutoSize = true;
+            HomePageForm_ITLbl.Font = new Font("Segoe UI", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point);
+            HomePageForm_ITLbl.ForeColor = Color.FromArgb(194, 36, 36);
+            HomePageForm_ITLbl.Location = new Point(23, 13);
+            HomePageForm_ITLbl.Name = "HomePageForm_ITLbl";
+            HomePageForm_ITLbl.Size = new Size(60, 60);
+            HomePageForm_ITLbl.TabIndex = 0;
+            HomePageForm_ITLbl.Text = "IT";
+            // 
+            // panel3
+            // 
+            panel3.BackColor = SystemColors.ControlLightLight;
+            panel3.BorderStyle = BorderStyle.FixedSingle;
+            panel3.Controls.Add(HomePageForm_PathLbl);
+            panel3.Controls.Add(HomePageForm_ITLbl);
+            panel3.Dock = DockStyle.Top;
+            panel3.Location = new Point(0, 0);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(1233, 146);
+            panel3.TabIndex = 2;
+            // 
             // AddNewQuestionForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -338,6 +375,7 @@
             ClientSize = new Size(1233, 840);
             Controls.Add(panel_body);
             Controls.Add(panel_heading);
+            Controls.Add(panel3);
             Name = "AddNewQuestionForm";
             WindowState = FormWindowState.Maximized;
             panel_heading.ResumeLayout(false);
@@ -351,6 +389,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)AddNewQuestionForm_ExpandPic).EndInit();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -380,5 +420,9 @@
         private PictureBox pictureBox3;
         private PictureBox pictureBox1;
         private ToolTip AddNewQuestionForm_ToolTip;
+
+        private Panel panel3;
+        private Label HomePageForm_PathLbl;
+        private Label HomePageForm_ITLbl;
     }
 }

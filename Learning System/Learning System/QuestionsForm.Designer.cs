@@ -38,12 +38,12 @@
             QuestionsForm_SelectCategoryLbl = new Label();
             QuestionsForm_QuestionsBankLbl = new Label();
             QuestionForm_ShowQuestionsDtg = new DataGridView();
-            CheckBox = new DataGridViewCheckBoxColumn();
             CheckBoxes = new DataGridViewCheckBoxColumn();
             QuestionName = new DataGridViewTextBoxColumn();
             Edit = new DataGridViewButtonColumn();
             ID = new DataGridViewTextBoxColumn();
             CategoryID = new DataGridViewTextBoxColumn();
+            CheckBox = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)QuestionForm_ShowQuestionsDtg).BeginInit();
             SuspendLayout();
             // 
@@ -168,18 +168,11 @@
             QuestionForm_ShowQuestionsDtg.RowHeadersVisible = false;
             QuestionForm_ShowQuestionsDtg.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             QuestionForm_ShowQuestionsDtg.RowTemplate.Height = 29;
-            QuestionForm_ShowQuestionsDtg.Size = new Size(1640, 400);
+            QuestionForm_ShowQuestionsDtg.Size = new Size(1660, 400);
             QuestionForm_ShowQuestionsDtg.TabIndex = 15;
             QuestionForm_ShowQuestionsDtg.CellContentClick += QuestionForm_ShowQuestionsDtg_CellContentClick;
             QuestionForm_ShowQuestionsDtg.CellMouseEnter += QuestionForm_ShowQuestionsDtg_CellMouseEnter;
             QuestionForm_ShowQuestionsDtg.CellMouseLeave += QuestionForm_ShowQuestionsDtg_CellMouseLeave;
-            // 
-            // CheckBox
-            // 
-            CheckBox.HeaderText = "T";
-            CheckBox.MinimumWidth = 6;
-            CheckBox.Name = "CheckBox";
-            CheckBox.Width = 125;
             // 
             // CheckBoxes
             // 
@@ -226,6 +219,13 @@
             CategoryID.Visible = false;
             CategoryID.Width = 125;
             // 
+            // CheckBox
+            // 
+            CheckBox.HeaderText = "T";
+            CheckBox.MinimumWidth = 6;
+            CheckBox.Name = "CheckBox";
+            CheckBox.Width = 125;
+            // 
             // QuestionsForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -241,7 +241,7 @@
             Controls.Add(QuestionsForm_SelectCategoryLbl);
             Controls.Add(QuestionsForm_QuestionsBankLbl);
             Name = "QuestionsForm";
-            Size = new Size(1678, 675);
+            Size = new Size(1717, 675);
             ((System.ComponentModel.ISupportInitialize)QuestionForm_ShowQuestionsDtg).EndInit();
             ResumeLayout(false);
             PerformLayout();

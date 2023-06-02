@@ -77,9 +77,9 @@ namespace Learning_System
 
                             DateTime endTime = _DT.Rows[i].Field<DateTime>("TimeEnd");
                             if (DateTime.Compare(endTime, DateTime.Now) < 0)
-                                pictureBox.Image = resources.GetObject("checked_file_blur") as Image;
+                                pictureBox.Image = Resources.checked_file_blur;
                             else
-                                pictureBox.Image = resources.GetObject("checked_file") as Image;
+                                pictureBox.Image = Resources.checked_file;
 
                             panel2.Controls.Add(linklbl);
                             panel2.Controls.Add(pictureBox);
@@ -160,7 +160,7 @@ namespace Learning_System
             PopUpForm.Visible = true;
             PopUpForm.Show_Export();
         }
-        
+
         private void HomePageForm_MenuPic_Click(object sender, EventArgs e)
         {
             panel_popup.Visible = false;

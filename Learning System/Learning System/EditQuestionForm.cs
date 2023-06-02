@@ -309,7 +309,10 @@ namespace Learning_System
 
                         CurrentParentId = Convert.ToInt32(_parentId.ToString());
                         List<string> query = new() { "ID", QuestionID.ToString() };
-                        DataRow _questionRow = questionsData.Init().Offset(0).Limit(1).Query(query).GetFirstRow();
+                        DataRow? _questionRow = questionsData.Init().Offset(0).Limit(1).Query(query).GetFirstRow();
+                        if (_questionRow == null)
+                            throw new E02CantProcessQuery();
+
                         _questionRow.BeginEdit();
                         _questionRow["Name"] = _name;
                         _questionRow["CategoryID"] = CurrentParentId;
@@ -323,10 +326,12 @@ namespace Learning_System
                         if (JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export()) == null)
                             throw new E04CantExportProperly();
                     }
+
+                    MessageBox.Show("Update question successfully!", "Success");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Add question failed!\nDescription: " + ex.Message, "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Update question failed!\nDescription: " + ex.Message, "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 Close();
             }
@@ -462,7 +467,10 @@ namespace Learning_System
 
                         CurrentParentId = Convert.ToInt32(_parentId.ToString());
                         List<string> query = new() { "ID", QuestionID.ToString() };
-                        DataRow _questionRow = questionsData.Init().Offset(0).Limit(1).Query(query).GetFirstRow();
+                        DataRow? _questionRow = questionsData.Init().Offset(0).Limit(1).Query(query).GetFirstRow();
+                        if (_questionRow == null)
+                            throw new E02CantProcessQuery();
+
                         _questionRow.BeginEdit();
                         _questionRow["Name"] = _name;
                         _questionRow["CategoryID"] = CurrentParentId;
@@ -476,6 +484,8 @@ namespace Learning_System
                         if (JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export()) == null)
                             throw new E04CantExportProperly();
                     }
+
+                    MessageBox.Show("Update question successfully!", "Success");
                 }
                 catch (Exception ex)
                 {

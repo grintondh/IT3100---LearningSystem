@@ -15,33 +15,33 @@ namespace Learning_System
 {
     public partial class ExportForm : UserControl
     {
-        public ExportForm()
-        {
-            InitializeComponent();
-        }
-
         private DataProcessing questionData = new();
         private readonly List<string> showColumns = new() { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
         private readonly List<Type> showType = new() { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
         private readonly List<string> showKey = new() { "PRIMARY KEY", "", "", "", "", "" };
         private DataTable? DataTable = new();
 
+        public ExportForm()
+        {
+            InitializeComponent();
+        }
+
         [Obsolete]
         private void ExportForm_ExportBtn_Click(object sender, EventArgs e)
         {
             ExportForm_progressLabel.Text = "Processing... ";
 
-            if (questionData.ImportedColumns == false)
+            JArray? _questionData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
+            if (_questionData == null)
+                throw new E01CantFindFile("Question.json");
+            else
             {
-                JArray? _questionData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
-                if (_questionData == null)
-                    throw new E01CantFindFile("Question.json");
-                else
-                {
+                if (questionData.ImportedColumns == true)
                     questionData.Import(showColumns, showType, showKey);
-                    questionData.Import(_questionData);
-                    DataTable = questionData.Init().Limit(questionData.Length()).Get();
-                }
+                
+                questionData.DeleteAll();
+                questionData.Import(_questionData);
+                DataTable = questionData.Init().Limit(questionData.Length()).Get();
             }
 
             if (DataTable == null)
@@ -98,7 +98,7 @@ namespace Learning_System
                         {
                             DataRow row = DataTable.Rows[i];
 
-                            string headerLine = "Question " + i.ToString() + ":";
+                            string headerLine = "Question " + (i + 1).ToString() + ":";
                             Paragraph header = new(new Text(headerLine));
                             header.SetFont(UserFont.GetFont("BOLD")).SetFontSize(14).SetTextAlignment(iText.Layout.Properties.TextAlignment.JUSTIFIED);
                             pdfDoc.Add(header);

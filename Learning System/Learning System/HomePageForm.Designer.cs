@@ -20,104 +20,6 @@
             base.Dispose(disposing);
         }
 
-        private static global::System.Resources.ResourceManager resourceMan;
-
-        private static global::System.Globalization.CultureInfo resourceCulture;
-
-        /// <summary>
-        ///   Returns the cached ResourceManager instance used by this class.
-        /// </summary>
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if (object.ReferenceEquals(resourceMan, null))
-                {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Learning_System.HomePageForm", typeof(HomePageForm).Assembly);
-                    resourceMan = temp;
-                }
-                return resourceMan;
-            }
-        }
-
-        /// <summary>
-        ///   Overrides the current thread's CurrentUICulture property for all
-        ///   resource lookups using this strongly typed resource class.
-        /// </summary>
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
-                return resourceCulture;
-            }
-            set
-            {
-                resourceCulture = value;
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap checked_file
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("checked_file", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap checked_file_blur
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("checked_file_blur", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap HomePageForm_AvatarPic_Image
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("HomePageForm_AvatarPic.Image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap HomePageForm_GearPic_Image
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("HomePageForm_GearPic.Image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap HomePageForm_MenuPic_Image
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("HomePageForm_MenuPic.Image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -143,8 +45,8 @@
             HomePageForm_ImportBtn = new Button();
             HomePageForm_ExportBtn = new Button();
             HomePageForm_QuestionsBankLbl = new Label();
-            panel2 = new Panel();
             PopUpForm = new PopUpForm();
+            panel2 = new Panel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)HomePageForm_AvatarPic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)HomePageForm_MenuPic).BeginInit();
@@ -152,7 +54,6 @@
             panel3.SuspendLayout();
             panel_popup.SuspendLayout();
             flowLayoutPanel_popup.SuspendLayout();
-            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -221,9 +122,9 @@
             HomePageForm_EditingBtn.FlatStyle = FlatStyle.Flat;
             HomePageForm_EditingBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             HomePageForm_EditingBtn.ForeColor = Color.White;
-            HomePageForm_EditingBtn.Location = new Point(1168, 96);
+            HomePageForm_EditingBtn.Location = new Point(1166, 96);
             HomePageForm_EditingBtn.Name = "HomePageForm_EditingBtn";
-            HomePageForm_EditingBtn.Size = new Size(211, 44);
+            HomePageForm_EditingBtn.Size = new Size(211, 42);
             HomePageForm_EditingBtn.TabIndex = 6;
             HomePageForm_EditingBtn.Text = "TURN EDITING ON";
             HomePageForm_EditingBtn.UseVisualStyleBackColor = false;
@@ -251,6 +152,7 @@
             // 
             // panel3
             // 
+            panel3.BorderStyle = BorderStyle.FixedSingle;
             panel3.Controls.Add(HomePageForm_EditingBtn);
             panel3.Controls.Add(HomePageForm_PathLbl);
             panel3.Controls.Add(HomePageForm_ITLbl);
@@ -399,7 +301,6 @@
             panel_popup.ResumeLayout(false);
             panel_popup.PerformLayout();
             flowLayoutPanel_popup.ResumeLayout(false);
-            panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 

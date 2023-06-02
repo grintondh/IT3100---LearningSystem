@@ -63,6 +63,26 @@ namespace Learning_System.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap checked_file {
+            get {
+                object obj = ResourceManager.GetObject("checked_file", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap checked_file_blur {
+            get {
+                object obj = ResourceManager.GetObject("checked_file_blur", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap exclaimation_removebg_preview {
             get {
                 object obj = ResourceManager.GetObject("exclaimation-removebg-preview", resourceCulture);

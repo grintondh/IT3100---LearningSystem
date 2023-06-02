@@ -53,6 +53,10 @@
             AddNewQuestionForm_SaveBtn = new Button();
             AddNewQuestionForm_CancelBtn = new Button();
             EditQuestionForm_Tooltip = new ToolTip(components);
+            HomePageForm_PathLbl = new Label();
+            HomePageForm_ITLbl = new Label();
+            panel3 = new Panel();
+            panel3.SuspendLayout();
             panel_heading.SuspendLayout();
             panel_body.SuspendLayout();
             panel_.SuspendLayout();
@@ -325,6 +329,39 @@
             AddNewQuestionForm_CancelBtn.UseVisualStyleBackColor = false;
             AddNewQuestionForm_CancelBtn.Click += AddNewQuestionForm_CancelBtn_Click;
             // 
+            // HomePageForm_PathLbl
+            // 
+            HomePageForm_PathLbl.AutoSize = true;
+            HomePageForm_PathLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            HomePageForm_PathLbl.Location = new Point(23, 83);
+            HomePageForm_PathLbl.Name = "HomePageForm_PathLbl";
+            HomePageForm_PathLbl.Size = new Size(291, 23);
+            HomePageForm_PathLbl.TabIndex = 1;
+            HomePageForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ / Question bank / Questions / Editing a Multiple choice question";
+            // 
+            // HomePageForm_ITLbl
+            // 
+            HomePageForm_ITLbl.AutoSize = true;
+            HomePageForm_ITLbl.Font = new Font("Segoe UI", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point);
+            HomePageForm_ITLbl.ForeColor = Color.FromArgb(194, 36, 36);
+            HomePageForm_ITLbl.Location = new Point(23, 13);
+            HomePageForm_ITLbl.Name = "HomePageForm_ITLbl";
+            HomePageForm_ITLbl.Size = new Size(60, 60);
+            HomePageForm_ITLbl.TabIndex = 0;
+            HomePageForm_ITLbl.Text = "IT";
+            // 
+            // panel3
+            // 
+            panel3.BackColor = SystemColors.ControlLightLight;
+            panel3.BorderStyle = BorderStyle.FixedSingle;
+            panel3.Controls.Add(HomePageForm_PathLbl);
+            panel3.Controls.Add(HomePageForm_ITLbl);
+            panel3.Dock = DockStyle.Top;
+            panel3.Location = new Point(0, 0);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(1233, 146);
+            panel3.TabIndex = 2;
+            // 
             // EditQuestionForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -333,6 +370,7 @@
             ClientSize = new Size(1233, 840);
             Controls.Add(panel_body);
             Controls.Add(panel_heading);
+            Controls.Add(panel3);
             Name = "EditQuestionForm";
             WindowState = FormWindowState.Maximized;
             panel_heading.ResumeLayout(false);
@@ -375,5 +413,9 @@
         private PictureBox pictureBox1;
         private PictureBox pictureBox3;
         private ToolTip EditQuestionForm_Tooltip;
+
+        private Panel panel3;
+        private Label HomePageForm_PathLbl;
+        private Label HomePageForm_ITLbl;
     }
 }

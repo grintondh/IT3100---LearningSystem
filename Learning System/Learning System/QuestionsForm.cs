@@ -70,7 +70,7 @@ namespace Learning_System
                                 row.Cells[1].Value = _QuestionName;
                             }
                             row.Cells[2].Value = "Edit";
-                            
+
                             DataGridViewButtonCell c = (DataGridViewButtonCell)row.Cells[2];
                             c.FlatStyle = FlatStyle.Flat;
                             if (i % 2 == 0)
