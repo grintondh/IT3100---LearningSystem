@@ -60,7 +60,14 @@ namespace Learning_System
                 panel_Page[i].Dock = DockStyle.Fill;
                 for (int j = 0; j < questionPerPage; j++)
                 {
-                    var questionsChoices = dataRow[questionPerPage * i + j].Field<JArray>("Choice").ToObject<List<QuestionChoice>>();
+                    List<QuestionChoice> questionsChoices = new List<QuestionChoice>();
+                    if (this.contestForm.editQuiz.EditQuiz_ShuffleCbx.Checked == false)
+                        questionsChoices = dataRow[questionPerPage * i + j].Field<JArray>("Choice").ToObject<List<QuestionChoice>>();
+                    else
+                    {
+                        questionsChoices = dataRow[questionPerPage * i + j].Field<JArray>("Choice").ToObject<List<QuestionChoice>>();
+                        questionsChoices = this.shuffleList(questionsChoices);
+                    }
                     var content = dataRow[questionPerPage * i + j].Field<string>("Content");
                     quiz[questionPerPage * i + j] = new PageOfPreviewQuiz(questionPerPage * i + j, questionsChoices, content, this);
                     quiz[questionPerPage * i + j].resize();
@@ -165,9 +172,14 @@ namespace Learning_System
         {
             if (finished == false)
             {
-                finished = true;
-                finishAttempt();
-                countDownTimer.Stop();
+                DialogResult dialog = MessageBox.Show("Are you sure you want to finish attempt ?", "Finish attempt",
+                        MessageBoxButtons.OKCancel);
+                if (dialog == DialogResult.OK)
+                {
+                    finished = true;
+                    finishAttempt();
+                    countDownTimer.Stop();
+                }
             }
             else this.Close();
         }
@@ -209,6 +221,11 @@ namespace Learning_System
                         }
                         // edit key rtb
                         quiz[questionPerPage * i + j].KeyRtb.Width = quiz[questionPerPage * i + j].panel2.Width;
+                        using (Graphics g = CreateGraphics())
+                        {
+                            quiz[questionPerPage * i + j].KeyRtb.Height = (int)g.MeasureString(quiz[questionPerPage * i + j].KeyRtb.Text,
+                                quiz[questionPerPage * i + j].KeyRtb.Font, quiz[questionPerPage * i + j].KeyRtb.Width).Height;
+                        }
                         quiz[questionPerPage * i + j].KeyRtb.Location = new Point(quiz[questionPerPage * i + j].panel2.Location.X,
                             quiz[questionPerPage * i + j].panel2.Location.Y +
                             quiz[questionPerPage * i + j].panel2.Height + 10);
@@ -253,6 +270,11 @@ namespace Learning_System
                         }
                         // edit key rtb
                         quiz[questionPerPage * i + j].KeyRtb.Width = quiz[questionPerPage * i + j].panel2.Width;
+                        using (Graphics g = CreateGraphics())
+                        {
+                            quiz[questionPerPage * i + j].KeyRtb.Height = (int)g.MeasureString(quiz[questionPerPage * i + j].KeyRtb.Text,
+                                quiz[questionPerPage * i + j].KeyRtb.Font, quiz[questionPerPage * i + j].KeyRtb.Width).Height;
+                        }
                         quiz[questionPerPage * i + j].KeyRtb.Location = new Point(quiz[questionPerPage * i + j].panel2.Location.X,
                             quiz[questionPerPage * i + j].panel2.Location.Y +
                             quiz[questionPerPage * i + j].panel2.Height + 10);
@@ -408,6 +430,21 @@ namespace Learning_System
                 finishAttempt();
                 finished = true;
             }
+        }
+
+        private List<QuestionChoice> shuffleList(List<QuestionChoice> list)
+        {
+            int i = list.Count;
+            Random rd = new Random();
+            while (i > 1)
+            {
+                i--;
+                int k = rd.Next(i + 1);
+                QuestionChoice tmp = list[k];
+                list[k] = list[i];
+                list[i] = tmp;
+            }
+            return list;
         }
 
     }
