@@ -1,5 +1,5 @@
-﻿using Learning_System.Class;
-using Learning_System.ExternalClass;
+﻿using Learning_System.ProcessingClasses;
+using Learning_System.ProcessingClasses;
 using Learning_System.Properties;
 using Newtonsoft.Json.Linq;
 using System.Data;

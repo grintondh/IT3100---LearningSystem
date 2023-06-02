@@ -4,7 +4,7 @@
 using Newtonsoft.Json.Linq;
 using System.Diagnostics.Eventing.Reader;
 
-namespace Learning_System.ExternalClass
+namespace Learning_System.ProcessingClasses
 {
     /// <summary>
     /// Methods for processing Json file

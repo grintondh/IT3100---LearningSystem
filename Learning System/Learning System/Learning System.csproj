@@ -46,7 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="HomePageForm.resx">
+    <EmbeddedResource Update="Controls\HomePageForm.resx">
       <Generator></Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">

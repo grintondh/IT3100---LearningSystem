@@ -1,4 +1,4 @@
-﻿namespace Learning_System
+﻿namespace Learning_System.Modals
 {
     internal class Contests
     {

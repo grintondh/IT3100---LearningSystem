@@ -5,7 +5,7 @@
 using Newtonsoft.Json.Linq;
 using System.Data;
 
-namespace Learning_System.ExternalClass
+namespace Learning_System.ProcessingClasses
 {
     public class DataProcessing
     {
@@ -440,7 +440,7 @@ namespace Learning_System.ExternalClass
             PrevListElements = ListElements;
             ListElements.Clear();
         }
-        
+
         /// <summary>
         /// Xóa (các) bản ghi thỏa mãn điều kiện (kết hợp với Offset(), Limit(), Query(), Select(), Sort())
         /// </summary>

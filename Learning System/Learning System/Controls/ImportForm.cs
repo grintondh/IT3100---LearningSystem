@@ -1,10 +1,11 @@
-﻿using Learning_System.ExternalClass;
-using System.Data;
+﻿using System.Data;
 using Newtonsoft.Json.Linq;
 using Microsoft.Office.Interop.Word;
 using System.Reflection;
 using Microsoft.VisualBasic.Devices;
-using Learning_System.Class;
+using Learning_System.ProcessingClasses;
+using Learning_System.Modals;
+using Learning_System.ProcessingClasses;
 
 namespace Learning_System
 {

@@ -1,5 +1,4 @@
-﻿using Learning_System.ExternalClass;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System.Data;
 using System.Globalization;
 using System.Text;
@@ -9,7 +8,9 @@ using iText.Layout.Element;
 using iText.Html2pdf;
 using iText.Html2pdf.Resolver.Font;
 using System.Diagnostics;
-using Learning_System.Class;
+using Learning_System.ProcessingClasses;
+using Learning_System.Modals;
+using Learning_System.ProcessingClasses;
 
 namespace Learning_System
 {

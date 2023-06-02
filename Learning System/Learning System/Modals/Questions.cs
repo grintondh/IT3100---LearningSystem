@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Learning_System
+namespace Learning_System.Modals
 {
     internal class Questions
     {

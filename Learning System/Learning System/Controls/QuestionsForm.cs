@@ -1,6 +1,5 @@
-﻿using Learning_System.Class;
-using Learning_System.ExternalClass;
-using Microsoft.Office.Interop.Word;
+﻿using Learning_System.ProcessingClasses;
+using Learning_System.Modals;
 using Newtonsoft.Json.Linq;
 using System.Data;
 

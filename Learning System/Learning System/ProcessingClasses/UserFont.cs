@@ -1,7 +1,7 @@
 using iText.Kernel.Font;
 
 
-namespace Learning_System.ExternalClass
+namespace Learning_System.ProcessingClasses
 {
     internal class UserFont
     {

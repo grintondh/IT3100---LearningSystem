@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Learning_System
+namespace Learning_System.Modals
 {
     public class Categories
     {
@@ -18,5 +18,5 @@ namespace Learning_System
         public string? Description { get; set; }
         public string? IdNumber { get; set; }
     }
-    
+
 }
