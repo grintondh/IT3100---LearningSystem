@@ -146,7 +146,7 @@ namespace Learning_System
                 return;
             }
             string text = "Đã thêm thành công những câu hỏi có ID sau vào contest: ";
-            for (int i = 0; i < RandomQuestions_NumberOfRdQuestionsCbo.SelectedIndex; i++)
+            for (int i = 0; i <= RandomQuestions_NumberOfRdQuestionsCbo.SelectedIndex; i++)
             {
                 Random rd = new Random();
                 int index = rd.Next(0, selectedQuestions.Count - 1);
@@ -245,7 +245,7 @@ namespace Learning_System
                 RandomQuestions_NumberOfRdQuestionsCbo.Items.Clear();
                 RandomQuestions_NumberOfRdQuestionsCbo.SelectedIndex = -1;
                 RandomQuestions_NumberOfRdQuestionsCbo.Text = " ";
-                for (int i = 0; i <= selectedQuestions.Count; i++)
+                for (int i = 1; i <= selectedQuestions.Count; i++)
                 {
                     RandomQuestions_NumberOfRdQuestionsCbo.Items.Add(i);
                 }
@@ -281,6 +281,11 @@ namespace Learning_System
             else PageButton[1].Text = "...";
             if (groupSelectedIndex == numberOfGroup) PageButton[NUMBER_OF_PAGES_PER_GROUP + 2].Text = " ";
             else PageButton[NUMBER_OF_PAGES_PER_GROUP + 2].Text = "...";
+            for (int i = 0; i < NUMBER_OF_PAGES_PER_GROUP + 3; i++)
+            {
+                if (PageButton[i].Text == " ") PageButton[i].Hide();
+                else PageButton[i].Show();
+            }
         }
         private void ShowQuestion(int pageSelectedIndex, List<int> selectedQuestions)
         {
