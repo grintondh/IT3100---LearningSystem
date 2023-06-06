@@ -56,6 +56,7 @@
             // 
             // panel_edit
             // 
+            panel_edit.AutoScroll = true;
             panel_edit.BackColor = Color.White;
             panel_edit.Controls.Add(flowLayoutPanel_popup);
             panel_edit.Controls.Add(EditQuiz_AddBtn);
