@@ -1,5 +1,4 @@
 ﻿using Learning_System.ExternalClass;
-using Microsoft.Office.Interop.Word;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -35,6 +34,8 @@ namespace Learning_System
             FromQuestionBank_ShowQuestionsDtg.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             FromQuestionBank_ShowQuestionsDtg.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             FromQuestionBank_ShowQuestionsDtg.RowTemplate.Height = 35;
+            FromQuestionBank_AddBtn.Location = new Point(FromQuestionBank_ShowQuestionsDtg.Location.X,
+                FromQuestionBank_ShowQuestionsDtg.Location.Y + FromQuestionBank_ShowQuestionsDtg.Height + 50);
         }
         public void addData(DataProcessing _questionData, DataProcessing _categoriesData, JArray __categoriesDataJarray)
         {

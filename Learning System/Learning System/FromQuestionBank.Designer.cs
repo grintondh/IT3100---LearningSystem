@@ -122,14 +122,13 @@
             // 
             // FromQuestionBank_AddBtn
             // 
-            FromQuestionBank_AddBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             FromQuestionBank_AddBtn.BackColor = Color.FromArgb(0, 115, 165);
             FromQuestionBank_AddBtn.FlatStyle = FlatStyle.Flat;
             FromQuestionBank_AddBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             FromQuestionBank_AddBtn.ForeColor = Color.White;
             FromQuestionBank_AddBtn.Location = new Point(14, 705);
             FromQuestionBank_AddBtn.Name = "FromQuestionBank_AddBtn";
-            FromQuestionBank_AddBtn.Size = new Size(378, 40);
+            FromQuestionBank_AddBtn.Size = new Size(420, 40);
             FromQuestionBank_AddBtn.TabIndex = 35;
             FromQuestionBank_AddBtn.Text = "ADD SELECTED QUESTIONS TO THE QUIZ";
             FromQuestionBank_AddBtn.UseVisualStyleBackColor = false;

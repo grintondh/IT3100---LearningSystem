@@ -1,5 +1,4 @@
 ﻿using Learning_System.ExternalClass;
-using Microsoft.Office.Interop.Word;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -102,6 +101,8 @@ namespace Learning_System
             RandomQuestion_ShowQuestionDgv.Columns[1].Width = RandomQuestion_ShowQuestionDgv.Width - 170;
             RandomQuestion_ShowQuestionDgv.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             RandomQuestion_ShowQuestionDgv.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            RandomQuestion_AddBtn.Location = new Point(RandomQuestion_ShowQuestionDgv.Location.X,
+                RandomQuestion_ShowQuestionDgv.Location.Y + RandomQuestion_ShowQuestionDgv.Height + 50);
 
             for (int i = 0; i < NUMBER_OF_PAGES_PER_GROUP + 4; i++)
             {
