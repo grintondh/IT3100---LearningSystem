@@ -1,5 +1,4 @@
 ﻿using Learning_System.ProcessingClasses;
-using Learning_System.ProcessingClasses;
 using Learning_System.Properties;
 using Newtonsoft.Json.Linq;
 using System.Data;
@@ -166,6 +165,12 @@ namespace Learning_System
             panel_popup.Visible = false;
             PopUpForm.Visible = false;
             LoadContestList();
+        }
+
+        private void HomePageForm_EditingBtn_Click(object sender, EventArgs e)
+        {
+            AddingNewQuiz aDN = new AddingNewQuiz();
+            aDN.ShowDialog();
         }
     }
 }

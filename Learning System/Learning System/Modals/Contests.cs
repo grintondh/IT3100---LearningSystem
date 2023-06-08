@@ -10,6 +10,9 @@
         public bool ShuffleAnswer { get; set; }
         public DateTime TimeStart { get; set; }
         public DateTime TimeEnd { get; set; }
+        public bool StartEnable { get; set; }
+        public bool EndEnable { get; set; }
         public int TimeLimit { get; set; }
+        public bool TimeLimitEnable { get; set; }
     }
 }

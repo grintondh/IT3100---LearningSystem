@@ -112,7 +112,7 @@ namespace Learning_System.ProcessingClasses
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Có lỗi trong quá trình chuyển đổi dữ liệu!\nChi tiết lỗi:\n" + ex, "Error");
+                MessageBox.Show("Có lỗi trong quá trình chuyển đổi dữ liệu!\nChi tiết lỗi:\n" + ex.Message, "Error");
                 return StatusCode.Error;
             }
         }
@@ -209,7 +209,7 @@ namespace Learning_System.ProcessingClasses
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Không thể duyệt dữ liệu!\nChi tiết lỗi:\n" + ex, "Error");
+                MessageBox.Show("Không thể duyệt dữ liệu!\nChi tiết lỗi:\n" + ex.Message, "Error");
                 return null;
             }
         }
@@ -298,7 +298,7 @@ namespace Learning_System.ProcessingClasses
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Không thể lấy dữ liệu!\nChi tiết lỗi:\n" + ex, "Error");
+                MessageBox.Show("Không thể lấy dữ liệu!\nChi tiết lỗi:\n" + ex.Message, "Error");
                 return null;
             }
         }
@@ -427,7 +427,7 @@ namespace Learning_System.ProcessingClasses
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Không thể thêm phần tử mới: Có lỗi trong quá trình duyệt dữ liệu\nChi tiết lỗi:\n" + ex, "Error");
+                MessageBox.Show("Không thể thêm phần tử mới: Có lỗi trong quá trình duyệt dữ liệu\nChi tiết lỗi:\n" + ex.Message, "Error");
                 return StatusCode.Error;
             }
         }
@@ -467,7 +467,7 @@ namespace Learning_System.ProcessingClasses
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Không thể xóa phần tử: Có lỗi trong quá trình xóa. Hệ thống đã tự động quay về bản dữ liệu trước khi thực hiện thao tác.\nChi tiết lỗi:\n" + ex, "Error");
+                MessageBox.Show("Không thể xóa phần tử: Có lỗi trong quá trình xóa. Hệ thống đã tự động quay về bản dữ liệu trước khi thực hiện thao tác.\nChi tiết lỗi:\n" + ex.Message, "Error");
                 Undo();
                 return StatusCode.Error;
             }
@@ -522,7 +522,7 @@ namespace Learning_System.ProcessingClasses
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Không thể cập nhật phần tử: Có lỗi trong quá trình cập nhật. Hệ thống đã tự động quay về bản dữ liệu trước khi thực hiện thao tác.\nChi tiết lỗi:\n" + ex, "Error");
+                MessageBox.Show("Không thể cập nhật phần tử: Có lỗi trong quá trình cập nhật. Hệ thống đã tự động quay về bản dữ liệu trước khi thực hiện thao tác.\nChi tiết lỗi:\n" + ex.Message, "Error");
                 Undo();
                 return StatusCode.Error;
             }

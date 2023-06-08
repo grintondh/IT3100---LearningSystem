@@ -59,7 +59,6 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(0, 115, 165);
-            panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(HomePageForm_UserNameLbl);
             panel1.Controls.Add(HomePageForm_AvatarPic);
             panel1.Controls.Add(HomePageForm_MenuPic);
@@ -128,6 +127,7 @@
             HomePageForm_EditingBtn.TabIndex = 6;
             HomePageForm_EditingBtn.Text = "TURN EDITING ON";
             HomePageForm_EditingBtn.UseVisualStyleBackColor = false;
+            HomePageForm_EditingBtn.Click += HomePageForm_EditingBtn_Click;
             // 
             // HomePageForm_PathLbl
             // 
@@ -152,7 +152,6 @@
             // 
             // panel3
             // 
-            panel3.BorderStyle = BorderStyle.FixedSingle;
             panel3.Controls.Add(HomePageForm_EditingBtn);
             panel3.Controls.Add(HomePageForm_PathLbl);
             panel3.Controls.Add(HomePageForm_ITLbl);
