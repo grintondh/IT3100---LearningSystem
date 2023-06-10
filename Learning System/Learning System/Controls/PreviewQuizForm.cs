@@ -325,6 +325,11 @@ namespace Learning_System
                     }
                     // edit key rtb
                     quiz[i].KeyRtb.Width = quiz[i].panel2.Width;
+                    using (Graphics g = CreateGraphics())
+                    {
+                        quiz[i].KeyRtb.Height = (int)g.MeasureString(quiz[i].KeyRtb.Text,
+                            quiz[i].KeyRtb.Font, quiz[i].KeyRtb.Width).Height;
+                    }
                     quiz[i].KeyRtb.Location = new Point(quiz[i].panel2.Location.X,
                         quiz[i].panel2.Location.Y +
                         quiz[i].panel2.Height + 10);
@@ -369,6 +374,11 @@ namespace Learning_System
                     }
                     // edit key rtb
                     quiz[i].KeyRtb.Width = quiz[i].panel2.Width;
+                    using (Graphics g = CreateGraphics())
+                    {
+                        quiz[i].KeyRtb.Height = (int)g.MeasureString(quiz[i].KeyRtb.Text,
+                            quiz[i].KeyRtb.Font, quiz[i].KeyRtb.Width).Height;
+                    }
                     quiz[i].KeyRtb.Location = new Point(quiz[i].panel2.Location.X,
                         quiz[i].panel2.Location.Y +
                         quiz[i].panel2.Height + 10);
