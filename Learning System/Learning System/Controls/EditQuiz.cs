@@ -110,9 +110,20 @@ namespace Learning_System
                 DataRow row = questionsData.Init().Offset(0).Limit(1).Query(query).GetFirstRow();
                 var index = EditQuiz_QuestionDtg.Rows.Add();
                 DataGridViewRow DtgRow = EditQuiz_QuestionDtg.Rows[index];
-                DtgRow.Cells[0].Value = row.Field<string>("Name") + " " + row.Field<string>("Content");
+                using (RichTextBox tmp = new RichTextBox())
+                {
+                    try
+                    {
+                        tmp.Rtf = row.Field<string>("Content");
+                    }
+                    catch
+                    {
+                        tmp.Text = row.Field<string>("Content");
+                    }
+                    string content = tmp.Text;
+                    DtgRow.Cells[0].Value = row.Field<string>("Name") + " " + content;
+                }
                 List<QuestionChoice> choices = row.Field<JArray>("Choice").ToObject<List<QuestionChoice>>();
-                for (int j = 0; j < choices.Count; j++) DtgRow.Cells[0].Value += " " + choices[j].choice;
                 DtgRow.Cells[2].Value = row.Field<int>("ID");
                 DtgRow.Cells[3].Value = row.Field<double>("DefaultMark");
                 if (i % 2 == 0) DtgRow.DefaultCellStyle.BackColor = Color.White;
