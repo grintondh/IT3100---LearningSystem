@@ -12,6 +12,7 @@ namespace Learning_System
 {
     public partial class PageOfPreviewQuiz : UserControl
     {
+        public const int HEIGHTMAX = 500;
         public double mark = 0;
         private PreviewQuizForm parentForm;
         public bool IsMultipleChoiceQuestion;
@@ -37,12 +38,7 @@ namespace Learning_System
             try
             {
                 ContentRtb.Rtf = content;
-                using (Graphics g = CreateGraphics())
-                {
-                    //ContentRtb.Height = (int)g.MeasureString(ContentRtb.Text,
-                    //    ContentRtb.Font, ContentRtb.Width).Height;
-                    ContentRtb.GetPreferredSize(ContentRtb.Size);
-                }
+                ContentRtb.Height = HEIGHTMAX;
             }
             catch
             {
@@ -88,12 +84,7 @@ namespace Learning_System
                 try
                 {
                     richTextBoxes[i].Rtf = questionChoices[i].choice;
-                    using (Graphics g = CreateGraphics())
-                    {
-                        //richTextBoxes[i].Height = (int)g.MeasureString(richTextBoxes[i].Rtf,
-                        //    richTextBoxes[i].Font, richTextBoxes[i].Width).Height;
-                        richTextBoxes[i].GetPreferredSize(richTextBoxes[i].Size);
-                    }
+                    richTextBoxes[i].Height = HEIGHTMAX;
                 }
                 catch
                 {
