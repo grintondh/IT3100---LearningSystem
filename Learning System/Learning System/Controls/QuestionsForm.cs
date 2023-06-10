@@ -1,5 +1,4 @@
 ﻿using Learning_System.ExternalClass;
-using Learning_System;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
