@@ -169,6 +169,11 @@ namespace Learning_System
             LoadCategoriesData();
             QuestionsForm_SelectCategoryCbo.SelectedIndex = -1;
             QuestionsForm_SelectCategoryCbo.SelectedText = "  Default";
+            QuestionForm_ShowQuestionsDtg.Width = Screen.PrimaryScreen.WorkingArea.Width - 100;
+            QuestionForm_ShowQuestionsDtg.Columns[1].Width = QuestionForm_ShowQuestionsDtg.Width - 200;
+            QuestionForm_ShowQuestionsDtg.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            QuestionForm_ShowQuestionsDtg.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            QuestionForm_ShowQuestionsDtg.RowTemplate.Height = 35;
         }
 
         private void QuestionsForm_SelectCategoryCbo_Click(object sender, EventArgs e)

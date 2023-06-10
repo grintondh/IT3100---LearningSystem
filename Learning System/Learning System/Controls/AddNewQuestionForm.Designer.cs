@@ -286,28 +286,28 @@
             // 
             // AddNewQuestionForm_CategoryCbo
             // 
-            AddNewQuestionForm_CategoryCbo.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_CategoryCbo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_CategoryCbo.FormattingEnabled = true;
             AddNewQuestionForm_CategoryCbo.Location = new Point(460, 53);
             AddNewQuestionForm_CategoryCbo.Name = "AddNewQuestionForm_CategoryCbo";
-            AddNewQuestionForm_CategoryCbo.Size = new Size(281, 31);
+            AddNewQuestionForm_CategoryCbo.Size = new Size(281, 36);
             AddNewQuestionForm_CategoryCbo.TabIndex = 8;
             AddNewQuestionForm_CategoryCbo.DropDown += AddNewQuestionForm_CategoryCbo_DropDown;
             // 
             // AddNewQuestionForm_NameTxt
             // 
-            AddNewQuestionForm_NameTxt.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_NameTxt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_NameTxt.Location = new Point(460, 101);
             AddNewQuestionForm_NameTxt.Name = "AddNewQuestionForm_NameTxt";
-            AddNewQuestionForm_NameTxt.Size = new Size(281, 30);
+            AddNewQuestionForm_NameTxt.Size = new Size(281, 34);
             AddNewQuestionForm_NameTxt.TabIndex = 9;
             // 
             // AddNewQuestionForm_MarkTxt
             // 
-            AddNewQuestionForm_MarkTxt.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_MarkTxt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_MarkTxt.Location = new Point(460, 436);
             AddNewQuestionForm_MarkTxt.Name = "AddNewQuestionForm_MarkTxt";
-            AddNewQuestionForm_MarkTxt.Size = new Size(281, 30);
+            AddNewQuestionForm_MarkTxt.Size = new Size(281, 34);
             AddNewQuestionForm_MarkTxt.TabIndex = 11;
             AddNewQuestionForm_MarkTxt.Text = "1";
             // 
@@ -340,7 +340,7 @@
             HomePageForm_PathLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             HomePageForm_PathLbl.Location = new Point(23, 83);
             HomePageForm_PathLbl.Name = "HomePageForm_PathLbl";
-            HomePageForm_PathLbl.Size = new Size(291, 23);
+            HomePageForm_PathLbl.Size = new Size(788, 23);
             HomePageForm_PathLbl.TabIndex = 1;
             HomePageForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ / Question bank / Questions / Editing a Multiple choice question";
             // 
