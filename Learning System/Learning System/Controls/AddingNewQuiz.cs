@@ -139,8 +139,6 @@ public partial class AddingNewQuiz : Form
                     throw new E02CantProcessQuery();
 
                 JsonProcessing.ExportJsonContentInDefaultFolder("Contest.json", quizData.Export());
-                MessageBox.Show("Đã thêm thành công!\nTại trang chủ hãy nhấn biểu tượng 3 dấu gạch ngang để tải lại danh sách kỳ thi!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 AddNewQuizForm_NameTxt.Text = "";
                 AddNewQuizFormTxt_Description.Text = "";
                 AddNewQuizForm_Timelimit.Text = "";
@@ -150,6 +148,7 @@ public partial class AddingNewQuiz : Form
                 MessageBox.Show("Thêm phần tử thất bại!\nChi tiết lỗi:\n" + ex.Message, "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        this.Close();
     }
 
     private void TimeLimit_KeyPress(object sender, KeyPressEventArgs e)
