@@ -23,27 +23,19 @@ namespace Learning_System
         public void ShowQuestions(List<int> showQuestionsFromCategoriesID, bool _showQuestionsFromSubcategories)
         {
             QuestionForm_ShowQuestionsDtg.Rows.Clear();
-            DataProcessing questionsData = new();
-            List<string> _showQuestionsColumns = new() { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
-            List<Type> _showQuestionsType = new() { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
-            List<string> _showQuestionsKey = new() { "PRIMARY KEY", "", "", "", "", "" };
+
             try
             {
-                JArray? jArray = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
-                if (jArray == null)
-                    throw new E01CantFindFile("Question.json");
+                QuestionsTable.table.LoadData(JsonProcessing.QuestionsPath);
 
-                questionsData.Import(_showQuestionsColumns, _showQuestionsType, _showQuestionsKey);
-                questionsData.Import(jArray);
-
-                if (questionsData.Length() == 0) MessageBox.Show("Không có câu hỏi nào trong Categories này!");
+                if (QuestionsTable.table.Length() == 0) MessageBox.Show("Không có câu hỏi nào trong Categories này!");
                 else
                 {
                     //var index = QuestionForm_ShowQuestionsDtg.Rows.Add();
                     //QuestionForm_ShowQuestionsDtg.Rows[index].Cells[1].Value = "Question name / ID number";
-                    for (int i = 0; i < questionsData.Length(); i++)
+                    for (int i = 0; i < QuestionsTable.table.Length(); i++)
                     {
-                        DataRow? Question = questionsData.Init().Offset(i).Limit(1).Sort("ID desc").GetFirstRow();
+                        DataRow? Question = QuestionsTable.table.Init().Offset(i).Limit(1).Sort("ID desc").GetFirstRow();
                         if (Question == null)
                             throw new E02CantProcessQuery();
 

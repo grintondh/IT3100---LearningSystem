@@ -1,4 +1,5 @@
-﻿using Learning_System.ProcessingClasses;
+﻿using Learning_System.Modals;
+using Learning_System.ProcessingClasses;
 using Learning_System.Properties;
 using Newtonsoft.Json.Linq;
 using System.Data;
@@ -9,80 +10,94 @@ namespace Learning_System
     {
         public HomePageForm()
         {
+            InitializeDataTable();
             InitializeComponent();
             LoadContestList();
+        }
+
+        private void InitializeDataTable()
+        {
+            List<string> showColumns, showKey;
+            List<Type> showType;
+
+            showColumns = new() { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
+            showType = new() { typeof(int), typeof(string), typeof(JArray), typeof(JArray), typeof(string), typeof(string) };
+            showKey = new() { "PRIMARY KEY", "NOT NULL", "", "", "", "" };
+
+            CategoriesTable.table.Import(showColumns, showType, showKey);
+
+            showColumns = new() { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
+            showType = new() { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
+            showKey = new() { "PRIMARY KEY", "NOT NULL", "", "NOT NULL", "NOT NULL", "" };
+
+            QuestionsTable.table.Import(showColumns, showType, showKey);
+
+            showColumns = new() { "Id", "Name", "Description", "DescriptionShow", "QuestionArray", "ShuffleAnswer",
+                                               "TimeStart", "StartEnable", "TimeEnd", "EndEnable", "TimeLimit", "TimeLimitEnable"};
+            showType = new() { typeof(int), typeof(string), typeof(string), typeof(bool), typeof(JArray), typeof(bool),
+                                          typeof(DateTime), typeof(bool), typeof(DateTime), typeof(bool), typeof(int), typeof(bool)};
+            showKey = new() { "PRIMARY KEY", "", "", "", "", "", "", "", "", "", "", "" };
+
+            ContestsTable.table.Import(showColumns, showType, showKey);
         }
 
         private void LoadContestList()
         {
             try
             {
-                JArray? contestJson = JsonProcessing.ImportJsonContentInDefaultFolder("contest.json", null, null);
+                ContestsTable.table.LoadData(JsonProcessing.ContestsPath);
 
-                if (contestJson == null)
-                    throw new E01CantFindFile("contest.json");
+                DataTable? _DT = ContestsTable.table.Init().Sort("TimeStart desc").Get();
+
+                if (_DT == null)
+                    throw new E02CantProcessQuery();
                 else
                 {
-                    DataProcessing contestData = new();
-                    List<string> contestColumns = new() { "Name", "TimeStart", "TimeEnd" };
-                    List<Type> contestType = new() { typeof(string), typeof(DateTime), typeof(DateTime) };
-                    List<string> contestKey = new() { "PRIMARY KEY", "", "" };
-
-                    contestData.Import(contestColumns, contestType, contestKey);
-                    contestData.Import(contestJson);
-
-                    DataTable? _DT = contestData.Init().Sort("TimeStart desc").Get();
-
-                    if (_DT == null)
-                        throw new E02CantProcessQuery();
-                    else
+                    for (int i = 0; i < _DT.Rows.Count; i++)
                     {
-                        for (int i = 0; i < _DT.Rows.Count; i++)
+                        LinkLabel linklbl = new()
                         {
-                            LinkLabel linklbl = new()
-                            {
-                                Name = "ExportForm_Linklbl" + i.ToString(),
-                                Location = new Point(120, 150 + i * 45),
-                                Font = new Font("Arvoregular", 12F, FontStyle.Regular, GraphicsUnit.Point),
-                                ActiveLinkColor = Color.Black,
-                                VisitedLinkColor = Color.Black,
-                                LinkColor = Color.Black,
-                                LinkBehavior = LinkBehavior.HoverUnderline,
-                                FlatStyle = FlatStyle.Flat,
-                                TabIndex = 10,
-                                Text = _DT.Rows[i].Field<string>("Name"),
-                                Size = new Size(919, 30),
-                            };
+                            Name = "ExportForm_Linklbl" + i.ToString(),
+                            Location = new Point(120, 150 + i * 45),
+                            Font = new Font("Arvoregular", 12F, FontStyle.Regular, GraphicsUnit.Point),
+                            ActiveLinkColor = Color.Black,
+                            VisitedLinkColor = Color.Black,
+                            LinkColor = Color.Black,
+                            LinkBehavior = LinkBehavior.HoverUnderline,
+                            FlatStyle = FlatStyle.Flat,
+                            TabIndex = 10,
+                            Text = _DT.Rows[i].Field<string>("Name"),
+                            Size = new Size(919, 30),
+                        };
 
-                            linklbl.Click += new EventHandler((sender, args) =>
-                            {
-                                Settings.Default["ChoosingContest"] = linklbl.Text;
-                                Settings.Default.Save();
+                        linklbl.Click += new EventHandler((sender, args) =>
+                        {
+                            Settings.Default["ChoosingContest"] = linklbl.Text;
+                            Settings.Default.Save();
 
-                                MessageBox.Show(Settings.Default.ChoosingContest, "Success", MessageBoxButtons.OK);
-                            });
+                            MessageBox.Show(Settings.Default.ChoosingContest, "Success", MessageBoxButtons.OK);
+                        });
 
-                            System.ComponentModel.ComponentResourceManager resources = new(typeof(HomePageForm));
+                        System.ComponentModel.ComponentResourceManager resources = new(typeof(HomePageForm));
 
-                            PictureBox pictureBox = new()
-                            {
-                                Name = "ExportForm_PictureBox" + i.ToString(),
-                                Location = new Point(90, 150 + i * 45),
-                                Size = new Size(20, 20),
-                                SizeMode = PictureBoxSizeMode.AutoSize,
-                                TabIndex = 0,
-                                TabStop = false
-                            };
+                        PictureBox pictureBox = new()
+                        {
+                            Name = "ExportForm_PictureBox" + i.ToString(),
+                            Location = new Point(90, 150 + i * 45),
+                            Size = new Size(20, 20),
+                            SizeMode = PictureBoxSizeMode.AutoSize,
+                            TabIndex = 0,
+                            TabStop = false
+                        };
 
-                            DateTime endTime = _DT.Rows[i].Field<DateTime>("TimeEnd");
-                            if (DateTime.Compare(endTime, DateTime.Now) < 0)
-                                pictureBox.Image = Resources.checked_file_blur;
-                            else
-                                pictureBox.Image = Resources.checked_file;
+                        DateTime endTime = _DT.Rows[i].Field<DateTime>("TimeEnd");
+                        if (DateTime.Compare(endTime, DateTime.Now) < 0)
+                            pictureBox.Image = Resources.checked_file_blur;
+                        else
+                            pictureBox.Image = Resources.checked_file;
 
-                            panel2.Controls.Add(linklbl);
-                            panel2.Controls.Add(pictureBox);
-                        }
+                        panel2.Controls.Add(linklbl);
+                        panel2.Controls.Add(pictureBox);
                     }
                 }
             }

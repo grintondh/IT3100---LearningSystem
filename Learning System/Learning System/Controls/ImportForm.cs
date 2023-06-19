@@ -5,7 +5,6 @@ using System.Reflection;
 using Microsoft.VisualBasic.Devices;
 using Learning_System.ProcessingClasses;
 using Learning_System.Modals;
-using Learning_System.ProcessingClasses;
 
 namespace Learning_System
 {
@@ -124,59 +123,17 @@ namespace Learning_System
         /// <param name="_ImportPath"> Đường dẫn của file được chọn</param>
         private int ImportQuestionsFile(List<string> lines, string _ImportPath)
         {
-            DataProcessing questionsData = new();
-            List<string> _showQuestionsColumns = new() { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
-            List<Type> _showQuestionsType = new() { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
-            List<string> _showQuestionsKey = new() { "PRIMARY KEY", "NOT NULL", "", "NOT NULL", "NOT NULL", "" };
-
-
-            DataProcessing categoriesData = new();
-            List<string> _showCategoryColumns = new() { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
-            List<Type> _showCategoryType = new() { typeof(int), typeof(string), typeof(JArray), typeof(JArray), typeof(string), typeof(string) };
-            List<string> _showCategoryKey = new() { "PRIMARY KEY", "NOT NULL", "", "", "", "" };
-
-
-            try
-            {
-                JArray? _questionsData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
-                if (_questionsData == null)
-                    throw new E01CantFindFile("Question.json");
-
-                questionsData.Import(_showQuestionsColumns, _showQuestionsType, _showQuestionsKey);
-                questionsData.Import(_questionsData);
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Can't get questions data!\nDescription: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return DataProcessing.StatusCode.Error;
-            }
-
-            try
-            {
-                JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
-                if (_categoriesData == null)
-                    throw new E01CantFindFile("Category.json");
-
-                categoriesData.Import(_showCategoryColumns, _showCategoryType, _showCategoryKey);
-                categoriesData.Import(_categoriesData);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Can't get categories data!\nDescription: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return DataProcessing.StatusCode.Error;
-            }
+            QuestionsTable.table.LoadData(JsonProcessing.QuestionsPath);
+            CategoriesTable.table.LoadData(JsonProcessing.CategoriesPath);
 
             List<string> _query = new() { "Id", "0" };
-            DataRow? _parentCategory = categoriesData.Init().Offset(0).Limit(1).Query(_query).Sort("Id desc").GetFirstRow();
+            DataRow? _parentCategory = CategoriesTable.table.Init().Offset(0).Limit(1).Query(_query).Sort("Id desc").GetFirstRow();
             if (_parentCategory == null)
                 throw new E02CantProcessQuery();
 
-            DataRow? _maxQuestionIdRow = questionsData.Init()
-                                                       .Offset(0)
-                                                       .Limit(questionsData.Length())
-                                                       .Sort("ID desc")
-                                                       .GetFirstRow();
+            DataRow? _maxQuestionIdRow = QuestionsTable.table.Init()
+                                                             .Sort("ID desc")
+                                                             .GetFirstRow();
 
             int questionIDCount = (_maxQuestionIdRow == null) ? 0 : (_maxQuestionIdRow.Field<int>("ID"));
 
@@ -230,7 +187,7 @@ namespace Learning_System
                         Choice = _questionChoices
                     };
 
-                    questionsData.Insert(JObject.FromObject(newQuestions));
+                    QuestionsTable.table.Insert(JObject.FromObject(newQuestions));
 
                     JArray? parentCtg = _parentCategory.Field<JArray>("QuestionArray");
                     if (parentCtg == null)
@@ -241,13 +198,13 @@ namespace Learning_System
 
             JObject x = DataProcessing.ConvertDataRowToJObject(_parentCategory);
 
-            categoriesData.Init().Query(_query).Update(JObject.FromObject(x));
+            CategoriesTable.table.Init().Query(_query).Update(JObject.FromObject(x));
 
             try
             {
-                if (JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export()) == null)
+                if (JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", QuestionsTable.table.Export()) == null)
                     throw new E04CantExportProperly();
-                if (JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export()) == null)
+                if (JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", CategoriesTable.table.Export()) == null)
                     throw new E04CantExportProperly();
             }
             catch (Exception ex)

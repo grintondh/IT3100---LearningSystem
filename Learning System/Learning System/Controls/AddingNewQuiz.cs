@@ -7,13 +7,6 @@ namespace Learning_System;
 
 public partial class AddingNewQuiz : Form
 {
-    private DataProcessing quizData = new();
-    private List<string> showColumns = new() { "Id", "Name", "Description", "DescriptionShow", "QuestionArray", "ShuffleAnswer",
-                                               "TimeStart", "StartEnable", "TimeEnd", "EndEnable", "TimeLimit", "TimeLimitEnable"};
-    private List<Type> showType = new() { typeof(int), typeof(string), typeof(string), typeof(bool), typeof(JArray), typeof(bool),
-                                          typeof(DateTime), typeof(bool), typeof(DateTime), typeof(bool), typeof(int), typeof(bool)};
-    private readonly List<string> showKey = new() { "PRIMARY KEY", "", "", "", "", "", "", "", "", "", "", "" };
-
     public AddingNewQuiz()
     {
         InitializeComponent();
@@ -46,13 +39,7 @@ public partial class AddingNewQuiz : Form
 
     public void AddNewQuizForm_Load()
     {
-        JArray? _quizData = JsonProcessing.ImportJsonContentInDefaultFolder("Contest.json", null, null);
-
-        if (_quizData == null)
-            throw new E01CantFindFile();
-
-        quizData.Import(showColumns, showType, showKey);
-        quizData.Import(_quizData);
+        ContestsTable.table.LoadData(JsonProcessing.ContestsPath);
     }
 
     private void Btn_Create_Click(object sender, EventArgs e)
@@ -117,7 +104,7 @@ public partial class AddingNewQuiz : Form
         {
             try
             {
-                DataRow? _maxIdRow = quizData.Init().Offset(0).Limit(quizData.Length()).Sort("Id desc").GetFirstRow();
+                DataRow? _maxIdRow = ContestsTable.table.Init().Sort("Id desc").GetFirstRow();
 
                 Contests _newQuiz = new()
                 {
@@ -135,10 +122,10 @@ public partial class AddingNewQuiz : Form
                     TimeLimitEnable = _timeLimitEnable,
                 };
 
-                if (quizData.Insert(JObject.FromObject(_newQuiz)) == DataProcessing.StatusCode.Error)
+                if (ContestsTable.table.Insert(JObject.FromObject(_newQuiz)) == DataProcessing.StatusCode.Error)
                     throw new E02CantProcessQuery();
 
-                JsonProcessing.ExportJsonContentInDefaultFolder("Contest.json", quizData.Export());
+                JsonProcessing.ExportJsonContentInDefaultFolder("Contest.json", ContestsTable.table.Export());
                 MessageBox.Show("Đã thêm thành công!\nTại trang chủ hãy nhấn biểu tượng 3 dấu gạch ngang để tải lại danh sách kỳ thi!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 AddNewQuizForm_NameTxt.Text = "";

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Learning_System.ProcessingClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,5 +21,10 @@ namespace Learning_System.Modals
     {
         public string? choice { get; set; }
         public double mark { get; set; }
+    }
+
+    public static class QuestionsTable
+    {
+        public static DataProcessing table = new();
     }
 }

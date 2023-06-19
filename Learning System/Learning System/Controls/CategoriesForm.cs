@@ -7,23 +7,18 @@ namespace Learning_System
 {
     public partial class CategoriesForm : UserControl
     {
-        private DataProcessing categoriesData = new();
-        private List<string> showColumns = new() { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
-        private List<Type> showType = new() { typeof(int), typeof(string), typeof(JArray), typeof(JArray), typeof(string), typeof(string) };
-        private readonly List<string> showKey = new() { "PRIMARY KEY", "NOT NULL", "", "", "", "" };
-        private DataTable? categoriesDataTable = new();
         public void LoadCombobox()
         {
+            DataTable? dt;
             try
             {
                 JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("category.json", null, null);
 
                 if (_categoriesData == null)
                     throw new E01CantFindFile();
-
-                categoriesData.Import(showColumns, showType, showKey);
-                categoriesData.Import(_categoriesData);
-                categoriesDataTable = categoriesData.Init().Offset(0).Limit(categoriesData.Length()).Get();
+                
+                CategoriesTable.table.Import(_categoriesData);
+                dt = CategoriesTable.table.Init().Offset(0).Limit(CategoriesTable.table.Length()).Get();
             }
             catch (Exception ex)
             {
@@ -33,7 +28,7 @@ namespace Learning_System
 
             CategoriesForm_ParentCategoryCbo.ValueMember = "Id";
             CategoriesForm_ParentCategoryCbo.DisplayMember = "Name";
-            CategoriesForm_ParentCategoryCbo.DataSource = categoriesDataTable;
+            CategoriesForm_ParentCategoryCbo.DataSource = dt;
         }
 
         public CategoriesForm()
@@ -71,7 +66,7 @@ namespace Learning_System
             {
                 try
                 {
-                    DataRow? _maxIdRow = categoriesData.Init().Offset(0).Limit(categoriesData.Length()).Sort("Id desc").GetFirstRow();
+                    DataRow? _maxIdRow = CategoriesTable.table.Init().Offset(0).Limit(CategoriesTable.table.Length()).Sort("Id desc").GetFirstRow();
 
                     Categories _newCategory = new()
                     {
@@ -83,11 +78,11 @@ namespace Learning_System
                         IdNumber = _id
                     };
 
-                    if (categoriesData.Insert(JObject.FromObject(_newCategory)) == DataProcessing.StatusCode.Error)
+                    if (CategoriesTable.table.Insert(JObject.FromObject(_newCategory)) == DataProcessing.StatusCode.Error)
                         throw new E05CantInsertProperly();
 
                     List<string> _query = new() { "Id", _parentId.ToString() };
-                    DataRow? _parentRow = categoriesData.Init().Offset(0).Limit(categoriesData.Length()).Query(_query).GetFirstRow();
+                    DataRow? _parentRow = CategoriesTable.table.Init().Offset(0).Limit(CategoriesTable.table.Length()).Query(_query).GetFirstRow();
 
                     if (_parentRow == null)
                         throw new E02CantProcessQuery();
@@ -101,14 +96,14 @@ namespace Learning_System
 
                         JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
 
-                        if (categoriesData.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
+                        if (CategoriesTable.table.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
                             throw new E02CantProcessQuery();
 
                         CategoriesForm_ParentCategoryCbo.ValueMember = "Id";
                         CategoriesForm_ParentCategoryCbo.DisplayMember = "Name";
-                        CategoriesForm_ParentCategoryCbo.DataSource = categoriesData.Init().Offset(0).Limit(categoriesData.Length()).Get();
+                        CategoriesForm_ParentCategoryCbo.DataSource = CategoriesTable.table.Init().Offset(0).Limit(CategoriesTable.table.Length()).Get();
 
-                        if (JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export()) == null)
+                        if (JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", CategoriesTable.table.Export()) == null)
                             throw new E04CantExportProperly();
 
                         MessageBox.Show("Add new category successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

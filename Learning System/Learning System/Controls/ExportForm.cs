@@ -10,16 +10,11 @@ using iText.Html2pdf.Resolver.Font;
 using System.Diagnostics;
 using Learning_System.ProcessingClasses;
 using Learning_System.Modals;
-using Learning_System.ProcessingClasses;
 
 namespace Learning_System
 {
     public partial class ExportForm : UserControl
     {
-        private DataProcessing questionData = new();
-        private readonly List<string> showColumns = new() { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
-        private readonly List<Type> showType = new() { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
-        private readonly List<string> showKey = new() { "PRIMARY KEY", "", "", "", "", "" };
         private DataTable? DataTable = new();
 
         public ExportForm()
@@ -32,18 +27,8 @@ namespace Learning_System
         {
             ExportForm_progressLabel.Text = "Processing... ";
 
-            JArray? _questionData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
-            if (_questionData == null)
-                throw new E01CantFindFile("Question.json");
-            else
-            {
-                if (questionData.ImportedColumns == true)
-                    questionData.Import(showColumns, showType, showKey);
-                
-                questionData.DeleteAll();
-                questionData.Import(_questionData);
-                DataTable = questionData.Init().Limit(questionData.Length()).Get();
-            }
+            QuestionsTable.table.LoadData(JsonProcessing.QuestionsPath);
+            DataTable = QuestionsTable.table.Init().Get();
 
             if (DataTable == null)
                 throw new E02CantProcessQuery();

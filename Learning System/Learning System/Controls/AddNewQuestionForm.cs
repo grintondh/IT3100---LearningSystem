@@ -21,33 +21,17 @@ namespace Learning_System
         Label[] labelGrade = new Label[MAXOFCHOICE];
 
         // Data cho category
-        private DataProcessing categoriesData = new();
-        private List<string> showColumns = new() { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
-        private List<Type> showType = new() { typeof(int), typeof(string), typeof(JArray), typeof(JArray), typeof(string), typeof(string) };
-        private readonly List<string> showKey = new() { "PRIMARY KEY", "NOT NULL", "", "", "", "" };
         private DataTable? categoriesDataTable = new();
-        private int currentLimit = 50;
-        private int currentOffset = 0;
 
         // Data cho question
-        private DataProcessing questionsData = new();
-        private List<string> showColumns_questions = new() { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
-        private List<Type> showType_questions = new() { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
-        private readonly List<string> showKey_questions = new() { "PRIMARY KEY", "NOT NULL", "", "NOT NULL", "NOT NULL", "" };
         private DataTable? questionsDataTable = new();
 
         public AddNewQuestionForm()
         {
             try
             {
-                JArray? _questionsData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
-
-                if (_questionsData == null)
-                    throw new E01CantFindFile();
-
-                questionsData.Import(showColumns_questions, showType_questions, showKey_questions);
-                questionsData.Import(_questionsData);
-                questionsDataTable = questionsData.Init().Offset(currentOffset).Limit(currentLimit).Get();
+                QuestionsTable.table.LoadData(JsonProcessing.QuestionsPath);
+                questionsDataTable = QuestionsTable.table.Init().Get();
             }
             catch (Exception ex)
             {
@@ -126,9 +110,8 @@ namespace Learning_System
                     if (_categoriesData == null)
                         throw new E01CantFindFile();
 
-                    categoriesData.Import(showColumns, showType, showKey);
-                    categoriesData.Import(_categoriesData);
-                    categoriesDataTable = categoriesData.Init().Offset(currentOffset).Limit(currentLimit).Get();
+                    CategoriesTable.table.Import(_categoriesData);
+                    categoriesDataTable = CategoriesTable.table.Init().Get();
                     IsInitial = false;
                 }
             }
@@ -173,17 +156,17 @@ namespace Learning_System
             {
                 if (Count_Button > 0)
                 {
-                    DataRow? _maxIDRow = questionsData.Init().Offset(0).Limit(questionsData.Length()).Sort("ID desc").GetFirstRow();
+                    DataRow? _maxIDRow = QuestionsTable.table.Init().Sort("ID desc").GetFirstRow();
                     if (_maxIDRow == null)
                         throw new E02CantProcessQuery();
 
                     int a = _maxIDRow.Field<int>("ID");
                     List<string> _query = new() { "ID", a.ToString() };
-                    _ = questionsData.Init().Offset(0).Limit(1).Query(_query).Delete();
+                    _ = QuestionsTable.table.Init().Offset(0).Limit(1).Query(_query).Delete();
 
                     List<string> _query1 = new() { "Id", CurrentParentId.ToString() };
 
-                    DataRow? _parentRow = categoriesData.Init().Offset(0).Limit(1).Query(_query1).GetFirstRow();
+                    DataRow? _parentRow = CategoriesTable.table.Init().Offset(0).Limit(1).Query(_query1).GetFirstRow();
                     if (_parentRow == null)
                         throw new E02CantProcessQuery();
 
@@ -194,7 +177,7 @@ namespace Learning_System
                     _x.RemoveAt(_x.Count - 1);
                     JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
 
-                    if (categoriesData.Init().Offset(0).Limit(1).Query(_query1).Update(x) == DataProcessing.StatusCode.Error)
+                    if (CategoriesTable.table.Init().Offset(0).Limit(1).Query(_query1).Update(x) == DataProcessing.StatusCode.Error)
                         throw new E02CantProcessQuery();
                 }
 
@@ -247,7 +230,7 @@ namespace Learning_System
 
                 try
                 {
-                    DataRow? _maxIDRow = questionsData.Init().Offset(0).Limit(questionsData.Length()).Sort("ID desc").GetFirstRow();
+                    DataRow? _maxIDRow = QuestionsTable.table.Init().Sort("ID desc").GetFirstRow();
                     if (_maxIDRow == null)
                         throw new E02CantProcessQuery();
 
@@ -262,7 +245,7 @@ namespace Learning_System
                     };
 
                     List<string> _query = new() { "Id", _parentId.ToString() };
-                    DataRow? _parentRow = categoriesData.Init().Offset(currentOffset).Limit(currentLimit).Query(_query).GetFirstRow();
+                    DataRow? _parentRow = CategoriesTable.table.Init().Query(_query).GetFirstRow();
 
                     if (_parentRow == null)
                         throw new E02CantProcessQuery();
@@ -276,18 +259,18 @@ namespace Learning_System
 
                         JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
 
-                        if (categoriesData.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
+                        if (CategoriesTable.table.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
                             throw new E02CantProcessQuery();
 
-                        if (JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export()) == null)
+                        if (JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", CategoriesTable.table.Export()) == null)
                             throw new E04CantExportProperly("Category.json");
 
                         CurrentParentId = Convert.ToInt32(_parentId.ToString());
 
-                        if (questionsData.Insert(JObject.FromObject(_newQuestion)) == DataProcessing.StatusCode.Error)
+                        if (QuestionsTable.table.Insert(JObject.FromObject(_newQuestion)) == DataProcessing.StatusCode.Error)
                             throw new E05CantInsertProperly();
 
-                        if (JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export()) == null)
+                        if (JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", QuestionsTable.table.Export()) == null)
                             throw new E04CantExportProperly();
                     }
 
@@ -336,16 +319,16 @@ namespace Learning_System
             {
                 if (Count_Button > 0)
                 {
-                    DataRow? _maxIDRow = questionsData.Init().Offset(0).Limit(questionsData.Length()).Sort("ID desc").GetFirstRow();
+                    DataRow? _maxIDRow = QuestionsTable.table.Init().Sort("ID desc").GetFirstRow();
                     if (_maxIDRow == null)
                         throw new E02CantProcessQuery();
 
                     var a = _maxIDRow.Field<int>("ID");
                     List<string> _query = new() { "ID", a.ToString() };
-                    _ = questionsData.Init().Offset(0).Limit(1).Query(_query).Delete();
+                    _ = QuestionsTable.table.Init().Offset(0).Limit(1).Query(_query).Delete();
 
                     List<string> _query1 = new() { "Id", CurrentParentId.ToString() };
-                    DataRow? _parentRow = categoriesData.Init().Offset(0).Limit(1).Query(_query1).GetFirstRow();
+                    DataRow? _parentRow = CategoriesTable.table.Init().Offset(0).Limit(1).Query(_query1).GetFirstRow();
 
                     if (_parentRow == null)
                         throw new E02CantProcessQuery();
@@ -357,7 +340,7 @@ namespace Learning_System
                         _x.RemoveAt(_x.Count - 1);
 
                     JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
-                    if (categoriesData.Init().Offset(0).Limit(1).Query(_query1).Update(x) == DataProcessing.StatusCode.Error)
+                    if (CategoriesTable.table.Init().Offset(0).Limit(1).Query(_query1).Update(x) == DataProcessing.StatusCode.Error)
                         throw new E02CantProcessQuery();
                 }
 
@@ -412,7 +395,7 @@ namespace Learning_System
 
                 try
                 {
-                    DataRow? _maxIDRow = questionsData.Init().Offset(0).Limit(questionsData.Length()).Sort("ID desc").GetFirstRow();
+                    DataRow? _maxIDRow = QuestionsTable.table.Init().Sort("ID desc").GetFirstRow();
                     if (_maxIDRow == null)
                         throw new E02CantProcessQuery();
 
@@ -427,7 +410,7 @@ namespace Learning_System
                     };
 
                     List<string> _query = new() { "Id", _parentId.ToString() };
-                    DataRow? _parentRow = categoriesData.Init().Offset(currentOffset).Limit(currentLimit).Query(_query).GetFirstRow();
+                    DataRow? _parentRow = CategoriesTable.table.Init().Query(_query).GetFirstRow();
 
                     if (_parentRow == null)
                         throw new E02CantProcessQuery();
@@ -440,16 +423,16 @@ namespace Learning_System
                         {
                             _x.Add(_newQuestion.ID);
                             JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
-                            if (categoriesData.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
+                            if (CategoriesTable.table.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
                                 throw new E02CantProcessQuery();
 
-                            if (JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export()) == null)
+                            if (JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", CategoriesTable.table.Export()) == null)
                                 throw new E04CantExportProperly();
 
                             CurrentParentId = Convert.ToInt32(_parentId.ToString());
                         }
-                        questionsData.Insert(JObject.FromObject(_newQuestion));
-                        JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export());
+                        QuestionsTable.table.Insert(JObject.FromObject(_newQuestion));
+                        JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", QuestionsTable.table.Export());
                     }
 
                     MessageBox.Show("Add question successfully!", "Success");

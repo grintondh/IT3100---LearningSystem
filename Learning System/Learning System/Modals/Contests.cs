@@ -1,4 +1,6 @@
-﻿namespace Learning_System.Modals
+﻿using Learning_System.ProcessingClasses;
+
+namespace Learning_System.Modals
 {
     internal class Contests
     {
@@ -14,5 +16,10 @@
         public bool EndEnable { get; set; }
         public int TimeLimit { get; set; }
         public bool TimeLimitEnable { get; set; }
+    }
+
+    public static class ContestsTable
+    {
+        public static DataProcessing table = new();
     }
 }

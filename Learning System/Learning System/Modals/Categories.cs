@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Learning_System.ProcessingClasses;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,4 +21,8 @@ namespace Learning_System.Modals
         public string? IdNumber { get; set; }
     }
 
+    public static class CategoriesTable
+    {
+        public static DataProcessing table = new();
+    }
 }
