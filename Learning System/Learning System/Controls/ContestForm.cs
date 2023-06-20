@@ -1,6 +1,5 @@
-﻿using Learning_System.Class;
-using Learning_System.ExternalClass;
-using Microsoft.Office.Interop.Word;
+﻿using Learning_System.ExternalClass;
+using Learning_System.ProcessingClasses;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -16,11 +15,14 @@ namespace Learning_System
 {
     public partial class ContestForm : Form
     {
+        public DateTime timeStart;
         public EditQuiz editQuiz;
         public string nameContest;
+        public int timeLimit;
         public ContestForm()
         {
             InitializeComponent();
+            timeStart = DateTime.Now;
             loadQuestionData();
             loadCategoryData();
             editQuiz = new EditQuiz(this);
@@ -40,7 +42,7 @@ namespace Learning_System
             ContestForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ  /  General  /  " + nameContest + "  /  Edit quiz";
         }
 
-        private DataProcessing questionsData = new();
+        public DataProcessing questionsData = new();
         private DataProcessing categoriesData = new();
         private JArray _categoriesDataJarray = new();
         private System.Data.DataTable contestDataTable = new();
@@ -91,6 +93,7 @@ namespace Learning_System
             nameContest = row.Field<string>("Name");
             ContestForm_ContestNameLbl.Text = nameContest;
             ContestForm_TimeLbl.Text = "Time limit: " + row.Field<int>("TimeLimit") + " minutes";
+            timeLimit = row.Field<int>("TimeLimit");
             editQuiz.EditQuiz_ContestNameLbl.Text = "Editing quiz: " + nameContest;
             editQuiz.EditQuiz_ShuffleCbx.Checked = row.Field<bool>("ShuffleAnswer");
             if (row.Field<double>("MaximumGrade").ToString() == null || row.Field<double>("MaximumGrade").ToString() == "")
@@ -114,5 +117,10 @@ namespace Learning_System
             this.contestData = contestData;
         }
 
+        private void ContestForm_PreviewQuizBtn_Click(object sender, EventArgs e)
+        {
+            StartAttemptForm startAttemptForm = new StartAttemptForm(this, editQuiz.questionID);
+            startAttemptForm.ShowDialog();
+        }
     }
 }

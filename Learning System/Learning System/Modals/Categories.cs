@@ -18,5 +18,5 @@ namespace Learning_System
         public string? Description { get; set; }
         public string? IdNumber { get; set; }
     }
-    
+
 }
