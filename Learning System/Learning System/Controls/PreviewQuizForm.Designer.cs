@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             panel_top = new Panel();
             panel_heading = new Panel();
+            FinishLbl = new Label();
             PathLbl = new Label();
             ITLbl = new Label();
             label7 = new Label();
@@ -39,8 +40,8 @@
             panel_changePage = new Panel();
             NextPageBtn = new Button();
             panel_right = new Panel();
-            FinishLbl = new Label();
             panel_QuestionBtn = new Panel();
+            panel1 = new Panel();
             QuizNavigationLbl = new Label();
             panel_time = new Panel();
             panel_timeLeft = new Panel();
@@ -63,6 +64,8 @@
             panel_left.SuspendLayout();
             panel_changePage.SuspendLayout();
             panel_right.SuspendLayout();
+            panel_QuestionBtn.SuspendLayout();
+            panel1.SuspendLayout();
             panel_time.SuspendLayout();
             panel_timeLeft.SuspendLayout();
             panel_Review.SuspendLayout();
@@ -89,6 +92,18 @@
             panel_heading.Name = "panel_heading";
             panel_heading.Size = new Size(1366, 146);
             panel_heading.TabIndex = 4;
+            // 
+            // FinishLbl
+            // 
+            FinishLbl.AutoSize = true;
+            FinishLbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            FinishLbl.ForeColor = Color.Black;
+            FinishLbl.Location = new Point(6, 342);
+            FinishLbl.Name = "FinishLbl";
+            FinishLbl.Size = new Size(154, 28);
+            FinishLbl.TabIndex = 4;
+            FinishLbl.Text = "Finish attempt ...";
+            FinishLbl.Click += FinishLbl_Click;
             // 
             // PathLbl
             // 
@@ -176,40 +191,39 @@
             // panel_right
             // 
             panel_right.BackColor = Color.White;
-            panel_right.Controls.Add(FinishLbl);
             panel_right.Controls.Add(panel_QuestionBtn);
-            panel_right.Controls.Add(QuizNavigationLbl);
+            panel_right.Controls.Add(panel1);
             panel_right.Dock = DockStyle.Right;
             panel_right.Location = new Point(1000, 210);
             panel_right.Name = "panel_right";
             panel_right.Size = new Size(366, 505);
             panel_right.TabIndex = 6;
             // 
-            // FinishLbl
-            // 
-            FinishLbl.AutoSize = true;
-            FinishLbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            FinishLbl.ForeColor = Color.Black;
-            FinishLbl.Location = new Point(6, 419);
-            FinishLbl.Name = "FinishLbl";
-            FinishLbl.Size = new Size(154, 28);
-            FinishLbl.TabIndex = 4;
-            FinishLbl.Text = "Finish attempt ...";
-            FinishLbl.Click += FinishLbl_Click;
-            // 
             // panel_QuestionBtn
             // 
-            panel_QuestionBtn.Location = new Point(16, 44);
+            panel_QuestionBtn.AutoScroll = true;
+            panel_QuestionBtn.Controls.Add(FinishLbl);
+            panel_QuestionBtn.Dock = DockStyle.Fill;
+            panel_QuestionBtn.Location = new Point(0, 36);
             panel_QuestionBtn.Name = "panel_QuestionBtn";
-            panel_QuestionBtn.Size = new Size(338, 363);
+            panel_QuestionBtn.Size = new Size(366, 469);
             panel_QuestionBtn.TabIndex = 3;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(QuizNavigationLbl);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(366, 36);
+            panel1.TabIndex = 0;
             // 
             // QuizNavigationLbl
             // 
             QuizNavigationLbl.AutoSize = true;
             QuizNavigationLbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             QuizNavigationLbl.ForeColor = Color.FromArgb(194, 36, 36);
-            QuizNavigationLbl.Location = new Point(6, 3);
+            QuizNavigationLbl.Location = new Point(6, 4);
             QuizNavigationLbl.Name = "QuizNavigationLbl";
             QuizNavigationLbl.Size = new Size(150, 28);
             QuizNavigationLbl.TabIndex = 2;
@@ -426,7 +440,10 @@
             panel_left.ResumeLayout(false);
             panel_changePage.ResumeLayout(false);
             panel_right.ResumeLayout(false);
-            panel_right.PerformLayout();
+            panel_QuestionBtn.ResumeLayout(false);
+            panel_QuestionBtn.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             panel_time.ResumeLayout(false);
             panel_timeLeft.ResumeLayout(false);
             panel_timeLeft.PerformLayout();
@@ -467,5 +484,6 @@
         private System.Windows.Forms.Timer countDownTimer;
         private Label label7;
         private Label TimeLeftLbl;
+        private Panel panel1;
     }
 }

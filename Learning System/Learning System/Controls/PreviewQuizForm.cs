@@ -21,7 +21,7 @@ namespace Learning_System
         private int numberOfPage;
         private int numberOfQuestion;
         const int questionPerPage = 3;
-        const int MAXQUESTION = 100;
+        const int MAXQUESTION = 1000;
         private int timeLimit;
         private List<int> questionID;
         private DataProcessing questionsData;
@@ -113,18 +113,20 @@ namespace Learning_System
             for (int i = 0; i < numberOfQuestion; i++)
             {
                 button[i] = new Button();
-                button[i].Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+                button[i].Anchor = AnchorStyles.Top | AnchorStyles.Left;
                 button[i].BackColor = Color.FromArgb(0, 159, 229);
                 button[i].FlatStyle = FlatStyle.Flat;
                 button[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
                 button[i].ForeColor = Color.White;
-                button[i].Location = new Point(5 + (i % 5) * 50, 5 + (i / 5) * 50);
+                button[i].Location = new Point(15 + (i % 5) * 50, 5 + (i / 5) * 50);
                 button[i].Size = new Size(45, 45);
                 button[i].Text = (i + 1).ToString();
                 button[i].UseVisualStyleBackColor = false;
                 button[i].Click += pageButtonClick;
                 panel_QuestionBtn.Controls.Add(button[i]);
             }
+            FinishLbl.Location = new Point(FinishLbl.Location.X, button[numberOfQuestion - 1].Location.Y 
+                + button[numberOfQuestion - 1].Height + 10);
             countDownTimer.Start();
         }
 

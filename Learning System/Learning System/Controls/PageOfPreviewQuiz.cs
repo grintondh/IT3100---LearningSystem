@@ -17,7 +17,7 @@ namespace Learning_System
         private PreviewQuizForm parentForm;
         public bool IsMultipleChoiceQuestion;
         public int numberOfChoice;
-        const int MAXOFCHOICE = 10;
+        const int MAXOFCHOICE = 100;
         public RadioButton[] radioChoice = new RadioButton[MAXOFCHOICE];
         public CheckBox[] checkboxChoice = new CheckBox[MAXOFCHOICE];
         public List<QuestionChoice> questionChoices = new List<QuestionChoice>();
