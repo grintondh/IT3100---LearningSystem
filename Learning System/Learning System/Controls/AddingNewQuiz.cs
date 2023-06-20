@@ -9,10 +9,12 @@ public partial class AddingNewQuiz : Form
 {
     private DataProcessing quizData = new();
     private List<string> showColumns = new() { "Id", "Name", "Description", "DescriptionShow", "QuestionArray", "ShuffleAnswer",
-                                               "TimeStart", "StartEnable", "TimeEnd", "EndEnable", "TimeLimit", "TimeLimitEnable"};
+                                               "TimeStart", "StartEnable", "TimeEnd", "EndEnable", "TimeLimit", "TimeLimitEnable",
+                                                "MaximumGrade"};
     private List<Type> showType = new() { typeof(int), typeof(string), typeof(string), typeof(bool), typeof(JArray), typeof(bool),
-                                          typeof(DateTime), typeof(bool), typeof(DateTime), typeof(bool), typeof(int), typeof(bool)};
-    private readonly List<string> showKey = new() { "PRIMARY KEY", "", "", "", "", "", "", "", "", "", "", "" };
+                                          typeof(DateTime), typeof(bool), typeof(DateTime), typeof(bool), typeof(int), typeof(bool),
+                                                typeof(double)};
+    private readonly List<string> showKey = new() { "PRIMARY KEY", "", "", "", "", "", "", "", "", "", "", "", "" };
 
     public AddingNewQuiz()
     {
@@ -133,6 +135,7 @@ public partial class AddingNewQuiz : Form
                     EndEnable = _closeEnable,
                     TimeLimit = _timeLimit,
                     TimeLimitEnable = _timeLimitEnable,
+                    MaximumGrade = 10
                 };
 
                 if (quizData.Insert(JObject.FromObject(_newQuiz)) == DataProcessing.StatusCode.Error)

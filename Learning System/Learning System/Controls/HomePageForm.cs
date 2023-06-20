@@ -24,9 +24,9 @@ namespace Learning_System
                 else
                 {
                     DataProcessing contestData = new();
-                    List<string> contestColumns = new() { "Name", "TimeStart", "TimeEnd" };
-                    List<Type> contestType = new() { typeof(string), typeof(DateTime), typeof(DateTime) };
-                    List<string> contestKey = new() { "PRIMARY KEY", "", "" };
+                    List<string> contestColumns = new() { "Id", "Name", "TimeStart", "TimeEnd" };
+                    List<Type> contestType = new() { typeof(int), typeof(string), typeof(DateTime), typeof(DateTime) };
+                    List<string> contestKey = new() { "PRIMARY KEY", "", "", "" };
 
                     contestData.Import(contestColumns, contestType, contestKey);
                     contestData.Import(contestJson);
@@ -53,13 +53,15 @@ namespace Learning_System
                                 Text = _DT.Rows[i].Field<string>("Name"),
                                 Size = new Size(919, 30),
                             };
-
+                            int id = _DT.Rows[i].Field<int>("Id");
                             linklbl.Click += new EventHandler((sender, args) =>
                             {
                                 Settings.Default["ChoosingContest"] = linklbl.Text;
                                 Settings.Default.Save();
-
-                                MessageBox.Show(Settings.Default.ChoosingContest, "Success", MessageBoxButtons.OK);
+                                ContestForm contestForm = new ContestForm(id);
+                                this.Hide();
+                                contestForm.ShowDialog();
+                                this.Show();
                             });
 
                             System.ComponentModel.ComponentResourceManager resources = new(typeof(HomePageForm));
