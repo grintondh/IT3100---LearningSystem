@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContestForm));
             panel1 = new Panel();
+            ContestForm_MenuPic = new PictureBox();
             panel_heading = new Panel();
             ContestForm_PathLbl = new Label();
             ContestForm_ITLbl = new Label();
@@ -41,6 +42,8 @@
             ContestForm_TimeLbl = new Label();
             ContestForm_EditPic = new PictureBox();
             ContestForm_ContestNameLbl = new Label();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ContestForm_MenuPic).BeginInit();
             panel_heading.SuspendLayout();
             panel_body.SuspendLayout();
             panel_main.SuspendLayout();
@@ -51,11 +54,23 @@
             // 
             panel1.BackColor = Color.FromArgb(0, 159, 229);
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(ContestForm_MenuPic);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(1409, 64);
             panel1.TabIndex = 1;
+            // 
+            // ContestForm_MenuPic
+            // 
+            ContestForm_MenuPic.Image = (Image)resources.GetObject("ContestForm_MenuPic.Image");
+            ContestForm_MenuPic.Location = new Point(27, 13);
+            ContestForm_MenuPic.Name = "ContestForm_MenuPic";
+            ContestForm_MenuPic.Size = new Size(49, 33);
+            ContestForm_MenuPic.SizeMode = PictureBoxSizeMode.Zoom;
+            ContestForm_MenuPic.TabIndex = 5;
+            ContestForm_MenuPic.TabStop = false;
+            ContestForm_MenuPic.Click += ContestForm_MenuPic_Click;
             // 
             // panel_heading
             // 
@@ -196,6 +211,8 @@
             Name = "ContestForm";
             Text = "ContestForm";
             WindowState = FormWindowState.Maximized;
+            panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ContestForm_MenuPic).EndInit();
             panel_heading.ResumeLayout(false);
             panel_heading.PerformLayout();
             panel_body.ResumeLayout(false);
@@ -219,5 +236,6 @@
         private Label ContestForm_GradingMethodLbl;
         private Label ContestForm_TimeLbl;
         private PictureBox ContestForm_EditPic;
+        private PictureBox ContestForm_MenuPic;
     }
 }

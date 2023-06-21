@@ -117,8 +117,20 @@ namespace Learning_System
 
         private void ContestForm_PreviewQuizBtn_Click(object sender, EventArgs e)
         {
-            StartAttemptForm startAttemptForm = new StartAttemptForm(this, editQuiz.questionID);
-            startAttemptForm.ShowDialog();
+            if (editQuiz.questionID.Count == 0)
+            {
+                MessageBox.Show("Before previewing the quiz, you must add some questions");
+            }
+            else
+            {
+                StartAttemptForm startAttemptForm = new StartAttemptForm(this, editQuiz.questionID);
+                startAttemptForm.ShowDialog();
+            }
+        }
+
+        private void ContestForm_MenuPic_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
