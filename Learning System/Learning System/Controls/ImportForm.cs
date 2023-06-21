@@ -129,7 +129,22 @@ namespace Learning_System
             List<string> _query = new() { "Id", "0" };
             DataRow? _parentCategory = CategoriesTable.table.Init().Offset(0).Limit(1).Query(_query).Sort("Id desc").GetFirstRow();
             if (_parentCategory == null)
-                throw new E02CantProcessQuery();
+            {
+                Modals.Categories _newCategory = new()
+                {
+                    Id = CategoriesTable.table.Length(),
+                    Name = DateTime.Now.ToString(),
+                    SubArray = new List<int>(),
+                    QuestionArray = new List<int>(),
+                    Description = "Auto-generated category",
+                    IdNumber = "AGC"
+                };
+
+                if (CategoriesTable.table.Insert(JObject.FromObject(_newCategory)) == DataProcessing.StatusCode.Error)
+                    throw new E05CantInsertProperly();
+
+                _parentCategory = CategoriesTable.table.Init().Offset(0).Limit(1).Query(_query).Sort("Id desc").GetFirstRow();
+            }
 
             DataRow? _maxQuestionIdRow = QuestionsTable.table.Init()
                                                              .Sort("ID desc")

@@ -2,6 +2,7 @@
 using Learning_System.Modals;
 using Newtonsoft.Json.Linq;
 using System.Data;
+using System.Configuration;
 
 namespace Learning_System
 {
@@ -24,6 +25,9 @@ namespace Learning_System
         {
             QuestionForm_ShowQuestionsDtg.Rows.Clear();
 
+            if (showQuestionsFromCategoriesID.Count == 0)
+                return;
+
             try
             {
                 QuestionsTable.table.LoadData(JsonProcessing.QuestionsPath);
@@ -43,7 +47,6 @@ namespace Learning_System
                         int QuestionID = Question.Field<int>("ID");
                         if ((showQuestionsFromCategoriesID.Contains(inCategories) && _showQuestionsFromSubcategories) || (showQuestionsFromCategoriesID[0] == inCategories && !showQuestionsFromSubcategories))
                         {
-                            string? _questionId = Question.Field<string>("Name");
                             string? _QuestionName = Question.Field<string>("Content");
                             var index = QuestionForm_ShowQuestionsDtg.Rows.Add();
                             DataGridViewRow row = QuestionForm_ShowQuestionsDtg.Rows[index];
@@ -54,12 +57,12 @@ namespace Learning_System
                             };
                             try
                             {
-                                tmp.Rtf = _questionId + " " + _QuestionName;
+                                tmp.Rtf = _QuestionName;
                                 row.Cells[1].Value = tmp.Text;
                             }
                             catch
                             {
-                                row.Cells[1].Value = _questionId + " " + _QuestionName;
+                                row.Cells[1].Value = _QuestionName;
                             }
                             row.Cells[2].Value = "Edit";
 
@@ -71,13 +74,13 @@ namespace Learning_System
                                 c.Style.BackColor = Color.AliceBlue;
                             c.Style.ForeColor = Color.FromArgb(30, 170, 232);
                             c.Style.Font = new("Segoe UI", 11F, FontStyle.Bold);
+                            c.Style.Padding = new Padding(0);
 
                             row.Cells[3].Value = QuestionID;
                             row.Cells[4].Value = inCategories;
                             if (i % 2 == 0) row.DefaultCellStyle.BackColor = Color.White;
                             else row.DefaultCellStyle.BackColor = Color.AliceBlue;
                         }
-
                     }
                 }
             }
@@ -89,73 +92,110 @@ namespace Learning_System
                 QuestionsForm_ShowFromSubcategoriesCb.Enabled = false;
             }
         }
+
+        public struct CboList {
+            public Categories category ;
+            public int loaded;
+        }
+
         public void LoadCategoriesData()
         {
-            List<Categories>? listCategories = new();
-            List<Categories> newListCategories = new();
+            List<CboList>? listCategories = new();
+            List<CboList> newListCategories = new();
             try
             {
                 JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
                 if (_categoriesData == null)
                     throw new E01CantFindFile("category.json");
 
-                listCategories = _categoriesData.ToObject<List<Categories>>();
-                if (listCategories == null) return;
-                AddSpace(ref newListCategories, ref listCategories, 0, "  ");
+                List<Categories>? _tmp = _categoriesData.ToObject<List<Categories>>();
+                if (_tmp == null) return;
+
+                foreach (Categories _x in _tmp)
+                {
+                    CboList _c = new();
+                    _c.category = _x;
+                    _c.loaded = 0;
+
+                    listCategories.Add(_c);
+                }
+
+                for (int i = 0; i < listCategories.Count; i++)
+                    if (listCategories[i].loaded == 0)
+                    {
+                        listCategories[i] = new CboList
+                        {
+                            category = listCategories[i].category,
+                            loaded = -1
+                        };
+
+                        AddSpace(ref newListCategories, ref listCategories, i, "  ");
+                    }
+
                 newListCategories.Reverse();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                QuestionForm_ShowQuestionsDtg.Enabled = false;
-                QuestionsForm_CreateNewQuestionBtn.Enabled = false;
-                QuestionsForm_ShowFromSubcategoriesCb.Enabled = false;
+                return;
             }
+
+            List<Categories> onlyCategoriesName = new List<Categories>();
+            foreach (CboList _x in newListCategories)
+                onlyCategoriesName.Add(_x.category);
 
             QuestionsForm_SelectCategoryCbo.ValueMember = "Id";
             QuestionsForm_SelectCategoryCbo.DisplayMember = "Name";
-            QuestionsForm_SelectCategoryCbo.DataSource = newListCategories;
+            QuestionsForm_SelectCategoryCbo.DataSource = onlyCategoriesName;
             QuestionsForm_SelectCategoryCbo.DrawItem += new DrawItemEventHandler((sender, args) =>
             {
                 System.Drawing.Font font;
                 FontFamily ffm = QuestionsForm_SelectCategoryCbo.Font.FontFamily;
                 float fsz = QuestionsForm_SelectCategoryCbo.Font.Size;
 
-                if (args.Index == 0)
-                    font = new System.Drawing.Font(ffm, fsz, FontStyle.Bold);
-                else
-                    font = new System.Drawing.Font(ffm, fsz, FontStyle.Regular);
-
                 if (newListCategories.Count > args.Index)
                 {
+                    if (newListCategories[args.Index].loaded == -1)
+                        font = new System.Drawing.Font(ffm, fsz, FontStyle.Bold);
+                    else
+                        font = new System.Drawing.Font(ffm, fsz, FontStyle.Regular);
+
                     if ((args.State & DrawItemState.Selected) == DrawItemState.Selected)
                     {
                         args.DrawBackground();
-                        args.Graphics.DrawString(newListCategories[args.Index].Name, font, SystemBrushes.Window, args.Bounds);
+                        args.Graphics.DrawString(newListCategories[args.Index].category.Name, font, SystemBrushes.Window, args.Bounds);
                     }
                     else
                     {
                         args.DrawBackground();
-                        args.Graphics.DrawString(newListCategories[args.Index].Name, font, SystemBrushes.WindowText, args.Bounds);
+                        args.Graphics.DrawString(newListCategories[args.Index].category.Name, font, SystemBrushes.WindowText, args.Bounds);
                     }
                 }
             });
         }
 
         //Them Space cho cac lua chon Combobox
-        public void AddSpace(ref List<Categories> List, ref List<Categories> addList, int begin, string space)
+        public void AddSpace(ref List<CboList> List, ref List<CboList> addList, int begin, string space)
         {
-            foreach (int x in addList[begin].SubArray)
+            if (addList[begin].loaded == 0)
+                addList[begin] = new CboList
+                {
+                    category = addList[begin].category,
+                    loaded = 1
+                };
+
+            foreach (int x in addList[begin].category.SubArray)
             {
-                addList[x].Name = space + addList[x].Name;
+                addList[x].category.Name = space + addList[x].category.Name;
                 AddSpace(ref List, ref addList, x, space + "  ");
             }
-            addList[begin].Name = "  " + addList[begin].Name;
+            addList[begin].category.Name = "  " + addList[begin].category.Name;
 
-            if (addList[begin].QuestionArray.Count > 0)
-                addList[begin].Name = addList[begin].Name + " (" + addList[begin].QuestionArray.Count + ")";
+            if (addList[begin].category.QuestionArray.Count > 0)
+                addList[begin].category.Name = addList[begin].category.Name + " (" + addList[begin].category.QuestionArray.Count + ")";
             List.Add(addList[begin]);
         }
+
         public QuestionsForm()
         {
             InitializeComponent();
@@ -164,12 +204,7 @@ namespace Learning_System
             QuestionsForm_SelectCategoryCbo.SelectedText = "  Default";
         }
 
-        private void QuestionsForm_SelectCategoryCbo_Click(object sender, EventArgs e)
-        {
-            LoadCategoriesData();
-        }
-
-        private void QuestionsForm_SelectCategoryCbo_DropDown(object sender, EventArgs e)
+        private void QuestionsForm_SelectCategoryCbo_ClickOrDropDown(object sender, EventArgs e)
         {
             LoadCategoriesData();
         }

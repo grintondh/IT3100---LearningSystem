@@ -221,7 +221,7 @@ namespace Learning_System
             // 
             // pictureBox3
             // 
-            pictureBox3.Image = Properties.Resources.exclaimation_removebg_preview;
+            pictureBox3.Image = Resources.exclaimation_removebg_preview;
             pictureBox3.Location = new Point(429, 442);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(20, 20);
@@ -232,7 +232,7 @@ namespace Learning_System
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.exclaimation_removebg_preview;
+            pictureBox1.Image = Resources.exclaimation_removebg_preview;
             pictureBox1.Location = new Point(429, 183);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(20, 20);
@@ -243,7 +243,7 @@ namespace Learning_System
             // 
             // pictureBox2
             // 
-            pictureBox2.Image = Properties.Resources.exclaimation_removebg_preview;
+            pictureBox2.Image = Resources.exclaimation_removebg_preview;
             pictureBox2.Location = new Point(429, 107);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(20, 20);
@@ -296,11 +296,13 @@ namespace Learning_System
             // 
             AddNewQuestionForm_CategoryCbo.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_CategoryCbo.FormattingEnabled = true;
+            AddNewQuestionForm_CategoryCbo.Items.AddRange(new object[] { "Default" });
             AddNewQuestionForm_CategoryCbo.Location = new Point(460, 53);
             AddNewQuestionForm_CategoryCbo.Name = "AddNewQuestionForm_CategoryCbo";
             AddNewQuestionForm_CategoryCbo.Size = new Size(281, 33);
             AddNewQuestionForm_CategoryCbo.TabIndex = 8;
             AddNewQuestionForm_CategoryCbo.DropDown += AddNewQuestionForm_CategoryCbo_DropDown;
+            AddNewQuestionForm_CategoryCbo.Text = "Default";
             // 
             // AddNewQuestionForm_NameTxt
             // 

@@ -31,7 +31,8 @@ namespace Learning_System
             CategoriesForm_ParentCategoryCbo.ValueMember = "Id";
             CategoriesForm_ParentCategoryCbo.DisplayMember = "Name";
             CategoriesForm_ParentCategoryCbo.DataSource = dt;
-            CategoriesForm_ParentCategoryCbo.SelectedIndex = 0;
+            CategoriesForm_ParentCategoryCbo.SelectedIndex = -1;
+            CategoriesForm_ParentCategoryCbo.SelectedText = "Default";
         }
 
         public CategoriesForm()
@@ -77,29 +78,34 @@ namespace Learning_System
                         throw new E05CantInsertProperly();
 
                     // Nếu chọn giá trị parent là default, tự động gán category vào 0. Nếu không, set nó thành category mới.
-                    List<string> _query = new() { "Id", _parentId.ToString() };
-                    DataRow? _parentRow = CategoriesTable.table.Init().Offset(0).Limit(CategoriesTable.table.Length()).Query(_query).GetFirstRow();
-
-                    if (_parentRow == null)
-                        throw new E02CantProcessQuery();
-                    else
+                    if (_parentId != null)
                     {
-                        var _x = _parentRow.Field<JArray>("SubArray");
-                        if (_x != null)
-                            _x.Add(_newCategory.Id);
-                        else
-                            throw new E03NotExistColumn("SubArray");
+                        List<string> _query = new() { "Id", _parentId.ToString() };
+                        DataRow? _parentRow = CategoriesTable.table.Init().Offset(0).Limit(CategoriesTable.table.Length()).Query(_query).GetFirstRow();
 
-                        JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
-
-                        if (CategoriesTable.table.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
+                        if (_parentRow == null)
                             throw new E02CantProcessQuery();
+                        else
+                        {
+                            var _x = _parentRow.Field<JArray>("SubArray");
+                            if (_x != null)
+                                _x.Add(_newCategory.Id);
+                            else
+                                throw new E03NotExistColumn("SubArray");
+
+                            JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
+
+                            if (CategoriesTable.table.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
+                                throw new E02CantProcessQuery();
+                        }
                     }
 
                     CategoriesForm_ParentCategoryCbo.ValueMember = "Id";
                     CategoriesForm_ParentCategoryCbo.DisplayMember = "Name";
                     CategoriesForm_ParentCategoryCbo.DataSource = CategoriesTable.table.Init().Get();
-                    CategoriesForm_ParentCategoryCbo.SelectedIndex = 0;
+                    CategoriesForm_ParentCategoryCbo.SelectedIndex = -1;
+                    CategoriesForm_ParentCategoryCbo.SelectedText = "Default";
+
 
                     if (JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", CategoriesTable.table.Export()) == null)
                         throw new E04CantExportProperly();

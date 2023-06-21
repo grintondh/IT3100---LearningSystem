@@ -41,6 +41,7 @@ namespace Learning_System
 
             InitializeComponent();
             this.ActiveControl = AddNewQuestionForm_CategoryCbo;
+
             AddNewQuestionForm_MarkTxt.ReadOnly = true;
             AddNewQuestionForm_MarkTxt.Text = "1";
             for (int i = 0; i < 2; i++)
@@ -105,12 +106,7 @@ namespace Learning_System
             {
                 if (IsInitial == true)
                 {
-                    JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
-
-                    if (_categoriesData == null)
-                        throw new E01CantFindFile();
-
-                    CategoriesTable.table.Import(_categoriesData);
+                    CategoriesTable.table.LoadData("Category.json");
                     categoriesDataTable = CategoriesTable.table.Init().Get();
                     IsInitial = false;
                 }
@@ -182,11 +178,6 @@ namespace Learning_System
                 }
 
                 AddNewQuestionForm_ErrorLbl.Text = "";
-                if (AddNewQuestionForm_CategoryCbo.SelectedValue == null)
-                {
-                    MessageBox.Show("Please select a category");
-                    return;
-                }
 
                 var _parentId = AddNewQuestionForm_CategoryCbo.SelectedValue;
                 var _name = AddNewQuestionForm_NameTxt.Text;
@@ -197,7 +188,7 @@ namespace Learning_System
                 }
                 catch
                 {
-                    MessageBox.Show("Default mark must be double");
+                    MessageBox.Show("Default mark must be double", "Error");
                     return;
                 }
 
@@ -221,10 +212,39 @@ namespace Learning_System
 
                 if (isExistFullMark == false)
                 {
-                    DialogResult dgr = MessageBox.Show("You haven't given any choice 100% score!", "Warning", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
-                    if (dgr == DialogResult.Retry)
+                    MessageBox.Show("You haven't given any choice 100% score!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                
+                if (_choice.Count == 1)
+                {
+                    MessageBox.Show("Your question must have at least two choices!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (_parentId == null)
+                {
+                    int categoriesCount = CategoriesTable.table.Length();
+                    if (categoriesCount > 0)
                     {
-                        return;
+                        _parentId = 0;
+                    }
+                    else
+                    {
+                        Categories _newCategory = new()
+                        {
+                            Id = categoriesCount,
+                            Name = DateTime.Now.ToString(),
+                            SubArray = new List<int>(),
+                            QuestionArray = new List<int>(),
+                            Description = "Auto-generated category",
+                            IdNumber = "AGC"
+                        };
+
+                        if (CategoriesTable.table.Insert(JObject.FromObject(_newCategory)) == DataProcessing.StatusCode.Error)
+                            throw new E05CantInsertProperly();
+
+                        _parentId = _newCategory.Id;
                     }
                 }
 
@@ -345,11 +365,6 @@ namespace Learning_System
                 }
 
                 AddNewQuestionForm_ErrorLbl.Text = "";
-                if (AddNewQuestionForm_CategoryCbo.SelectedValue == null)
-                {
-                    MessageBox.Show("Please select a category");
-                    return;
-                }
 
                 var _parentId = AddNewQuestionForm_CategoryCbo.SelectedValue;
                 var _name = AddNewQuestionForm_NameTxt.Text;

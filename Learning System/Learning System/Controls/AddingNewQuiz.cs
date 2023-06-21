@@ -10,22 +10,6 @@ public partial class AddingNewQuiz : Form
     public AddingNewQuiz()
     {
         InitializeComponent();
-        Controls.Add(AddNewQuizForm_HeadingLbl);
-        Controls.Add(AddNewQuizForm_GeneralLbl);
-        Controls.Add(AddNewQuizForm_NameTxt);
-        Controls.Add(AddNewQuizFormTxt_Description);
-        Controls.Add(AddNewQuizForm_NameLbl);
-        Controls.Add(AddNewQuizFormLbl_Description);
-        Controls.Add(AddNewQuizForm_LineLbl);
-        Controls.Add(AddNewQuizForm_TiminglLbl);
-        Controls.Add(AddNewQuizForm_OpenthequizLbl);
-        Controls.Add(AddNewQuizForm_ClosethequizLbl);
-        Controls.Add(AddNewQuizForm_Timelimit);
-        Controls.Add(AddNewQuizForm_Timeexpires);
-        Controls.Add(AddingNewQuizForm_openMonthCbo);
-        Controls.Add(AddingNewQuizForm_closeMonthCbo);
-        Controls.Add(AddNewQuizForm_TimelimiMinuteCbo);
-        Controls.Add(AddNewQuizForm_TimeexpiresCloseCbo);
 
         AddingNewQuizForm_closeMonthCbo.SelectedIndex = 0;
         AddingNewQuizForm_openMonthCbo.SelectedIndex = 0;

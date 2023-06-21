@@ -108,9 +108,9 @@
             QuestionsForm_SelectCategoryCbo.Name = "QuestionsForm_SelectCategoryCbo";
             QuestionsForm_SelectCategoryCbo.Size = new Size(332, 33);
             QuestionsForm_SelectCategoryCbo.TabIndex = 9;
-            QuestionsForm_SelectCategoryCbo.DropDown += QuestionsForm_SelectCategoryCbo_DropDown;
+            QuestionsForm_SelectCategoryCbo.DropDown += QuestionsForm_SelectCategoryCbo_ClickOrDropDown;
             QuestionsForm_SelectCategoryCbo.SelectedIndexChanged += QuestionsForm_SelectCategoryCbo_SelectedIndexChanged;
-            QuestionsForm_SelectCategoryCbo.Click += QuestionsForm_SelectCategoryCbo_Click;
+            QuestionsForm_SelectCategoryCbo.Click += QuestionsForm_SelectCategoryCbo_ClickOrDropDown;
             // 
             // QuestionsForm_SelectCategoryLbl
             // 
