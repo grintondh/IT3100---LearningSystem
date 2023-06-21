@@ -1,4 +1,8 @@
-﻿namespace Learning_System
+﻿using Learning_System.Properties;
+using System.Drawing.Text;
+using System.Windows.Forms;
+
+namespace Learning_System
 {
     partial class AddNewQuestionForm
     {
@@ -100,7 +104,7 @@
             panel_body.Dock = DockStyle.Fill;
             panel_body.Location = new Point(0, 217);
             panel_body.Name = "panel_body";
-            panel_body.Size = new Size(1233, 623);
+            panel_body.Size = new Size(1233, 766);
             panel_body.TabIndex = 0;
             // 
             // panel_button
@@ -119,7 +123,7 @@
             // AddNewQuestionForm_ErrorLbl
             // 
             AddNewQuestionForm_ErrorLbl.AutoSize = true;
-            AddNewQuestionForm_ErrorLbl.Location = new Point(316, 88);
+            AddNewQuestionForm_ErrorLbl.Location = new Point(429, 91);
             AddNewQuestionForm_ErrorLbl.Name = "AddNewQuestionForm_ErrorLbl";
             AddNewQuestionForm_ErrorLbl.Size = new Size(0, 20);
             AddNewQuestionForm_ErrorLbl.TabIndex = 0;
@@ -127,10 +131,11 @@
             // AddNewQuestionForm_MoreChoicesBtn
             // 
             AddNewQuestionForm_MoreChoicesBtn.BackColor = Color.FromArgb(0, 159, 229);
+            AddNewQuestionForm_MoreChoicesBtn.Cursor = Cursors.Hand;
             AddNewQuestionForm_MoreChoicesBtn.FlatStyle = FlatStyle.Flat;
             AddNewQuestionForm_MoreChoicesBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_MoreChoicesBtn.ForeColor = Color.White;
-            AddNewQuestionForm_MoreChoicesBtn.Location = new Point(316, 21);
+            AddNewQuestionForm_MoreChoicesBtn.Location = new Point(429, 24);
             AddNewQuestionForm_MoreChoicesBtn.Name = "AddNewQuestionForm_MoreChoicesBtn";
             AddNewQuestionForm_MoreChoicesBtn.Size = new Size(328, 51);
             AddNewQuestionForm_MoreChoicesBtn.TabIndex = 99;
@@ -141,10 +146,11 @@
             // AddNewQuestionForm_SaveAndContinueBtn
             // 
             AddNewQuestionForm_SaveAndContinueBtn.BackColor = Color.FromArgb(0, 159, 229);
+            AddNewQuestionForm_SaveAndContinueBtn.Cursor = Cursors.Hand;
             AddNewQuestionForm_SaveAndContinueBtn.FlatStyle = FlatStyle.Flat;
             AddNewQuestionForm_SaveAndContinueBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_SaveAndContinueBtn.ForeColor = Color.White;
-            AddNewQuestionForm_SaveAndContinueBtn.Location = new Point(316, 126);
+            AddNewQuestionForm_SaveAndContinueBtn.Location = new Point(429, 129);
             AddNewQuestionForm_SaveAndContinueBtn.Name = "AddNewQuestionForm_SaveAndContinueBtn";
             AddNewQuestionForm_SaveAndContinueBtn.Size = new Size(407, 51);
             AddNewQuestionForm_SaveAndContinueBtn.TabIndex = 100;
@@ -155,10 +161,11 @@
             // AddNewQuestionForm_SaveBtn
             // 
             AddNewQuestionForm_SaveBtn.BackColor = Color.FromArgb(194, 36, 36);
+            AddNewQuestionForm_SaveBtn.Cursor = Cursors.Hand;
             AddNewQuestionForm_SaveBtn.FlatStyle = FlatStyle.Flat;
             AddNewQuestionForm_SaveBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_SaveBtn.ForeColor = Color.White;
-            AddNewQuestionForm_SaveBtn.Location = new Point(316, 183);
+            AddNewQuestionForm_SaveBtn.Location = new Point(429, 186);
             AddNewQuestionForm_SaveBtn.Name = "AddNewQuestionForm_SaveBtn";
             AddNewQuestionForm_SaveBtn.Size = new Size(181, 53);
             AddNewQuestionForm_SaveBtn.TabIndex = 101;
@@ -169,10 +176,11 @@
             // AddNewQuestionForm_CancelBtn
             // 
             AddNewQuestionForm_CancelBtn.BackColor = Color.FromArgb(0, 159, 229);
+            AddNewQuestionForm_CancelBtn.Cursor = Cursors.Hand;
             AddNewQuestionForm_CancelBtn.FlatStyle = FlatStyle.Flat;
             AddNewQuestionForm_CancelBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_CancelBtn.ForeColor = Color.White;
-            AddNewQuestionForm_CancelBtn.Location = new Point(530, 183);
+            AddNewQuestionForm_CancelBtn.Location = new Point(643, 186);
             AddNewQuestionForm_CancelBtn.Name = "AddNewQuestionForm_CancelBtn";
             AddNewQuestionForm_CancelBtn.Size = new Size(135, 53);
             AddNewQuestionForm_CancelBtn.TabIndex = 102;
@@ -205,9 +213,9 @@
             AddNewQuestionForm_TextRtb.AutoSize = true;
             AddNewQuestionForm_TextRtb.EnableAutoDragDrop = true;
             AddNewQuestionForm_TextRtb.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            AddNewQuestionForm_TextRtb.Location = new Point(460, 172);
+            AddNewQuestionForm_TextRtb.Location = new Point(460, 174);
             AddNewQuestionForm_TextRtb.Name = "AddNewQuestionForm_TextRtb";
-            AddNewQuestionForm_TextRtb.Size = new Size(565, 225);
+            AddNewQuestionForm_TextRtb.Size = new Size(568, 235);
             AddNewQuestionForm_TextRtb.TabIndex = 10;
             AddNewQuestionForm_TextRtb.Text = "";
             // 
@@ -247,67 +255,67 @@
             // AddNewQuestionForm_CategoryLbl
             // 
             AddNewQuestionForm_CategoryLbl.AutoSize = true;
-            AddNewQuestionForm_CategoryLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_CategoryLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_CategoryLbl.Location = new Point(33, 56);
             AddNewQuestionForm_CategoryLbl.Name = "AddNewQuestionForm_CategoryLbl";
-            AddNewQuestionForm_CategoryLbl.Size = new Size(79, 23);
+            AddNewQuestionForm_CategoryLbl.Size = new Size(88, 25);
             AddNewQuestionForm_CategoryLbl.TabIndex = 4;
             AddNewQuestionForm_CategoryLbl.Text = "Category";
             // 
             // AddNewQuestionForm_NameLbl
             // 
             AddNewQuestionForm_NameLbl.AutoSize = true;
-            AddNewQuestionForm_NameLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_NameLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_NameLbl.Location = new Point(33, 104);
             AddNewQuestionForm_NameLbl.Name = "AddNewQuestionForm_NameLbl";
-            AddNewQuestionForm_NameLbl.Size = new Size(127, 23);
+            AddNewQuestionForm_NameLbl.Size = new Size(140, 25);
             AddNewQuestionForm_NameLbl.TabIndex = 5;
             AddNewQuestionForm_NameLbl.Text = "Question name";
             // 
             // AddNewQuestionForm_TextLbl
             // 
             AddNewQuestionForm_TextLbl.AutoSize = true;
-            AddNewQuestionForm_TextLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_TextLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_TextLbl.Location = new Point(33, 180);
             AddNewQuestionForm_TextLbl.Name = "AddNewQuestionForm_TextLbl";
-            AddNewQuestionForm_TextLbl.Size = new Size(113, 23);
+            AddNewQuestionForm_TextLbl.Size = new Size(124, 25);
             AddNewQuestionForm_TextLbl.TabIndex = 6;
             AddNewQuestionForm_TextLbl.Text = "Question text";
             // 
             // AddNewQuestionForm_MarkLbl
             // 
             AddNewQuestionForm_MarkLbl.AutoSize = true;
-            AddNewQuestionForm_MarkLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_MarkLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_MarkLbl.Location = new Point(33, 439);
             AddNewQuestionForm_MarkLbl.Name = "AddNewQuestionForm_MarkLbl";
-            AddNewQuestionForm_MarkLbl.Size = new Size(108, 23);
+            AddNewQuestionForm_MarkLbl.Size = new Size(120, 25);
             AddNewQuestionForm_MarkLbl.TabIndex = 7;
             AddNewQuestionForm_MarkLbl.Text = "Default mark";
             // 
             // AddNewQuestionForm_CategoryCbo
             // 
-            AddNewQuestionForm_CategoryCbo.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_CategoryCbo.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_CategoryCbo.FormattingEnabled = true;
             AddNewQuestionForm_CategoryCbo.Location = new Point(460, 53);
             AddNewQuestionForm_CategoryCbo.Name = "AddNewQuestionForm_CategoryCbo";
-            AddNewQuestionForm_CategoryCbo.Size = new Size(281, 31);
+            AddNewQuestionForm_CategoryCbo.Size = new Size(281, 33);
             AddNewQuestionForm_CategoryCbo.TabIndex = 8;
             AddNewQuestionForm_CategoryCbo.DropDown += AddNewQuestionForm_CategoryCbo_DropDown;
             // 
             // AddNewQuestionForm_NameTxt
             // 
-            AddNewQuestionForm_NameTxt.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_NameTxt.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_NameTxt.Location = new Point(460, 101);
             AddNewQuestionForm_NameTxt.Name = "AddNewQuestionForm_NameTxt";
-            AddNewQuestionForm_NameTxt.Size = new Size(281, 30);
+            AddNewQuestionForm_NameTxt.Size = new Size(281, 32);
             AddNewQuestionForm_NameTxt.TabIndex = 9;
             // 
             // AddNewQuestionForm_MarkTxt
             // 
-            AddNewQuestionForm_MarkTxt.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_MarkTxt.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_MarkTxt.Location = new Point(460, 436);
             AddNewQuestionForm_MarkTxt.Name = "AddNewQuestionForm_MarkTxt";
-            AddNewQuestionForm_MarkTxt.Size = new Size(281, 30);
+            AddNewQuestionForm_MarkTxt.Size = new Size(281, 32);
             AddNewQuestionForm_MarkTxt.TabIndex = 11;
             AddNewQuestionForm_MarkTxt.Text = "1";
             // 
@@ -325,7 +333,7 @@
             // 
             AddNewQuestionForm_GeneralBtn.FlatAppearance.BorderSize = 0;
             AddNewQuestionForm_GeneralBtn.FlatStyle = FlatStyle.Flat;
-            AddNewQuestionForm_GeneralBtn.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_GeneralBtn.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_GeneralBtn.ForeColor = Color.FromArgb(194, 36, 36);
             AddNewQuestionForm_GeneralBtn.Location = new Point(33, 6);
             AddNewQuestionForm_GeneralBtn.Name = "AddNewQuestionForm_GeneralBtn";
@@ -337,10 +345,10 @@
             // HomePageForm_PathLbl
             // 
             HomePageForm_PathLbl.AutoSize = true;
-            HomePageForm_PathLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            HomePageForm_PathLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             HomePageForm_PathLbl.Location = new Point(23, 83);
             HomePageForm_PathLbl.Name = "HomePageForm_PathLbl";
-            HomePageForm_PathLbl.Size = new Size(291, 23);
+            HomePageForm_PathLbl.Size = new Size(859, 25);
             HomePageForm_PathLbl.TabIndex = 1;
             HomePageForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ / Question bank / Questions / Editing a Multiple choice question";
             // 
@@ -372,7 +380,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            ClientSize = new Size(1233, 840);
+            ClientSize = new Size(1233, 983);
             Controls.Add(panel_body);
             Controls.Add(panel_heading);
             Controls.Add(panel3);

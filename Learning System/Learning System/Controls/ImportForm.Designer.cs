@@ -283,6 +283,7 @@
             ImportForm_ImportBtn.Text = "IMPORT";
             ImportForm_ImportBtn.UseVisualStyleBackColor = false;
             ImportForm_ImportBtn.Click += ImportForm_ImportBtn_Click;
+            ImportForm_ImportBtn.Cursor = Cursors.Hand;
             // 
             // ImportForm_SelectFileBtn
             // 
@@ -297,6 +298,7 @@
             ImportForm_SelectFileBtn.Text = "CHOOSE A FILE ...";
             ImportForm_SelectFileBtn.UseVisualStyleBackColor = false;
             ImportForm_SelectFileBtn.Click += ImportForm_SelectFileBtn_Click;
+            ImportForm_SelectFileBtn.Cursor = Cursors.Hand;
             // 
             // ImportForm_ImportLbl
             // 

@@ -53,6 +53,7 @@
             ExportForm_ExportBtn.Text = "EXPORT";
             ExportForm_ExportBtn.UseVisualStyleBackColor = false;
             ExportForm_ExportBtn.Click += ExportForm_ExportBtn_Click;
+            ExportForm_ExportBtn.Cursor = Cursors.Hand;
             // 
             // ExportForm_PasswordTxt
             // 

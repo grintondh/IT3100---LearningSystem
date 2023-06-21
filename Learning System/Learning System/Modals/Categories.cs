@@ -19,6 +19,14 @@ namespace Learning_System.Modals
         public List<int> QuestionArray { get; set; } = new List<int>();
         public string? Description { get; set; }
         public string? IdNumber { get; set; }
+
+        public static Categories DefaultCategory = new Categories
+        {
+            Id = -1,
+            Name = "root",
+            Description = "root category",
+            IdNumber = "defaultId"
+        };
     }
 
     public static class CategoriesTable

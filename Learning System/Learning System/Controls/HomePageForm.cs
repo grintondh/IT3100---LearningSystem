@@ -67,7 +67,8 @@ namespace Learning_System
                             FlatStyle = FlatStyle.Flat,
                             TabIndex = 10,
                             Text = _DT.Rows[i].Field<string>("Name"),
-                            Size = new Size(919, 30),
+                            AutoSize = true,
+                            MaximumSize = new Size(500, 0)
                         };
 
                         linklbl.Click += new EventHandler((sender, args) =>

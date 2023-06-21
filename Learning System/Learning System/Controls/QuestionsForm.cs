@@ -43,6 +43,7 @@ namespace Learning_System
                         int QuestionID = Question.Field<int>("ID");
                         if ((showQuestionsFromCategoriesID.Contains(inCategories) && _showQuestionsFromSubcategories) || (showQuestionsFromCategoriesID[0] == inCategories && !showQuestionsFromSubcategories))
                         {
+                            string? _questionId = Question.Field<string>("Name");
                             string? _QuestionName = Question.Field<string>("Content");
                             var index = QuestionForm_ShowQuestionsDtg.Rows.Add();
                             DataGridViewRow row = QuestionForm_ShowQuestionsDtg.Rows[index];
@@ -53,12 +54,12 @@ namespace Learning_System
                             };
                             try
                             {
-                                tmp.Rtf = _QuestionName;
+                                tmp.Rtf = _questionId + " " + _QuestionName;
                                 row.Cells[1].Value = tmp.Text;
                             }
                             catch
                             {
-                                row.Cells[1].Value = _QuestionName;
+                                row.Cells[1].Value = _questionId + " " + _QuestionName;
                             }
                             row.Cells[2].Value = "Edit";
 
@@ -69,7 +70,7 @@ namespace Learning_System
                             else
                                 c.Style.BackColor = Color.AliceBlue;
                             c.Style.ForeColor = Color.FromArgb(30, 170, 232);
-                            c.Style.Font = new("Segoe UI", 10, FontStyle.Bold);
+                            c.Style.Font = new("Segoe UI", 11F, FontStyle.Bold);
 
                             row.Cells[3].Value = QuestionID;
                             row.Cells[4].Value = inCategories;
@@ -229,16 +230,14 @@ namespace Learning_System
         {
             //Skip the Column and Row headers
             if (e.ColumnIndex < 0 || e.RowIndex < 0)
-            {
                 return;
-            }
             var dataGridView = (sender as DataGridView);
             //Check the condition as per the requirement casting the cell value to the appropriate type
             if (e.ColumnIndex == 2)
             {
                 var gridCell = dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 gridCell.Style.ForeColor = Color.White;
-                gridCell.Style.Font = new("Segoe UI", 10, FontStyle.Bold | FontStyle.Underline);
+                gridCell.Style.Font = new("Segoe UI", 11, FontStyle.Bold | FontStyle.Underline);
             }
         }
 
@@ -246,22 +245,15 @@ namespace Learning_System
         {
             //Skip the Column and Row headers
             if (e.ColumnIndex < 0 || e.RowIndex < 0)
-            {
                 return;
-            }
             var dataGridView = (sender as DataGridView);
             //Check the condition as per the requirement casting the cell value to the appropriate type
             if (e.ColumnIndex == 2)
             {
                 var gridCell = dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 gridCell.Style.ForeColor = Color.FromArgb(30, 170, 232);
-                gridCell.Style.Font = new("Segoe UI", 10, FontStyle.Bold);
+                gridCell.Style.Font = new("Segoe UI", 11, FontStyle.Bold);
             }
-        }
-
-        private void QuestionsForm_QuestionsBankLbl_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -159,7 +159,7 @@
             // AddNewQuestionForm_CategoryLbl
             // 
             AddNewQuestionForm_CategoryLbl.AutoSize = true;
-            AddNewQuestionForm_CategoryLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_CategoryLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_CategoryLbl.Location = new Point(33, 56);
             AddNewQuestionForm_CategoryLbl.Name = "AddNewQuestionForm_CategoryLbl";
             AddNewQuestionForm_CategoryLbl.Size = new Size(79, 23);
@@ -168,7 +168,7 @@
             // 
             // AddNewQuestionForm_TextRtb
             // 
-            AddNewQuestionForm_TextRtb.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_TextRtb.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_TextRtb.Location = new Point(460, 180);
             AddNewQuestionForm_TextRtb.Name = "AddNewQuestionForm_TextRtb";
             AddNewQuestionForm_TextRtb.Size = new Size(568, 235);
@@ -178,7 +178,7 @@
             // AddNewQuestionForm_NameLbl
             // 
             AddNewQuestionForm_NameLbl.AutoSize = true;
-            AddNewQuestionForm_NameLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_NameLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_NameLbl.Location = new Point(33, 104);
             AddNewQuestionForm_NameLbl.Name = "AddNewQuestionForm_NameLbl";
             AddNewQuestionForm_NameLbl.Size = new Size(127, 23);
@@ -188,7 +188,7 @@
             // AddNewQuestionForm_TextLbl
             // 
             AddNewQuestionForm_TextLbl.AutoSize = true;
-            AddNewQuestionForm_TextLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_TextLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_TextLbl.Location = new Point(33, 180);
             AddNewQuestionForm_TextLbl.Name = "AddNewQuestionForm_TextLbl";
             AddNewQuestionForm_TextLbl.Size = new Size(113, 23);
@@ -198,7 +198,7 @@
             // AddNewQuestionForm_MarkLbl
             // 
             AddNewQuestionForm_MarkLbl.AutoSize = true;
-            AddNewQuestionForm_MarkLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_MarkLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_MarkLbl.Location = new Point(33, 439);
             AddNewQuestionForm_MarkLbl.Name = "AddNewQuestionForm_MarkLbl";
             AddNewQuestionForm_MarkLbl.Size = new Size(108, 23);
@@ -207,7 +207,7 @@
             // 
             // AddNewQuestionForm_CategoryCbo
             // 
-            AddNewQuestionForm_CategoryCbo.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_CategoryCbo.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_CategoryCbo.FormattingEnabled = true;
             AddNewQuestionForm_CategoryCbo.Location = new Point(460, 53);
             AddNewQuestionForm_CategoryCbo.Name = "AddNewQuestionForm_CategoryCbo";
@@ -216,7 +216,7 @@
             // 
             // AddNewQuestionForm_NameTxt
             // 
-            AddNewQuestionForm_NameTxt.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_NameTxt.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_NameTxt.Location = new Point(460, 101);
             AddNewQuestionForm_NameTxt.Name = "AddNewQuestionForm_NameTxt";
             AddNewQuestionForm_NameTxt.Size = new Size(281, 30);
@@ -224,7 +224,7 @@
             // 
             // AddNewQuestionForm_MarkTxt
             // 
-            AddNewQuestionForm_MarkTxt.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_MarkTxt.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_MarkTxt.Location = new Point(460, 436);
             AddNewQuestionForm_MarkTxt.Name = "AddNewQuestionForm_MarkTxt";
             AddNewQuestionForm_MarkTxt.Size = new Size(281, 30);
@@ -243,7 +243,7 @@
             // 
             AddNewQuestionForm_GeneralBtn.FlatAppearance.BorderSize = 0;
             AddNewQuestionForm_GeneralBtn.FlatStyle = FlatStyle.Flat;
-            AddNewQuestionForm_GeneralBtn.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AddNewQuestionForm_GeneralBtn.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_GeneralBtn.ForeColor = Color.FromArgb(194, 36, 36);
             AddNewQuestionForm_GeneralBtn.Location = new Point(33, 6);
             AddNewQuestionForm_GeneralBtn.Name = "AddNewQuestionForm_GeneralBtn";
@@ -286,6 +286,7 @@
             AddNewQuestionForm_MoreChoicesBtn.Text = "BLANKS FOR 3 MORE CHOICES ";
             AddNewQuestionForm_MoreChoicesBtn.UseVisualStyleBackColor = false;
             AddNewQuestionForm_MoreChoicesBtn.Click += AddNewQuestionForm_MoreChoicesBtn_Click;
+            AddNewQuestionForm_MoreChoicesBtn.Cursor = Cursors.Hand;
             // 
             // AddNewQuestionForm_SaveAndContinueBtn
             // 
@@ -300,6 +301,7 @@
             AddNewQuestionForm_SaveAndContinueBtn.Text = "SAVE CHANGES AND CONTINUE EDITING";
             AddNewQuestionForm_SaveAndContinueBtn.UseVisualStyleBackColor = false;
             AddNewQuestionForm_SaveAndContinueBtn.Click += AddNewQuestionForm_SaveAndContinueBtn_Click;
+            AddNewQuestionForm_SaveAndContinueBtn.Cursor = Cursors.Hand;
             // 
             // AddNewQuestionForm_SaveBtn
             // 
@@ -314,6 +316,7 @@
             AddNewQuestionForm_SaveBtn.Text = "SAVE CHANGES";
             AddNewQuestionForm_SaveBtn.UseVisualStyleBackColor = false;
             AddNewQuestionForm_SaveBtn.Click += AddNewQuestionForm_SaveBtn_Click;
+            AddNewQuestionForm_SaveBtn.Cursor = Cursors.Hand;
             // 
             // AddNewQuestionForm_CancelBtn
             // 
@@ -328,11 +331,12 @@
             AddNewQuestionForm_CancelBtn.Text = "CANCEL";
             AddNewQuestionForm_CancelBtn.UseVisualStyleBackColor = false;
             AddNewQuestionForm_CancelBtn.Click += AddNewQuestionForm_CancelBtn_Click;
+            AddNewQuestionForm_CancelBtn.Cursor = Cursors.Hand;
             // 
             // HomePageForm_PathLbl
             // 
             HomePageForm_PathLbl.AutoSize = true;
-            HomePageForm_PathLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            HomePageForm_PathLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             HomePageForm_PathLbl.Location = new Point(23, 83);
             HomePageForm_PathLbl.Name = "HomePageForm_PathLbl";
             HomePageForm_PathLbl.Size = new Size(291, 23);
