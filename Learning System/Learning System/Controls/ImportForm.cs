@@ -126,9 +126,9 @@ namespace Learning_System
             QuestionsTable.table.LoadData(JsonProcessing.QuestionsPath);
             CategoriesTable.table.LoadData(JsonProcessing.CategoriesPath);
 
-            List<string> _query = new() { "Id", "0" };
-            DataRow? _parentCategory = CategoriesTable.table.Init().Offset(0).Limit(1).Query(_query).Sort("Id desc").GetFirstRow();
-            if (_parentCategory == null)
+            DataRow? _parentCategory;
+            
+            if (CategoriesTable.table.Length() == 0)
             {
                 Modals.Categories _newCategory = new()
                 {
@@ -142,15 +142,20 @@ namespace Learning_System
 
                 if (CategoriesTable.table.Insert(JObject.FromObject(_newCategory)) == DataProcessing.StatusCode.Error)
                     throw new E05CantInsertProperly();
-
-                _parentCategory = CategoriesTable.table.Init().Offset(0).Limit(1).Query(_query).Sort("Id desc").GetFirstRow();
             }
 
-            DataRow? _maxQuestionIdRow = QuestionsTable.table.Init()
-                                                             .Sort("ID desc")
-                                                             .GetFirstRow();
+            _parentCategory = CategoriesTable.table.Init().Offset(0).Limit(1).GetFirstRow();
+            if (_parentCategory == null)
+                throw new E02CantProcessQuery();
 
-            int questionIDCount = (_maxQuestionIdRow == null) ? 0 : (_maxQuestionIdRow.Field<int>("ID"));
+            System.Data.DataTable? _maxQuestionIdTbl = QuestionsTable.table.Init()
+                                                                    .Sort("ID desc")
+                                                                    .Get();
+
+            if (_maxQuestionIdTbl == null)
+                throw new E02CantProcessQuery();
+
+            int questionIDCount = (_maxQuestionIdTbl.Rows.Count == 0) ? 0 : _maxQuestionIdTbl.Rows[0].Field<int>("ID");
 
             int i = 0;
             while (i < lines.Count)
@@ -213,7 +218,8 @@ namespace Learning_System
 
             JObject x = DataProcessing.ConvertDataRowToJObject(_parentCategory);
 
-            CategoriesTable.table.Init().Query(_query).Update(JObject.FromObject(x));
+            if (CategoriesTable.table.Init().Offset(0).Limit(1).Update(JObject.FromObject(x)) == DataProcessing.StatusCode.Error)
+                throw new E02CantProcessQuery();
 
             try
             {

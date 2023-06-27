@@ -88,6 +88,7 @@ public partial class AddingNewQuiz : Form
         {
             try
             {
+                // This GetFirstRow doesn't affect the return value below
                 DataRow? _maxIdRow = ContestsTable.table.Init().Sort("Id desc").GetFirstRow();
 
                 Contests _newQuiz = new()

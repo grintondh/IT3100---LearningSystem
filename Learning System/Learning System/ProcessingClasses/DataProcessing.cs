@@ -384,12 +384,12 @@ namespace Learning_System.ProcessingClasses
         /// <summary>
         /// Lấy dữ liệu hàng đầu tiên trả về (kết hợp với Offset(), Limit(), Query(), Select(), Sort())
         /// </summary>
-        /// <returns>null nếu thất bại, DataRow nếu thành công</returns>
+        /// <returns>null nếu thất bại hoặc không tồn tại hàng đầu tiên, DataRow nếu thành công</returns>
         public DataRow? GetFirstRow()
         {
             DataTable? _dt = Get();
 
-            if (_dt == null)
+            if (_dt == null || _dt.Rows.Count == 0)
                 return null;
             else
                 return _dt.Rows[0];

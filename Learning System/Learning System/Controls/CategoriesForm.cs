@@ -81,7 +81,15 @@ namespace Learning_System
                     if (_parentId != null)
                     {
                         List<string> _query = new() { "Id", _parentId.ToString() };
-                        DataRow? _parentRow = CategoriesTable.table.Init().Offset(0).Limit(CategoriesTable.table.Length()).Query(_query).GetFirstRow();
+                        DataTable? _chkDT = CategoriesTable.table.Init().Query(_query).Get();
+                        if (_chkDT == null)
+                            throw new E02CantProcessQuery();
+
+                        // Không có category nào thỏa mãn Id (lỗi?)
+                        if (_chkDT.Rows.Count == 0)
+                            throw new E99OtherException("Can't find your selected parent category value!");
+
+                        DataRow? _parentRow = _chkDT.Rows[0];
 
                         if (_parentRow == null)
                             throw new E02CantProcessQuery();
