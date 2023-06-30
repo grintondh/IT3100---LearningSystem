@@ -63,6 +63,7 @@
             // 
             // ContestForm_MenuPic
             // 
+            ContestForm_MenuPic.Cursor = Cursors.Hand;
             ContestForm_MenuPic.Image = (Image)resources.GetObject("ContestForm_MenuPic.Image");
             ContestForm_MenuPic.Location = new Point(27, 13);
             ContestForm_MenuPic.Name = "ContestForm_MenuPic";
@@ -133,6 +134,7 @@
             // 
             ContestForm_PreviewQuizBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             ContestForm_PreviewQuizBtn.BackColor = Color.FromArgb(0, 159, 229);
+            ContestForm_PreviewQuizBtn.Cursor = Cursors.Hand;
             ContestForm_PreviewQuizBtn.FlatStyle = FlatStyle.Flat;
             ContestForm_PreviewQuizBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             ContestForm_PreviewQuizBtn.ForeColor = Color.White;
@@ -180,6 +182,7 @@
             // ContestForm_EditPic
             // 
             ContestForm_EditPic.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            ContestForm_EditPic.Cursor = Cursors.Hand;
             ContestForm_EditPic.Image = (Image)resources.GetObject("ContestForm_EditPic.Image");
             ContestForm_EditPic.Location = new Point(1334, 19);
             ContestForm_EditPic.Name = "ContestForm_EditPic";

@@ -83,7 +83,9 @@
             // FromQuestionBank_ShowQuestionsDtg
             // 
             FromQuestionBank_ShowQuestionsDtg.AllowUserToAddRows = false;
-            FromQuestionBank_ShowQuestionsDtg.AllowUserToOrderColumns = true;
+            FromQuestionBank_ShowQuestionsDtg.AllowUserToDeleteRows = false;
+            FromQuestionBank_ShowQuestionsDtg.AllowUserToResizeColumns = false;
+            FromQuestionBank_ShowQuestionsDtg.AllowUserToResizeRows = false;
             FromQuestionBank_ShowQuestionsDtg.BackgroundColor = SystemColors.ButtonHighlight;
             FromQuestionBank_ShowQuestionsDtg.BorderStyle = BorderStyle.None;
             FromQuestionBank_ShowQuestionsDtg.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -91,6 +93,7 @@
             FromQuestionBank_ShowQuestionsDtg.Location = new Point(14, 282);
             FromQuestionBank_ShowQuestionsDtg.Margin = new Padding(2);
             FromQuestionBank_ShowQuestionsDtg.Name = "FromQuestionBank_ShowQuestionsDtg";
+            FromQuestionBank_ShowQuestionsDtg.RowHeadersVisible = false;
             FromQuestionBank_ShowQuestionsDtg.RowHeadersWidth = 4;
             FromQuestionBank_ShowQuestionsDtg.RowTemplate.Height = 33;
             FromQuestionBank_ShowQuestionsDtg.Size = new Size(1085, 363);
@@ -101,8 +104,8 @@
             Checkbox.HeaderText = "";
             Checkbox.MinimumWidth = 8;
             Checkbox.Name = "Checkbox";
-            Checkbox.Resizable = DataGridViewTriState.True;
-            Checkbox.SortMode = DataGridViewColumnSortMode.Automatic;
+            Checkbox.Resizable = DataGridViewTriState.False;
+            Checkbox.SortMode = DataGridViewColumnSortMode.NotSortable;
             Checkbox.Width = 60;
             // 
             // Content
@@ -111,6 +114,7 @@
             Content.MinimumWidth = 8;
             Content.Name = "Content";
             Content.ReadOnly = true;
+            Content.SortMode = DataGridViewColumnSortMode.NotSortable;
             Content.Width = 1019;
             // 
             // QuestionID
@@ -176,7 +180,7 @@
             FromQuestionBank_SelectCategoryCbo.FormattingEnabled = true;
             FromQuestionBank_SelectCategoryCbo.Location = new Point(164, 90);
             FromQuestionBank_SelectCategoryCbo.Name = "FromQuestionBank_SelectCategoryCbo";
-            FromQuestionBank_SelectCategoryCbo.Size = new Size(190, 31);
+            FromQuestionBank_SelectCategoryCbo.Size = new Size(214, 31);
             FromQuestionBank_SelectCategoryCbo.TabIndex = 31;
             FromQuestionBank_SelectCategoryCbo.SelectedIndexChanged += FromQuestionBank_SelectCategoryCbo_SelectedIndexChanged;
             FromQuestionBank_SelectCategoryCbo.MouseClick += FromQuestionBank_SelectCategoryCbo_MouseClick;

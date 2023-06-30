@@ -328,6 +328,7 @@
             EditQuiz_QuestionDtg.TabIndex = 27;
             EditQuiz_QuestionDtg.CellContentClick += EditQuiz_QuestionDtg_CellContentClick;
             EditQuiz_QuestionDtg.RowPostPaint += AutoNumberInDtg;
+            EditQuiz_QuestionDtg.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             // 
             // Content
             // 
