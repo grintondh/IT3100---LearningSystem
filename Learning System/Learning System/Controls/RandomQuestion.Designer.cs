@@ -71,7 +71,7 @@
             RandomQuestion_CategoryCbo.FormattingEnabled = true;
             RandomQuestion_CategoryCbo.Location = new Point(283, 79);
             RandomQuestion_CategoryCbo.Name = "RandomQuestion_CategoryCbo";
-            RandomQuestion_CategoryCbo.Size = new Size(190, 31);
+            RandomQuestion_CategoryCbo.Size = new Size(348, 31);
             RandomQuestion_CategoryCbo.TabIndex = 20;
             RandomQuestion_CategoryCbo.SelectedIndexChanged += RandomQuestion_CategoryCbo_SelectedIndexChanged;
             RandomQuestion_CategoryCbo.Click += RandomQuestion_CategoryCbo_Click;
@@ -150,7 +150,9 @@
             Icon.MinimumWidth = 6;
             Icon.Name = "Icon";
             Icon.ReadOnly = true;
-            Icon.Width = 150;
+            Icon.Width = 50;
+            Icon.Image = (Image)Learning_System.Properties.Resources.list_;
+            Icon.ImageLayout = DataGridViewImageCellLayout.Zoom;
             // 
             // Content
             // 
@@ -163,9 +165,9 @@
             // RandomQuestions_NumberOfRdQuestionsCbo
             // 
             RandomQuestions_NumberOfRdQuestionsCbo.FormattingEnabled = true;
-            RandomQuestions_NumberOfRdQuestionsCbo.Location = new Point(274, 173);
+            RandomQuestions_NumberOfRdQuestionsCbo.Location = new Point(283, 173);
             RandomQuestions_NumberOfRdQuestionsCbo.Name = "RandomQuestions_NumberOfRdQuestionsCbo";
-            RandomQuestions_NumberOfRdQuestionsCbo.Size = new Size(151, 28);
+            RandomQuestions_NumberOfRdQuestionsCbo.Size = new Size(83, 28);
             RandomQuestions_NumberOfRdQuestionsCbo.TabIndex = 32;
             // 
             // RandomQuestion_ExitBtn
