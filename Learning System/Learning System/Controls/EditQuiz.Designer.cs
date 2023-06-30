@@ -333,7 +333,7 @@
             // Delete
             // 
             Delete.HeaderText = "Delete";
-            Delete.Image = (Image)resources.GetObject("Delete.Image");
+            Delete.Image = (Image)Learning_System.Properties.Resources.thungrac;
             Delete.ImageLayout = DataGridViewImageCellLayout.Zoom;
             Delete.MinimumWidth = 6;
             Delete.Name = "Delete";
