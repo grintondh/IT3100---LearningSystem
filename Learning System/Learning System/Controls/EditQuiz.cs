@@ -34,6 +34,7 @@ namespace Learning_System
             randomQuestion.Dock = DockStyle.Fill;
             fromQuestionBank.Dock = DockStyle.Fill;
             this.parentContestForm = parentContestForm;
+            panel1.Width = Screen.PrimaryScreen.WorkingArea.Width;
         }
         public void addData(DataProcessing _questionData, DataProcessing _categoriesData)
         {

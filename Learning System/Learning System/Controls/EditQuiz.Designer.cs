@@ -30,12 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditQuiz));
             panel_edit = new Panel();
+            panel1 = new Panel();
+            pictureBox2 = new PictureBox();
+            pictureBox1 = new PictureBox();
+            EditQuiz_ShuffleCbx = new CheckBox();
+            EditQuiz_AddBtn = new Button();
             flowLayoutPanel_popup = new FlowLayoutPanel();
             EditForm_NewQuestionBtn = new Button();
             EditQuiz_BankBtn = new Button();
             EditQuiz_RandomBtn = new Button();
-            EditQuiz_AddBtn = new Button();
-            EditQuiz_ShuffleCbx = new CheckBox();
             EditQuiz_TotalofMarkLbl = new Label();
             EditQuiz_MaxGradeTxt = new TextBox();
             EditQuiz_SaveBtn = new Button();
@@ -50,6 +53,9 @@
             QuestionID = new DataGridViewTextBoxColumn();
             DefaultMark = new DataGridViewTextBoxColumn();
             panel_edit.SuspendLayout();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             flowLayoutPanel_popup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)EditQuiz_QuestionDtg).BeginInit();
             SuspendLayout();
@@ -58,9 +64,8 @@
             // 
             panel_edit.AutoScroll = true;
             panel_edit.BackColor = Color.White;
+            panel_edit.Controls.Add(panel1);
             panel_edit.Controls.Add(flowLayoutPanel_popup);
-            panel_edit.Controls.Add(EditQuiz_AddBtn);
-            panel_edit.Controls.Add(EditQuiz_ShuffleCbx);
             panel_edit.Controls.Add(EditQuiz_TotalofMarkLbl);
             panel_edit.Controls.Add(EditQuiz_MaxGradeTxt);
             panel_edit.Controls.Add(EditQuiz_SaveBtn);
@@ -75,6 +80,67 @@
             panel_edit.Name = "panel_edit";
             panel_edit.Size = new Size(1379, 804);
             panel_edit.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.WhiteSmoke;
+            panel1.Controls.Add(pictureBox2);
+            panel1.Controls.Add(pictureBox1);
+            panel1.Controls.Add(EditQuiz_ShuffleCbx);
+            panel1.Controls.Add(EditQuiz_AddBtn);
+            panel1.Location = new Point(0, 176);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1379, 76);
+            panel1.TabIndex = 28;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(14, 11);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(24, 23);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 30;
+            pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox1.Image = Properties.Resources.question_removebg_preview;
+            pictureBox1.Location = new Point(1338, 15);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(22, 19);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 29;
+            pictureBox1.TabStop = false;
+            // 
+            // EditQuiz_ShuffleCbx
+            // 
+            EditQuiz_ShuffleCbx.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            EditQuiz_ShuffleCbx.AutoSize = true;
+            EditQuiz_ShuffleCbx.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            EditQuiz_ShuffleCbx.Location = new Point(1258, 11);
+            EditQuiz_ShuffleCbx.Name = "EditQuiz_ShuffleCbx";
+            EditQuiz_ShuffleCbx.Size = new Size(84, 27);
+            EditQuiz_ShuffleCbx.TabIndex = 24;
+            EditQuiz_ShuffleCbx.Text = "Shuffle";
+            EditQuiz_ShuffleCbx.UseVisualStyleBackColor = true;
+            // 
+            // EditQuiz_AddBtn
+            // 
+            EditQuiz_AddBtn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            EditQuiz_AddBtn.BackColor = Color.Transparent;
+            EditQuiz_AddBtn.FlatAppearance.BorderColor = SystemColors.Control;
+            EditQuiz_AddBtn.FlatStyle = FlatStyle.Flat;
+            EditQuiz_AddBtn.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            EditQuiz_AddBtn.ForeColor = Color.FromArgb(44, 171, 230);
+            EditQuiz_AddBtn.Location = new Point(1297, 40);
+            EditQuiz_AddBtn.Name = "EditQuiz_AddBtn";
+            EditQuiz_AddBtn.Size = new Size(66, 31);
+            EditQuiz_AddBtn.TabIndex = 25;
+            EditQuiz_AddBtn.Text = "Add";
+            EditQuiz_AddBtn.UseVisualStyleBackColor = false;
+            EditQuiz_AddBtn.Click += EditQuiz_AddBtn_Click;
             // 
             // flowLayoutPanel_popup
             // 
@@ -91,75 +157,53 @@
             // 
             // EditForm_NewQuestionBtn
             // 
+            EditForm_NewQuestionBtn.BackColor = Color.WhiteSmoke;
             EditForm_NewQuestionBtn.FlatAppearance.BorderSize = 0;
-            EditForm_NewQuestionBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 255, 255);
+            EditForm_NewQuestionBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 159, 229);
             EditForm_NewQuestionBtn.FlatStyle = FlatStyle.Flat;
             EditForm_NewQuestionBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            EditForm_NewQuestionBtn.ForeColor = Color.FromArgb(44, 171, 230);
+            EditForm_NewQuestionBtn.ForeColor = Color.Black;
             EditForm_NewQuestionBtn.Location = new Point(3, 3);
             EditForm_NewQuestionBtn.Name = "EditForm_NewQuestionBtn";
             EditForm_NewQuestionBtn.Size = new Size(210, 39);
             EditForm_NewQuestionBtn.TabIndex = 5;
             EditForm_NewQuestionBtn.Text = "a new question";
-            EditForm_NewQuestionBtn.UseVisualStyleBackColor = true;
+            EditForm_NewQuestionBtn.TextAlign = ContentAlignment.MiddleLeft;
+            EditForm_NewQuestionBtn.UseVisualStyleBackColor = false;
             // 
             // EditQuiz_BankBtn
             // 
+            EditQuiz_BankBtn.BackColor = Color.WhiteSmoke;
             EditQuiz_BankBtn.FlatAppearance.BorderSize = 0;
-            EditQuiz_BankBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 255, 255);
+            EditQuiz_BankBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 159, 229);
             EditQuiz_BankBtn.FlatStyle = FlatStyle.Flat;
             EditQuiz_BankBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            EditQuiz_BankBtn.ForeColor = Color.FromArgb(44, 171, 230);
+            EditQuiz_BankBtn.ForeColor = Color.Black;
             EditQuiz_BankBtn.Location = new Point(3, 48);
             EditQuiz_BankBtn.Name = "EditQuiz_BankBtn";
             EditQuiz_BankBtn.Size = new Size(210, 39);
             EditQuiz_BankBtn.TabIndex = 6;
             EditQuiz_BankBtn.Text = "from question bank";
-            EditQuiz_BankBtn.UseVisualStyleBackColor = true;
+            EditQuiz_BankBtn.TextAlign = ContentAlignment.MiddleLeft;
+            EditQuiz_BankBtn.UseVisualStyleBackColor = false;
             EditQuiz_BankBtn.Click += EditQuiz_BankBtn_Click;
             // 
             // EditQuiz_RandomBtn
             // 
+            EditQuiz_RandomBtn.BackColor = Color.WhiteSmoke;
             EditQuiz_RandomBtn.FlatAppearance.BorderSize = 0;
-            EditQuiz_RandomBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 255, 255);
+            EditQuiz_RandomBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 159, 229);
             EditQuiz_RandomBtn.FlatStyle = FlatStyle.Flat;
             EditQuiz_RandomBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            EditQuiz_RandomBtn.ForeColor = Color.FromArgb(44, 171, 230);
+            EditQuiz_RandomBtn.ForeColor = Color.Black;
             EditQuiz_RandomBtn.Location = new Point(3, 93);
             EditQuiz_RandomBtn.Name = "EditQuiz_RandomBtn";
             EditQuiz_RandomBtn.Size = new Size(210, 39);
             EditQuiz_RandomBtn.TabIndex = 7;
             EditQuiz_RandomBtn.Text = "a random question";
-            EditQuiz_RandomBtn.UseVisualStyleBackColor = true;
+            EditQuiz_RandomBtn.TextAlign = ContentAlignment.MiddleLeft;
+            EditQuiz_RandomBtn.UseVisualStyleBackColor = false;
             EditQuiz_RandomBtn.Click += EditQuiz_RandomBtn_Click;
-            // 
-            // EditQuiz_AddBtn
-            // 
-            EditQuiz_AddBtn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            EditQuiz_AddBtn.BackColor = Color.White;
-            EditQuiz_AddBtn.FlatAppearance.BorderColor = SystemColors.Control;
-            EditQuiz_AddBtn.FlatStyle = FlatStyle.Flat;
-            EditQuiz_AddBtn.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            EditQuiz_AddBtn.ForeColor = Color.FromArgb(44, 171, 230);
-            EditQuiz_AddBtn.Location = new Point(1297, 221);
-            EditQuiz_AddBtn.Name = "EditQuiz_AddBtn";
-            EditQuiz_AddBtn.Size = new Size(66, 31);
-            EditQuiz_AddBtn.TabIndex = 25;
-            EditQuiz_AddBtn.Text = "Add";
-            EditQuiz_AddBtn.UseVisualStyleBackColor = false;
-            EditQuiz_AddBtn.Click += EditQuiz_AddBtn_Click;
-            // 
-            // EditQuiz_ShuffleCbx
-            // 
-            EditQuiz_ShuffleCbx.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            EditQuiz_ShuffleCbx.AutoSize = true;
-            EditQuiz_ShuffleCbx.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            EditQuiz_ShuffleCbx.Location = new Point(1279, 179);
-            EditQuiz_ShuffleCbx.Name = "EditQuiz_ShuffleCbx";
-            EditQuiz_ShuffleCbx.Size = new Size(84, 27);
-            EditQuiz_ShuffleCbx.TabIndex = 24;
-            EditQuiz_ShuffleCbx.Text = "Shuffle";
-            EditQuiz_ShuffleCbx.UseVisualStyleBackColor = true;
             // 
             // EditQuiz_TotalofMarkLbl
             // 
@@ -322,6 +366,10 @@
             Size = new Size(1379, 804);
             panel_edit.ResumeLayout(false);
             panel_edit.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             flowLayoutPanel_popup.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)EditQuiz_QuestionDtg).EndInit();
             ResumeLayout(false);
@@ -349,5 +397,8 @@
         private DataGridViewImageColumn Delete;
         private DataGridViewTextBoxColumn QuestionID;
         private DataGridViewTextBoxColumn DefaultMark;
+        private Panel panel1;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
     }
 }
