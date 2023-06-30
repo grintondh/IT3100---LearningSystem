@@ -130,6 +130,7 @@
             // 
             EditQuiz_AddBtn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             EditQuiz_AddBtn.BackColor = Color.Transparent;
+            EditQuiz_AddBtn.Cursor = Cursors.Hand;
             EditQuiz_AddBtn.FlatAppearance.BorderColor = SystemColors.Control;
             EditQuiz_AddBtn.FlatStyle = FlatStyle.Flat;
             EditQuiz_AddBtn.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
@@ -158,6 +159,7 @@
             // EditForm_NewQuestionBtn
             // 
             EditForm_NewQuestionBtn.BackColor = Color.WhiteSmoke;
+            EditForm_NewQuestionBtn.Cursor = Cursors.Hand;
             EditForm_NewQuestionBtn.FlatAppearance.BorderSize = 0;
             EditForm_NewQuestionBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 159, 229);
             EditForm_NewQuestionBtn.FlatStyle = FlatStyle.Flat;
@@ -174,6 +176,7 @@
             // EditQuiz_BankBtn
             // 
             EditQuiz_BankBtn.BackColor = Color.WhiteSmoke;
+            EditQuiz_BankBtn.Cursor = Cursors.Hand;
             EditQuiz_BankBtn.FlatAppearance.BorderSize = 0;
             EditQuiz_BankBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 159, 229);
             EditQuiz_BankBtn.FlatStyle = FlatStyle.Flat;
@@ -191,6 +194,7 @@
             // EditQuiz_RandomBtn
             // 
             EditQuiz_RandomBtn.BackColor = Color.WhiteSmoke;
+            EditQuiz_RandomBtn.Cursor = Cursors.Hand;
             EditQuiz_RandomBtn.FlatAppearance.BorderSize = 0;
             EditQuiz_RandomBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 159, 229);
             EditQuiz_RandomBtn.FlatStyle = FlatStyle.Flat;
@@ -231,6 +235,7 @@
             // 
             EditQuiz_SaveBtn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             EditQuiz_SaveBtn.BackColor = Color.FromArgb(0, 159, 229);
+            EditQuiz_SaveBtn.Cursor = Cursors.Hand;
             EditQuiz_SaveBtn.FlatStyle = FlatStyle.Flat;
             EditQuiz_SaveBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             EditQuiz_SaveBtn.ForeColor = Color.White;
@@ -256,6 +261,7 @@
             // EditQuiz_MultipleItemsBtn
             // 
             EditQuiz_MultipleItemsBtn.BackColor = Color.FromArgb(0, 159, 229);
+            EditQuiz_MultipleItemsBtn.Cursor = Cursors.Hand;
             EditQuiz_MultipleItemsBtn.FlatStyle = FlatStyle.Flat;
             EditQuiz_MultipleItemsBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             EditQuiz_MultipleItemsBtn.ForeColor = Color.White;
@@ -269,6 +275,7 @@
             // EditQuiz_RepaginateBtn
             // 
             EditQuiz_RepaginateBtn.BackColor = Color.FromArgb(0, 159, 229);
+            EditQuiz_RepaginateBtn.Cursor = Cursors.Hand;
             EditQuiz_RepaginateBtn.FlatStyle = FlatStyle.Flat;
             EditQuiz_RepaginateBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             EditQuiz_RepaginateBtn.ForeColor = Color.White;
@@ -333,7 +340,7 @@
             // Delete
             // 
             Delete.HeaderText = "Delete";
-            Delete.Image = (Image)Learning_System.Properties.Resources.thungrac;
+            Delete.Image = Properties.Resources.thungrac;
             Delete.ImageLayout = DataGridViewImageCellLayout.Zoom;
             Delete.MinimumWidth = 6;
             Delete.Name = "Delete";

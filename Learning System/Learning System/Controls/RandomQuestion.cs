@@ -125,6 +125,7 @@ namespace Learning_System
                 PageButton[i].Visible = true;
                 PageButton[i].AutoSize = true;
                 PageButton[i].Click += new EventHandler(PageButtonHandler);
+                PageButton[i].Cursor = Cursors.Hand;
                 RandomQuestion_ButtonPanelPnl.Controls.Add(PageButton[i]);
             }
         }
@@ -147,15 +148,12 @@ namespace Learning_System
                 MessageBox.Show("Không tồn tại các câu hỏi cần được thêm trong Category đã chọn", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            string text = "Đã thêm thành công những câu hỏi có ID sau vào contest: ";
+            string text = "Đã thêm thành công";
             for (int i = 0; i <= RandomQuestions_NumberOfRdQuestionsCbo.SelectedIndex; i++)
             {
                 Random rd = new Random();
                 int index = rd.Next(0, selectedQuestions.Count - 1);
                 randomSelectedQuestions.Add(selectedQuestions[index]);
-                text += selectedQuestions[index].ToString();
-                if (i == RandomQuestions_NumberOfRdQuestionsCbo.SelectedIndex - 1) text += ".";
-                else text += ", ";
                 selectedQuestions.RemoveAt(index);
                 selectedQuestionsContent.RemoveAt(index);
             }

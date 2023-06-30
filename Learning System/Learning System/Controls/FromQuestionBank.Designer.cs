@@ -70,6 +70,7 @@
             FromQuestionBank_ExitBtn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             FromQuestionBank_ExitBtn.AutoSize = true;
             FromQuestionBank_ExitBtn.BackColor = SystemColors.ControlLight;
+            FromQuestionBank_ExitBtn.Cursor = Cursors.Hand;
             FromQuestionBank_ExitBtn.ForeColor = SystemColors.ControlDarkDark;
             FromQuestionBank_ExitBtn.Location = new Point(1370, 17);
             FromQuestionBank_ExitBtn.Name = "FromQuestionBank_ExitBtn";
@@ -123,6 +124,7 @@
             // FromQuestionBank_AddBtn
             // 
             FromQuestionBank_AddBtn.BackColor = Color.FromArgb(0, 115, 165);
+            FromQuestionBank_AddBtn.Cursor = Cursors.Hand;
             FromQuestionBank_AddBtn.FlatStyle = FlatStyle.Flat;
             FromQuestionBank_AddBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             FromQuestionBank_AddBtn.ForeColor = Color.White;
