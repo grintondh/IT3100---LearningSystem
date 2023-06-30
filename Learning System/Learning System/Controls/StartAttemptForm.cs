@@ -37,6 +37,7 @@ namespace Learning_System
 
         private void StartBtn_Click_1(object sender, EventArgs e)
         {
+            this.Hide();
             this.Close();
             PreviewQuizForm previewQuizForm = new PreviewQuizForm(contestForm, questionID);
             previewQuizForm.ShowDialog();

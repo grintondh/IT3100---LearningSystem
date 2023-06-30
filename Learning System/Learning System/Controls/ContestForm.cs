@@ -123,8 +123,10 @@ namespace Learning_System
             }
             else
             {
+                this.Hide();
                 StartAttemptForm startAttemptForm = new StartAttemptForm(this, editQuiz.questionID);
                 startAttemptForm.ShowDialog();
+                this.Show();
             }
         }
 
