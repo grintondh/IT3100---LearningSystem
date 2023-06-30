@@ -48,6 +48,7 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.WhiteSmoke;
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(MarkLbl);
             panel1.Controls.Add(AnswerLbl);
@@ -63,7 +64,7 @@
             MarkLbl.AutoSize = true;
             MarkLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             MarkLbl.ForeColor = Color.Black;
-            MarkLbl.Location = new Point(4, 78);
+            MarkLbl.Location = new Point(4, 67);
             MarkLbl.Name = "MarkLbl";
             MarkLbl.Size = new Size(135, 23);
             MarkLbl.TabIndex = 6;
@@ -74,7 +75,7 @@
             AnswerLbl.AutoSize = true;
             AnswerLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             AnswerLbl.ForeColor = Color.Black;
-            AnswerLbl.Location = new Point(4, 49);
+            AnswerLbl.Location = new Point(4, 41);
             AnswerLbl.Name = "AnswerLbl";
             AnswerLbl.Size = new Size(144, 23);
             AnswerLbl.TabIndex = 5;
@@ -116,7 +117,7 @@
             // panel3
             // 
             panel3.AutoScroll = true;
-            panel3.BackColor = Color.Gainsboro;
+            panel3.BackColor = Color.FromArgb(231, 243, 245);
             panel3.Controls.Add(QuestionChoiceGrb);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 217);
@@ -127,7 +128,7 @@
             // QuestionChoiceGrb
             // 
             QuestionChoiceGrb.AutoSize = true;
-            QuestionChoiceGrb.BackColor = Color.Gainsboro;
+            QuestionChoiceGrb.BackColor = Color.FromArgb(231, 243, 245);
             QuestionChoiceGrb.Controls.Add(panel_richTextboxes);
             QuestionChoiceGrb.Controls.Add(panel_button);
             QuestionChoiceGrb.Dock = DockStyle.Fill;
@@ -136,11 +137,10 @@
             QuestionChoiceGrb.Size = new Size(1104, 189);
             QuestionChoiceGrb.TabIndex = 1;
             QuestionChoiceGrb.TabStop = false;
-            QuestionChoiceGrb.Text = "Choice";
             // 
             // panel_richTextboxes
             // 
-            panel_richTextboxes.BackColor = Color.Gainsboro;
+            panel_richTextboxes.BackColor = Color.FromArgb(231, 243, 245);
             panel_richTextboxes.Dock = DockStyle.Fill;
             panel_richTextboxes.Location = new Point(41, 23);
             panel_richTextboxes.Name = "panel_richTextboxes";
@@ -157,7 +157,7 @@
             // 
             // ContentRtb
             // 
-            ContentRtb.BackColor = Color.White;
+            ContentRtb.BackColor = Color.FromArgb(231, 243, 245);
             ContentRtb.BorderStyle = BorderStyle.None;
             ContentRtb.Dock = DockStyle.Top;
             ContentRtb.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);

@@ -33,7 +33,7 @@ namespace Learning_System
         public PreviewQuizForm(ContestForm contestForm, List<int> questionID)
         {
             InitializeComponent();
-            panel_right.Width = 300;
+            panel_right.Width = 275;
             panel_left.Width = Screen.PrimaryScreen.WorkingArea.Width - panel_right.Width;
             panel_QuestionBtn.AutoScroll = true;
             this.contestForm = contestForm;
@@ -110,6 +110,10 @@ namespace Learning_System
             }
             panel_Page[0].BringToFront();
             PreviousPageBtn.Visible = false;
+            if (numberOfPage == 1)
+            {
+                NextPageBtn.Visible = false;
+            }
             //
             for (int i = 0; i < numberOfQuestion; i++)
             {
@@ -126,7 +130,7 @@ namespace Learning_System
                 button[i].Click += pageButtonClick;
                 panel_QuestionBtn.Controls.Add(button[i]);
             }
-            FinishLbl.Location = new Point(FinishLbl.Location.X, button[numberOfQuestion - 1].Location.Y 
+            FinishLbl.Location = new Point(FinishLbl.Location.X, button[numberOfQuestion - 1].Location.Y
                 + button[numberOfQuestion - 1].Height + 10);
             countDownTimer.Start();
         }
@@ -403,10 +407,10 @@ namespace Learning_System
             StartTimeLbl.Text = contestForm.timeStart.ToString();
             FinishTimeLbl.Text = DateTime.Now.ToString();
             TimeTakenLbl.Text = "1 min 27 secs";
-            MarkLbl.Text = finalMark.ToString() + "/" + questionID.Count.ToString();
+            MarkLbl.Text = Math.Round(finalMark, 2).ToString() + "/" + questionID.Count.ToString();
             double x = finalMark / questionID.Count;
-            GradeLbl.Text = (x * Convert.ToDouble(contestForm.editQuiz.EditQuiz_MaxGradeTxt.Text)).ToString() + " out of "
-                + contestForm.editQuiz.EditQuiz_MaxGradeTxt.Text + $" ({100 * x}%)";
+            GradeLbl.Text = Math.Round(x * Convert.ToDouble(contestForm.editQuiz.EditQuiz_MaxGradeTxt.Text), 2).ToString() + " out of "
+                + contestForm.editQuiz.EditQuiz_MaxGradeTxt.Text + $" ({Math.Round(100 * x, 2)}%)";
             string[] str = TimeLeftLbl.Text.Split(':');
             if (Convert.ToInt32(str[1]) != 0)
             {
@@ -459,6 +463,11 @@ namespace Learning_System
                 list[i] = tmp;
             }
             return list;
+        }
+
+        private void panel_timeLeft_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, panel_timeLeft.ClientRectangle, Color.Red, ButtonBorderStyle.Solid);
         }
 
     }

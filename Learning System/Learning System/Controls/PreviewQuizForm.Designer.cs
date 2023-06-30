@@ -31,9 +31,9 @@
             components = new System.ComponentModel.Container();
             panel_top = new Panel();
             panel_heading = new Panel();
-            FinishLbl = new Label();
             PathLbl = new Label();
             ITLbl = new Label();
+            FinishLbl = new Label();
             label7 = new Label();
             PreviousPageBtn = new Button();
             panel_left = new Panel();
@@ -93,18 +93,6 @@
             panel_heading.Size = new Size(1366, 146);
             panel_heading.TabIndex = 4;
             // 
-            // FinishLbl
-            // 
-            FinishLbl.AutoSize = true;
-            FinishLbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            FinishLbl.ForeColor = Color.Black;
-            FinishLbl.Location = new Point(6, 342);
-            FinishLbl.Name = "FinishLbl";
-            FinishLbl.Size = new Size(154, 28);
-            FinishLbl.TabIndex = 4;
-            FinishLbl.Text = "Finish attempt ...";
-            FinishLbl.Click += FinishLbl_Click;
-            // 
             // PathLbl
             // 
             PathLbl.AutoSize = true;
@@ -126,12 +114,26 @@
             ITLbl.TabIndex = 0;
             ITLbl.Text = "IT";
             // 
+            // FinishLbl
+            // 
+            FinishLbl.AutoSize = true;
+            FinishLbl.BackColor = Color.WhiteSmoke;
+            FinishLbl.Cursor = Cursors.Hand;
+            FinishLbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            FinishLbl.ForeColor = Color.Black;
+            FinishLbl.Location = new Point(6, 342);
+            FinishLbl.Name = "FinishLbl";
+            FinishLbl.Size = new Size(154, 28);
+            FinishLbl.TabIndex = 4;
+            FinishLbl.Text = "Finish attempt ...";
+            FinishLbl.Click += FinishLbl_Click;
+            // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label7.ForeColor = Color.Black;
-            label7.Location = new Point(3, 6);
+            label7.Location = new Point(7, 6);
             label7.Name = "label7";
             label7.Size = new Size(80, 23);
             label7.TabIndex = 10;
@@ -144,7 +146,7 @@
             PreviousPageBtn.FlatStyle = FlatStyle.Flat;
             PreviousPageBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             PreviousPageBtn.ForeColor = Color.White;
-            PreviousPageBtn.Location = new Point(7, 3);
+            PreviousPageBtn.Location = new Point(18, 3);
             PreviousPageBtn.Name = "PreviousPageBtn";
             PreviousPageBtn.Size = new Size(169, 42);
             PreviousPageBtn.TabIndex = 14;
@@ -180,7 +182,7 @@
             NextPageBtn.FlatStyle = FlatStyle.Flat;
             NextPageBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             NextPageBtn.ForeColor = Color.White;
-            NextPageBtn.Location = new Point(824, 3);
+            NextPageBtn.Location = new Point(801, 3);
             NextPageBtn.Name = "NextPageBtn";
             NextPageBtn.Size = new Size(169, 42);
             NextPageBtn.TabIndex = 15;
@@ -191,6 +193,7 @@
             // panel_right
             // 
             panel_right.BackColor = Color.White;
+            panel_right.BorderStyle = BorderStyle.FixedSingle;
             panel_right.Controls.Add(panel_QuestionBtn);
             panel_right.Controls.Add(panel1);
             panel_right.Dock = DockStyle.Right;
@@ -206,16 +209,17 @@
             panel_QuestionBtn.Dock = DockStyle.Fill;
             panel_QuestionBtn.Location = new Point(0, 36);
             panel_QuestionBtn.Name = "panel_QuestionBtn";
-            panel_QuestionBtn.Size = new Size(366, 469);
+            panel_QuestionBtn.Size = new Size(364, 467);
             panel_QuestionBtn.TabIndex = 3;
             // 
             // panel1
             // 
+            panel1.BackColor = Color.WhiteSmoke;
             panel1.Controls.Add(QuizNavigationLbl);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(366, 36);
+            panel1.Size = new Size(364, 36);
             panel1.TabIndex = 0;
             // 
             // QuizNavigationLbl
@@ -248,17 +252,18 @@
             panel_timeLeft.Controls.Add(TimeLeftLbl);
             panel_timeLeft.Controls.Add(label7);
             panel_timeLeft.ForeColor = SystemColors.ControlText;
-            panel_timeLeft.Location = new Point(832, 3);
+            panel_timeLeft.Location = new Point(815, 3);
             panel_timeLeft.Name = "panel_timeLeft";
-            panel_timeLeft.Size = new Size(159, 38);
+            panel_timeLeft.Size = new Size(174, 38);
             panel_timeLeft.TabIndex = 1;
+            panel_timeLeft.Paint += panel_timeLeft_Paint;
             // 
             // TimeLeftLbl
             // 
             TimeLeftLbl.AutoSize = true;
             TimeLeftLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             TimeLeftLbl.ForeColor = Color.Black;
-            TimeLeftLbl.Location = new Point(88, 6);
+            TimeLeftLbl.Location = new Point(92, 6);
             TimeLeftLbl.Name = "TimeLeftLbl";
             TimeLeftLbl.Size = new Size(60, 23);
             TimeLeftLbl.TabIndex = 11;
@@ -266,6 +271,7 @@
             // 
             // panel_Review
             // 
+            panel_Review.BorderStyle = BorderStyle.FixedSingle;
             panel_Review.Controls.Add(GradeLbl);
             panel_Review.Controls.Add(MarkLbl);
             panel_Review.Controls.Add(TimeTakenLbl);
