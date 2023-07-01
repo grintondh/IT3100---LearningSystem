@@ -27,7 +27,15 @@ namespace Learning_System
             questionsData = contestForm.questionsData;
             this.questionID = questionID;
             nameContest = contestForm.nameContest;
-            NotiTxt.Text = $"Your attempt will have a time limit of {timeLimit} minutes. When you start, the timer will begin to count down and cannot be paused. You must finish your attempt before it expires. Are you sure you wish to start now?";
+            if (contestForm.TimeLimitEnable == true)
+            {
+                NotiTxt.Text = $"Your attempt will have a time limit of {timeLimit} minutes. When you start, the timer will begin to count down and cannot be paused. You must finish your attempt before it expires. Are you sure you wish to start now?";
+            }
+            else
+            {
+                TimeLbl.Text = "";
+                NotiTxt.Text = "Are you sure you wish to start now?";
+            }
         }
 
         private void CancelBtn_Click_1(object sender, EventArgs e)

@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartAttemptForm));
             panel_main = new Panel();
+            NotiTxt = new TextBox();
             panel1 = new Panel();
             CancelBtn = new Button();
             StartBtn = new Button();
             TimeLbl = new Label();
             HeaderLbl = new Label();
-            NotiTxt = new TextBox();
             panel_main.SuspendLayout();
             SuspendLayout();
             // 
@@ -54,6 +54,19 @@
             panel_main.Size = new Size(742, 391);
             panel_main.TabIndex = 9;
             // 
+            // NotiTxt
+            // 
+            NotiTxt.BackColor = Color.White;
+            NotiTxt.BorderStyle = BorderStyle.None;
+            NotiTxt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            NotiTxt.Location = new Point(22, 171);
+            NotiTxt.Multiline = true;
+            NotiTxt.Name = "NotiTxt";
+            NotiTxt.ReadOnly = true;
+            NotiTxt.Size = new Size(707, 108);
+            NotiTxt.TabIndex = 15;
+            NotiTxt.Text = resources.GetString("NotiTxt.Text");
+            // 
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
@@ -66,6 +79,7 @@
             // 
             CancelBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             CancelBtn.BackColor = Color.FromArgb(0, 159, 229);
+            CancelBtn.Cursor = Cursors.Hand;
             CancelBtn.FlatStyle = FlatStyle.Flat;
             CancelBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             CancelBtn.ForeColor = Color.White;
@@ -81,6 +95,7 @@
             // 
             StartBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             StartBtn.BackColor = Color.FromArgb(194, 36, 36);
+            StartBtn.Cursor = Cursors.Hand;
             StartBtn.FlatStyle = FlatStyle.Flat;
             StartBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             StartBtn.ForeColor = Color.White;
@@ -112,19 +127,6 @@
             HeaderLbl.Size = new Size(219, 46);
             HeaderLbl.TabIndex = 9;
             HeaderLbl.Text = "Start attempt";
-            // 
-            // NotiTxt
-            // 
-            NotiTxt.BackColor = Color.White;
-            NotiTxt.BorderStyle = BorderStyle.None;
-            NotiTxt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            NotiTxt.Location = new Point(22, 171);
-            NotiTxt.Multiline = true;
-            NotiTxt.Name = "NotiTxt";
-            NotiTxt.ReadOnly = true;
-            NotiTxt.Size = new Size(707, 108);
-            NotiTxt.TabIndex = 15;
-            NotiTxt.Text = resources.GetString("NotiTxt.Text");
             // 
             // StartAttemptForm
             // 
