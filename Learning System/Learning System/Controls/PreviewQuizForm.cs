@@ -113,6 +113,7 @@ namespace Learning_System
             if (numberOfPage == 1)
             {
                 NextPageBtn.Visible = false;
+                panel_changePage.Visible = false;
             }
             //
             for (int i = 0; i < numberOfQuestion; i++)
@@ -132,7 +133,14 @@ namespace Learning_System
             }
             FinishLbl.Location = new Point(FinishLbl.Location.X, button[numberOfQuestion - 1].Location.Y
                 + button[numberOfQuestion - 1].Height + 10);
-            countDownTimer.Start();
+            if (contestForm.TimeLimitEnable == true)
+            {
+                countDownTimer.Start();
+            }
+            else
+            {
+                panel_timeLeft.Visible = false;
+            }
         }
 
         private void PreviousPageBtn_Click(object sender, EventArgs e)

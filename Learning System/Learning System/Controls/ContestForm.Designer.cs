@@ -138,7 +138,7 @@
             ContestForm_PreviewQuizBtn.FlatStyle = FlatStyle.Flat;
             ContestForm_PreviewQuizBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             ContestForm_PreviewQuizBtn.ForeColor = Color.White;
-            ContestForm_PreviewQuizBtn.Location = new Point(1102, 417);
+            ContestForm_PreviewQuizBtn.Location = new Point(1121, 417);
             ContestForm_PreviewQuizBtn.Name = "ContestForm_PreviewQuizBtn";
             ContestForm_PreviewQuizBtn.Size = new Size(266, 54);
             ContestForm_PreviewQuizBtn.TabIndex = 6;
@@ -162,7 +162,7 @@
             ContestForm_GradingMethodLbl.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ContestForm_GradingMethodLbl.AutoSize = true;
             ContestForm_GradingMethodLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            ContestForm_GradingMethodLbl.Location = new Point(1127, 141);
+            ContestForm_GradingMethodLbl.Location = new Point(1146, 141);
             ContestForm_GradingMethodLbl.Name = "ContestForm_GradingMethodLbl";
             ContestForm_GradingMethodLbl.Size = new Size(241, 23);
             ContestForm_GradingMethodLbl.TabIndex = 3;
@@ -173,7 +173,7 @@
             ContestForm_TimeLbl.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ContestForm_TimeLbl.AutoSize = true;
             ContestForm_TimeLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            ContestForm_TimeLbl.Location = new Point(1164, 103);
+            ContestForm_TimeLbl.Location = new Point(1243, 103);
             ContestForm_TimeLbl.Name = "ContestForm_TimeLbl";
             ContestForm_TimeLbl.Size = new Size(144, 23);
             ContestForm_TimeLbl.TabIndex = 2;

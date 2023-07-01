@@ -19,6 +19,7 @@ namespace Learning_System
         public EditQuiz editQuiz;
         public string nameContest;
         public int timeLimit;
+        public bool TimeLimitEnable;
         public ContestForm(int contestID)
         {
             InitializeComponent();
@@ -99,6 +100,15 @@ namespace Learning_System
             else editQuiz.EditQuiz_MaxGradeTxt.Text = row.Field<double>("MaximumGrade").ToString();
             ContestForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ  /  General  /  " + nameContest;
             var x = row.Field<JArray>("QuestionArray").ToObject<List<int>>();
+            if (row.Field<bool>("TimeLimitEnable") == false)
+            {
+                ContestForm_TimeLbl.Visible = false;
+                TimeLimitEnable = false;
+            }
+            else
+            {
+                TimeLimitEnable = true;
+            }
             editQuiz.loadQuestionID(x);
         }
 
