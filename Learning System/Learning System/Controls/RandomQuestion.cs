@@ -108,8 +108,9 @@ namespace Learning_System
             for (int i = 0; i < NUMBER_OF_PAGES_PER_GROUP + 4; i++)
             {
                 PageButton[i] = new Button();
-                PageButton[i].Location = new System.Drawing.Point(RandomQuestion_ButtonPanelPnl.Left + i * 50, 0);
+                PageButton[i].Location = new System.Drawing.Point(RandomQuestion_ButtonPanelPnl.Left + i * 48, 0);
                 PageButton[i].Size = new Size(50, 50);
+                PageButton[i]
                 if (i == 0 || i == NUMBER_OF_PAGES_PER_GROUP + 3)
                 {
                     if (i == 0) PageButton[i].Text = "<";
@@ -127,6 +128,8 @@ namespace Learning_System
                 PageButton[i].Click += new EventHandler(PageButtonHandler);
                 PageButton[i].Cursor = Cursors.Hand;
                 RandomQuestion_ButtonPanelPnl.Controls.Add(PageButton[i]);
+                if (RandomQuestion_CategoryCbo.SelectedIndex == -1) PageButton[i].Hide();
+                else PageButton[i].Show();
             }
         }
         public void addData(DataProcessing _questionData, DataProcessing _categoriesData, JArray _categoriesDataJarray)
@@ -281,7 +284,7 @@ namespace Learning_System
             else PageButton[1].Text = "...";
             if (groupSelectedIndex == numberOfGroup) PageButton[NUMBER_OF_PAGES_PER_GROUP + 2].Text = " ";
             else PageButton[NUMBER_OF_PAGES_PER_GROUP + 2].Text = "...";
-            for (int i = 0; i < NUMBER_OF_PAGES_PER_GROUP + 3; i++)
+            for (int i = 0; i < NUMBER_OF_PAGES_PER_GROUP + 4; i++)
             {
                 if (PageButton[i].Text == " ") PageButton[i].Hide();
                 else PageButton[i].Show();
