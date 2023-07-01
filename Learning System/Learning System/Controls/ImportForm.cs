@@ -174,8 +174,15 @@ namespace Learning_System
                     {
                         if (lines[i][1] == '.')
                         {
-                            if (Path.GetExtension(ImportPath) != ".txt") _stringContent = lineTextBoxes[i].Rtf;
-                            else _stringContent = lines[i];
+                            if (Path.GetExtension(ImportPath) != ".txt")
+                            {
+                                lineTextBoxes[i].Text = lineTextBoxes[i].Text[3..];
+                                _stringContent = lineTextBoxes[i].Rtf;
+                            }
+                            else
+                            {
+                                _stringContent = lines[i][3..];
+                            }
                             QuestionChoice _questionChoice = new()
                             {
                                 choice = _stringContent,
