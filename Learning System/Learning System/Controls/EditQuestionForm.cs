@@ -7,7 +7,7 @@ namespace Learning_System
 {
     public partial class EditQuestionForm : Form
     {
-        const int MAXOFCHOICE = 20;
+        const int MAXOFCHOICE = 26;
         private int Count_Choices;
         private int Count_Button = 1;
         private int Count_Line = 0;
@@ -395,6 +395,13 @@ namespace Learning_System
 
         private void AddNewQuestionForm_MoreChoicesBtn_Click(object sender, EventArgs e)
         {
+            // Keep the number of choices <= 26 to use English alphabet
+            if (Count_Choices + 3 > 26)
+            {
+                MessageBox.Show("Can't add more than 26 choices in a single question!", "Warning");
+                return;
+            }
+
             if (Count_Choices + 3 > MAXOFCHOICE)
             {
                 MessageBox.Show($"Max of choice is {MAXOFCHOICE}");

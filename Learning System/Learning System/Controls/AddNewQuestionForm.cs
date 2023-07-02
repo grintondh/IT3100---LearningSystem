@@ -336,6 +336,13 @@ namespace Learning_System
 
         private void AddNewQuestionForm_MoreChoicesBtn_Click(object sender, EventArgs e)
         {
+            // Keep the number of choices <= 26 to use English alphabet
+            if (Count_Choices + 3 > 26)
+            {
+                MessageBox.Show("Can't add more than 26 choices in a single question!", "Warning");
+                return;
+            }
+
             for (int i = Count_Choices; i < Count_Choices + 3; i++)
             {
                 richTextBoxes[i] = new RichTextBox();
