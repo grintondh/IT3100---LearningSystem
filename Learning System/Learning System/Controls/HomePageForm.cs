@@ -36,7 +36,7 @@ namespace Learning_System
                                                "TimeStart", "StartEnable", "TimeEnd", "EndEnable", "TimeLimit", "TimeLimitEnable"};
             showType = new() { typeof(int), typeof(string), typeof(string), typeof(bool), typeof(JArray), typeof(bool),
                                           typeof(DateTime), typeof(bool), typeof(DateTime), typeof(bool), typeof(int), typeof(bool)};
-            showKey = new() { "PRIMARY KEY", "", "", "", "", "", "", "", "", "", "", "" };
+            showKey = new() { "PRIMARY KEY", "NOT NULL", "", "", "", "", "NOT NULL", "NOT NULL", "NOT NULL", "NOT NULL", "NOT NULL", "NOT NULL" };
 
             ContestsTable.table.Import(showColumns, showType, showKey);
         }

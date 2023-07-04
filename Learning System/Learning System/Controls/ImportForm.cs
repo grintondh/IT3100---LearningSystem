@@ -36,7 +36,7 @@ namespace Learning_System
 
         private void ImportForm_SelectFileBtn_Click(object sender, EventArgs e)
         {
-            openFileDialog.Filter = "All File (*.*)|*.*|File Text(*.txt)|*.txt|File .doc(*.doc)|*.doc|File .docx (*.docx)|.docx";
+            openFileDialog.Filter = "File Text(*.txt)|*.txt|File .doc(*.doc)|*.doc|File .docx (*.docx)|.docx|All File (*.*)|*.*";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 ImportPath = openFileDialog.FileName;
@@ -127,7 +127,7 @@ namespace Learning_System
             CategoriesTable.table.LoadData(JsonProcessing.CategoriesPath);
 
             DataRow? _parentCategory;
-            
+
             if (CategoriesTable.table.Length() == 0)
             {
                 Modals.Categories _newCategory = new()
@@ -148,9 +148,9 @@ namespace Learning_System
             if (_parentCategory == null)
                 throw new E02CantProcessQuery();
 
-            System.Data.DataTable? _maxQuestionIdTbl = QuestionsTable.table.Init()
-                                                                    .Sort("ID desc")
-                                                                    .Get();
+            System.Data.DataTable? _maxQuestionIdTbl = QuestionsTable.table.Init().Sort("ID desc").Get();
+
+            ImportForm_ImportProgress.Value = 50;
 
             if (_maxQuestionIdTbl == null)
                 throw new E02CantProcessQuery();
@@ -202,6 +202,8 @@ namespace Learning_System
                             i += 2;
                             break;
                         }
+
+                        ImportForm_ImportStatus.Text = "Added " + (i + 1) + "question";
                     }
 
                     Questions newQuestions = new()
@@ -223,6 +225,8 @@ namespace Learning_System
                 }
             }
 
+            ImportForm_ImportProgress.Value = 70;
+
             JObject x = DataProcessing.ConvertDataRowToJObject(_parentCategory);
 
             if (CategoriesTable.table.Init().Offset(0).Limit(1).Update(JObject.FromObject(x)) == DataProcessing.StatusCode.Error)
@@ -234,6 +238,8 @@ namespace Learning_System
                     throw new E04CantExportProperly();
                 if (JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", CategoriesTable.table.Export()) == null)
                     throw new E04CantExportProperly();
+
+                ImportForm_ImportProgress.Value = 90;
             }
             catch (Exception ex)
             {
@@ -342,8 +348,13 @@ namespace Learning_System
             }
             return _lines;
         }
+
         private void ImportForm_ImportBtn_Click(object sender, EventArgs e)
         {
+            ImportForm_ImportStatus.Text = "Processing...";
+            ImportForm_ImportProgress.Value = 0;
+            ImportForm_ImportProgress.Maximum = 100;
+
             if (ImportPath == null)
             {
                 MessageBox.Show("Please choose a file!");
@@ -360,21 +371,31 @@ namespace Learning_System
                     MessageBox.Show($"File's size must be smaller than {MAX_OF_SIZE} MB!");
                     return;
                 }
+                ImportForm_ImportProgress.Value = 10;
+                ImportForm_ImportStatus.Text = "Read file content and checking Aiken format...";
                 List<string> lines = ReadFromDocumentFile(ImportPath);
+                ImportForm_ImportProgress.Value = 20;
                 if (lines == null) { return; }
                 int checkAikenFormat = CheckAikenFormat(lines);
                 if (checkAikenFormat >= 0)
                 {
                     MessageBox.Show($"Error at line {checkAikenFormat + 1}!");
+                    ImportForm_ImportStatus.Text = "Error";
                 }
                 else
                 {
+                    ImportForm_ImportProgress.Value = 30;
                     if (ImportQuestionsFile(lines, ImportPath) == DataProcessing.StatusCode.OK)
                     {
+                        ImportForm_ImportProgress.Value = 100;
+                        ImportForm_ImportStatus.Text = "Done";
+
                         MessageBox.Show($"OK. Successfully imported {-checkAikenFormat} question(s)!");
                         maximumSizeForNewFiles -= fileSize / SIZE_OF_MB;
                         ImportForm_StatusLbl.Text = $"Maximum size for new files: {Math.Round(maximumSizeForNewFiles, 2)} MB";
-                    }
+                    } 
+                    else
+                        ImportForm_ImportStatus.Text = "Error";
                 }
                 ImportPath = null;
                 selectedImage = null;

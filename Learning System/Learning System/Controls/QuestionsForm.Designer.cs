@@ -109,7 +109,7 @@
             QuestionsForm_SelectCategoryCbo.Size = new Size(332, 33);
             QuestionsForm_SelectCategoryCbo.TabIndex = 9;
             QuestionsForm_SelectCategoryCbo.DropDown += QuestionsForm_SelectCategoryCbo_ClickOrDropDown;
-            QuestionsForm_SelectCategoryCbo.SelectedIndexChanged += QuestionsForm_SelectCategoryCbo_SelectedIndexChanged;
+            QuestionsForm_SelectCategoryCbo.SelectionChangeCommitted += QuestionsForm_SelectCategoryCbo_SelectionChangeCommitted;
             QuestionsForm_SelectCategoryCbo.Click += QuestionsForm_SelectCategoryCbo_ClickOrDropDown;
             // 
             // QuestionsForm_SelectCategoryLbl

@@ -183,8 +183,8 @@ namespace Learning_System
 
         private void AddNewQuestionForm_SaveBtn_Click(object sender, EventArgs e)
         {
-            UpdateNewQuestion();
-            Close();
+            if (UpdateNewQuestion() == true)
+                Close();
         }
 
         private void AddNewQuestionForm_CancelBtn_Click(object sender, EventArgs e)
@@ -194,11 +194,11 @@ namespace Learning_System
 
         private void AddNewQuestionForm_SaveAndContinueBtn_Click(object sender, EventArgs e)
         {
-            UpdateNewQuestion();
-            Count_Button++;
+            if (UpdateNewQuestion() == true)
+                Count_Button++;
         }
 
-        private void UpdateNewQuestion()
+        private bool UpdateNewQuestion()
         {
             string _error = "";
             if (AddNewQuestionForm_NameTxt.Text == null || AddNewQuestionForm_NameTxt.Text == "")
@@ -287,36 +287,37 @@ namespace Learning_System
                 catch
                 {
                     MessageBox.Show("Default mark must be double");
-                    return;
+                    return false;
                 }
                 var _defaultmark = Convert.ToDouble(AddNewQuestionForm_MarkTxt.Text);
                 // doc du lieu tu dap an
                 var _choice = new List<QuestionChoice>();
-                bool isExistFullMark = false;
+                double sumPositiveGrade = 0;
                 for (int i = 0; i < Count_Choices; i++)
                 {
                     if (richTextBoxes[i].TextLength != 0)
                     {
-                        _choice.Add(new QuestionChoice()
+                        QuestionChoice newChoice = new QuestionChoice()
                         {
                             choice = richTextBoxes[i].Rtf,
                             mark = ConvertComboboxTextToDouble(combobox[i].Text)
-                        });
-                        if (_choice[i].mark == 1)
-                            isExistFullMark = true;
+                        };
+                        _choice.Add(newChoice);
+                        if (newChoice.mark > 0)
+                            sumPositiveGrade += newChoice.mark;
                     }
                 }
 
-                if (isExistFullMark == false)
+                if (sumPositiveGrade != (double)1)
                 {
-                    MessageBox.Show("You haven't given any choice 100% score!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    MessageBox.Show("Sum of all positive grades must equals to 100%!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
                 }
 
                 if (_choice.Count == 1)
                 {
                     MessageBox.Show("Your question must have at least two choices!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    return false;
                 }
 
                 try
@@ -385,12 +386,17 @@ namespace Learning_System
                         throw new E04CantExportProperly();
 
                     MessageBox.Show("Update question successfully!", "Success");
+
+                    return true;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Update question failed!\nDescription: " + ex.Message, "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
                 }
             }
+
+            return false;
         }
 
         private void AddNewQuestionForm_MoreChoicesBtn_Click(object sender, EventArgs e)

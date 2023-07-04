@@ -8,26 +8,34 @@ namespace Learning_System
 {
     public partial class CategoriesForm : UserControl
     {
+        bool _firstLoad = false;
+
         public void LoadCombobox()
         {
             DataTable? dt;
 
-            try
+            // Only load from file first time   
+            if (_firstLoad == false)
             {
-                JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("category.json", null, null);
+                try
+                {
+                    JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("category.json", null, null);
 
-                if (_categoriesData == null)
-                    throw new E01CantFindFile();
+                    if (_categoriesData == null)
+                        throw new E01CantFindFile();
 
-                CategoriesTable.table.Import(_categoriesData);
-                dt = CategoriesTable.table.Init().Get();
+                    CategoriesTable.table.Import(_categoriesData);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                _firstLoad = true;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
+            dt = CategoriesTable.table.Init().Get();
             CategoriesForm_ParentCategoryCbo.ValueMember = "Id";
             CategoriesForm_ParentCategoryCbo.DisplayMember = "Name";
             CategoriesForm_ParentCategoryCbo.DataSource = dt;

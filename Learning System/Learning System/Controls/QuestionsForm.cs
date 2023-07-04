@@ -104,11 +104,33 @@ namespace Learning_System
             List<CboList> newListCategories = new();
             try
             {
+                DataTable _dt = CategoriesTable.table.Init().Get();
+
+                if (_dt == null) return;
+
+                foreach (DataRow _row in _dt.Rows)
+                {
+                    CboList _c = new();
+                    _c.category = new Categories();
+
+                    _c.category.Id = _row.Field<int>("Id");
+                    _c.category.Name = _row.Field<string>("Name");
+                    _c.category.QuestionArray = _row.Field<JArray>("QuestionArray").ToObject<List<int>>();
+                    _c.category.SubArray = _row.Field<JArray>("SubArray").ToObject<List<int>>();
+
+                    _c.loaded = 0;
+                    listCategories.Add(_c);
+                }
+
+                /*
+                List<Categories>? _tmp;
+
                 JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
                 if (_categoriesData == null)
                     throw new E01CantFindFile("category.json");
 
-                List<Categories>? _tmp = _categoriesData.ToObject<List<Categories>>();
+                _tmp = _categoriesData.ToObject<List<Categories>>();
+
                 if (_tmp == null) return;
 
                 foreach (Categories _x in _tmp)
@@ -119,7 +141,7 @@ namespace Learning_System
 
                     listCategories.Add(_c);
                 }
-
+                */
                 for (int i = 0; i < listCategories.Count; i++)
                     if (listCategories[i].loaded == 0)
                     {
@@ -200,6 +222,7 @@ namespace Learning_System
         {
             InitializeComponent();
             LoadCategoriesData();
+
             QuestionsForm_SelectCategoryCbo.SelectedIndex = -1;
             QuestionsForm_SelectCategoryCbo.SelectedText = "  Default";
         }
@@ -216,10 +239,12 @@ namespace Learning_System
             ShowQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
         }
 
-        private void QuestionsForm_SelectCategoryCbo_SelectedIndexChanged(object sender, EventArgs e)
+        private void QuestionsForm_SelectCategoryCbo_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (QuestionsForm_SelectCategoryCbo.SelectedItem == null) return;
+
             var a = (Categories)QuestionsForm_SelectCategoryCbo.SelectedItem;
+
             selectedCategoriesIdList.Clear();
             int _parentCategories = a.Id;
             try
