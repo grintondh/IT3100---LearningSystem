@@ -110,7 +110,7 @@ namespace Learning_System
                 PageButton[i] = new Button();
                 PageButton[i].Location = new System.Drawing.Point(RandomQuestion_ButtonPanelPnl.Left + i * 48, 0);
                 PageButton[i].Size = new Size(50, 50);
-                PageButton[i]
+                //PageButton[i]
                 if (i == 0 || i == NUMBER_OF_PAGES_PER_GROUP + 3)
                 {
                     if (i == 0) PageButton[i].Text = "<";

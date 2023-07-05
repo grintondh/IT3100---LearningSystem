@@ -160,7 +160,7 @@
             ContentRtb.BackColor = Color.FromArgb(231, 243, 245);
             ContentRtb.BorderStyle = BorderStyle.None;
             ContentRtb.Dock = DockStyle.Top;
-            ContentRtb.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            ContentRtb.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             ContentRtb.Location = new Point(0, 0);
             ContentRtb.Name = "ContentRtb";
             ContentRtb.Size = new Size(1104, 217);

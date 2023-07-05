@@ -78,7 +78,7 @@ namespace Learning_System
                 this.panel_richTextboxes.Controls.Add(richTextBoxes[i]);
                 richTextBoxes[i].BackColor = Color.FromArgb(231, 243, 245);
                 richTextBoxes[i].BorderStyle = BorderStyle.None;
-                richTextBoxes[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                richTextBoxes[i].Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
                 if (i == 0)
                     richTextBoxes[i].Location = new Point(0, 0);
                 else richTextBoxes[i].Location = new Point(0, richTextBoxes[i - 1].Height + richTextBoxes[i - 1].Location.Y);
@@ -107,7 +107,7 @@ namespace Learning_System
                     checkboxChoice[i].Size = new Size(131, 27);
                     checkboxChoice[i].UseVisualStyleBackColor = true;
                     checkboxChoice[i].Text = "";
-                    checkboxChoice[i].Location = new Point(5, richTextBoxes[i].Location.Y + 2);
+                    checkboxChoice[i].Location = new Point(5, richTextBoxes[i].Location.Y + 5);
                     checkboxChoice[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
                     checkboxChoice[i].Click += checkBoxClick;
                 }
@@ -117,7 +117,7 @@ namespace Learning_System
                     this.panel_button.Controls.Add(radioChoice[i]);
                     radioChoice[i].AutoSize = true;
                     radioChoice[i].Size = new Size(131, 27);
-                    radioChoice[i].Location = new Point(5, richTextBoxes[i].Location.Y + 2);
+                    radioChoice[i].Location = new Point(5, richTextBoxes[i].Location.Y + 5);
                     radioChoice[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
                     radioChoice[i].UseVisualStyleBackColor = true;
                     radioChoice[i].Text = "";
