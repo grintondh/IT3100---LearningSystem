@@ -266,6 +266,7 @@ namespace Learning_System
             catch (Exception ex)
             {
                 MessageBox.Show("Can't get categories data!\nDescription: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
         }
 

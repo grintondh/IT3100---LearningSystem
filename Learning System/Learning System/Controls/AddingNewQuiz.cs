@@ -111,7 +111,7 @@ public partial class AddingNewQuiz : Form
                     throw new E02CantProcessQuery();
 
                 JsonProcessing.ExportJsonContentInDefaultFolder("Contest.json", ContestsTable.table.Export());
-                MessageBox.Show("Đã thêm thành công!\nTại trang chủ hãy nhấn biểu tượng 3 dấu gạch ngang để tải lại danh sách kỳ thi!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Add new contest successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 AddNewQuizForm_NameTxt.Text = "";
                 AddNewQuizFormTxt_Description.Text = "";

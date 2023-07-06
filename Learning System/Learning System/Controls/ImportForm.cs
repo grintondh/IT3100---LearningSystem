@@ -36,7 +36,7 @@ namespace Learning_System
 
         private void ImportForm_SelectFileBtn_Click(object sender, EventArgs e)
         {
-            openFileDialog.Filter = "File Text(*.txt)|*.txt|File .doc(*.doc)|*.doc|File .docx (*.docx)|.docx|All File (*.*)|*.*";
+            openFileDialog.Filter = "File Text(*.txt)|*.txt|File .doc(*.doc)|*.doc|File .docx (*.docx)|*.docx|All File (*.*)|*.*";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 ImportPath = openFileDialog.FileName;
@@ -303,50 +303,58 @@ namespace Learning_System
         /// <returns>Trả về list các dòng text trong file, nếu là file doc thì paste content vào mảng Rich Text Box </returns>
         private List<string> ReadFromDocumentFile(string _ImportPath)
         {
-            List<string> _lines = new();
-            if (Path.GetExtension(_ImportPath) == ".txt")
+            try
             {
-                _lines = File.ReadAllLines(_ImportPath).ToList();
-            }
-            else
-            {
-                Microsoft.Office.Interop.Word.Application application = new();
-                object miss = Missing.Value;
-                object path = _ImportPath;
-                object readOnly = true;
-                object save = false;
-                Document docs = application.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                if (docs != null)
+                List<string> _lines = new();
+                if (Path.GetExtension(_ImportPath) == ".txt")
                 {
-                    if (docs.Paragraphs.Count > MAX_OF_LINES)
-                    {
-                        MessageBox.Show($"Maximum {MAX_OF_LINES} lines on .doc and .docx files!");
-                        return _lines;
-                    }
-                    lineIndex = 0;
-                    foreach (Paragraph p in docs.Paragraphs)
-                    {
-                        paragraph = p;
-                        //_lines.Add(CopyFromClipboardInlineShape());
-                        Thread thread = new(CopyFromClipboardInlineShape);
-                        thread.SetApartmentState(ApartmentState.STA);
-                        thread.Start();
-                        thread.Join();
-                        lineTextBoxes[lineIndex] = new RichTextBox
-                        {
-                            Rtf = selectedImage
-                        };
-                        _lines.Add(lineTextBoxes[lineIndex].Text.Trim());
-                        lineIndex++;
-                        //totaltext += p.Range.Text;
-                    }
-                    //string[] _totaltext = totaltext.Split('\r');
-                    //_lines.AddRange(_totaltext);
-                    docs.Close(ref save, ref miss, ref miss);
+                    _lines = File.ReadAllLines(_ImportPath).ToList();
                 }
-                application.Quit(ref save, ref miss, ref miss);
+                else
+                {
+                    Microsoft.Office.Interop.Word.Application application = new();
+                    object miss = Missing.Value;
+                    object path = _ImportPath;
+                    object readOnly = true;
+                    object save = false;
+                    Document docs = application.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    if (docs != null)
+                    {
+                        if (docs.Paragraphs.Count > MAX_OF_LINES)
+                        {
+                            MessageBox.Show($"Maximum {MAX_OF_LINES} lines on .doc and .docx files!");
+                            return _lines;
+                        }
+                        lineIndex = 0;
+                        foreach (Paragraph p in docs.Paragraphs)
+                        {
+                            paragraph = p;
+                            //_lines.Add(CopyFromClipboardInlineShape());
+                            Thread thread = new(CopyFromClipboardInlineShape);
+                            thread.SetApartmentState(ApartmentState.STA);
+                            thread.Start();
+                            thread.Join();
+                            lineTextBoxes[lineIndex] = new RichTextBox
+                            {
+                                Rtf = selectedImage
+                            };
+                            _lines.Add(lineTextBoxes[lineIndex].Text.Trim());
+                            lineIndex++;
+                            //totaltext += p.Range.Text;
+                        }
+                        //string[] _totaltext = totaltext.Split('\r');
+                        //_lines.AddRange(_totaltext);
+                        docs.Close(ref save, ref miss, ref miss);
+                    }
+                    application.Quit(ref save, ref miss, ref miss);
+                }
+                return _lines;
             }
-            return _lines;
+            catch
+            {
+                MessageBox.Show("Your import file has some errors.\nPlease check again. Be sure it has Aiken format!", "Error");
+                return null;
+            }
         }
 
         private void ImportForm_ImportBtn_Click(object sender, EventArgs e)
@@ -372,9 +380,14 @@ namespace Learning_System
                     return;
                 }
                 ImportForm_ImportProgress.Value = 10;
-                ImportForm_ImportStatus.Text = "Read file content and checking Aiken format...";
+                ImportForm_ImportStatus.Text = "Reading file content. It can be lagged during this phase. Please wait a couple of minutes...";
                 List<string> lines = ReadFromDocumentFile(ImportPath);
+
+                if (lines == null)
+                    return;
+
                 ImportForm_ImportProgress.Value = 20;
+                ImportForm_ImportStatus.Text = "Checking Aiken format. It can be lagged during this phase. Please wait a couple of minutes...";
                 if (lines == null) { return; }
                 int checkAikenFormat = CheckAikenFormat(lines);
                 if (checkAikenFormat >= 0)

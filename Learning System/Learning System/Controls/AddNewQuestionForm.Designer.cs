@@ -61,6 +61,7 @@ namespace Learning_System
             HomePageForm_PathLbl = new Label();
             HomePageForm_ITLbl = new Label();
             panel3 = new Panel();
+            panel1 = new Panel();
             panel_heading.SuspendLayout();
             panel_body.SuspendLayout();
             panel_button.SuspendLayout();
@@ -70,6 +71,7 @@ namespace Learning_System
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AddNewQuestionForm_ExpandPic).BeginInit();
             panel3.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // AddNewQuestionForm_HeadingLbl
@@ -88,7 +90,7 @@ namespace Learning_System
             panel_heading.BackColor = SystemColors.ControlLightLight;
             panel_heading.Controls.Add(AddNewQuestionForm_HeadingLbl);
             panel_heading.Dock = DockStyle.Top;
-            panel_heading.Location = new Point(0, 146);
+            panel_heading.Location = new Point(0, 207);
             panel_heading.Name = "panel_heading";
             panel_heading.Size = new Size(1233, 71);
             panel_heading.TabIndex = 9;
@@ -102,9 +104,9 @@ namespace Learning_System
             panel_body.Controls.Add(AddNewQuestionForm_ExpandPic);
             panel_body.Controls.Add(AddNewQuestionForm_GeneralBtn);
             panel_body.Dock = DockStyle.Fill;
-            panel_body.Location = new Point(0, 217);
+            panel_body.Location = new Point(0, 278);
             panel_body.Name = "panel_body";
-            panel_body.Size = new Size(1233, 766);
+            panel_body.Size = new Size(1233, 705);
             panel_body.TabIndex = 0;
             // 
             // panel_button
@@ -301,8 +303,8 @@ namespace Learning_System
             AddNewQuestionForm_CategoryCbo.Name = "AddNewQuestionForm_CategoryCbo";
             AddNewQuestionForm_CategoryCbo.Size = new Size(281, 33);
             AddNewQuestionForm_CategoryCbo.TabIndex = 8;
-            AddNewQuestionForm_CategoryCbo.DropDown += AddNewQuestionForm_CategoryCbo_DropDown;
             AddNewQuestionForm_CategoryCbo.Text = "Default";
+            AddNewQuestionForm_CategoryCbo.DropDown += AddNewQuestionForm_CategoryCbo_DropDown;
             // 
             // AddNewQuestionForm_NameTxt
             // 
@@ -348,7 +350,7 @@ namespace Learning_System
             // 
             HomePageForm_PathLbl.AutoSize = true;
             HomePageForm_PathLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            HomePageForm_PathLbl.Location = new Point(23, 83);
+            HomePageForm_PathLbl.Location = new Point(31, 150);
             HomePageForm_PathLbl.Name = "HomePageForm_PathLbl";
             HomePageForm_PathLbl.Size = new Size(859, 25);
             HomePageForm_PathLbl.TabIndex = 1;
@@ -359,7 +361,7 @@ namespace Learning_System
             HomePageForm_ITLbl.AutoSize = true;
             HomePageForm_ITLbl.Font = new Font("Segoe UI", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point);
             HomePageForm_ITLbl.ForeColor = Color.FromArgb(194, 36, 36);
-            HomePageForm_ITLbl.Location = new Point(23, 13);
+            HomePageForm_ITLbl.Location = new Point(31, 80);
             HomePageForm_ITLbl.Name = "HomePageForm_ITLbl";
             HomePageForm_ITLbl.Size = new Size(60, 60);
             HomePageForm_ITLbl.TabIndex = 0;
@@ -371,11 +373,21 @@ namespace Learning_System
             panel3.BorderStyle = BorderStyle.FixedSingle;
             panel3.Controls.Add(HomePageForm_PathLbl);
             panel3.Controls.Add(HomePageForm_ITLbl);
+            panel3.Controls.Add(panel1);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1233, 146);
+            panel3.Size = new Size(1233, 207);
             panel3.TabIndex = 2;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(0, 115, 165);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1231, 64);
+            panel1.TabIndex = 10;
             // 
             // AddNewQuestionForm
             // 
@@ -401,6 +413,8 @@ namespace Learning_System
             ((System.ComponentModel.ISupportInitialize)AddNewQuestionForm_ExpandPic).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -434,5 +448,6 @@ namespace Learning_System
         private Panel panel3;
         private Label HomePageForm_PathLbl;
         private Label HomePageForm_ITLbl;
+        private Panel panel1;
     }
 }

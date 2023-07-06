@@ -187,6 +187,7 @@ namespace Learning_System
         {
             AddingNewQuiz aDN = new AddingNewQuiz();
             aDN.ShowDialog();
+            LoadContestList();
         }
     }
 }

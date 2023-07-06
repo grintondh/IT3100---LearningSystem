@@ -84,7 +84,7 @@ namespace Learning_System
             if (_chkDT.Rows.Count == 0)
                 throw new E99OtherException("Can't load your question. Please try again");
 
-            DataRow ? currentQuestionRow = QuestionsTable.table.Init().Offset(0).Limit(1).Query(queryQuestion).GetFirstRow();
+            DataRow? currentQuestionRow = QuestionsTable.table.Init().Offset(0).Limit(1).Query(queryQuestion).GetFirstRow();
             if (currentQuestionRow == null)
                 throw new E02CantProcessQuery();
 
@@ -151,7 +151,7 @@ namespace Learning_System
                 labelChoice[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
                 labelChoice[i].Location = new Point(12, 14);
                 labelChoice[i].Size = new Size(71, 23);
-                labelChoice[i].Text = "Choice" + (i + 1).ToString();
+                labelChoice[i].Text = "Choice " + (i + 1).ToString() + ": ";
                 // label grade
                 labelGrade[i].AutoSize = true;
                 labelGrade[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
@@ -261,7 +261,7 @@ namespace Learning_System
                         List<int>? questionArray = _x.ToObject<List<int>>();
                         if (questionArray == null)
                             throw new E99OtherException("Can't get data from null!");
-                            
+
                         _x.RemoveAt(questionArray.IndexOf(QuestionID));
                         JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
                         if (CategoriesTable.table.Init().Offset(0).Limit(1).Query(_query1).Update(x) == DataProcessing.StatusCode.Error)
@@ -461,7 +461,7 @@ namespace Learning_System
                 labelChoice[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
                 labelChoice[i].Location = new Point(12, 14);
                 labelChoice[i].Size = new Size(71, 23);
-                labelChoice[i].Text = "Choice" + (i + 1).ToString();
+                labelChoice[i].Text = "Choice " + (i + 1).ToString() + ": ";
 
                 // label grade
                 labelGrade[i].AutoSize = true;

@@ -87,7 +87,7 @@ namespace Learning_System
                 labelChoice[i].Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
                 labelChoice[i].Location = new Point(12, 14);
                 labelChoice[i].Size = new Size(71, 23);
-                labelChoice[i].Text = "Choice" + (i + 1).ToString();
+                labelChoice[i].Text = "Choice " + (i + 1).ToString() + ": ";
                 // label grade
                 labelGrade[i].AutoSize = true;
                 labelGrade[i].Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
@@ -230,7 +230,7 @@ namespace Learning_System
                     }
                 }
 
-                if (sumPositiveGrade != (double) 1)
+                if (sumPositiveGrade != (double)1)
                 {
                     MessageBox.Show("Sum of all positive grades must equals to 100%!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
@@ -391,7 +391,7 @@ namespace Learning_System
                 labelChoice[i].Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
                 labelChoice[i].Location = new Point(12, 14);
                 labelChoice[i].Size = new Size(71, 23);
-                labelChoice[i].Text = "Choice" + (i + 1).ToString();
+                labelChoice[i].Text = "Choice " + (i + 1).ToString() + ": ";
                 // label grade
                 labelGrade[i].AutoSize = true;
                 labelGrade[i].Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);

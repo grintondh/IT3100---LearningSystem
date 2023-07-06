@@ -22,13 +22,13 @@ namespace Learning_System
                     JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("category.json", null, null);
 
                     if (_categoriesData == null)
-                        throw new E01CantFindFile();
+                        throw new E01CantFindFile("category.json");
 
                     CategoriesTable.table.Import(_categoriesData);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Can't load category list.\nDescription: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
