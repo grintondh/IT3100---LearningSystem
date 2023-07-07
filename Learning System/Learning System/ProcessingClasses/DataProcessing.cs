@@ -2,6 +2,7 @@
 // Last modified: 13.5.2023 by DH
 // Add ImportedColumns & Modified 2nd Import to load only selected columns
 
+using Learning_System.Modals;
 using Newtonsoft.Json.Linq;
 using System.Data;
 
@@ -18,8 +19,6 @@ namespace Learning_System.ProcessingClasses
 
         private List<(string Name, Type Type, string Key)> ColumnsSetting { get; set; } = new List<(string Name, Type Type, string Key)>();
         public static List<string> EmptyList { get; } = new List<string>();
-
-        private const int DEFAULT_LIMIT = 25;
 
         public class StatusCode
         {
@@ -117,10 +116,27 @@ namespace Learning_System.ProcessingClasses
             }
         }
 
+        public int LoadData(string jsonPath)
+        {
+            try
+            {
+                JArray? jsonContent = JsonProcessing.ImportJsonContentInDefaultFolder(jsonPath, null, null);
+                if (jsonContent == null)
+                    throw new E01CantFindFile(jsonPath);
+                else
+                    return Import(jsonContent);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+                return StatusCode.Error;
+            }
+        }
+
         private List<string> queryList = new();
         private List<string> columnsList = new();
         private string? sortList = null;
-        private int limit = DEFAULT_LIMIT;
+        private int limit = 0;
         private int offset = 0;
 
         /// <summary>
@@ -311,7 +327,7 @@ namespace Learning_System.ProcessingClasses
             queryList = EmptyList;
             columnsList = EmptyList;
             sortList = null;
-            limit = DEFAULT_LIMIT;
+            limit = Length();
             offset = 0;
             return this;
         }
@@ -368,12 +384,12 @@ namespace Learning_System.ProcessingClasses
         /// <summary>
         /// Lấy dữ liệu hàng đầu tiên trả về (kết hợp với Offset(), Limit(), Query(), Select(), Sort())
         /// </summary>
-        /// <returns>null nếu thất bại, DataRow nếu thành công</returns>
+        /// <returns>null nếu thất bại hoặc không tồn tại hàng đầu tiên, DataRow nếu thành công</returns>
         public DataRow? GetFirstRow()
         {
             DataTable? _dt = Get();
 
-            if (_dt == null)
+            if (_dt == null || _dt.Rows.Count == 0)
                 return null;
             else
                 return _dt.Rows[0];

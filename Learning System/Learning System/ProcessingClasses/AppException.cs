@@ -2,7 +2,7 @@
 {
     public class E01CantFindFile : Exception
     {
-        public E01CantFindFile() { }
+        public E01CantFindFile() : base("[E01] Can't get information from destination file. Your file may not found in selected folder or be broken!") { }
         public E01CantFindFile(string path) : base("[E01] Can't get information from " + path + ". Your file may not found in selected folder or be broken!") { }
     }
 

@@ -54,6 +54,9 @@
             ImportForm_ShowImportBtn = new Button();
             openFileDialog = new OpenFileDialog();
             ImportForm_Tooltip = new ToolTip(components);
+            statusStrip1 = new StatusStrip();
+            ImportForm_ImportProgress = new ToolStripProgressBar();
+            ImportForm_ImportStatus = new ToolStripStatusLabel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic1).BeginInit();
@@ -65,6 +68,7 @@
             panel_drop_file.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ImportForm_DropPic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic3).BeginInit();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -171,6 +175,7 @@
             // 
             panel4.AutoScroll = true;
             panel4.BackColor = SystemColors.ControlLightLight;
+            panel4.Controls.Add(statusStrip1);
             panel4.Controls.Add(pictureBox3);
             panel4.Controls.Add(label1);
             panel4.Controls.Add(pictureBox1);
@@ -184,7 +189,7 @@
             panel4.Dock = DockStyle.Fill;
             panel4.Location = new Point(0, 202);
             panel4.Name = "panel4";
-            panel4.Size = new Size(1112, 448);
+            panel4.Size = new Size(1112, 472);
             panel4.TabIndex = 5;
             // 
             // pictureBox3
@@ -273,6 +278,7 @@
             // ImportForm_ImportBtn
             // 
             ImportForm_ImportBtn.BackColor = Color.FromArgb(194, 36, 36);
+            ImportForm_ImportBtn.Cursor = Cursors.Hand;
             ImportForm_ImportBtn.FlatStyle = FlatStyle.Flat;
             ImportForm_ImportBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             ImportForm_ImportBtn.ForeColor = Color.White;
@@ -287,6 +293,7 @@
             // ImportForm_SelectFileBtn
             // 
             ImportForm_SelectFileBtn.BackColor = Color.FromArgb(0, 159, 229);
+            ImportForm_SelectFileBtn.Cursor = Cursors.Hand;
             ImportForm_SelectFileBtn.FlatStyle = FlatStyle.Flat;
             ImportForm_SelectFileBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             ImportForm_SelectFileBtn.ForeColor = Color.White;
@@ -321,6 +328,27 @@
             ImportForm_ShowImportBtn.Text = "Import questions from file";
             ImportForm_ShowImportBtn.UseVisualStyleBackColor = true;
             // 
+            // statusStrip1
+            // 
+            statusStrip1.ImageScalingSize = new Size(20, 20);
+            statusStrip1.Items.AddRange(new ToolStripItem[] { ImportForm_ImportProgress, ImportForm_ImportStatus });
+            statusStrip1.Location = new Point(0, 446);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(1112, 26);
+            statusStrip1.TabIndex = 28;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // ImportForm_ImportProgress
+            // 
+            ImportForm_ImportProgress.Name = "ImportForm_ImportProgress";
+            ImportForm_ImportProgress.Size = new Size(100, 18);
+            // 
+            // ImportForm_ImportStatus
+            // 
+            ImportForm_ImportStatus.Name = "ImportForm_ImportStatus";
+            ImportForm_ImportStatus.Size = new Size(45, 20);
+            ImportForm_ImportStatus.Text = "Done";
+            // 
             // ImportForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -331,7 +359,7 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "ImportForm";
-            Size = new Size(1112, 650);
+            Size = new Size(1112, 674);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -347,6 +375,8 @@
             panel_drop_file.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)ImportForm_DropPic).EndInit();
             ((System.ComponentModel.ISupportInitialize)ImportForm_ExpandPic3).EndInit();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -376,5 +406,8 @@
         private ToolTip ImportForm_Tooltip;
         private PictureBox pictureBox3;
         private Label label1;
+        private StatusStrip statusStrip1;
+        private ToolStripProgressBar ImportForm_ImportProgress;
+        private ToolStripStatusLabel ImportForm_ImportStatus;
     }
 }

@@ -7,34 +7,9 @@ namespace Learning_System;
 
 public partial class AddingNewQuiz : Form
 {
-    private DataProcessing quizData = new();
-    private List<string> showColumns = new() { "Id", "Name", "Description", "DescriptionShow", "QuestionArray", "ShuffleAnswer",
-                                               "TimeStart", "StartEnable", "TimeEnd", "EndEnable", "TimeLimit", "TimeLimitEnable",
-                                                "MaximumGrade"};
-    private List<Type> showType = new() { typeof(int), typeof(string), typeof(string), typeof(bool), typeof(JArray), typeof(bool),
-                                          typeof(DateTime), typeof(bool), typeof(DateTime), typeof(bool), typeof(int), typeof(bool),
-                                                typeof(double)};
-    private readonly List<string> showKey = new() { "PRIMARY KEY", "", "", "", "", "", "", "", "", "", "", "", "" };
-
     public AddingNewQuiz()
     {
         InitializeComponent();
-        Controls.Add(AddNewQuizForm_HeadingLbl);
-        Controls.Add(AddNewQuizForm_GeneralLbl);
-        Controls.Add(AddNewQuizForm_NameTxt);
-        Controls.Add(AddNewQuizFormTxt_Description);
-        Controls.Add(AddNewQuizForm_NameLbl);
-        Controls.Add(AddNewQuizFormLbl_Description);
-        Controls.Add(AddNewQuizForm_LineLbl);
-        Controls.Add(AddNewQuizForm_TiminglLbl);
-        Controls.Add(AddNewQuizForm_OpenthequizLbl);
-        Controls.Add(AddNewQuizForm_ClosethequizLbl);
-        Controls.Add(AddNewQuizForm_Timelimit);
-        Controls.Add(AddNewQuizForm_Timeexpires);
-        Controls.Add(AddingNewQuizForm_openMonthCbo);
-        Controls.Add(AddingNewQuizForm_closeMonthCbo);
-        Controls.Add(AddNewQuizForm_TimelimiMinuteCbo);
-        Controls.Add(AddNewQuizForm_TimeexpiresCloseCbo);
 
         AddingNewQuizForm_closeMonthCbo.SelectedIndex = 0;
         AddingNewQuizForm_openMonthCbo.SelectedIndex = 0;
@@ -48,13 +23,7 @@ public partial class AddingNewQuiz : Form
 
     public void AddNewQuizForm_Load()
     {
-        JArray? _quizData = JsonProcessing.ImportJsonContentInDefaultFolder("Contest.json", null, null);
-
-        if (_quizData == null)
-            throw new E01CantFindFile();
-
-        quizData.Import(showColumns, showType, showKey);
-        quizData.Import(_quizData);
+        ContestsTable.table.LoadData(JsonProcessing.ContestsPath);
     }
 
     private void Btn_Create_Click(object sender, EventArgs e)
@@ -119,7 +88,8 @@ public partial class AddingNewQuiz : Form
         {
             try
             {
-                DataRow? _maxIdRow = quizData.Init().Offset(0).Limit(quizData.Length()).Sort("Id desc").GetFirstRow();
+                // This GetFirstRow doesn't affect the return value below
+                DataRow? _maxIdRow = ContestsTable.table.Init().Sort("Id desc").GetFirstRow();
 
                 Contests _newQuiz = new()
                 {
@@ -138,10 +108,11 @@ public partial class AddingNewQuiz : Form
                     MaximumGrade = 10
                 };
 
-                if (quizData.Insert(JObject.FromObject(_newQuiz)) == DataProcessing.StatusCode.Error)
+                if (ContestsTable.table.Insert(JObject.FromObject(_newQuiz)) == DataProcessing.StatusCode.Error)
                     throw new E02CantProcessQuery();
 
-                JsonProcessing.ExportJsonContentInDefaultFolder("Contest.json", quizData.Export());
+                JsonProcessing.ExportJsonContentInDefaultFolder("Contest.json", ContestsTable.table.Export());
+                MessageBox.Show("Add new contest successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 AddNewQuizForm_NameTxt.Text = "";
                 AddNewQuizFormTxt_Description.Text = "";
                 AddNewQuizForm_Timelimit.Text = "";

@@ -10,16 +10,12 @@ using iText.Html2pdf.Resolver.Font;
 using System.Diagnostics;
 using Learning_System.ProcessingClasses;
 using Learning_System.Modals;
-using Learning_System.ProcessingClasses;
+using System.Text.RegularExpressions;
 
 namespace Learning_System
 {
     public partial class ExportForm : UserControl
     {
-        private DataProcessing questionData = new();
-        private readonly List<string> showColumns = new() { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
-        private readonly List<Type> showType = new() { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
-        private readonly List<string> showKey = new() { "PRIMARY KEY", "", "", "", "", "" };
         private DataTable? DataTable = new();
 
         public ExportForm()
@@ -32,18 +28,8 @@ namespace Learning_System
         {
             ExportForm_progressLabel.Text = "Processing... ";
 
-            JArray? _questionData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
-            if (_questionData == null)
-                throw new E01CantFindFile("Question.json");
-            else
-            {
-                if (questionData.ImportedColumns == true)
-                    questionData.Import(showColumns, showType, showKey);
-                
-                questionData.DeleteAll();
-                questionData.Import(_questionData);
-                DataTable = questionData.Init().Limit(questionData.Length()).Get();
-            }
+            QuestionsTable.table.LoadData(JsonProcessing.QuestionsPath);
+            DataTable = QuestionsTable.table.Init().Get();
 
             if (DataTable == null)
                 throw new E02CantProcessQuery();
@@ -61,6 +47,14 @@ namespace Learning_System
                 pdfPassword = ExportForm_PasswordTxt.Text;
 
             string RandomGUIDForTempFile = Guid.NewGuid().ToString();
+
+            List<string> options_vector = new();
+
+            for (int i = 0; i < 26; i++)
+            {
+                char ascii = (char)(i + 65);
+                options_vector.Add(ascii.ToString() + ". ");
+            }
 
             try
             {
@@ -108,19 +102,21 @@ namespace Learning_System
 
                             if (questionLine != null)
                             {
-                                Task task = AddRTFToPdf(pdfDoc, questionLine, RandomGUIDForTempFile);
+                                Task task = AddRTFToPdf(pdfDoc, questionLine, RandomGUIDForTempFile, null);
                                 task.Wait();
                             }
 
                             JArray? choiceArray = row.Field<JArray>("Choice");
                             if (choiceArray != null)
                             {
+                                int cnt = 0;
                                 foreach (var choiceLine in choiceArray)
                                 {
                                     QuestionChoice? qc = choiceLine.ToObject<QuestionChoice>();
                                     if (qc != null)
                                     {
-                                        Task task = AddRTFToPdf(pdfDoc, qc.choice, RandomGUIDForTempFile);
+                                        Task task = AddRTFToPdf(pdfDoc, qc.choice, RandomGUIDForTempFile, options_vector[cnt]);
+                                        cnt++;
                                         task.Wait();
                                     }
                                 }
@@ -219,7 +215,7 @@ namespace Learning_System
         }
 
         [Obsolete]
-        private Task AddRTFToPdf(iText.Layout.Document pdfDoc, string rtfString, string RandomGUID)
+        private Task AddRTFToPdf(iText.Layout.Document pdfDoc, string rtfString, string RandomGUID, string option)
         {
             RichTextBox rtb = new();
             try
@@ -228,17 +224,26 @@ namespace Learning_System
             }
             catch
             {
-                rtb.Rtf = null;
-                Paragraph par = new(new Text(rtfString));
-                par.SetFont(UserFont.GetFont("REGULAR")).SetFontSize(14).SetTextAlignment(iText.Layout.Properties.TextAlignment.JUSTIFIED);
-                pdfDoc.Add(par);
-                return Task.CompletedTask;
+                rtb.Text = rtfString;
             }
 
             string fileLocation = "tempRTF" + RandomGUID + ".rtf";
             rtb.SaveFile(fileLocation);
 
-            var htmlDoc = Rtf.ToHtml(rtfString);
+            var htmlDoc = Rtf.ToHtml(rtb.Rtf.ToString());
+            htmlDoc = Regex.Replace(htmlDoc, @"font-size:[0-9]+pt", "");
+            htmlDoc = Regex.Replace(htmlDoc, @"font-family:[^;']*(;)?", "");
+            htmlDoc = Regex.Replace(htmlDoc, @"<div", "<div style='margin-bottom: 15px';");
+            htmlDoc = Regex.Replace(htmlDoc, @"<p", "<p style='margin-bottom: 15px';");
+
+            // Add character to option
+            Regex rgxAddOptionOpen = new Regex(@"><p");
+            htmlDoc = rgxAddOptionOpen.Replace(htmlDoc, "><span>" + option + "</span><span", 1);
+            Regex rgxAddOptionClose = new Regex(@"</p><");
+            htmlDoc = rgxAddOptionClose.Replace(htmlDoc, "</span><", 1);
+
+            htmlDoc = "<div style='font-family:\"Times New Roman\", Times, serif; font-size: 14pt'>" + htmlDoc + "</div>";
+
             File.WriteAllText("tempHTML" + RandomGUID + ".html", htmlDoc);
 
             try

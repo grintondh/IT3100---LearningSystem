@@ -2,38 +2,45 @@
 using Learning_System.Modals;
 using Newtonsoft.Json.Linq;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Learning_System
 {
     public partial class CategoriesForm : UserControl
     {
-        private DataProcessing categoriesData = new();
-        private List<string> showColumns = new() { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
-        private List<Type> showType = new() { typeof(int), typeof(string), typeof(JArray), typeof(JArray), typeof(string), typeof(string) };
-        private readonly List<string> showKey = new() { "PRIMARY KEY", "NOT NULL", "", "", "", "" };
-        private DataTable? categoriesDataTable = new();
+        bool _firstLoad = false;
+
         public void LoadCombobox()
         {
-            try
+            DataTable? dt;
+
+            // Only load from file first time   
+            if (_firstLoad == false)
             {
-                JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("category.json", null, null);
+                try
+                {
+                    JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("category.json", null, null);
 
-                if (_categoriesData == null)
-                    throw new E01CantFindFile();
+                    if (_categoriesData == null)
+                        throw new E01CantFindFile("category.json");
 
-                categoriesData.Import(showColumns, showType, showKey);
-                categoriesData.Import(_categoriesData);
-                categoriesDataTable = categoriesData.Init().Offset(0).Limit(categoriesData.Length()).Get();
+                    CategoriesTable.table.Import(_categoriesData);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Can't load category list.\nDescription: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                _firstLoad = true;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
+            dt = CategoriesTable.table.Init().Get();
             CategoriesForm_ParentCategoryCbo.ValueMember = "Id";
             CategoriesForm_ParentCategoryCbo.DisplayMember = "Name";
-            CategoriesForm_ParentCategoryCbo.DataSource = categoriesDataTable;
+            CategoriesForm_ParentCategoryCbo.DataSource = dt;
+            CategoriesForm_ParentCategoryCbo.SelectedIndex = -1;
+            CategoriesForm_ParentCategoryCbo.SelectedText = "Default";
         }
 
         public CategoriesForm()
@@ -50,12 +57,6 @@ namespace Learning_System
             var _id = CategoriesForm_IDNumberTxt.Text;
 
             string _errorNoti = "";
-            if (_parentId == null || _parentId.ToString() == "")
-            {
-                if (_errorNoti.Length > 0)
-                    _errorNoti += ", ";
-                _errorNoti += "Parent Category";
-            }
             if (_name == null || _name == "")
             {
                 if (_errorNoti.Length > 0)
@@ -71,11 +72,9 @@ namespace Learning_System
             {
                 try
                 {
-                    DataRow? _maxIdRow = categoriesData.Init().Offset(0).Limit(categoriesData.Length()).Sort("Id desc").GetFirstRow();
-
                     Categories _newCategory = new()
                     {
-                        Id = (_maxIdRow == null) ? 0 : (_maxIdRow.Field<int>("Id") + 1),
+                        Id = CategoriesTable.table.Length(),
                         Name = _name,
                         SubArray = new List<int>(),
                         QuestionArray = new List<int>(),
@@ -83,40 +82,55 @@ namespace Learning_System
                         IdNumber = _id
                     };
 
-                    if (categoriesData.Insert(JObject.FromObject(_newCategory)) == DataProcessing.StatusCode.Error)
+                    if (CategoriesTable.table.Insert(JObject.FromObject(_newCategory)) == DataProcessing.StatusCode.Error)
                         throw new E05CantInsertProperly();
 
-                    List<string> _query = new() { "Id", _parentId.ToString() };
-                    DataRow? _parentRow = categoriesData.Init().Offset(0).Limit(categoriesData.Length()).Query(_query).GetFirstRow();
-
-                    if (_parentRow == null)
-                        throw new E02CantProcessQuery();
-                    else
+                    // Nếu chọn giá trị parent là default, tự động gán category vào 0. Nếu không, set nó thành category mới.
+                    if (_parentId != null)
                     {
-                        var _x = _parentRow.Field<JArray>("SubArray");
-                        if (_x != null)
-                            _x.Add(_newCategory.Id);
-                        else
-                            throw new E03NotExistColumn("SubArray");
-
-                        JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
-
-                        if (categoriesData.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
+                        List<string> _query = new() { "Id", _parentId.ToString() };
+                        DataTable? _chkDT = CategoriesTable.table.Init().Query(_query).Get();
+                        if (_chkDT == null)
                             throw new E02CantProcessQuery();
 
-                        CategoriesForm_ParentCategoryCbo.ValueMember = "Id";
-                        CategoriesForm_ParentCategoryCbo.DisplayMember = "Name";
-                        CategoriesForm_ParentCategoryCbo.DataSource = categoriesData.Init().Offset(0).Limit(categoriesData.Length()).Get();
+                        // Không có category nào thỏa mãn Id (lỗi?)
+                        if (_chkDT.Rows.Count == 0)
+                            throw new E99OtherException("Can't find your selected parent category value!");
 
-                        if (JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export()) == null)
-                            throw new E04CantExportProperly();
+                        DataRow? _parentRow = _chkDT.Rows[0];
 
-                        MessageBox.Show("Add new category successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (_parentRow == null)
+                            throw new E02CantProcessQuery();
+                        else
+                        {
+                            var _x = _parentRow.Field<JArray>("SubArray");
+                            if (_x != null)
+                                _x.Add(_newCategory.Id);
+                            else
+                                throw new E03NotExistColumn("SubArray");
 
-                        CategoriesForm_NameTxt.Text = "";
-                        CategoriesForm_CategoryInfoTxt.Text = "";
-                        CategoriesForm_IDNumberTxt.Text = "";
+                            JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
+
+                            if (CategoriesTable.table.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
+                                throw new E02CantProcessQuery();
+                        }
                     }
+
+                    CategoriesForm_ParentCategoryCbo.ValueMember = "Id";
+                    CategoriesForm_ParentCategoryCbo.DisplayMember = "Name";
+                    CategoriesForm_ParentCategoryCbo.DataSource = CategoriesTable.table.Init().Get();
+                    CategoriesForm_ParentCategoryCbo.SelectedIndex = -1;
+                    CategoriesForm_ParentCategoryCbo.SelectedText = "Default";
+
+
+                    if (JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", CategoriesTable.table.Export()) == null)
+                        throw new E04CantExportProperly();
+
+                    MessageBox.Show("Add new category successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    CategoriesForm_NameTxt.Text = "";
+                    CategoriesForm_CategoryInfoTxt.Text = "";
+                    CategoriesForm_IDNumberTxt.Text = "";
                 }
                 catch (Exception ex)
                 {

@@ -1,16 +1,13 @@
 ﻿using Learning_System.ProcessingClasses;
 using Learning_System.Modals;
-using Learning_System.ProcessingClasses;
 using Newtonsoft.Json.Linq;
-using System.CodeDom;
 using System.Data;
-using System.Net.Http.Headers;
 
 namespace Learning_System
 {
     public partial class EditQuestionForm : Form
     {
-        const int MAXOFCHOICE = 20;
+        const int MAXOFCHOICE = 26;
         private int Count_Choices;
         private int Count_Button = 1;
         private int Count_Line = 0;
@@ -27,17 +24,9 @@ namespace Learning_System
         Label[] labelGrade = new Label[MAXOFCHOICE];
 
         // Data cho category
-        private DataProcessing categoriesData = new();
-        private readonly List<string> showColumns = new() { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
-        private readonly List<Type> showType = new() { typeof(int), typeof(string), typeof(JArray), typeof(JArray), typeof(string), typeof(string) };
-        private readonly List<string> showKey = new() { "PRIMARY KEY", "", "", "", "", "" };
         private DataTable? categoriesDataTable = new();
 
         // Data cho question
-        private DataProcessing questionsData = new();
-        private readonly List<string> showColumns_questions = new() { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
-        private readonly List<Type> showType_questions = new() { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
-        private readonly List<string> showKey_questions = new() { "PRIMARY KEY", "", "", "", "", "" };
         private DataTable? questionsDataTable = new();
 
         public EditQuestionForm(int ID, int ParentID)
@@ -47,13 +36,8 @@ namespace Learning_System
             // Doc du lieu Question
             try
             {
-                JArray? _questionsData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
-                if (_questionsData == null)
-                    throw new E01CantFindFile("Question.json");
-
-                questionsData.Import(showColumns_questions, showType_questions, showKey_questions);
-                questionsData.Import(_questionsData);
-                questionsDataTable = questionsData.Init().Offset(0).Limit(questionsData.Length()).Get();
+                QuestionsTable.table.LoadData(JsonProcessing.QuestionsPath);
+                questionsDataTable = QuestionsTable.table.Init().Get();
 
                 if (questionsDataTable == null)
                     throw new E02CantProcessQuery();
@@ -72,13 +56,8 @@ namespace Learning_System
             {
                 if (IsInitial == true)
                 {
-                    JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
-                    if (_categoriesData == null)
-                        throw new E01CantFindFile("category.json");
-
-                    categoriesData.Import(showColumns, showType, showKey);
-                    categoriesData.Import(_categoriesData);
-                    categoriesDataTable = categoriesData.Init().Offset(0).Limit(categoriesData.Length()).Get();
+                    CategoriesTable.table.LoadData(JsonProcessing.CategoriesPath);
+                    categoriesDataTable = CategoriesTable.table.Init().Get();
                     if (categoriesDataTable == null)
                         throw new E02CantProcessQuery();
 
@@ -97,7 +76,15 @@ namespace Learning_System
 
             // Doc du lieu cau hoi vao form
             List<string> queryQuestion = new() { "ID", ID.ToString() };
-            DataRow? currentQuestionRow = questionsData.Init().Offset(0).Limit(1).Query(queryQuestion).GetFirstRow();
+            DataTable? _chkDT = QuestionsTable.table.Init().Offset(0).Limit(1).Query(queryQuestion).Get();
+            if (_chkDT == null)
+                throw new E02CantProcessQuery();
+
+            // Can't find your old question
+            if (_chkDT.Rows.Count == 0)
+                throw new E99OtherException("Can't load your question. Please try again");
+
+            DataRow? currentQuestionRow = QuestionsTable.table.Init().Offset(0).Limit(1).Query(queryQuestion).GetFirstRow();
             if (currentQuestionRow == null)
                 throw new E02CantProcessQuery();
 
@@ -164,7 +151,7 @@ namespace Learning_System
                 labelChoice[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
                 labelChoice[i].Location = new Point(12, 14);
                 labelChoice[i].Size = new Size(71, 23);
-                labelChoice[i].Text = "Choice" + (i + 1).ToString();
+                labelChoice[i].Text = "Choice " + (i + 1).ToString() + ": ";
                 // label grade
                 labelGrade[i].AutoSize = true;
                 labelGrade[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
@@ -196,6 +183,23 @@ namespace Learning_System
 
         private void AddNewQuestionForm_SaveBtn_Click(object sender, EventArgs e)
         {
+            if (UpdateNewQuestion() == true)
+                Close();
+        }
+
+        private void AddNewQuestionForm_CancelBtn_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void AddNewQuestionForm_SaveAndContinueBtn_Click(object sender, EventArgs e)
+        {
+            if (UpdateNewQuestion() == true)
+                Count_Button++;
+        }
+
+        private bool UpdateNewQuestion()
+        {
             string _error = "";
             if (AddNewQuestionForm_NameTxt.Text == null || AddNewQuestionForm_NameTxt.Text == "")
             {
@@ -224,38 +228,58 @@ namespace Learning_System
                 if (Count_Button > 0)
                 {
                     List<string> _query1 = new() { "Id", CurrentParentId.ToString() };
-                    DataRow? _parentRow = categoriesData.Init().Offset(0).Limit(1).Query(_query1).GetFirstRow();
-                    if (_parentRow == null)
+                    DataTable? _parentTbl = CategoriesTable.table.Init().Offset(0).Limit(1).Query(_query1).Get();
+                    if (_parentTbl == null)
                         throw new E02CantProcessQuery();
 
-                    JArray? _x = _parentRow.Field<JArray>("QuestionArray");
-                    if (_x == null)
-                        throw new E03NotExistColumn("QuestionArray");
-
-                    List<int>? questionArray = _x.ToObject<List<int>>();
-                    if (questionArray == null)
-                        throw new E99OtherException("Can't get data from null!");
-                    try
+                    // If old category was deleted by sth? => Create new category
+                    if (_parentTbl.Rows.Count == 0)
                     {
+                        Categories _newCategory = new()
+                        {
+                            Id = CategoriesTable.table.Length(),
+                            Name = DateTime.Now.ToString(),
+                            SubArray = new List<int>(),
+                            QuestionArray = new List<int>(),
+                            Description = "Auto-generated category",
+                            IdNumber = "AGC"
+                        };
+
+                        if (CategoriesTable.table.Insert(JObject.FromObject(_newCategory)) == DataProcessing.StatusCode.Error)
+                            throw new E05CantInsertProperly();
+
+                        CurrentParentId = _newCategory.Id;
+                    }
+                    else
+                    {
+                        DataRow _parentRow = _parentTbl.Rows[0];
+
+                        JArray? _x = _parentRow.Field<JArray>("QuestionArray");
+                        if (_x == null)
+                            throw new E03NotExistColumn("QuestionArray");
+
+                        List<int>? questionArray = _x.ToObject<List<int>>();
+                        if (questionArray == null)
+                            throw new E99OtherException("Can't get data from null!");
+
                         _x.RemoveAt(questionArray.IndexOf(QuestionID));
                         JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
-                        if (categoriesData.Init().Offset(0).Limit(1).Query(_query1).Update(x) == DataProcessing.StatusCode.Error)
+                        if (CategoriesTable.table.Init().Offset(0).Limit(1).Query(_query1).Update(x) == DataProcessing.StatusCode.Error)
                             throw new E02CantProcessQuery();
                     }
-                    catch { }
                 }
                 AddNewQuestionForm_ErrorLbl.Text = "";
-                if (AddNewQuestionForm_CategoryCbo.SelectedValue == null)
-                {
-                    MessageBox.Show("Please select a category");
-                    return;
-                }
+
                 var _parentId = AddNewQuestionForm_CategoryCbo.SelectedValue;
                 var _name = AddNewQuestionForm_NameTxt.Text;
-                string _content;
-                if (AddNewQuestionForm_TextRtb.Rtf.Contains("\\pict"))
-                    _content = AddNewQuestionForm_TextRtb.Rtf;
-                else _content = AddNewQuestionForm_TextRtb.Text;
+                var _content = AddNewQuestionForm_TextRtb.Rtf;
+
+                // Default / NULL value => use the old category
+                if (AddNewQuestionForm_CategoryCbo.SelectedValue == null)
+                {
+                    _parentId = CurrentParentId;
+                }
+
                 try
                 {
                     Convert.ToDouble(AddNewQuestionForm_MarkTxt.Text);
@@ -263,29 +287,41 @@ namespace Learning_System
                 catch
                 {
                     MessageBox.Show("Default mark must be double");
-                    return;
+                    return false;
                 }
                 var _defaultmark = Convert.ToDouble(AddNewQuestionForm_MarkTxt.Text);
                 // doc du lieu tu dap an
                 var _choice = new List<QuestionChoice>();
+                double sumPositiveGrade = 0;
                 for (int i = 0; i < Count_Choices; i++)
                 {
                     if (richTextBoxes[i].TextLength != 0)
                     {
-                        string _choiceContent;
-                        if (richTextBoxes[i].Rtf.Contains("\\pict"))
-                            _choiceContent = richTextBoxes[i].Rtf;
-                        else _choiceContent = richTextBoxes[i].Text;
-                        _choice.Add(new QuestionChoice()
+                        QuestionChoice newChoice = new QuestionChoice()
                         {
-                            choice = _choiceContent,
+                            choice = richTextBoxes[i].Rtf,
                             mark = ConvertComboboxTextToDouble(combobox[i].Text)
-                        });
+                        };
+                        _choice.Add(newChoice);
+                        if (newChoice.mark > 0)
+                            sumPositiveGrade += newChoice.mark;
                     }
                 }
+
+                if (sumPositiveGrade != (double)1)
+                {
+                    MessageBox.Show("Sum of all positive grades must equals to 100%!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
+                if (_choice.Count == 1)
+                {
+                    MessageBox.Show("Your question must have at least two choices!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
                 try
                 {
-                    DataRow? _maxIDRow = questionsData.Init().Offset(0).Limit(questionsData.Length()).Sort("ID desc").GetFirstRow();
                     Questions _newQuestion = new()
                     {
                         ID = QuestionID,
@@ -297,187 +333,41 @@ namespace Learning_System
                     };
 
                     List<string> _query = new() { "Id", _parentId.ToString() };
-                    DataRow? _parentRow = categoriesData.Init().Offset(0).Limit(categoriesData.Length()).Query(_query).GetFirstRow();
-
-                    if (_parentRow == null)
+                    DataTable? _parentTbl = CategoriesTable.table.Init().Limit(1).Query(_query).Get();
+                    if (_parentTbl == null)
                         throw new E02CantProcessQuery();
-                    else
-                    {
-                        JArray? _x = _parentRow.Field<JArray>("QuestionArray");
-                        if (_x == null)
-                            throw new E03NotExistColumn("QuestionArray");
 
-                        _x.Add(_newQuestion.ID);
-                        JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
-                        if (categoriesData.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
-                            throw new E02CantProcessQuery();
-
-                        if (JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export()) == null)
-                            throw new E04CantExportProperly();
-
-                        CurrentParentId = Convert.ToInt32(_parentId.ToString());
-                        List<string> query = new() { "ID", QuestionID.ToString() };
-                        DataRow? _questionRow = questionsData.Init().Offset(0).Limit(1).Query(query).GetFirstRow();
-                        if (_questionRow == null)
-                            throw new E02CantProcessQuery();
-
-                        _questionRow.BeginEdit();
-                        _questionRow["Name"] = _name;
-                        _questionRow["CategoryID"] = CurrentParentId;
-                        _questionRow["Content"] = _content;
-                        _questionRow["DefaultMark"] = _defaultmark;
-                        _questionRow["Choice"] = JArray.FromObject(_choice);
-                        _questionRow.EndEdit();
-                        JObject _ = DataProcessing.ConvertDataRowToJObject(_questionRow);
-                        if (questionsData.Init().Offset(0).Limit(1).Query(query).Update(_) == DataProcessing.StatusCode.Error)
-                            throw new E02CantProcessQuery();
-                        if (JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export()) == null)
-                            throw new E04CantExportProperly();
-                    }
-
-                    MessageBox.Show("Update question successfully!", "Success");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Update question failed!\nDescription: " + ex.Message, "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                Close();
-            }
-
-        }
-
-        private void AddNewQuestionForm_CancelBtn_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void AddNewQuestionForm_SaveAndContinueBtn_Click(object sender, EventArgs e)
-        {
-            string _error = "";
-            if (AddNewQuestionForm_NameTxt.Text == null || AddNewQuestionForm_NameTxt.Text == "")
-            {
-                if (_error.Length > 0)
-                    _error += ", ";
-                _error += "Question name";
-            }
-            if (AddNewQuestionForm_TextRtb.Text == null || AddNewQuestionForm_TextRtb.Text == "")
-            {
-                if (_error.Length > 0)
-                    _error += ", ";
-                _error += "Question text";
-            }
-            if (AddNewQuestionForm_MarkTxt.Text == null || AddNewQuestionForm_MarkTxt.Text == "")
-            {
-                if (_error.Length > 0)
-                    _error += ", ";
-                _error += "Default mark";
-            }
-
-            if (_error != "")
-            {
-                AddNewQuestionForm_ErrorLbl.Text = "Must be filled: " + _error;
-            }
-            else
-            {
-                if (Count_Button > 0)
-                {
-                    List<string> _query1 = new() { "Id", CurrentParentId.ToString() };
-                    DataRow? _parentRow = categoriesData.Init().Offset(0).Limit(1).Query(_query1).GetFirstRow();
-                    if (_parentRow == null)
-                        throw new E02CantProcessQuery();
+                    // Chac chan co row (khong co thi tren vua tao oi), neu khong co thi chiu thoi
+                    DataRow _parentRow = _parentTbl.Rows[0];
 
                     JArray? _x = _parentRow.Field<JArray>("QuestionArray");
                     if (_x == null)
                         throw new E03NotExistColumn("QuestionArray");
 
-                    List<int>? questionArray = _x.ToObject<List<int>>();
-                    if (questionArray == null)
-                        throw new E99OtherException("Can't get data from null!");
-                    try
+                    _x.Add(_newQuestion.ID);
+                    JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
+                    if (CategoriesTable.table.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
+                        throw new E02CantProcessQuery();
+
+                    if (JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", CategoriesTable.table.Export()) == null)
+                        throw new E04CantExportProperly();
+
+                    CurrentParentId = Convert.ToInt32(_parentId.ToString());
+
+                    List<string> query = new() { "ID", QuestionID.ToString() };
+                    DataTable? _questionTbl = QuestionsTable.table.Init().Offset(0).Limit(1).Query(query).Get();
+                    if (_questionTbl == null)
+                        throw new E02CantProcessQuery();
+
+                    // If this qs is not exist (by somehow), we have to insert it
+                    if (_questionTbl.Rows.Count == 0)
                     {
-                        _x.RemoveAt(questionArray.IndexOf(QuestionID));
-                        JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
-                        if (categoriesData.Init().Offset(0).Limit(1).Query(_query1).Update(x) == DataProcessing.StatusCode.Error)
+                        if (QuestionsTable.table.Insert(JObject.FromObject(_newQuestion)) == DataProcessing.StatusCode.Error)
                             throw new E02CantProcessQuery();
                     }
-                    catch { }
-                }
-
-                AddNewQuestionForm_ErrorLbl.Text = "";
-                if (AddNewQuestionForm_CategoryCbo.SelectedValue == null)
-                {
-                    MessageBox.Show("Please select a category");
-                    return;
-                }
-
-                var _parentId = AddNewQuestionForm_CategoryCbo.SelectedValue;
-                var _name = AddNewQuestionForm_NameTxt.Text;
-                var _content = AddNewQuestionForm_TextRtb.Rtf;
-                try
-                {
-                    Convert.ToDouble(AddNewQuestionForm_MarkTxt.Text);
-                }
-                catch
-                {
-                    MessageBox.Show("Default mark must be double");
-                    return;
-                }
-
-                var _defaultmark = Convert.ToDouble(AddNewQuestionForm_MarkTxt.Text);
-                // doc du lieu tu dap an
-                var _choice = new List<QuestionChoice>();
-                for (int i = 0; i < Count_Choices; i++)
-                {
-                    if (richTextBoxes[i].TextLength != 0)
-                    {
-                        _choice.Add(new QuestionChoice()
-                        {
-                            choice = richTextBoxes[i].Rtf,
-                            mark = ConvertComboboxTextToDouble(combobox[i].Text)
-                        });
-                    }
-                }
-
-                try
-                {
-                    DataRow? _maxIDRow = questionsData.Init().Offset(0).Limit(questionsData.Length()).Sort("ID desc").GetFirstRow();
-                    if (_maxIDRow == null)
-                        throw new E02CantProcessQuery();
-
-                    Questions _newQuestion = new Questions()
-                    {
-                        ID = QuestionID,
-                        CategoryID = Convert.ToInt32(_parentId.ToString()),
-                        Name = _name,
-                        Content = _content,
-                        DefaultMark = _defaultmark,
-                        Choice = _choice
-                    };
-
-                    List<string> _query = new() { "Id", _parentId.ToString() };
-                    DataRow? _parentRow = categoriesData.Init().Offset(0).Limit(categoriesData.Length()).Query(_query).GetFirstRow();
-
-                    if (_parentRow == null)
-                        throw new E02CantProcessQuery();
                     else
                     {
-                        JArray? _x = _parentRow.Field<JArray>("QuestionArray");
-                        if (_x == null)
-                            throw new E03NotExistColumn("QuestionArray");
-
-                        _x.Add(_newQuestion.ID);
-                        JObject x = DataProcessing.ConvertDataRowToJObject(_parentRow);
-                        if (categoriesData.Init().Offset(0).Limit(1).Query(_query).Update(x) == DataProcessing.StatusCode.Error)
-                            throw new E02CantProcessQuery();
-
-                        if (JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export()) == null)
-                            throw new E04CantExportProperly();
-
-                        CurrentParentId = Convert.ToInt32(_parentId.ToString());
-                        List<string> query = new() { "ID", QuestionID.ToString() };
-                        DataRow? _questionRow = questionsData.Init().Offset(0).Limit(1).Query(query).GetFirstRow();
-                        if (_questionRow == null)
-                            throw new E02CantProcessQuery();
+                        DataRow _questionRow = _questionTbl.Rows[0];
 
                         _questionRow.BeginEdit();
                         _questionRow["Name"] = _name;
@@ -486,26 +376,38 @@ namespace Learning_System
                         _questionRow["DefaultMark"] = _defaultmark;
                         _questionRow["Choice"] = JArray.FromObject(_choice);
                         _questionRow.EndEdit();
+
                         JObject _ = DataProcessing.ConvertDataRowToJObject(_questionRow);
-                        if (questionsData.Init().Offset(0).Limit(1).Query(query).Update(_) == DataProcessing.StatusCode.Error)
+                        if (QuestionsTable.table.Init().Offset(0).Limit(1).Query(query).Update(_) == DataProcessing.StatusCode.Error)
                             throw new E02CantProcessQuery();
-                        if (JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export()) == null)
-                            throw new E04CantExportProperly();
                     }
 
+                    if (JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", QuestionsTable.table.Export()) == null)
+                        throw new E04CantExportProperly();
+
                     MessageBox.Show("Update question successfully!", "Success");
+
+                    return true;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Update failed!\nDescription: " + ex.Message, "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Update question failed!\nDescription: " + ex.Message, "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
                 }
             }
 
-            Count_Button++;
+            return false;
         }
 
         private void AddNewQuestionForm_MoreChoicesBtn_Click(object sender, EventArgs e)
         {
+            // Keep the number of choices <= 26 to use English alphabet
+            if (Count_Choices + 3 > 26)
+            {
+                MessageBox.Show("Can't add more than 26 choices in a single question!", "Warning");
+                return;
+            }
+
             if (Count_Choices + 3 > MAXOFCHOICE)
             {
                 MessageBox.Show($"Max of choice is {MAXOFCHOICE}");
@@ -559,7 +461,7 @@ namespace Learning_System
                 labelChoice[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
                 labelChoice[i].Location = new Point(12, 14);
                 labelChoice[i].Size = new Size(71, 23);
-                labelChoice[i].Text = "Choice" + (i + 1).ToString();
+                labelChoice[i].Text = "Choice " + (i + 1).ToString() + ": ";
 
                 // label grade
                 labelGrade[i].AutoSize = true;

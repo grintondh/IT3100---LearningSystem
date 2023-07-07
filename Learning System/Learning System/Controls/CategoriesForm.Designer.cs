@@ -79,6 +79,7 @@
             CategoriesForm_ParentCategoryCbo.IntegralHeight = false;
             CategoriesForm_ParentCategoryCbo.Items.AddRange(new object[] { "1", "2", "3", "4", "5" });
             CategoriesForm_ParentCategoryCbo.Location = new Point(345, 88);
+            CategoriesForm_ParentCategoryCbo.Margin = new Padding(30, 15, 15, 15);
             CategoriesForm_ParentCategoryCbo.Name = "CategoriesForm_ParentCategoryCbo";
             CategoriesForm_ParentCategoryCbo.Size = new Size(721, 33);
             CategoriesForm_ParentCategoryCbo.TabIndex = 2;
@@ -142,6 +143,7 @@
             // CategoriesForm_AddCategoryBtn
             // 
             CategoriesForm_AddCategoryBtn.BackColor = Color.FromArgb(194, 36, 36);
+            CategoriesForm_AddCategoryBtn.Cursor = Cursors.Hand;
             CategoriesForm_AddCategoryBtn.FlatStyle = FlatStyle.Flat;
             CategoriesForm_AddCategoryBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             CategoriesForm_AddCategoryBtn.ForeColor = Color.White;

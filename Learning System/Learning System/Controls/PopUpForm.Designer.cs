@@ -56,6 +56,7 @@
             PopUpForm_ExportBtn.Text = "Export";
             PopUpForm_ExportBtn.UseVisualStyleBackColor = true;
             PopUpForm_ExportBtn.Click += Button_Export_Click;
+            PopUpForm_ExportBtn.Cursor = Cursors.Hand;
             // 
             // PopUpForm_ImportBtn
             // 
@@ -71,6 +72,7 @@
             PopUpForm_ImportBtn.Text = "Import";
             PopUpForm_ImportBtn.UseVisualStyleBackColor = true;
             PopUpForm_ImportBtn.Click += Button_Import_Click;
+            PopUpForm_ImportBtn.Cursor = Cursors.Hand;
             // 
             // PopUpForm_CategoriesBtn
             // 
@@ -86,6 +88,7 @@
             PopUpForm_CategoriesBtn.Text = "Categories";
             PopUpForm_CategoriesBtn.UseVisualStyleBackColor = true;
             PopUpForm_CategoriesBtn.Click += Button_Categories_Click;
+            PopUpForm_CategoriesBtn.Cursor = Cursors.Hand;
             // 
             // PopUpForm_QuestionsBtn
             // 
@@ -101,6 +104,7 @@
             PopUpForm_QuestionsBtn.Text = "Questions";
             PopUpForm_QuestionsBtn.UseVisualStyleBackColor = true;
             PopUpForm_QuestionsBtn.Click += Button_Questions_Click;
+            PopUpForm_QuestionsBtn.Cursor = Cursors.Hand;
             // 
             // ExportForm
             // 
@@ -117,7 +121,6 @@
             // panel_chuc_nang
             // 
             panel_chuc_nang.BackColor = SystemColors.ControlLightLight;
-            panel_chuc_nang.BorderStyle = BorderStyle.FixedSingle;
             panel_chuc_nang.Controls.Add(PopUpForm_QuestionsBtn);
             panel_chuc_nang.Controls.Add(PopUpForm_ImportBtn);
             panel_chuc_nang.Controls.Add(PopUpForm_ExportBtn);
@@ -127,6 +130,7 @@
             panel_chuc_nang.Name = "panel_chuc_nang";
             panel_chuc_nang.Size = new Size(1089, 70);
             panel_chuc_nang.TabIndex = 4;
+            panel_chuc_nang.Paint += Panel_chuc_nang_Paint;
             // 
             // QuestionsForm
             // 
@@ -185,6 +189,15 @@
             panel_chuc_nang.ResumeLayout(false);
             panel_giao_dien.ResumeLayout(false);
             ResumeLayout(false);
+        }
+
+        private void Panel_chuc_nang_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, panel_chuc_nang.ClientRectangle,
+                    Color.LightBlue, 0, ButtonBorderStyle.Solid,
+                    Color.LightBlue, 0, ButtonBorderStyle.Solid,
+                    Color.LightBlue, 0, ButtonBorderStyle.Solid,
+                    Color.Black, 1, ButtonBorderStyle.Solid);
         }
 
         #endregion

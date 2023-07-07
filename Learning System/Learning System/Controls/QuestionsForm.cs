@@ -2,6 +2,7 @@
 using Learning_System.Modals;
 using Newtonsoft.Json.Linq;
 using System.Data;
+using System.Configuration;
 
 namespace Learning_System
 {
@@ -23,27 +24,22 @@ namespace Learning_System
         public void ShowQuestions(List<int> showQuestionsFromCategoriesID, bool _showQuestionsFromSubcategories)
         {
             QuestionForm_ShowQuestionsDtg.Rows.Clear();
-            DataProcessing questionsData = new();
-            List<string> _showQuestionsColumns = new() { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
-            List<Type> _showQuestionsType = new() { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
-            List<string> _showQuestionsKey = new() { "PRIMARY KEY", "", "", "", "", "" };
+
+            if (showQuestionsFromCategoriesID.Count == 0)
+                return;
+
             try
             {
-                JArray? jArray = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
-                if (jArray == null)
-                    throw new E01CantFindFile("Question.json");
+                QuestionsTable.table.LoadData(JsonProcessing.QuestionsPath);
 
-                questionsData.Import(_showQuestionsColumns, _showQuestionsType, _showQuestionsKey);
-                questionsData.Import(jArray);
-
-                if (questionsData.Length() == 0) MessageBox.Show("Không có câu hỏi nào trong Categories này!");
+                if (QuestionsTable.table.Length() == 0) MessageBox.Show("Không có câu hỏi nào trong Categories này!");
                 else
                 {
                     //var index = QuestionForm_ShowQuestionsDtg.Rows.Add();
                     //QuestionForm_ShowQuestionsDtg.Rows[index].Cells[1].Value = "Question name / ID number";
-                    for (int i = 0; i < questionsData.Length(); i++)
+                    for (int i = 0; i < QuestionsTable.table.Length(); i++)
                     {
-                        DataRow? Question = questionsData.Init().Offset(i).Limit(1).Sort("ID desc").GetFirstRow();
+                        DataRow? Question = QuestionsTable.table.Init().Offset(i).Limit(1).Sort("ID desc").GetFirstRow();
                         if (Question == null)
                             throw new E02CantProcessQuery();
 
@@ -77,14 +73,14 @@ namespace Learning_System
                             else
                                 c.Style.BackColor = Color.AliceBlue;
                             c.Style.ForeColor = Color.FromArgb(30, 170, 232);
-                            c.Style.Font = new("Segoe UI", 10, FontStyle.Bold);
+                            c.Style.Font = new("Segoe UI", 11F, FontStyle.Bold);
+                            c.Style.Padding = new Padding(0);
 
                             row.Cells[3].Value = QuestionID;
                             row.Cells[4].Value = inCategories;
                             if (i % 2 == 0) row.DefaultCellStyle.BackColor = Color.White;
                             else row.DefaultCellStyle.BackColor = Color.AliceBlue;
                         }
-
                     }
                 }
             }
@@ -96,77 +92,137 @@ namespace Learning_System
                 QuestionsForm_ShowFromSubcategoriesCb.Enabled = false;
             }
         }
+
+        public struct CboList {
+            public Categories category ;
+            public int loaded;
+        }
+
         public void LoadCategoriesData()
         {
-            List<Categories>? listCategories = new();
-            List<Categories> newListCategories = new();
+            List<CboList>? listCategories = new();
+            List<CboList> newListCategories = new();
             try
             {
+                DataTable _dt = CategoriesTable.table.Init().Get();
+
+                if (_dt == null) return;
+
+                foreach (DataRow _row in _dt.Rows)
+                {
+                    CboList _c = new();
+                    _c.category = new Categories();
+
+                    _c.category.Id = _row.Field<int>("Id");
+                    _c.category.Name = _row.Field<string>("Name");
+                    _c.category.QuestionArray = _row.Field<JArray>("QuestionArray").ToObject<List<int>>();
+                    _c.category.SubArray = _row.Field<JArray>("SubArray").ToObject<List<int>>();
+
+                    _c.loaded = 0;
+                    listCategories.Add(_c);
+                }
+
+                /*
+                List<Categories>? _tmp;
+
                 JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
                 if (_categoriesData == null)
                     throw new E01CantFindFile("category.json");
 
-                listCategories = _categoriesData.ToObject<List<Categories>>();
-                if (listCategories == null) return;
-                AddSpace(ref newListCategories, ref listCategories, 0, "  ");
+                _tmp = _categoriesData.ToObject<List<Categories>>();
+
+                if (_tmp == null) return;
+
+                foreach (Categories _x in _tmp)
+                {
+                    CboList _c = new();
+                    _c.category = _x;
+                    _c.loaded = 0;
+
+                    listCategories.Add(_c);
+                }
+                */
+                for (int i = 0; i < listCategories.Count; i++)
+                    if (listCategories[i].loaded == 0)
+                    {
+                        listCategories[i] = new CboList
+                        {
+                            category = listCategories[i].category,
+                            loaded = -1
+                        };
+
+                        AddSpace(ref newListCategories, ref listCategories, i, "  ");
+                    }
+
                 newListCategories.Reverse();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                QuestionForm_ShowQuestionsDtg.Enabled = false;
-                QuestionsForm_CreateNewQuestionBtn.Enabled = false;
-                QuestionsForm_ShowFromSubcategoriesCb.Enabled = false;
+                return;
             }
+
+            List<Categories> onlyCategoriesName = new List<Categories>();
+            foreach (CboList _x in newListCategories)
+                onlyCategoriesName.Add(_x.category);
 
             QuestionsForm_SelectCategoryCbo.ValueMember = "Id";
             QuestionsForm_SelectCategoryCbo.DisplayMember = "Name";
-            QuestionsForm_SelectCategoryCbo.DataSource = newListCategories;
+            QuestionsForm_SelectCategoryCbo.DataSource = onlyCategoriesName;
             QuestionsForm_SelectCategoryCbo.DrawItem += new DrawItemEventHandler((sender, args) =>
             {
                 System.Drawing.Font font;
                 FontFamily ffm = QuestionsForm_SelectCategoryCbo.Font.FontFamily;
                 float fsz = QuestionsForm_SelectCategoryCbo.Font.Size;
 
-                if (args.Index == 0)
-                    font = new System.Drawing.Font(ffm, fsz, FontStyle.Bold);
-                else
-                    font = new System.Drawing.Font(ffm, fsz, FontStyle.Regular);
-
                 if (newListCategories.Count > args.Index)
                 {
+                    if (newListCategories[args.Index].loaded == -1)
+                        font = new System.Drawing.Font(ffm, fsz, FontStyle.Bold);
+                    else
+                        font = new System.Drawing.Font(ffm, fsz, FontStyle.Regular);
+
                     if ((args.State & DrawItemState.Selected) == DrawItemState.Selected)
                     {
                         args.DrawBackground();
-                        args.Graphics.DrawString(newListCategories[args.Index].Name, font, SystemBrushes.Window, args.Bounds);
+                        args.Graphics.DrawString(newListCategories[args.Index].category.Name, font, SystemBrushes.Window, args.Bounds);
                     }
                     else
                     {
                         args.DrawBackground();
-                        args.Graphics.DrawString(newListCategories[args.Index].Name, font, SystemBrushes.WindowText, args.Bounds);
+                        args.Graphics.DrawString(newListCategories[args.Index].category.Name, font, SystemBrushes.WindowText, args.Bounds);
                     }
                 }
             });
         }
 
         //Them Space cho cac lua chon Combobox
-        public void AddSpace(ref List<Categories> List, ref List<Categories> addList, int begin, string space)
+        public void AddSpace(ref List<CboList> List, ref List<CboList> addList, int begin, string space)
         {
-            foreach (int x in addList[begin].SubArray)
+            if (addList[begin].loaded == 0)
+                addList[begin] = new CboList
+                {
+                    category = addList[begin].category,
+                    loaded = 1
+                };
+
+            foreach (int x in addList[begin].category.SubArray)
             {
-                addList[x].Name = space + addList[x].Name;
+                addList[x].category.Name = space + addList[x].category.Name;
                 AddSpace(ref List, ref addList, x, space + "  ");
             }
-            addList[begin].Name = "  " + addList[begin].Name;
+            addList[begin].category.Name = "  " + addList[begin].category.Name;
 
-            if (addList[begin].QuestionArray.Count > 0)
-                addList[begin].Name = addList[begin].Name + " (" + addList[begin].QuestionArray.Count + ")";
+            if (addList[begin].category.QuestionArray.Count > 0)
+                addList[begin].category.Name = addList[begin].category.Name + " (" + addList[begin].category.QuestionArray.Count + ")";
             List.Add(addList[begin]);
         }
+
         public QuestionsForm()
         {
             InitializeComponent();
             LoadCategoriesData();
+
             QuestionsForm_SelectCategoryCbo.SelectedIndex = -1;
             QuestionsForm_SelectCategoryCbo.SelectedText = "  Default";
             QuestionForm_ShowQuestionsDtg.Width = Screen.PrimaryScreen.WorkingArea.Width - 100;
@@ -176,12 +232,7 @@ namespace Learning_System
             QuestionForm_ShowQuestionsDtg.RowTemplate.Height = 35;
         }
 
-        private void QuestionsForm_SelectCategoryCbo_Click(object sender, EventArgs e)
-        {
-            LoadCategoriesData();
-        }
-
-        private void QuestionsForm_SelectCategoryCbo_DropDown(object sender, EventArgs e)
+        private void QuestionsForm_SelectCategoryCbo_ClickOrDropDown(object sender, EventArgs e)
         {
             LoadCategoriesData();
         }
@@ -193,10 +244,12 @@ namespace Learning_System
             ShowQuestions(selectedCategoriesIdList, showQuestionsFromSubcategories);
         }
 
-        private void QuestionsForm_SelectCategoryCbo_SelectedIndexChanged(object sender, EventArgs e)
+        private void QuestionsForm_SelectCategoryCbo_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (QuestionsForm_SelectCategoryCbo.SelectedItem == null) return;
+
             var a = (Categories)QuestionsForm_SelectCategoryCbo.SelectedItem;
+
             selectedCategoriesIdList.Clear();
             int _parentCategories = a.Id;
             try
@@ -218,6 +271,7 @@ namespace Learning_System
             catch (Exception ex)
             {
                 MessageBox.Show("Can't get categories data!\nDescription: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
         }
 
@@ -242,16 +296,14 @@ namespace Learning_System
         {
             //Skip the Column and Row headers
             if (e.ColumnIndex < 0 || e.RowIndex < 0)
-            {
                 return;
-            }
             var dataGridView = (sender as DataGridView);
             //Check the condition as per the requirement casting the cell value to the appropriate type
             if (e.ColumnIndex == 2)
             {
                 var gridCell = dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 gridCell.Style.ForeColor = Color.White;
-                gridCell.Style.Font = new("Segoe UI", 10, FontStyle.Bold | FontStyle.Underline);
+                gridCell.Style.Font = new("Segoe UI", 11, FontStyle.Bold | FontStyle.Underline);
             }
         }
 
@@ -259,22 +311,15 @@ namespace Learning_System
         {
             //Skip the Column and Row headers
             if (e.ColumnIndex < 0 || e.RowIndex < 0)
-            {
                 return;
-            }
             var dataGridView = (sender as DataGridView);
             //Check the condition as per the requirement casting the cell value to the appropriate type
             if (e.ColumnIndex == 2)
             {
                 var gridCell = dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 gridCell.Style.ForeColor = Color.FromArgb(30, 170, 232);
-                gridCell.Style.Font = new("Segoe UI", 10, FontStyle.Bold);
+                gridCell.Style.Font = new("Segoe UI", 11, FontStyle.Bold);
             }
-        }
-
-        private void QuestionsForm_QuestionsBankLbl_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

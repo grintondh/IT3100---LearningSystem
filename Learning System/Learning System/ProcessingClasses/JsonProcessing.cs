@@ -38,6 +38,10 @@ namespace Learning_System.ProcessingClasses
             }
         }
 
+        public static readonly string ContestsPath = "contest.json";
+        public static readonly string QuestionsPath = "question.json";
+        public static readonly string CategoriesPath = "category.json";
+
         /// <summary>
         /// Get content in your request Json file. If file doesn't exist in default folder, we will create a new one (with sample content) for you.
         /// </summary>

@@ -101,6 +101,7 @@
             HomePageForm_MenuPic.TabIndex = 0;
             HomePageForm_MenuPic.TabStop = false;
             HomePageForm_MenuPic.Click += HomePageForm_MenuPic_Click;
+            HomePageForm_MenuPic.Cursor = Cursors.Hand;
             // 
             // HomePageForm_GearPic
             // 
@@ -113,6 +114,7 @@
             HomePageForm_GearPic.TabIndex = 2;
             HomePageForm_GearPic.TabStop = false;
             HomePageForm_GearPic.Click += Picture_setting_Click;
+            HomePageForm_GearPic.Cursor = Cursors.Hand;
             // 
             // HomePageForm_EditingBtn
             // 
@@ -128,6 +130,7 @@
             HomePageForm_EditingBtn.Text = "TURN EDITING ON";
             HomePageForm_EditingBtn.UseVisualStyleBackColor = false;
             HomePageForm_EditingBtn.Click += HomePageForm_EditingBtn_Click;
+            HomePageForm_EditingBtn.Cursor = Cursors.Hand;
             // 
             // HomePageForm_PathLbl
             // 
@@ -160,6 +163,7 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(1385, 146);
             panel3.TabIndex = 2;
+            panel3.Paint += Panel3_Paint;
             // 
             // panel_popup
             // 
@@ -199,6 +203,7 @@
             HomePageForm_QuestionsBtn.Text = "Questions";
             HomePageForm_QuestionsBtn.UseVisualStyleBackColor = true;
             HomePageForm_QuestionsBtn.Click += Button_Questions_Click;
+            HomePageForm_QuestionsBtn.Cursor = Cursors.Hand;
             // 
             // HomePageForm_CategoriesBtn
             // 
@@ -214,6 +219,7 @@
             HomePageForm_CategoriesBtn.Text = "Categories";
             HomePageForm_CategoriesBtn.UseVisualStyleBackColor = true;
             HomePageForm_CategoriesBtn.Click += Button_Categories_Click;
+            HomePageForm_CategoriesBtn.Cursor = Cursors.Hand;
             // 
             // HomePageForm_ImportBtn
             // 
@@ -229,6 +235,7 @@
             HomePageForm_ImportBtn.Text = "Import";
             HomePageForm_ImportBtn.UseVisualStyleBackColor = true;
             HomePageForm_ImportBtn.Click += Button_Import_Click;
+            HomePageForm_ImportBtn.Cursor = Cursors.Hand;
             // 
             // HomePageForm_ExportBtn
             // 
@@ -244,6 +251,7 @@
             HomePageForm_ExportBtn.Text = "Export";
             HomePageForm_ExportBtn.UseVisualStyleBackColor = true;
             HomePageForm_ExportBtn.Click += Button_Export_Click;
+            HomePageForm_ExportBtn.Cursor = Cursors.Hand;
             // 
             // HomePageForm_QuestionsBankLbl
             // 
@@ -301,6 +309,15 @@
             panel_popup.PerformLayout();
             flowLayoutPanel_popup.ResumeLayout(false);
             ResumeLayout(false);
+        }
+
+        private void Panel3_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, panel3.ClientRectangle,
+                    Color.LightBlue, 0, ButtonBorderStyle.Solid,
+                    Color.LightBlue, 0, ButtonBorderStyle.Solid,
+                    Color.LightBlue, 0, ButtonBorderStyle.Solid,
+                    Color.Black, 1, ButtonBorderStyle.Solid);
         }
 
         #endregion

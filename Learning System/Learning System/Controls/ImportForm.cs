@@ -5,7 +5,6 @@ using System.Reflection;
 using Microsoft.VisualBasic.Devices;
 using Learning_System.ProcessingClasses;
 using Learning_System.Modals;
-using Learning_System.ProcessingClasses;
 
 namespace Learning_System
 {
@@ -37,7 +36,7 @@ namespace Learning_System
 
         private void ImportForm_SelectFileBtn_Click(object sender, EventArgs e)
         {
-            openFileDialog.Filter = "All File (*.*)|*.*|File Text(*.txt)|*.txt|File .doc(*.doc)|*.doc|File .docx (*.docx)|.docx";
+            openFileDialog.Filter = "File Text(*.txt)|*.txt|File .doc(*.doc)|*.doc|File .docx (*.docx)|*.docx|All File (*.*)|*.*";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 ImportPath = openFileDialog.FileName;
@@ -124,61 +123,39 @@ namespace Learning_System
         /// <param name="_ImportPath"> Đường dẫn của file được chọn</param>
         private int ImportQuestionsFile(List<string> lines, string _ImportPath)
         {
-            DataProcessing questionsData = new();
-            List<string> _showQuestionsColumns = new() { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
-            List<Type> _showQuestionsType = new() { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
-            List<string> _showQuestionsKey = new() { "PRIMARY KEY", "NOT NULL", "", "NOT NULL", "NOT NULL", "" };
+            QuestionsTable.table.LoadData(JsonProcessing.QuestionsPath);
+            CategoriesTable.table.LoadData(JsonProcessing.CategoriesPath);
 
+            DataRow? _parentCategory;
 
-            DataProcessing categoriesData = new();
-            List<string> _showCategoryColumns = new() { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
-            List<Type> _showCategoryType = new() { typeof(int), typeof(string), typeof(JArray), typeof(JArray), typeof(string), typeof(string) };
-            List<string> _showCategoryKey = new() { "PRIMARY KEY", "NOT NULL", "", "", "", "" };
-
-
-            try
+            if (CategoriesTable.table.Length() == 0)
             {
-                JArray? _questionsData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
-                if (_questionsData == null)
-                    throw new E01CantFindFile("Question.json");
+                Modals.Categories _newCategory = new()
+                {
+                    Id = CategoriesTable.table.Length(),
+                    Name = DateTime.Now.ToString(),
+                    SubArray = new List<int>(),
+                    QuestionArray = new List<int>(),
+                    Description = "Auto-generated category",
+                    IdNumber = "AGC"
+                };
 
-                questionsData.Import(_showQuestionsColumns, _showQuestionsType, _showQuestionsKey);
-                questionsData.Import(_questionsData);
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Can't get questions data!\nDescription: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return DataProcessing.StatusCode.Error;
+                if (CategoriesTable.table.Insert(JObject.FromObject(_newCategory)) == DataProcessing.StatusCode.Error)
+                    throw new E05CantInsertProperly();
             }
 
-            try
-            {
-                JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
-                if (_categoriesData == null)
-                    throw new E01CantFindFile("Category.json");
-
-                categoriesData.Import(_showCategoryColumns, _showCategoryType, _showCategoryKey);
-                categoriesData.Import(_categoriesData);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Can't get categories data!\nDescription: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return DataProcessing.StatusCode.Error;
-            }
-
-            List<string> _query = new() { "Id", "0" };
-            DataRow? _parentCategory = categoriesData.Init().Offset(0).Limit(1).Query(_query).Sort("Id desc").GetFirstRow();
+            _parentCategory = CategoriesTable.table.Init().Offset(0).Limit(1).GetFirstRow();
             if (_parentCategory == null)
                 throw new E02CantProcessQuery();
 
-            DataRow? _maxQuestionIdRow = questionsData.Init()
-                                                       .Offset(0)
-                                                       .Limit(questionsData.Length())
-                                                       .Sort("ID desc")
-                                                       .GetFirstRow();
+            System.Data.DataTable? _maxQuestionIdTbl = QuestionsTable.table.Init().Sort("ID desc").Get();
 
-            int questionIDCount = (_maxQuestionIdRow == null) ? 0 : (_maxQuestionIdRow.Field<int>("ID"));
+            ImportForm_ImportProgress.Value = 50;
+
+            if (_maxQuestionIdTbl == null)
+                throw new E02CantProcessQuery();
+
+            int questionIDCount = (_maxQuestionIdTbl.Rows.Count == 0) ? 0 : _maxQuestionIdTbl.Rows[0].Field<int>("ID");
 
             int i = 0;
             while (i < lines.Count)
@@ -197,8 +174,15 @@ namespace Learning_System
                     {
                         if (lines[i][1] == '.')
                         {
-                            if (Path.GetExtension(ImportPath) != ".txt") _stringContent = lineTextBoxes[i].Rtf;
-                            else _stringContent = lines[i];
+                            if (Path.GetExtension(ImportPath) != ".txt")
+                            {
+                                lineTextBoxes[i].Text = lineTextBoxes[i].Text[3..];
+                                _stringContent = lineTextBoxes[i].Rtf;
+                            }
+                            else
+                            {
+                                _stringContent = lines[i][3..];
+                            }
                             QuestionChoice _questionChoice = new()
                             {
                                 choice = _stringContent,
@@ -218,6 +202,8 @@ namespace Learning_System
                             i += 2;
                             break;
                         }
+
+                        ImportForm_ImportStatus.Text = "Added " + (i + 1) + "question";
                     }
 
                     Questions newQuestions = new()
@@ -230,7 +216,7 @@ namespace Learning_System
                         Choice = _questionChoices
                     };
 
-                    questionsData.Insert(JObject.FromObject(newQuestions));
+                    QuestionsTable.table.Insert(JObject.FromObject(newQuestions));
 
                     JArray? parentCtg = _parentCategory.Field<JArray>("QuestionArray");
                     if (parentCtg == null)
@@ -239,16 +225,21 @@ namespace Learning_System
                 }
             }
 
+            ImportForm_ImportProgress.Value = 70;
+
             JObject x = DataProcessing.ConvertDataRowToJObject(_parentCategory);
 
-            categoriesData.Init().Query(_query).Update(JObject.FromObject(x));
+            if (CategoriesTable.table.Init().Offset(0).Limit(1).Update(JObject.FromObject(x)) == DataProcessing.StatusCode.Error)
+                throw new E02CantProcessQuery();
 
             try
             {
-                if (JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", questionsData.Export()) == null)
+                if (JsonProcessing.ExportJsonContentInDefaultFolder("Question.json", QuestionsTable.table.Export()) == null)
                     throw new E04CantExportProperly();
-                if (JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", categoriesData.Export()) == null)
+                if (JsonProcessing.ExportJsonContentInDefaultFolder("Category.json", CategoriesTable.table.Export()) == null)
                     throw new E04CantExportProperly();
+
+                ImportForm_ImportProgress.Value = 90;
             }
             catch (Exception ex)
             {
@@ -312,53 +303,66 @@ namespace Learning_System
         /// <returns>Trả về list các dòng text trong file, nếu là file doc thì paste content vào mảng Rich Text Box </returns>
         private List<string> ReadFromDocumentFile(string _ImportPath)
         {
-            List<string> _lines = new();
-            if (Path.GetExtension(_ImportPath) == ".txt")
+            try
             {
-                _lines = File.ReadAllLines(_ImportPath).ToList();
-            }
-            else
-            {
-                Microsoft.Office.Interop.Word.Application application = new();
-                object miss = Missing.Value;
-                object path = _ImportPath;
-                object readOnly = true;
-                object save = false;
-                Document docs = application.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                if (docs != null)
+                List<string> _lines = new();
+                if (Path.GetExtension(_ImportPath) == ".txt")
                 {
-                    if (docs.Paragraphs.Count > MAX_OF_LINES)
-                    {
-                        MessageBox.Show($"Maximum {MAX_OF_LINES} lines on .doc and .docx files!");
-                        return _lines;
-                    }
-                    lineIndex = 0;
-                    foreach (Paragraph p in docs.Paragraphs)
-                    {
-                        paragraph = p;
-                        //_lines.Add(CopyFromClipboardInlineShape());
-                        Thread thread = new(CopyFromClipboardInlineShape);
-                        thread.SetApartmentState(ApartmentState.STA);
-                        thread.Start();
-                        thread.Join();
-                        lineTextBoxes[lineIndex] = new RichTextBox
-                        {
-                            Rtf = selectedImage
-                        };
-                        _lines.Add(lineTextBoxes[lineIndex].Text.Trim());
-                        lineIndex++;
-                        //totaltext += p.Range.Text;
-                    }
-                    //string[] _totaltext = totaltext.Split('\r');
-                    //_lines.AddRange(_totaltext);
-                    docs.Close(ref save, ref miss, ref miss);
+                    _lines = File.ReadAllLines(_ImportPath).ToList();
                 }
-                application.Quit(ref save, ref miss, ref miss);
+                else
+                {
+                    Microsoft.Office.Interop.Word.Application application = new();
+                    object miss = Missing.Value;
+                    object path = _ImportPath;
+                    object readOnly = true;
+                    object save = false;
+                    Document docs = application.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    if (docs != null)
+                    {
+                        if (docs.Paragraphs.Count > MAX_OF_LINES)
+                        {
+                            MessageBox.Show($"Maximum {MAX_OF_LINES} lines on .doc and .docx files!");
+                            return _lines;
+                        }
+                        lineIndex = 0;
+                        foreach (Paragraph p in docs.Paragraphs)
+                        {
+                            paragraph = p;
+                            //_lines.Add(CopyFromClipboardInlineShape());
+                            Thread thread = new(CopyFromClipboardInlineShape);
+                            thread.SetApartmentState(ApartmentState.STA);
+                            thread.Start();
+                            thread.Join();
+                            lineTextBoxes[lineIndex] = new RichTextBox
+                            {
+                                Rtf = selectedImage
+                            };
+                            _lines.Add(lineTextBoxes[lineIndex].Text.Trim());
+                            lineIndex++;
+                            //totaltext += p.Range.Text;
+                        }
+                        //string[] _totaltext = totaltext.Split('\r');
+                        //_lines.AddRange(_totaltext);
+                        docs.Close(ref save, ref miss, ref miss);
+                    }
+                    application.Quit(ref save, ref miss, ref miss);
+                }
+                return _lines;
             }
-            return _lines;
+            catch
+            {
+                MessageBox.Show("Your import file has some errors.\nPlease check again. Be sure it has Aiken format!", "Error");
+                return null;
+            }
         }
+
         private void ImportForm_ImportBtn_Click(object sender, EventArgs e)
         {
+            ImportForm_ImportStatus.Text = "Processing...";
+            ImportForm_ImportProgress.Value = 0;
+            ImportForm_ImportProgress.Maximum = 100;
+
             if (ImportPath == null)
             {
                 MessageBox.Show("Please choose a file!");
@@ -375,21 +379,36 @@ namespace Learning_System
                     MessageBox.Show($"File's size must be smaller than {MAX_OF_SIZE} MB!");
                     return;
                 }
+                ImportForm_ImportProgress.Value = 10;
+                ImportForm_ImportStatus.Text = "Reading file content. It can be lagged during this phase. Please wait a couple of minutes...";
                 List<string> lines = ReadFromDocumentFile(ImportPath);
+
+                if (lines == null)
+                    return;
+
+                ImportForm_ImportProgress.Value = 20;
+                ImportForm_ImportStatus.Text = "Checking Aiken format. It can be lagged during this phase. Please wait a couple of minutes...";
                 if (lines == null) { return; }
                 int checkAikenFormat = CheckAikenFormat(lines);
                 if (checkAikenFormat >= 0)
                 {
                     MessageBox.Show($"Error at line {checkAikenFormat + 1}!");
+                    ImportForm_ImportStatus.Text = "Error";
                 }
                 else
                 {
+                    ImportForm_ImportProgress.Value = 30;
                     if (ImportQuestionsFile(lines, ImportPath) == DataProcessing.StatusCode.OK)
                     {
+                        ImportForm_ImportProgress.Value = 100;
+                        ImportForm_ImportStatus.Text = "Done";
+
                         MessageBox.Show($"OK. Successfully imported {-checkAikenFormat} question(s)!");
                         maximumSizeForNewFiles -= fileSize / SIZE_OF_MB;
                         ImportForm_StatusLbl.Text = $"Maximum size for new files: {Math.Round(maximumSizeForNewFiles, 2)} MB";
-                    }
+                    } 
+                    else
+                        ImportForm_ImportStatus.Text = "Error";
                 }
                 ImportPath = null;
                 selectedImage = null;
