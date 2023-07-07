@@ -226,12 +226,15 @@ namespace Learning_System
                         if (richTextBoxes[i].Rtf.Contains("\\pict"))
                             _choiceContent = richTextBoxes[i].Rtf;
                         else _choiceContent = richTextBoxes[i].Text;
-                        _choice.Add(new QuestionChoice()
+
+                        QuestionChoice newChoice = new QuestionChoice()
                         {
                             choice = _choiceContent,
                             mark = ConvertComboboxTextToDouble(combobox[i].Text)
                         };
+
                         _choice.Add(newChoice);
+
                         if (newChoice.mark > 0)
                             sumPositiveGrade += newChoice.mark;
                     }
