@@ -11,7 +11,8 @@
     "TimeEnd": "2023-08-05 12:00:00",
     "EndEnable": true,
     "TimeLimit": 45,
-    "TimeLimitEnable": true
+    "TimeLimitEnable": true,
+    "MaximumGrade": 10
   },
   {
     "Id": 1,
@@ -25,7 +26,8 @@
     "TimeEnd": "2023-08-05 12:00:00",
     "EndEnable": true,
     "TimeLimit": 45,
-    "TimeLimitEnable": true
+    "TimeLimitEnable": true,
+    "MaximumGrade": 10
   },
   {
     "Id": 2,
@@ -39,6 +41,7 @@
     "TimeEnd": "2023-08-05 12:00:00",
     "EndEnable": true,
     "TimeLimit": 45,
-    "TimeLimitEnable": true
+    "TimeLimitEnable": true,
+    "MaximumGrade": 10
   }
 ]

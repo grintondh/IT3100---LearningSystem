@@ -200,7 +200,10 @@ namespace Learning_System
 
                 var _parentId = AddNewQuestionForm_CategoryCbo.SelectedValue;
                 var _name = AddNewQuestionForm_NameTxt.Text;
-                var _content = AddNewQuestionForm_TextRtb.Rtf;
+                string _content;
+                if (AddNewQuestionForm_TextRtb.Rtf.Contains("\\pict"))
+                    _content = AddNewQuestionForm_TextRtb.Rtf;
+                else _content = AddNewQuestionForm_TextRtb.Text;
                 try
                 {
                     Convert.ToDouble(AddNewQuestionForm_MarkTxt.Text);
@@ -219,9 +222,13 @@ namespace Learning_System
                 {
                     if (richTextBoxes[i].TextLength != 0)
                     {
-                        QuestionChoice newChoice = new QuestionChoice()
+                        string _choiceContent;
+                        if (richTextBoxes[i].Rtf.Contains("\\pict"))
+                            _choiceContent = richTextBoxes[i].Rtf;
+                        else _choiceContent = richTextBoxes[i].Text;
+                        _choice.Add(new QuestionChoice()
                         {
-                            choice = richTextBoxes[i].Rtf,
+                            choice = _choiceContent,
                             mark = ConvertComboboxTextToDouble(combobox[i].Text)
                         };
                         _choice.Add(newChoice);

@@ -71,12 +71,15 @@ namespace Learning_System
                             MaximumSize = new Size(500, 0)
                         };
 
+                        int id = _DT.Rows[i].Field<int>("Id");
                         linklbl.Click += new EventHandler((sender, args) =>
                         {
                             Settings.Default["ChoosingContest"] = linklbl.Text;
                             Settings.Default.Save();
-
-                            MessageBox.Show(Settings.Default.ChoosingContest, "Success", MessageBoxButtons.OK);
+                            ContestForm contestForm = new ContestForm(id);
+                            this.Hide();
+                            contestForm.ShowDialog();
+                            this.Show();
                         });
 
                         System.ComponentModel.ComponentResourceManager resources = new(typeof(HomePageForm));

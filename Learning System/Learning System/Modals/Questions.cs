@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Learning_System.Modals
 {
-    internal class Questions
+    public class Questions
     {
         public int ID { get; set; }
         public string? Name { get; set; }
@@ -17,7 +17,7 @@ namespace Learning_System.Modals
         public List<QuestionChoice> Choice { get; set; } = new List<QuestionChoice>();
     }
 
-    internal class QuestionChoice
+    public class QuestionChoice
     {
         public string? choice { get; set; }
         public double mark { get; set; }

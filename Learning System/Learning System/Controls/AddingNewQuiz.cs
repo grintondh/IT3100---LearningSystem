@@ -105,6 +105,7 @@ public partial class AddingNewQuiz : Form
                     EndEnable = _closeEnable,
                     TimeLimit = _timeLimit,
                     TimeLimitEnable = _timeLimitEnable,
+                    MaximumGrade = 10
                 };
 
                 if (ContestsTable.table.Insert(JObject.FromObject(_newQuiz)) == DataProcessing.StatusCode.Error)
@@ -112,7 +113,6 @@ public partial class AddingNewQuiz : Form
 
                 JsonProcessing.ExportJsonContentInDefaultFolder("Contest.json", ContestsTable.table.Export());
                 MessageBox.Show("Add new contest successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 AddNewQuizForm_NameTxt.Text = "";
                 AddNewQuizFormTxt_Description.Text = "";
                 AddNewQuizForm_Timelimit.Text = "";
@@ -122,6 +122,7 @@ public partial class AddingNewQuiz : Form
                 MessageBox.Show("Thêm phần tử thất bại!\nChi tiết lỗi:\n" + ex.Message, "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        this.Close();
     }
 
     private void TimeLimit_KeyPress(object sender, KeyPressEventArgs e)
