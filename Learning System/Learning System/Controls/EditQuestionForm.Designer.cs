@@ -388,6 +388,7 @@
             Controls.Add(panel3);
             Name = "EditQuestionForm";
             WindowState = FormWindowState.Maximized;
+            FormBorderStyle = FormBorderStyle.None;
             panel_heading.ResumeLayout(false);
             panel_heading.PerformLayout();
             panel_body.ResumeLayout(false);

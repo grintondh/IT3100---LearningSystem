@@ -399,6 +399,7 @@ namespace Learning_System
             Controls.Add(panel_heading);
             Controls.Add(panel3);
             Name = "AddNewQuestionForm";
+            FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
             panel_heading.ResumeLayout(false);
             panel_heading.PerformLayout();

@@ -26,7 +26,7 @@ namespace Learning_System
         [Obsolete]
         private void ExportForm_ExportBtn_Click(object sender, EventArgs e)
         {
-            ExportForm_progressLabel.Text = "Processing... ";
+            ExportForm_progressLabel.Text = "Processing. It can be lagged during this phase but please don't interupt...";
 
             QuestionsTable.table.LoadData(JsonProcessing.QuestionsPath);
             DataTable = QuestionsTable.table.Init().Get();
@@ -238,7 +238,7 @@ namespace Learning_System
 
             // Add character to option
             Regex rgxAddOptionOpen = new Regex(@"><p");
-            htmlDoc = rgxAddOptionOpen.Replace(htmlDoc, ">-<span>" + option + "</span><span", 1);
+            htmlDoc = rgxAddOptionOpen.Replace(htmlDoc, "><span>" + option + "</span><span", 1);
 
             Regex rgxAddOptionClose = new Regex(@"</p><");
             htmlDoc = rgxAddOptionClose.Replace(htmlDoc, "</span><", 1);

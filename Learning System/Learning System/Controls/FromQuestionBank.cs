@@ -236,11 +236,14 @@ namespace Learning_System
                 // Select "Select All" cell
                 if (e.RowIndex == -1 && e.ColumnIndex == 0)
                 {
+                    if (FromQuestionBank_ShowQuestionsDtg.Rows.Count == 0)
+                        return;
+
                     FromQuestionBank_ShowQuestionsDtg.CurrentCell = FromQuestionBank_ShowQuestionsDtg.CurrentRow.Cells[1];
                     foreach (DataGridViewRow row in FromQuestionBank_ShowQuestionsDtg.Rows)
                     {
                         DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[0];
-                        if (chk.Value == null || chk.Value == (object)false)
+                        if (chk.Value == null || Convert.ToBoolean(chk.Value) == false)
                             chk.Value = (object)true;
                         else
                             chk.Value = (object)false;

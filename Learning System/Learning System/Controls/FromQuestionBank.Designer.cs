@@ -1,4 +1,5 @@
-﻿namespace Learning_System
+﻿
+namespace Learning_System
 {
     partial class FromQuestionBank
     {
@@ -91,6 +92,7 @@
             FromQuestionBank_ShowQuestionsDtg.AllowUserToDeleteRows = false;
             FromQuestionBank_ShowQuestionsDtg.AllowUserToResizeColumns = false;
             FromQuestionBank_ShowQuestionsDtg.AllowUserToResizeRows = false;
+            FromQuestionBank_ShowQuestionsDtg.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             FromQuestionBank_ShowQuestionsDtg.BackgroundColor = SystemColors.ButtonHighlight;
             FromQuestionBank_ShowQuestionsDtg.BorderStyle = BorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -125,7 +127,7 @@
             FromQuestionBank_ShowQuestionsDtg.RowHeadersVisible = false;
             FromQuestionBank_ShowQuestionsDtg.RowHeadersWidth = 4;
             FromQuestionBank_ShowQuestionsDtg.RowTemplate.Height = 33;
-            FromQuestionBank_ShowQuestionsDtg.Size = new Size(1081, 434);
+            FromQuestionBank_ShowQuestionsDtg.Size = new Size(1236, 434);
             FromQuestionBank_ShowQuestionsDtg.TabIndex = 36;
             FromQuestionBank_ShowQuestionsDtg.CellClick += FromQuestionBank_ShowQuestionsDtg_CellClick;
             // 
@@ -218,7 +220,7 @@
             Checkbox.Name = "Checkbox";
             Checkbox.Resizable = DataGridViewTriState.False;
             Checkbox.ToolTipText = "Chọn tất cả các câu hỏi";
-            Checkbox.Width = 105;
+            Checkbox.Width = 110;
             // 
             // Content
             // 
@@ -227,7 +229,7 @@
             Content.Name = "Content";
             Content.ReadOnly = true;
             Content.SortMode = DataGridViewColumnSortMode.NotSortable;
-            Content.Width = 700;
+            Content.Width = 1050;
             // 
             // QuestionID
             // 
