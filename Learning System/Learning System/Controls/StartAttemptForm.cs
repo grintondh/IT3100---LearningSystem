@@ -24,7 +24,7 @@ namespace Learning_System
             InitializeComponent();
             this.contestForm = contestForm;
             timeLimit = contestForm.timeLimit;
-            questionsData = contestForm.questionsData;
+            questionsData = QuestionsTable.table;
             this.questionID = questionID;
             nameContest = contestForm.nameContest;
             if (contestForm.TimeLimitEnable == true)

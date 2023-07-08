@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartAttemptForm));
             panel_main = new Panel();
+            button1 = new Button();
             NotiTxt = new TextBox();
             panel1 = new Panel();
             CancelBtn = new Button();
@@ -42,6 +43,7 @@
             // panel_main
             // 
             panel_main.BorderStyle = BorderStyle.FixedSingle;
+            panel_main.Controls.Add(button1);
             panel_main.Controls.Add(NotiTxt);
             panel_main.Controls.Add(panel1);
             panel_main.Controls.Add(CancelBtn);
@@ -54,12 +56,27 @@
             panel_main.Size = new Size(742, 391);
             panel_main.TabIndex = 9;
             // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button1.BackColor = Color.FromArgb(194, 36, 36);
+            button1.Cursor = Cursors.Hand;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(476, 300);
+            button1.Name = "button1";
+            button1.Size = new Size(253, 54);
+            button1.TabIndex = 16;
+            button1.Text = "EXPORT QUESTIONS";
+            button1.UseVisualStyleBackColor = false;
+            // 
             // NotiTxt
             // 
             NotiTxt.BackColor = Color.White;
             NotiTxt.BorderStyle = BorderStyle.None;
             NotiTxt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            NotiTxt.Location = new Point(22, 171);
+            NotiTxt.Location = new Point(22, 168);
             NotiTxt.Multiline = true;
             NotiTxt.Name = "NotiTxt";
             NotiTxt.ReadOnly = true;
@@ -83,7 +100,7 @@
             CancelBtn.FlatStyle = FlatStyle.Flat;
             CancelBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             CancelBtn.ForeColor = Color.White;
-            CancelBtn.Location = new Point(226, 316);
+            CancelBtn.Location = new Point(241, 300);
             CancelBtn.Name = "CancelBtn";
             CancelBtn.Size = new Size(169, 54);
             CancelBtn.TabIndex = 13;
@@ -99,7 +116,7 @@
             StartBtn.FlatStyle = FlatStyle.Flat;
             StartBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             StartBtn.ForeColor = Color.White;
-            StartBtn.Location = new Point(10, 316);
+            StartBtn.Location = new Point(22, 300);
             StartBtn.Name = "StartBtn";
             StartBtn.Size = new Size(210, 54);
             StartBtn.TabIndex = 12;
@@ -121,10 +138,10 @@
             // HeaderLbl
             // 
             HeaderLbl.AutoSize = true;
-            HeaderLbl.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point);
-            HeaderLbl.Location = new Point(3, 17);
+            HeaderLbl.Font = new Font("Segoe UI", 21F, FontStyle.Regular, GraphicsUnit.Point);
+            HeaderLbl.Location = new Point(22, 17);
             HeaderLbl.Name = "HeaderLbl";
-            HeaderLbl.Size = new Size(219, 46);
+            HeaderLbl.Size = new Size(225, 47);
             HeaderLbl.TabIndex = 9;
             HeaderLbl.Text = "Start attempt";
             // 
@@ -151,7 +168,8 @@
         private Button CancelBtn;
         private Button StartBtn;
         private Label TimeLbl;
-        private Label HeaderLbl;
         private TextBox NotiTxt;
+        private Button button1;
+        private Label HeaderLbl;
     }
 }

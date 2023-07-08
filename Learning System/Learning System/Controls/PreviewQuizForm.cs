@@ -1,15 +1,7 @@
 ﻿using Learning_System.Modals;
 using Learning_System.ProcessingClasses;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Learning_System
 {
@@ -38,7 +30,7 @@ namespace Learning_System
             panel_QuestionBtn.AutoScroll = true;
             this.contestForm = contestForm;
             this.timeLimit = contestForm.timeLimit;
-            this.questionsData = contestForm.questionsData;
+            this.questionsData = QuestionsTable.table;
             this.questionID = questionID;
             PathLbl.Text += "  /  " + contestForm.nameContest + "  /  Preview";
             numberOfQuestion = questionID.Count;

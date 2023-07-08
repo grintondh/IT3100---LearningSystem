@@ -12,6 +12,9 @@ namespace Learning_System
         {
             InitializeDataTable();
             InitializeComponent();
+
+            notifyIcon1.ShowBalloonTip(10000);
+
             LoadContestList();
         }
 
@@ -33,10 +36,10 @@ namespace Learning_System
             QuestionsTable.table.Import(showColumns, showType, showKey);
 
             showColumns = new() { "Id", "Name", "Description", "DescriptionShow", "QuestionArray", "ShuffleAnswer",
-                                               "TimeStart", "StartEnable", "TimeEnd", "EndEnable", "TimeLimit", "TimeLimitEnable"};
+                                               "TimeStart", "StartEnable", "TimeEnd", "EndEnable", "TimeLimit", "TimeLimitEnable", "MaximumGrade"};
             showType = new() { typeof(int), typeof(string), typeof(string), typeof(bool), typeof(JArray), typeof(bool),
-                                          typeof(DateTime), typeof(bool), typeof(DateTime), typeof(bool), typeof(int), typeof(bool)};
-            showKey = new() { "PRIMARY KEY", "NOT NULL", "", "", "", "", "NOT NULL", "NOT NULL", "NOT NULL", "NOT NULL", "NOT NULL", "NOT NULL" };
+                                          typeof(DateTime), typeof(bool), typeof(DateTime), typeof(bool), typeof(int), typeof(bool), typeof(double)};
+            showKey = new() { "PRIMARY KEY", "NOT NULL", "", "", "", "", "NOT NULL", "NOT NULL", "NOT NULL", "NOT NULL", "NOT NULL", "NOT NULL", "NOT NULL" };
 
             ContestsTable.table.Import(showColumns, showType, showKey);
         }
@@ -74,9 +77,9 @@ namespace Learning_System
                         int id = _DT.Rows[i].Field<int>("Id");
                         linklbl.Click += new EventHandler((sender, args) =>
                         {
-                            Settings.Default["ChoosingContest"] = linklbl.Text;
+                            Settings.Default["ChoosingContest"] = id;
                             Settings.Default.Save();
-                            ContestForm contestForm = new ContestForm(id);
+                            ContestForm contestForm = new();
                             this.Hide();
                             contestForm.ShowDialog();
                             this.Show();

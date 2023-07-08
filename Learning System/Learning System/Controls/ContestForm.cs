@@ -1,14 +1,8 @@
 ﻿using Learning_System.ProcessingClasses;
 using Learning_System.Modals;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Learning_System.Properties;
 using System.Windows.Forms;
 
 namespace Learning_System
@@ -20,16 +14,25 @@ namespace Learning_System
         public string nameContest;
         public int timeLimit;
         public bool TimeLimitEnable;
-        public ContestForm(int contestID)
+
+        public ContestForm()
         {
             InitializeComponent();
+
             timeStart = DateTime.Now;
-            this.ContestID = contestID;
+
+            ContestID = Settings.Default.ChoosingContest;
+
+            DataProcessing questionsData = QuestionsTable.table;
+            DataProcessing categoriesData = CategoriesTable.table;
+
             loadQuestionData();
             loadCategoryData();
+
             editQuiz = new EditQuiz(this);
             panel_body.Controls.Add(editQuiz);
             editQuiz.Dock = DockStyle.Fill;
+
             editQuiz.addData(questionsData, categoriesData);
             loadContestData();
             editQuiz.addContestData(contestData);
@@ -44,23 +47,17 @@ namespace Learning_System
             ContestForm_PathLbl.Text = "Home  /  My courses  /  THI CUỐI KỲ  /  General  /  " + nameContest + "  /  Edit quiz";
         }
 
-        public DataProcessing questionsData = new();
-        private DataProcessing categoriesData = new();
-        private JArray _categoriesDataJarray = new();
-        private System.Data.DataTable contestDataTable = new();
+        private JArray? _categoriesDataJarray = new();
         private DataProcessing contestData = new();
         public int ContestID;
 
         private void loadQuestionData()
         {
-            JArray _questionsData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
+            JArray? _questionsData = JsonProcessing.ImportJsonContentInDefaultFolder("Question.json", null, null);
             if (_questionsData == null)
                 throw new E01CantFindFile();
-            List<string> showColumns_questions = new List<string> { "ID", "Name", "CategoryID", "Content", "DefaultMark", "Choice" };
-            List<Type> showType_questions = new List<Type> { typeof(int), typeof(string), typeof(int), typeof(string), typeof(double), typeof(JArray) };
-            List<string> showKey_questions = new List<string>() { "PRIMARY KEY", "NOT NULL", "", "NOT NULL", "NOT NULL", "" };
-            questionsData.Import(showColumns_questions, showType_questions, showKey_questions);
-            questionsData.Import(_questionsData);
+
+            QuestionsTable.table.Import(_questionsData);
         }
 
         private void loadCategoryData()
@@ -68,33 +65,29 @@ namespace Learning_System
             _categoriesDataJarray = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
             if (_categoriesDataJarray == null)
                 throw new E01CantFindFile();
-            List<string> showColumns = new() { "Id", "Name", "SubArray", "QuestionArray", "Description", "IdNumber" };
-            List<Type> showType = new() { typeof(int), typeof(string), typeof(JArray), typeof(JArray), typeof(string), typeof(string) };
-            List<string> showKey = new() { "PRIMARY KEY", "NOT NULL", "", "", "", "" };
-            categoriesData.Import(showColumns, showType, showKey);
-            categoriesData.Import(_categoriesDataJarray);
+
+            CategoriesTable.table.Import(_categoriesDataJarray);
         }
 
         private void loadContestData()
         {
-            JArray _contestData = JsonProcessing.ImportJsonContentInDefaultFolder("Contest.json", null, null);
+            JArray? _contestData = JsonProcessing.ImportJsonContentInDefaultFolder("Contest.json", null, null);
             if (_contestData == null)
                 throw new E01CantFindFile();
-            List<string> showColumns = new List<string>() { "Id", "Name", "Description", "DescriptionShow", "QuestionArray", "ShuffleAnswer",
-                                               "TimeStart", "StartEnable", "TimeEnd", "EndEnable", "TimeLimit", "TimeLimitEnable", "MaximumGrade"};
-            List<Type> showType = new() { typeof(int), typeof(string), typeof(string), typeof(bool), typeof(JArray), typeof(bool),
-                                 typeof(DateTime), typeof(bool), typeof(DateTime), typeof(bool), typeof(int), typeof(bool), typeof(double) };
-            List<string> showKey = new() { "PRIMARY KEY", "", "", "", "", "", "", "", "", "", "", "", "" };
-            contestData.Import(showColumns, showType, showKey);
-            contestData.Import(_contestData);
+            ContestsTable.table.Import(_contestData);
+
+
             List<string> query = new() { "Id", ContestID.ToString() };
-            DataRow row = contestData.Init().Offset(0).Limit(1).Query(query).GetFirstRow();
+            DataRow? row = ContestsTable.table.Init().Offset(0).Limit(1).Query(query).GetFirstRow();
             nameContest = row.Field<string>("Name");
+
             ContestForm_ContestNameLbl.Text = nameContest;
-            ContestForm_TimeLbl.Text = "Time limit: " + row.Field<int>("TimeLimit") + " minutes";
+            ContestForm_TimeLbl.Text = "Time limit: " + row.Field<int>("TimeLimit").ToString() + " minutes";
             timeLimit = row.Field<int>("TimeLimit");
+
             editQuiz.EditQuiz_ContestNameLbl.Text = "Editing quiz: " + nameContest;
             editQuiz.EditQuiz_ShuffleCbx.Checked = row.Field<bool>("ShuffleAnswer");
+
             if (row.Field<double>("MaximumGrade").ToString() == null || row.Field<double>("MaximumGrade").ToString() == "")
                 editQuiz.EditQuiz_MaxGradeTxt.Text = "10.00";
             else editQuiz.EditQuiz_MaxGradeTxt.Text = row.Field<double>("MaximumGrade").ToString();

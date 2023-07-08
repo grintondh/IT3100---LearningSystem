@@ -120,7 +120,7 @@
             FinishLbl.BackColor = Color.WhiteSmoke;
             FinishLbl.Cursor = Cursors.Hand;
             FinishLbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            FinishLbl.ForeColor = Color.Black;
+            FinishLbl.ForeColor = Color.Red;
             FinishLbl.Location = new Point(6, 342);
             FinishLbl.Name = "FinishLbl";
             FinishLbl.Size = new Size(154, 28);
@@ -131,11 +131,11 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             label7.ForeColor = Color.Black;
             label7.Location = new Point(7, 6);
             label7.Name = "label7";
-            label7.Size = new Size(80, 23);
+            label7.Size = new Size(89, 25);
             label7.TabIndex = 10;
             label7.Text = "Time left:";
             // 
@@ -143,12 +143,13 @@
             // 
             PreviousPageBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             PreviousPageBtn.BackColor = Color.FromArgb(0, 159, 229);
+            PreviousPageBtn.Cursor = Cursors.Hand;
             PreviousPageBtn.FlatStyle = FlatStyle.Flat;
             PreviousPageBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             PreviousPageBtn.ForeColor = Color.White;
-            PreviousPageBtn.Location = new Point(18, 3);
+            PreviousPageBtn.Location = new Point(32, 12);
             PreviousPageBtn.Name = "PreviousPageBtn";
-            PreviousPageBtn.Size = new Size(169, 42);
+            PreviousPageBtn.Size = new Size(169, 47);
             PreviousPageBtn.TabIndex = 14;
             PreviousPageBtn.Text = "Previous page";
             PreviousPageBtn.UseVisualStyleBackColor = false;
@@ -170,21 +171,22 @@
             panel_changePage.Controls.Add(PreviousPageBtn);
             panel_changePage.Controls.Add(NextPageBtn);
             panel_changePage.Dock = DockStyle.Bottom;
-            panel_changePage.Location = new Point(0, 256);
+            panel_changePage.Location = new Point(0, 233);
             panel_changePage.Name = "panel_changePage";
-            panel_changePage.Size = new Size(1000, 52);
+            panel_changePage.Size = new Size(1000, 75);
             panel_changePage.TabIndex = 8;
             // 
             // NextPageBtn
             // 
             NextPageBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             NextPageBtn.BackColor = Color.FromArgb(0, 159, 229);
+            NextPageBtn.Cursor = Cursors.Hand;
             NextPageBtn.FlatStyle = FlatStyle.Flat;
             NextPageBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             NextPageBtn.ForeColor = Color.White;
-            NextPageBtn.Location = new Point(801, 3);
+            NextPageBtn.Location = new Point(815, 12);
             NextPageBtn.Name = "NextPageBtn";
-            NextPageBtn.Size = new Size(169, 42);
+            NextPageBtn.Size = new Size(169, 47);
             NextPageBtn.TabIndex = 15;
             NextPageBtn.Text = "Next page";
             NextPageBtn.UseVisualStyleBackColor = false;
@@ -248,7 +250,6 @@
             // 
             panel_timeLeft.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             panel_timeLeft.BackColor = Color.White;
-            panel_timeLeft.BorderStyle = BorderStyle.FixedSingle;
             panel_timeLeft.Controls.Add(TimeLeftLbl);
             panel_timeLeft.Controls.Add(label7);
             panel_timeLeft.ForeColor = SystemColors.ControlText;
@@ -261,11 +262,11 @@
             // TimeLeftLbl
             // 
             TimeLeftLbl.AutoSize = true;
-            TimeLeftLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            TimeLeftLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             TimeLeftLbl.ForeColor = Color.Black;
             TimeLeftLbl.Location = new Point(92, 6);
             TimeLeftLbl.Name = "TimeLeftLbl";
-            TimeLeftLbl.Size = new Size(60, 23);
+            TimeLeftLbl.Size = new Size(66, 25);
             TimeLeftLbl.TabIndex = 11;
             TimeLeftLbl.Text = "60 : 00";
             // 
@@ -285,141 +286,141 @@
             panel_Review.Controls.Add(label2);
             panel_Review.Controls.Add(label1);
             panel_Review.Dock = DockStyle.Bottom;
-            panel_Review.Location = new Point(0, 42);
+            panel_Review.Location = new Point(0, 43);
             panel_Review.Name = "panel_Review";
-            panel_Review.Size = new Size(1000, 155);
+            panel_Review.Size = new Size(1000, 154);
             panel_Review.TabIndex = 0;
             panel_Review.Visible = false;
             // 
             // GradeLbl
             // 
             GradeLbl.AutoSize = true;
-            GradeLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            GradeLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             GradeLbl.ForeColor = Color.Black;
-            GradeLbl.Location = new Point(152, 127);
+            GradeLbl.Location = new Point(152, 124);
             GradeLbl.Name = "GradeLbl";
-            GradeLbl.Size = new Size(56, 23);
+            GradeLbl.Size = new Size(63, 25);
             GradeLbl.TabIndex = 14;
             GradeLbl.Text = "Grade";
             // 
             // MarkLbl
             // 
             MarkLbl.AutoSize = true;
-            MarkLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            MarkLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             MarkLbl.ForeColor = Color.Black;
-            MarkLbl.Location = new Point(152, 103);
+            MarkLbl.Location = new Point(152, 100);
             MarkLbl.Name = "MarkLbl";
-            MarkLbl.Size = new Size(55, 23);
+            MarkLbl.Size = new Size(63, 25);
             MarkLbl.TabIndex = 13;
             MarkLbl.Text = "Marks";
             // 
             // TimeTakenLbl
             // 
             TimeTakenLbl.AutoSize = true;
-            TimeTakenLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            TimeTakenLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             TimeTakenLbl.ForeColor = Color.Black;
-            TimeTakenLbl.Location = new Point(152, 79);
+            TimeTakenLbl.Location = new Point(152, 76);
             TimeTakenLbl.Name = "TimeTakenLbl";
-            TimeTakenLbl.Size = new Size(94, 23);
+            TimeTakenLbl.Size = new Size(104, 25);
             TimeTakenLbl.TabIndex = 12;
             TimeTakenLbl.Text = "Time taken";
             // 
             // FinishTimeLbl
             // 
             FinishTimeLbl.AutoSize = true;
-            FinishTimeLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            FinishTimeLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             FinishTimeLbl.ForeColor = Color.Black;
-            FinishTimeLbl.Location = new Point(152, 55);
+            FinishTimeLbl.Location = new Point(152, 52);
             FinishTimeLbl.Name = "FinishTimeLbl";
-            FinishTimeLbl.Size = new Size(119, 23);
+            FinishTimeLbl.Size = new Size(131, 25);
             FinishTimeLbl.TabIndex = 11;
             FinishTimeLbl.Text = "Completed on";
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label11.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             label11.ForeColor = Color.Black;
-            label11.Location = new Point(152, 31);
+            label11.Location = new Point(152, 28);
             label11.Name = "label11";
-            label11.Size = new Size(72, 23);
+            label11.Size = new Size(82, 25);
             label11.TabIndex = 10;
             label11.Text = "Finished";
             // 
             // StartTimeLbl
             // 
             StartTimeLbl.AutoSize = true;
-            StartTimeLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            StartTimeLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             StartTimeLbl.ForeColor = Color.Black;
-            StartTimeLbl.Location = new Point(152, 7);
+            StartTimeLbl.Location = new Point(152, 4);
             StartTimeLbl.Name = "StartTimeLbl";
-            StartTimeLbl.Size = new Size(89, 23);
+            StartTimeLbl.Size = new Size(98, 25);
             StartTimeLbl.TabIndex = 9;
             StartTimeLbl.Text = "Started on";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.FromArgb(194, 36, 36);
-            label6.Location = new Point(7, 127);
+            label6.Location = new Point(7, 124);
             label6.Name = "label6";
-            label6.Size = new Size(58, 23);
+            label6.Size = new Size(66, 25);
             label6.TabIndex = 8;
             label6.Text = "Grade";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = Color.FromArgb(194, 36, 36);
-            label5.Location = new Point(7, 103);
+            label5.Location = new Point(7, 100);
             label5.Name = "label5";
-            label5.Size = new Size(59, 23);
+            label5.Size = new Size(67, 25);
             label5.TabIndex = 7;
             label5.Text = "Marks";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.FromArgb(194, 36, 36);
-            label4.Location = new Point(7, 79);
+            label4.Location = new Point(7, 76);
             label4.Name = "label4";
-            label4.Size = new Size(100, 23);
+            label4.Size = new Size(110, 25);
             label4.TabIndex = 6;
             label4.Text = "Time taken";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.FromArgb(194, 36, 36);
-            label3.Location = new Point(7, 55);
+            label3.Location = new Point(7, 52);
             label3.Name = "label3";
-            label3.Size = new Size(124, 23);
+            label3.Size = new Size(138, 25);
             label3.TabIndex = 5;
             label3.Text = "Completed on";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.FromArgb(194, 36, 36);
-            label2.Location = new Point(7, 31);
+            label2.Location = new Point(7, 28);
             label2.Name = "label2";
-            label2.Size = new Size(52, 23);
+            label2.Size = new Size(57, 25);
             label2.TabIndex = 4;
             label2.Text = "State";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.FromArgb(194, 36, 36);
-            label1.Location = new Point(7, 7);
+            label1.Location = new Point(7, 4);
             label1.Name = "label1";
-            label1.Size = new Size(95, 23);
+            label1.Size = new Size(107, 25);
             label1.TabIndex = 3;
             label1.Text = "Started on";
             // 
@@ -438,6 +439,7 @@
             Controls.Add(panel_right);
             Controls.Add(panel_heading);
             Controls.Add(panel_top);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "PreviewQuizForm";
             Text = "PreviewQuizForm";
             WindowState = FormWindowState.Maximized;

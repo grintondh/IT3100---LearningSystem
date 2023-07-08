@@ -1,4 +1,6 @@
-﻿namespace Learning_System
+﻿using System.Windows.Forms;
+
+namespace Learning_System
 {
     partial class ContestForm
     {
@@ -28,6 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContestForm));
             panel1 = new Panel();
             ContestForm_MenuPic = new PictureBox();
@@ -42,6 +45,7 @@
             ContestForm_TimeLbl = new Label();
             ContestForm_EditPic = new PictureBox();
             ContestForm_ContestNameLbl = new Label();
+            ContestForm_Tooltip = new ToolTip(components);
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ContestForm_MenuPic).BeginInit();
             panel_heading.SuspendLayout();
@@ -71,6 +75,7 @@
             ContestForm_MenuPic.SizeMode = PictureBoxSizeMode.Zoom;
             ContestForm_MenuPic.TabIndex = 5;
             ContestForm_MenuPic.TabStop = false;
+            ContestForm_Tooltip.SetToolTip(ContestForm_MenuPic, "Click here to return home page");
             ContestForm_MenuPic.Click += ContestForm_MenuPic_Click;
             // 
             // panel_heading
@@ -132,15 +137,15 @@
             // 
             // ContestForm_PreviewQuizBtn
             // 
-            ContestForm_PreviewQuizBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            ContestForm_PreviewQuizBtn.Anchor = AnchorStyles.Bottom;
             ContestForm_PreviewQuizBtn.BackColor = Color.FromArgb(0, 159, 229);
             ContestForm_PreviewQuizBtn.Cursor = Cursors.Hand;
             ContestForm_PreviewQuizBtn.FlatStyle = FlatStyle.Flat;
             ContestForm_PreviewQuizBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             ContestForm_PreviewQuizBtn.ForeColor = Color.White;
-            ContestForm_PreviewQuizBtn.Location = new Point(1121, 417);
+            ContestForm_PreviewQuizBtn.Location = new Point(589, 305);
             ContestForm_PreviewQuizBtn.Name = "ContestForm_PreviewQuizBtn";
-            ContestForm_PreviewQuizBtn.Size = new Size(266, 54);
+            ContestForm_PreviewQuizBtn.Size = new Size(262, 54);
             ContestForm_PreviewQuizBtn.TabIndex = 6;
             ContestForm_PreviewQuizBtn.Text = "PREVIEW QUIZ NOW";
             ContestForm_PreviewQuizBtn.UseVisualStyleBackColor = false;
@@ -159,25 +164,27 @@
             // 
             // ContestForm_GradingMethodLbl
             // 
-            ContestForm_GradingMethodLbl.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            ContestForm_GradingMethodLbl.Anchor = AnchorStyles.Top;
             ContestForm_GradingMethodLbl.AutoSize = true;
-            ContestForm_GradingMethodLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            ContestForm_GradingMethodLbl.Location = new Point(1146, 141);
+            ContestForm_GradingMethodLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            ContestForm_GradingMethodLbl.Location = new Point(576, 162);
             ContestForm_GradingMethodLbl.Name = "ContestForm_GradingMethodLbl";
-            ContestForm_GradingMethodLbl.Size = new Size(241, 23);
+            ContestForm_GradingMethodLbl.Size = new Size(262, 25);
             ContestForm_GradingMethodLbl.TabIndex = 3;
             ContestForm_GradingMethodLbl.Text = "Grading method: Last attempt";
+            ContestForm_GradingMethodLbl.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // ContestForm_TimeLbl
             // 
-            ContestForm_TimeLbl.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            ContestForm_TimeLbl.Anchor = AnchorStyles.Top;
             ContestForm_TimeLbl.AutoSize = true;
-            ContestForm_TimeLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            ContestForm_TimeLbl.Location = new Point(1243, 103);
+            ContestForm_TimeLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            ContestForm_TimeLbl.Location = new Point(612, 119);
             ContestForm_TimeLbl.Name = "ContestForm_TimeLbl";
-            ContestForm_TimeLbl.Size = new Size(144, 23);
+            ContestForm_TimeLbl.Size = new Size(206, 25);
             ContestForm_TimeLbl.TabIndex = 2;
-            ContestForm_TimeLbl.Text = "Time limit: 1 hour";
+            ContestForm_TimeLbl.Text = "Time limit: 999 minutes";
+            ContestForm_TimeLbl.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // ContestForm_EditPic
             // 
@@ -207,10 +214,14 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
             ClientSize = new Size(1409, 711);
             Controls.Add(panel_body);
             Controls.Add(panel_heading);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.None;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "ContestForm";
             Text = "ContestForm";
             WindowState = FormWindowState.Maximized;
@@ -240,5 +251,6 @@
         private Label ContestForm_TimeLbl;
         private PictureBox ContestForm_EditPic;
         private PictureBox ContestForm_MenuPic;
+        private ToolTip ContestForm_Tooltip;
     }
 }
