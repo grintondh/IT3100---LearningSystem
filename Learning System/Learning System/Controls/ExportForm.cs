@@ -238,7 +238,8 @@ namespace Learning_System
 
             // Add character to option
             Regex rgxAddOptionOpen = new Regex(@"><p");
-            htmlDoc = rgxAddOptionOpen.Replace(htmlDoc, "><span>" + option + "</span><span", 1);
+            htmlDoc = rgxAddOptionOpen.Replace(htmlDoc, ">-<span>" + option + "</span><span", 1);
+
             Regex rgxAddOptionClose = new Regex(@"</p><");
             htmlDoc = rgxAddOptionClose.Replace(htmlDoc, "</span><", 1);
 

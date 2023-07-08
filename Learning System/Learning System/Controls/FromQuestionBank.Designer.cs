@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             panel1 = new Panel();
             FromQuestionBank_ExitBtn = new Button();
             FromQuestionBank_ShowQuestionsDtg = new DataGridView();
-            Checkbox = new DataGridViewCheckBoxColumn();
-            Content = new DataGridViewTextBoxColumn();
-            QuestionID = new DataGridViewTextBoxColumn();
             FromQuestionBank_AddBtn = new Button();
             FromQuestionBank_OldQuestionCbx = new CheckBox();
             FromQuestionBank_SubcategoriesCbx = new CheckBox();
@@ -41,6 +41,9 @@
             FromQuestionBank_SelectCategoryCbo = new ComboBox();
             FromQuestionBank_CategoryLbl = new Label();
             FromQuestionBank_Header = new Label();
+            Checkbox = new DataGridViewCheckBoxColumn();
+            Content = new DataGridViewTextBoxColumn();
+            QuestionID = new DataGridViewTextBoxColumn();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)FromQuestionBank_ShowQuestionsDtg).BeginInit();
             SuspendLayout();
@@ -67,16 +70,18 @@
             // 
             // FromQuestionBank_ExitBtn
             // 
-            FromQuestionBank_ExitBtn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            FromQuestionBank_ExitBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             FromQuestionBank_ExitBtn.AutoSize = true;
             FromQuestionBank_ExitBtn.BackColor = SystemColors.ControlLight;
+            FromQuestionBank_ExitBtn.BackgroundImageLayout = ImageLayout.Center;
             FromQuestionBank_ExitBtn.Cursor = Cursors.Hand;
-            FromQuestionBank_ExitBtn.ForeColor = SystemColors.ControlDarkDark;
-            FromQuestionBank_ExitBtn.Location = new Point(1370, 17);
+            FromQuestionBank_ExitBtn.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            FromQuestionBank_ExitBtn.ForeColor = SystemColors.ActiveCaptionText;
+            FromQuestionBank_ExitBtn.Location = new Point(440, 695);
             FromQuestionBank_ExitBtn.Name = "FromQuestionBank_ExitBtn";
-            FromQuestionBank_ExitBtn.Size = new Size(28, 30);
+            FromQuestionBank_ExitBtn.Size = new Size(121, 50);
             FromQuestionBank_ExitBtn.TabIndex = 34;
-            FromQuestionBank_ExitBtn.Text = "X";
+            FromQuestionBank_ExitBtn.Text = "Cancel";
             FromQuestionBank_ExitBtn.UseVisualStyleBackColor = false;
             FromQuestionBank_ExitBtn.Click += RandomQuestion_ExitBtn_Click;
             // 
@@ -88,53 +93,53 @@
             FromQuestionBank_ShowQuestionsDtg.AllowUserToResizeRows = false;
             FromQuestionBank_ShowQuestionsDtg.BackgroundColor = SystemColors.ButtonHighlight;
             FromQuestionBank_ShowQuestionsDtg.BorderStyle = BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            FromQuestionBank_ShowQuestionsDtg.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             FromQuestionBank_ShowQuestionsDtg.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             FromQuestionBank_ShowQuestionsDtg.Columns.AddRange(new DataGridViewColumn[] { Checkbox, Content, QuestionID });
-            FromQuestionBank_ShowQuestionsDtg.Location = new Point(14, 282);
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            FromQuestionBank_ShowQuestionsDtg.DefaultCellStyle = dataGridViewCellStyle2;
+            FromQuestionBank_ShowQuestionsDtg.Location = new Point(14, 243);
             FromQuestionBank_ShowQuestionsDtg.Margin = new Padding(2);
             FromQuestionBank_ShowQuestionsDtg.Name = "FromQuestionBank_ShowQuestionsDtg";
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            FromQuestionBank_ShowQuestionsDtg.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             FromQuestionBank_ShowQuestionsDtg.RowHeadersVisible = false;
             FromQuestionBank_ShowQuestionsDtg.RowHeadersWidth = 4;
             FromQuestionBank_ShowQuestionsDtg.RowTemplate.Height = 33;
-            FromQuestionBank_ShowQuestionsDtg.Size = new Size(1085, 363);
+            FromQuestionBank_ShowQuestionsDtg.Size = new Size(1081, 434);
             FromQuestionBank_ShowQuestionsDtg.TabIndex = 36;
-            // 
-            // Checkbox
-            // 
-            Checkbox.HeaderText = "";
-            Checkbox.MinimumWidth = 8;
-            Checkbox.Name = "Checkbox";
-            Checkbox.Resizable = DataGridViewTriState.False;
-            Checkbox.SortMode = DataGridViewColumnSortMode.NotSortable;
-            Checkbox.Width = 60;
-            // 
-            // Content
-            // 
-            Content.HeaderText = "Câu hỏi";
-            Content.MinimumWidth = 8;
-            Content.Name = "Content";
-            Content.ReadOnly = true;
-            Content.SortMode = DataGridViewColumnSortMode.NotSortable;
-            Content.Width = 1019;
-            // 
-            // QuestionID
-            // 
-            QuestionID.HeaderText = "QuestionID";
-            QuestionID.MinimumWidth = 8;
-            QuestionID.Name = "QuestionID";
-            QuestionID.Visible = false;
-            QuestionID.Width = 150;
+            FromQuestionBank_ShowQuestionsDtg.CellClick += FromQuestionBank_ShowQuestionsDtg_CellClick;
             // 
             // FromQuestionBank_AddBtn
             // 
+            FromQuestionBank_AddBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             FromQuestionBank_AddBtn.BackColor = Color.FromArgb(0, 115, 165);
             FromQuestionBank_AddBtn.Cursor = Cursors.Hand;
             FromQuestionBank_AddBtn.FlatStyle = FlatStyle.Flat;
             FromQuestionBank_AddBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             FromQuestionBank_AddBtn.ForeColor = Color.White;
-            FromQuestionBank_AddBtn.Location = new Point(14, 705);
+            FromQuestionBank_AddBtn.Location = new Point(14, 695);
             FromQuestionBank_AddBtn.Name = "FromQuestionBank_AddBtn";
-            FromQuestionBank_AddBtn.Size = new Size(420, 40);
+            FromQuestionBank_AddBtn.Size = new Size(420, 50);
             FromQuestionBank_AddBtn.TabIndex = 35;
             FromQuestionBank_AddBtn.Text = "ADD SELECTED QUESTIONS TO THE QUIZ";
             FromQuestionBank_AddBtn.UseVisualStyleBackColor = false;
@@ -143,10 +148,10 @@
             // FromQuestionBank_OldQuestionCbx
             // 
             FromQuestionBank_OldQuestionCbx.AutoSize = true;
-            FromQuestionBank_OldQuestionCbx.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            FromQuestionBank_OldQuestionCbx.Location = new Point(14, 250);
+            FromQuestionBank_OldQuestionCbx.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            FromQuestionBank_OldQuestionCbx.Location = new Point(18, 209);
             FromQuestionBank_OldQuestionCbx.Name = "FromQuestionBank_OldQuestionCbx";
-            FromQuestionBank_OldQuestionCbx.Size = new Size(215, 27);
+            FromQuestionBank_OldQuestionCbx.Size = new Size(237, 29);
             FromQuestionBank_OldQuestionCbx.TabIndex = 34;
             FromQuestionBank_OldQuestionCbx.Text = "Also show old questions";
             FromQuestionBank_OldQuestionCbx.UseVisualStyleBackColor = true;
@@ -154,10 +159,10 @@
             // FromQuestionBank_SubcategoriesCbx
             // 
             FromQuestionBank_SubcategoriesCbx.AutoSize = true;
-            FromQuestionBank_SubcategoriesCbx.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            FromQuestionBank_SubcategoriesCbx.Location = new Point(14, 219);
+            FromQuestionBank_SubcategoriesCbx.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            FromQuestionBank_SubcategoriesCbx.Location = new Point(18, 178);
             FromQuestionBank_SubcategoriesCbx.Name = "FromQuestionBank_SubcategoriesCbx";
-            FromQuestionBank_SubcategoriesCbx.Size = new Size(337, 27);
+            FromQuestionBank_SubcategoriesCbx.Size = new Size(372, 29);
             FromQuestionBank_SubcategoriesCbx.TabIndex = 33;
             FromQuestionBank_SubcategoriesCbx.Text = "Also show questions form subcategories";
             FromQuestionBank_SubcategoriesCbx.UseVisualStyleBackColor = true;
@@ -166,21 +171,21 @@
             // FromQuestionBank_OptionLbl
             // 
             FromQuestionBank_OptionLbl.AutoSize = true;
-            FromQuestionBank_OptionLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            FromQuestionBank_OptionLbl.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             FromQuestionBank_OptionLbl.ForeColor = Color.FromArgb(44, 171, 230);
-            FromQuestionBank_OptionLbl.Location = new Point(14, 191);
+            FromQuestionBank_OptionLbl.Location = new Point(14, 150);
             FromQuestionBank_OptionLbl.Name = "FromQuestionBank_OptionLbl";
-            FromQuestionBank_OptionLbl.Size = new Size(128, 23);
+            FromQuestionBank_OptionLbl.Size = new Size(144, 25);
             FromQuestionBank_OptionLbl.TabIndex = 32;
             FromQuestionBank_OptionLbl.Text = "Search options";
             // 
             // FromQuestionBank_SelectCategoryCbo
             // 
-            FromQuestionBank_SelectCategoryCbo.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            FromQuestionBank_SelectCategoryCbo.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             FromQuestionBank_SelectCategoryCbo.FormattingEnabled = true;
-            FromQuestionBank_SelectCategoryCbo.Location = new Point(164, 90);
+            FromQuestionBank_SelectCategoryCbo.Location = new Point(179, 90);
             FromQuestionBank_SelectCategoryCbo.Name = "FromQuestionBank_SelectCategoryCbo";
-            FromQuestionBank_SelectCategoryCbo.Size = new Size(214, 31);
+            FromQuestionBank_SelectCategoryCbo.Size = new Size(324, 33);
             FromQuestionBank_SelectCategoryCbo.TabIndex = 31;
             FromQuestionBank_SelectCategoryCbo.SelectedIndexChanged += FromQuestionBank_SelectCategoryCbo_SelectedIndexChanged;
             FromQuestionBank_SelectCategoryCbo.MouseClick += FromQuestionBank_SelectCategoryCbo_MouseClick;
@@ -188,10 +193,10 @@
             // FromQuestionBank_CategoryLbl
             // 
             FromQuestionBank_CategoryLbl.AutoSize = true;
-            FromQuestionBank_CategoryLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            FromQuestionBank_CategoryLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             FromQuestionBank_CategoryLbl.Location = new Point(14, 90);
             FromQuestionBank_CategoryLbl.Name = "FromQuestionBank_CategoryLbl";
-            FromQuestionBank_CategoryLbl.Size = new Size(144, 23);
+            FromQuestionBank_CategoryLbl.Size = new Size(159, 25);
             FromQuestionBank_CategoryLbl.TabIndex = 30;
             FromQuestionBank_CategoryLbl.Text = "Select a category:";
             // 
@@ -205,6 +210,32 @@
             FromQuestionBank_Header.Size = new Size(723, 59);
             FromQuestionBank_Header.TabIndex = 29;
             FromQuestionBank_Header.Text = "Add from a question bank at the end";
+            // 
+            // Checkbox
+            // 
+            Checkbox.HeaderText = "Select All";
+            Checkbox.MinimumWidth = 8;
+            Checkbox.Name = "Checkbox";
+            Checkbox.Resizable = DataGridViewTriState.False;
+            Checkbox.ToolTipText = "Chọn tất cả các câu hỏi";
+            Checkbox.Width = 105;
+            // 
+            // Content
+            // 
+            Content.HeaderText = "Câu hỏi";
+            Content.MinimumWidth = 8;
+            Content.Name = "Content";
+            Content.ReadOnly = true;
+            Content.SortMode = DataGridViewColumnSortMode.NotSortable;
+            Content.Width = 700;
+            // 
+            // QuestionID
+            // 
+            QuestionID.HeaderText = "QuestionID";
+            QuestionID.MinimumWidth = 8;
+            QuestionID.Name = "QuestionID";
+            QuestionID.Visible = false;
+            QuestionID.Width = 150;
             // 
             // FromQuestionBank
             // 
@@ -231,9 +262,9 @@
         private ComboBox FromQuestionBank_SelectCategoryCbo;
         private Label FromQuestionBank_CategoryLbl;
         private Label FromQuestionBank_Header;
+        private Button FromQuestionBank_ExitBtn;
         private DataGridViewCheckBoxColumn Checkbox;
         private DataGridViewTextBoxColumn Content;
         private DataGridViewTextBoxColumn QuestionID;
-        private Button FromQuestionBank_ExitBtn;
     }
 }

@@ -152,6 +152,7 @@
             panel_button.Dock = DockStyle.Left;
             panel_button.Location = new Point(3, 23);
             panel_button.Name = "panel_button";
+            panel_button.Padding = new Padding(5);
             panel_button.Size = new Size(38, 163);
             panel_button.TabIndex = 0;
             // 
@@ -162,6 +163,7 @@
             ContentRtb.Dock = DockStyle.Top;
             ContentRtb.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             ContentRtb.Location = new Point(0, 0);
+            ContentRtb.Margin = new Padding(10, 7, 3, 3);
             ContentRtb.Name = "ContentRtb";
             ContentRtb.Size = new Size(1104, 217);
             ContentRtb.TabIndex = 0;
@@ -173,6 +175,7 @@
             KeyRtb.BorderStyle = BorderStyle.None;
             KeyRtb.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             KeyRtb.Location = new Point(226, 441);
+            KeyRtb.Margin = new Padding(10);
             KeyRtb.Name = "KeyRtb";
             KeyRtb.Size = new Size(1101, 217);
             KeyRtb.TabIndex = 3;

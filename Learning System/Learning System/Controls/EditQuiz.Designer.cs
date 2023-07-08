@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditQuiz));
             panel_edit = new Panel();
             panel1 = new Panel();
@@ -52,6 +53,7 @@
             Delete = new DataGridViewImageColumn();
             QuestionID = new DataGridViewTextBoxColumn();
             DefaultMark = new DataGridViewTextBoxColumn();
+            toolTip1 = new ToolTip(components);
             panel_edit.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -96,9 +98,9 @@
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(14, 11);
+            pictureBox2.Location = new Point(18, 14);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(24, 23);
+            pictureBox2.Size = new Size(20, 20);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 30;
             pictureBox2.TabStop = false;
@@ -107,21 +109,22 @@
             // 
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox1.Image = Properties.Resources.question_removebg_preview;
-            pictureBox1.Location = new Point(1338, 15);
+            pictureBox1.Location = new Point(1338, 14);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(22, 19);
+            pictureBox1.Size = new Size(20, 20);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 29;
             pictureBox1.TabStop = false;
+            toolTip1.SetToolTip(pictureBox1, "Shuffle the order of questions");
             // 
             // EditQuiz_ShuffleCbx
             // 
             EditQuiz_ShuffleCbx.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             EditQuiz_ShuffleCbx.AutoSize = true;
-            EditQuiz_ShuffleCbx.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            EditQuiz_ShuffleCbx.Location = new Point(1258, 11);
+            EditQuiz_ShuffleCbx.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            EditQuiz_ShuffleCbx.Location = new Point(1248, 11);
             EditQuiz_ShuffleCbx.Name = "EditQuiz_ShuffleCbx";
-            EditQuiz_ShuffleCbx.Size = new Size(84, 27);
+            EditQuiz_ShuffleCbx.Size = new Size(93, 29);
             EditQuiz_ShuffleCbx.TabIndex = 24;
             EditQuiz_ShuffleCbx.Text = "Shuffle";
             EditQuiz_ShuffleCbx.UseVisualStyleBackColor = true;
@@ -133,11 +136,11 @@
             EditQuiz_AddBtn.Cursor = Cursors.Hand;
             EditQuiz_AddBtn.FlatAppearance.BorderColor = SystemColors.Control;
             EditQuiz_AddBtn.FlatStyle = FlatStyle.Flat;
-            EditQuiz_AddBtn.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            EditQuiz_AddBtn.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             EditQuiz_AddBtn.ForeColor = Color.FromArgb(44, 171, 230);
-            EditQuiz_AddBtn.Location = new Point(1297, 40);
+            EditQuiz_AddBtn.Location = new Point(1298, 40);
             EditQuiz_AddBtn.Name = "EditQuiz_AddBtn";
-            EditQuiz_AddBtn.Size = new Size(66, 31);
+            EditQuiz_AddBtn.Size = new Size(61, 31);
             EditQuiz_AddBtn.TabIndex = 25;
             EditQuiz_AddBtn.Text = "Add";
             EditQuiz_AddBtn.UseVisualStyleBackColor = false;
@@ -163,7 +166,7 @@
             EditForm_NewQuestionBtn.FlatAppearance.BorderSize = 0;
             EditForm_NewQuestionBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 159, 229);
             EditForm_NewQuestionBtn.FlatStyle = FlatStyle.Flat;
-            EditForm_NewQuestionBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            EditForm_NewQuestionBtn.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             EditForm_NewQuestionBtn.ForeColor = Color.Black;
             EditForm_NewQuestionBtn.Location = new Point(3, 3);
             EditForm_NewQuestionBtn.Name = "EditForm_NewQuestionBtn";
@@ -180,7 +183,7 @@
             EditQuiz_BankBtn.FlatAppearance.BorderSize = 0;
             EditQuiz_BankBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 159, 229);
             EditQuiz_BankBtn.FlatStyle = FlatStyle.Flat;
-            EditQuiz_BankBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            EditQuiz_BankBtn.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             EditQuiz_BankBtn.ForeColor = Color.Black;
             EditQuiz_BankBtn.Location = new Point(3, 48);
             EditQuiz_BankBtn.Name = "EditQuiz_BankBtn";
@@ -198,7 +201,7 @@
             EditQuiz_RandomBtn.FlatAppearance.BorderSize = 0;
             EditQuiz_RandomBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 159, 229);
             EditQuiz_RandomBtn.FlatStyle = FlatStyle.Flat;
-            EditQuiz_RandomBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            EditQuiz_RandomBtn.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             EditQuiz_RandomBtn.ForeColor = Color.Black;
             EditQuiz_RandomBtn.Location = new Point(3, 93);
             EditQuiz_RandomBtn.Name = "EditQuiz_RandomBtn";
@@ -213,20 +216,20 @@
             // 
             EditQuiz_TotalofMarkLbl.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             EditQuiz_TotalofMarkLbl.AutoSize = true;
-            EditQuiz_TotalofMarkLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            EditQuiz_TotalofMarkLbl.Location = new Point(1214, 126);
+            EditQuiz_TotalofMarkLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            EditQuiz_TotalofMarkLbl.Location = new Point(1199, 126);
             EditQuiz_TotalofMarkLbl.Name = "EditQuiz_TotalofMarkLbl";
-            EditQuiz_TotalofMarkLbl.Size = new Size(149, 23);
+            EditQuiz_TotalofMarkLbl.Size = new Size(164, 25);
             EditQuiz_TotalofMarkLbl.TabIndex = 23;
             EditQuiz_TotalofMarkLbl.Text = "Total of mark: 0.00";
             // 
             // EditQuiz_MaxGradeTxt
             // 
             EditQuiz_MaxGradeTxt.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            EditQuiz_MaxGradeTxt.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            EditQuiz_MaxGradeTxt.Location = new Point(1176, 73);
+            EditQuiz_MaxGradeTxt.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            EditQuiz_MaxGradeTxt.Location = new Point(1164, 71);
             EditQuiz_MaxGradeTxt.Name = "EditQuiz_MaxGradeTxt";
-            EditQuiz_MaxGradeTxt.Size = new Size(84, 30);
+            EditQuiz_MaxGradeTxt.Size = new Size(91, 32);
             EditQuiz_MaxGradeTxt.TabIndex = 22;
             EditQuiz_MaxGradeTxt.Text = "10.00";
             EditQuiz_MaxGradeTxt.TextAlign = HorizontalAlignment.Center;
@@ -239,7 +242,7 @@
             EditQuiz_SaveBtn.FlatStyle = FlatStyle.Flat;
             EditQuiz_SaveBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             EditQuiz_SaveBtn.ForeColor = Color.White;
-            EditQuiz_SaveBtn.Location = new Point(1278, 63);
+            EditQuiz_SaveBtn.Location = new Point(1273, 63);
             EditQuiz_SaveBtn.Name = "EditQuiz_SaveBtn";
             EditQuiz_SaveBtn.Size = new Size(85, 48);
             EditQuiz_SaveBtn.TabIndex = 21;
@@ -251,10 +254,10 @@
             // 
             EditQuiz_MaxGradeLbl.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             EditQuiz_MaxGradeLbl.AutoSize = true;
-            EditQuiz_MaxGradeLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            EditQuiz_MaxGradeLbl.Location = new Point(1035, 76);
+            EditQuiz_MaxGradeLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            EditQuiz_MaxGradeLbl.Location = new Point(1008, 76);
             EditQuiz_MaxGradeLbl.Name = "EditQuiz_MaxGradeLbl";
-            EditQuiz_MaxGradeLbl.Size = new Size(135, 23);
+            EditQuiz_MaxGradeLbl.Size = new Size(150, 25);
             EditQuiz_MaxGradeLbl.TabIndex = 20;
             EditQuiz_MaxGradeLbl.Text = "Maximum grade";
             // 
@@ -263,11 +266,11 @@
             EditQuiz_MultipleItemsBtn.BackColor = Color.FromArgb(0, 159, 229);
             EditQuiz_MultipleItemsBtn.Cursor = Cursors.Hand;
             EditQuiz_MultipleItemsBtn.FlatStyle = FlatStyle.Flat;
-            EditQuiz_MultipleItemsBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            EditQuiz_MultipleItemsBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             EditQuiz_MultipleItemsBtn.ForeColor = Color.White;
-            EditQuiz_MultipleItemsBtn.Location = new Point(286, 116);
+            EditQuiz_MultipleItemsBtn.Location = new Point(243, 108);
             EditQuiz_MultipleItemsBtn.Name = "EditQuiz_MultipleItemsBtn";
-            EditQuiz_MultipleItemsBtn.Size = new Size(285, 54);
+            EditQuiz_MultipleItemsBtn.Size = new Size(270, 55);
             EditQuiz_MultipleItemsBtn.TabIndex = 19;
             EditQuiz_MultipleItemsBtn.Text = "SELECT MULTIPLE ITEMS";
             EditQuiz_MultipleItemsBtn.UseVisualStyleBackColor = false;
@@ -277,11 +280,11 @@
             EditQuiz_RepaginateBtn.BackColor = Color.FromArgb(0, 159, 229);
             EditQuiz_RepaginateBtn.Cursor = Cursors.Hand;
             EditQuiz_RepaginateBtn.FlatStyle = FlatStyle.Flat;
-            EditQuiz_RepaginateBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            EditQuiz_RepaginateBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             EditQuiz_RepaginateBtn.ForeColor = Color.White;
-            EditQuiz_RepaginateBtn.Location = new Point(14, 116);
+            EditQuiz_RepaginateBtn.Location = new Point(18, 108);
             EditQuiz_RepaginateBtn.Name = "EditQuiz_RepaginateBtn";
-            EditQuiz_RepaginateBtn.Size = new Size(266, 54);
+            EditQuiz_RepaginateBtn.Size = new Size(212, 55);
             EditQuiz_RepaginateBtn.TabIndex = 18;
             EditQuiz_RepaginateBtn.Text = "REPAGINATE";
             EditQuiz_RepaginateBtn.UseVisualStyleBackColor = false;
@@ -289,10 +292,10 @@
             // EditQuiz_NumberofQuestionLbl
             // 
             EditQuiz_NumberofQuestionLbl.AutoSize = true;
-            EditQuiz_NumberofQuestionLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            EditQuiz_NumberofQuestionLbl.Location = new Point(14, 76);
+            EditQuiz_NumberofQuestionLbl.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            EditQuiz_NumberofQuestionLbl.Location = new Point(14, 72);
             EditQuiz_NumberofQuestionLbl.Name = "EditQuiz_NumberofQuestionLbl";
-            EditQuiz_NumberofQuestionLbl.Size = new Size(238, 23);
+            EditQuiz_NumberofQuestionLbl.Size = new Size(263, 25);
             EditQuiz_NumberofQuestionLbl.TabIndex = 17;
             EditQuiz_NumberofQuestionLbl.Text = "Question: 0 | This quiz is open";
             // 
@@ -323,12 +326,12 @@
             EditQuiz_QuestionDtg.Name = "EditQuiz_QuestionDtg";
             EditQuiz_QuestionDtg.ReadOnly = true;
             EditQuiz_QuestionDtg.RowHeadersWidth = 51;
+            EditQuiz_QuestionDtg.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             EditQuiz_QuestionDtg.RowTemplate.Height = 29;
             EditQuiz_QuestionDtg.Size = new Size(1349, 524);
             EditQuiz_QuestionDtg.TabIndex = 27;
             EditQuiz_QuestionDtg.CellContentClick += EditQuiz_QuestionDtg_CellContentClick;
             EditQuiz_QuestionDtg.RowPostPaint += AutoNumberInDtg;
-            EditQuiz_QuestionDtg.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             // 
             // Content
             // 
@@ -408,5 +411,6 @@
         private Panel panel1;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
+        private ToolTip toolTip1;
     }
 }

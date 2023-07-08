@@ -40,6 +40,7 @@
             HomePageForm_ITLbl = new Label();
             panel3 = new Panel();
             panel_popup = new Panel();
+            PopUpForm = new PopUpForm();
             flowLayoutPanel_popup = new FlowLayoutPanel();
             HomePageForm_QuestionsBtn = new Button();
             HomePageForm_CategoriesBtn = new Button();
@@ -268,11 +269,21 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(PopUpForm);
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 210);
             panel2.Name = "panel2";
             panel2.Size = new Size(1385, 514);
             panel2.TabIndex = 3;
+            // 
+            // PopUpForm
+            // 
+            PopUpForm.Dock = DockStyle.Fill;
+            PopUpForm.Location = new Point(0, 0);
+            PopUpForm.Name = "PopUpForm";
+            PopUpForm.Size = new Size(1385, 514);
+            PopUpForm.TabIndex = 0;
+            PopUpForm.Visible = false;
             // 
             // notifyIcon1
             // 
@@ -294,8 +305,8 @@
             Controls.Add(panel3);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Name = "HomePageForm";
-            Text = "Home Page";
+            Name = "Learning System";
+            Text = "Learning System";
             WindowState = FormWindowState.Maximized;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

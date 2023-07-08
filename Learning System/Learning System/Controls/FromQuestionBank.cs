@@ -2,6 +2,7 @@
 using Learning_System.Modals;
 using Newtonsoft.Json.Linq;
 using System.Data;
+using System.Windows.Forms;
 
 namespace Learning_System
 {
@@ -227,5 +228,25 @@ namespace Learning_System
             questionSelectedList.Clear();
             this.SendToBack();
         }
+
+        private void FromQuestionBank_ShowQuestionsDtg_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Select "Select All" cell
+            if (e.RowIndex == -1 && e.ColumnIndex == 0)
+            {
+                FromQuestionBank_ShowQuestionsDtg.CurrentCell = FromQuestionBank_ShowQuestionsDtg.CurrentRow.Cells[1];
+                foreach (DataGridViewRow row in FromQuestionBank_ShowQuestionsDtg.Rows)
+                {
+                    DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[0];
+                    if (chk.Value == null || chk.Value == (object)false)
+                        chk.Value = (object)true;
+                    else
+                        chk.Value = (object)false;
+
+                    // chk.Value = !(chk.Value == null ? false : (bool)chk.Value); //because chk.Value is initialy null
+                }
+            }
+        }
+
     }
 }

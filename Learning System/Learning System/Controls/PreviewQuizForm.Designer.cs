@@ -119,11 +119,11 @@
             FinishLbl.AutoSize = true;
             FinishLbl.BackColor = Color.WhiteSmoke;
             FinishLbl.Cursor = Cursors.Hand;
-            FinishLbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            FinishLbl.ForeColor = Color.Red;
-            FinishLbl.Location = new Point(6, 342);
+            FinishLbl.Font = new Font("Segoe UI Historic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            FinishLbl.ForeColor = SystemColors.ActiveCaptionText;
+            FinishLbl.Location = new Point(6, 347);
             FinishLbl.Name = "FinishLbl";
-            FinishLbl.Size = new Size(154, 28);
+            FinishLbl.Size = new Size(172, 28);
             FinishLbl.TabIndex = 4;
             FinishLbl.Text = "Finish attempt ...";
             FinishLbl.Click += FinishLbl_Click;
@@ -171,9 +171,9 @@
             panel_changePage.Controls.Add(PreviousPageBtn);
             panel_changePage.Controls.Add(NextPageBtn);
             panel_changePage.Dock = DockStyle.Bottom;
-            panel_changePage.Location = new Point(0, 233);
+            panel_changePage.Location = new Point(0, 217);
             panel_changePage.Name = "panel_changePage";
-            panel_changePage.Size = new Size(1000, 75);
+            panel_changePage.Size = new Size(1000, 91);
             panel_changePage.TabIndex = 8;
             // 
             // NextPageBtn
@@ -209,9 +209,9 @@
             panel_QuestionBtn.AutoScroll = true;
             panel_QuestionBtn.Controls.Add(FinishLbl);
             panel_QuestionBtn.Dock = DockStyle.Fill;
-            panel_QuestionBtn.Location = new Point(0, 36);
+            panel_QuestionBtn.Location = new Point(0, 46);
             panel_QuestionBtn.Name = "panel_QuestionBtn";
-            panel_QuestionBtn.Size = new Size(364, 467);
+            panel_QuestionBtn.Size = new Size(364, 457);
             panel_QuestionBtn.TabIndex = 3;
             // 
             // panel1
@@ -221,17 +221,17 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(364, 36);
+            panel1.Size = new Size(364, 46);
             panel1.TabIndex = 0;
             // 
             // QuizNavigationLbl
             // 
             QuizNavigationLbl.AutoSize = true;
-            QuizNavigationLbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            QuizNavigationLbl.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             QuizNavigationLbl.ForeColor = Color.FromArgb(194, 36, 36);
-            QuizNavigationLbl.Location = new Point(6, 4);
+            QuizNavigationLbl.Location = new Point(6, 6);
             QuizNavigationLbl.Name = "QuizNavigationLbl";
-            QuizNavigationLbl.Size = new Size(150, 28);
+            QuizNavigationLbl.Size = new Size(162, 28);
             QuizNavigationLbl.TabIndex = 2;
             QuizNavigationLbl.Text = "Quiz navigation";
             // 

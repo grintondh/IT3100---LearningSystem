@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Learning_System.ProcessingClasses;
-using Learning_System.Modals;
+﻿using Learning_System.Modals;
 
 namespace Learning_System
 {
@@ -51,7 +41,9 @@ namespace Learning_System
                         ContentRtb.Font, ContentRtb.Width).Height;
                 }
             }
+
             ContentRtb.ReadOnly = true;
+
             panel3.Dock = DockStyle.None;
             panel3.Width = panel2.Width;
             panel3.Dock = DockStyle.Fill;
