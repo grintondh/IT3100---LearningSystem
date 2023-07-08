@@ -5,6 +5,7 @@ using System.Reflection;
 using Microsoft.VisualBasic.Devices;
 using Learning_System.ProcessingClasses;
 using Learning_System.Modals;
+using System.Text.RegularExpressions;
 
 namespace Learning_System
 {
@@ -100,7 +101,7 @@ namespace Learning_System
                                 i++;
                                 if (i == lines.Count) break;
                                 if (lines[i].Length > 0) return i;
-                                i++;
+                                while (lines[i].Length == 0 && i < lines.Count) i++;
                                 break;
                             }
                         }
@@ -176,7 +177,9 @@ namespace Learning_System
                         {
                             if (Path.GetExtension(ImportPath) != ".txt")
                             {
-                                lineTextBoxes[i].Text = lineTextBoxes[i].Text[3..];
+                                string letter = lines[i][..2];
+                                Regex replaceLetter = new Regex(letter);
+                                lineTextBoxes[i].Rtf = replaceLetter.Replace(lineTextBoxes[i].Rtf, "", 1);
                                 _stringContent = lineTextBoxes[i].Rtf;
                             }
                             else
@@ -199,7 +202,9 @@ namespace Learning_System
                                 if (lines[i].EndsWith(lines[i - _questionChoices.Count + j][0])) _questionChoice.mark = 1;
                                 j++;
                             }
-                            i += 2;
+                            i++;
+                            if (i >= lines.Count) break;
+                            while (lines[i].Length == 0 && i < lines.Count) i++;
                             break;
                         }
 
@@ -370,6 +375,7 @@ namespace Learning_System
             else if (CheckFileFormat(ImportPath) == false)
             {
                 MessageBox.Show("Wrong format!");
+                ImportForm_StatusLbl.Text = $"Maximum size for new files: {Math.Round(maximumSizeForNewFiles, 2)} MB";
             }
             else
             {
@@ -377,6 +383,7 @@ namespace Learning_System
                 if (fileSize >= MAX_OF_SIZE * SIZE_OF_MB)
                 {
                     MessageBox.Show($"File's size must be smaller than {MAX_OF_SIZE} MB!");
+                    ImportForm_StatusLbl.Text = $"Maximum size for new files: {Math.Round(maximumSizeForNewFiles, 2)} MB";
                     return;
                 }
                 ImportForm_ImportProgress.Value = 10;
@@ -394,6 +401,7 @@ namespace Learning_System
                 {
                     MessageBox.Show($"Error at line {checkAikenFormat + 1}!");
                     ImportForm_ImportStatus.Text = "Error";
+                    ImportForm_StatusLbl.Text = $"Maximum size for new files: {Math.Round(maximumSizeForNewFiles, 2)} MB";
                 }
                 else
                 {

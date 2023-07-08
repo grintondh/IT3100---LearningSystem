@@ -284,10 +284,16 @@ namespace Learning_System
             else PageButton[1].Text = "...";
             if (groupSelectedIndex == numberOfGroup) PageButton[NUMBER_OF_PAGES_PER_GROUP + 2].Text = " ";
             else PageButton[NUMBER_OF_PAGES_PER_GROUP + 2].Text = "...";
+            int tmp = 0;
             for (int i = 0; i < NUMBER_OF_PAGES_PER_GROUP + 4; i++)
             {
                 if (PageButton[i].Text == " ") PageButton[i].Hide();
-                else PageButton[i].Show();
+                else
+                {
+                    PageButton[i].Show();
+                    PageButton[i].Location = new System.Drawing.Point(RandomQuestion_ButtonPanelPnl.Left + tmp * 48, 0);
+                    tmp++;
+                }
             }
         }
         private void ShowQuestion(int pageSelectedIndex, List<int> selectedQuestions)
