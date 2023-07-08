@@ -16,6 +16,7 @@ namespace Learning_System
         public RichTextBox[] richTextBoxes = new RichTextBox[MAXOFCHOICE];
         private string content;
         private int STT;
+        public char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
         public PageOfPreviewQuiz(int STT, List<QuestionChoice> questionChoices, string content, PreviewQuizForm previewQuizForm)
         {
             InitializeComponent();
@@ -50,7 +51,7 @@ namespace Learning_System
             QuestionChoiceGrb.Dock = DockStyle.None;
             QuestionChoiceGrb.Width = panel3.Width;
             QuestionChoiceGrb.Dock = DockStyle.Fill;
-            panel_button.Width = 30;
+            panel_button.Width = 50;
             panel_richTextboxes.Dock = DockStyle.None;
             panel_richTextboxes.Width = panel3.Width - panel_button.Width;
             panel_richTextboxes.Dock = DockStyle.Fill;
@@ -99,9 +100,10 @@ namespace Learning_System
                     checkboxChoice[i].Size = new Size(131, 27);
                     checkboxChoice[i].UseVisualStyleBackColor = true;
                     checkboxChoice[i].Text = "";
-                    checkboxChoice[i].Location = new Point(5, richTextBoxes[i].Location.Y + 5);
-                    checkboxChoice[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                    checkboxChoice[i].Location = new Point(5, richTextBoxes[i].Location.Y - 2);
+                    checkboxChoice[i].Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
                     checkboxChoice[i].Click += checkBoxClick;
+                    checkboxChoice[i].Text = alphabet[i % 26].ToString() + ".";
                 }
                 else
                 {
@@ -109,11 +111,12 @@ namespace Learning_System
                     this.panel_button.Controls.Add(radioChoice[i]);
                     radioChoice[i].AutoSize = true;
                     radioChoice[i].Size = new Size(131, 27);
-                    radioChoice[i].Location = new Point(5, richTextBoxes[i].Location.Y + 5);
-                    radioChoice[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+                    radioChoice[i].Location = new Point(5, richTextBoxes[i].Location.Y - 2);
+                    radioChoice[i].Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
                     radioChoice[i].UseVisualStyleBackColor = true;
                     radioChoice[i].Text = "";
                     radioChoice[i].Click += radionButtonClick;
+                    radioChoice[i].Text = alphabet[i % 26].ToString() + ".";
                 }
             }
             NumberLbl.Text = (STT + 1).ToString();

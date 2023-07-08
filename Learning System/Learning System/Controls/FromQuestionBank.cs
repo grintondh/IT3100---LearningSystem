@@ -23,7 +23,7 @@ namespace Learning_System
             ParentEditQuiz = _EditQuiz;
             FromQuestionBank_ShowQuestionsDtg.BorderStyle = BorderStyle.None;
             FromQuestionBank_ShowQuestionsDtg.Width = Screen.PrimaryScreen.WorkingArea.Width - 30;
-            FromQuestionBank_ShowQuestionsDtg.Columns[1].Width = FromQuestionBank_ShowQuestionsDtg.Width - 100;
+            FromQuestionBank_ShowQuestionsDtg.Columns[1].Width = FromQuestionBank_ShowQuestionsDtg.Width - 130;
             FromQuestionBank_ShowQuestionsDtg.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             FromQuestionBank_ShowQuestionsDtg.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             FromQuestionBank_ShowQuestionsDtg.RowTemplate.Height = 35;
@@ -231,21 +231,26 @@ namespace Learning_System
 
         private void FromQuestionBank_ShowQuestionsDtg_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Select "Select All" cell
-            if (e.RowIndex == -1 && e.ColumnIndex == 0)
+            try
             {
-                FromQuestionBank_ShowQuestionsDtg.CurrentCell = FromQuestionBank_ShowQuestionsDtg.CurrentRow.Cells[1];
-                foreach (DataGridViewRow row in FromQuestionBank_ShowQuestionsDtg.Rows)
+                // Select "Select All" cell
+                if (e.RowIndex == -1 && e.ColumnIndex == 0)
                 {
-                    DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[0];
-                    if (chk.Value == null || chk.Value == (object)false)
-                        chk.Value = (object)true;
-                    else
-                        chk.Value = (object)false;
+                    FromQuestionBank_ShowQuestionsDtg.CurrentCell = FromQuestionBank_ShowQuestionsDtg.CurrentRow.Cells[1];
+                    foreach (DataGridViewRow row in FromQuestionBank_ShowQuestionsDtg.Rows)
+                    {
+                        DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[0];
+                        if (chk.Value == null || chk.Value == (object)false)
+                            chk.Value = (object)true;
+                        else
+                            chk.Value = (object)false;
 
-                    // chk.Value = !(chk.Value == null ? false : (bool)chk.Value); //because chk.Value is initialy null
+                        // chk.Value = !(chk.Value == null ? false : (bool)chk.Value); //because chk.Value is initialy null
+                    }
+
                 }
             }
+            catch { return; }
         }
 
     }

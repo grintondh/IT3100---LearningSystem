@@ -147,7 +147,7 @@
             PreviousPageBtn.FlatStyle = FlatStyle.Flat;
             PreviousPageBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             PreviousPageBtn.ForeColor = Color.White;
-            PreviousPageBtn.Location = new Point(32, 12);
+            PreviousPageBtn.Location = new Point(18, 5);
             PreviousPageBtn.Name = "PreviousPageBtn";
             PreviousPageBtn.Size = new Size(169, 47);
             PreviousPageBtn.TabIndex = 14;
@@ -171,9 +171,9 @@
             panel_changePage.Controls.Add(PreviousPageBtn);
             panel_changePage.Controls.Add(NextPageBtn);
             panel_changePage.Dock = DockStyle.Bottom;
-            panel_changePage.Location = new Point(0, 217);
+            panel_changePage.Location = new Point(0, 235);
             panel_changePage.Name = "panel_changePage";
-            panel_changePage.Size = new Size(1000, 91);
+            panel_changePage.Size = new Size(1000, 73);
             panel_changePage.TabIndex = 8;
             // 
             // NextPageBtn
@@ -184,7 +184,7 @@
             NextPageBtn.FlatStyle = FlatStyle.Flat;
             NextPageBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             NextPageBtn.ForeColor = Color.White;
-            NextPageBtn.Location = new Point(815, 12);
+            NextPageBtn.Location = new Point(813, 5);
             NextPageBtn.Name = "NextPageBtn";
             NextPageBtn.Size = new Size(169, 47);
             NextPageBtn.TabIndex = 15;

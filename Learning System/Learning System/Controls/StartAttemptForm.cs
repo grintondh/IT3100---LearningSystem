@@ -50,5 +50,13 @@ namespace Learning_System
             PreviewQuizForm previewQuizForm = new PreviewQuizForm(contestForm, questionID);
             previewQuizForm.ShowDialog();
         }
+
+        private void ExportBtn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.Close();
+            ExportQuizForm exportQuizForm = new ExportQuizForm(questionID);
+            exportQuizForm.ShowDialog();
+        }
     }
 }

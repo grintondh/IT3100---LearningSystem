@@ -210,7 +210,8 @@ namespace Learning_System
                                 finalMark += quiz[questionPerPage * i + j].questionChoices[k].mark;
                             }
                             if (quiz[questionPerPage * i + j].questionChoices[k].mark > 0)
-                                correctAnswer += "\n" + quiz[questionPerPage * i + j].richTextBoxes[k].Text;
+                                correctAnswer += "\n" + quiz[questionPerPage * i + j].alphabet[k].ToString()
+                                    + ". " + quiz[questionPerPage * i + j].richTextBoxes[k].Text;
                         }
                         if (quiz[questionPerPage * i + j].mark == 1)
                         {
@@ -259,7 +260,8 @@ namespace Learning_System
                                 finalMark += quiz[questionPerPage * i + j].questionChoices[k].mark;
                             }
                             if (quiz[questionPerPage * i + j].questionChoices[k].mark > 0)
-                                correctAnswer += "\n" + quiz[questionPerPage * i + j].richTextBoxes[k].Text;
+                                correctAnswer += "\n" + quiz[questionPerPage * i + j].alphabet[k].ToString()
+                                    + ". " + quiz[questionPerPage * i + j].richTextBoxes[k].Text;
                         }
                         if (quiz[questionPerPage * i + j].mark == 1)
                         {
@@ -315,7 +317,7 @@ namespace Learning_System
                             finalMark += quiz[i].questionChoices[k].mark;
                         }
                         if (quiz[i].questionChoices[k].mark > 0)
-                            correctAnswer += "\n" + quiz[i].richTextBoxes[k].Text;
+                            correctAnswer += "\n" + quiz[i].alphabet[k].ToString() + ". " + quiz[i].richTextBoxes[k].Text;
                     }
                     if (quiz[i].mark == 1)
                     {
@@ -364,7 +366,7 @@ namespace Learning_System
                             finalMark += quiz[i].questionChoices[k].mark;
                         }
                         if (quiz[i].questionChoices[k].mark > 0)
-                            correctAnswer += "\n" + quiz[i].richTextBoxes[k].Text;
+                            correctAnswer += "\n" + quiz[i].alphabet[k].ToString() + ". " + quiz[i].richTextBoxes[k].Text;
                     }
                     if (quiz[i].mark == 1)
                     {
@@ -429,6 +431,8 @@ namespace Learning_System
             panel_Page[0].BringToFront();
             currentPage = 0;
             FinishLbl.Text = "Finish review";
+            PreviousPageBtn.Visible = false;
+            if (numberOfPage > 0) NextPageBtn.Visible = true;
         }
 
         private int minute;

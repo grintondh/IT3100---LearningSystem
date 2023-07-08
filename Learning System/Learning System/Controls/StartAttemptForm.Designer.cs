@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartAttemptForm));
             panel_main = new Panel();
-            button1 = new Button();
+            ExportBtn = new Button();
             NotiTxt = new TextBox();
             panel1 = new Panel();
             CancelBtn = new Button();
@@ -43,7 +43,7 @@
             // panel_main
             // 
             panel_main.BorderStyle = BorderStyle.FixedSingle;
-            panel_main.Controls.Add(button1);
+            panel_main.Controls.Add(ExportBtn);
             panel_main.Controls.Add(NotiTxt);
             panel_main.Controls.Add(panel1);
             panel_main.Controls.Add(CancelBtn);
@@ -56,20 +56,21 @@
             panel_main.Size = new Size(742, 391);
             panel_main.TabIndex = 9;
             // 
-            // button1
+            // ExportBtn
             // 
-            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button1.BackColor = Color.FromArgb(194, 36, 36);
-            button1.Cursor = Cursors.Hand;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(476, 300);
-            button1.Name = "button1";
-            button1.Size = new Size(253, 54);
-            button1.TabIndex = 16;
-            button1.Text = "EXPORT QUESTIONS";
-            button1.UseVisualStyleBackColor = false;
+            ExportBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            ExportBtn.BackColor = Color.FromArgb(194, 36, 36);
+            ExportBtn.Cursor = Cursors.Hand;
+            ExportBtn.FlatStyle = FlatStyle.Flat;
+            ExportBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            ExportBtn.ForeColor = Color.White;
+            ExportBtn.Location = new Point(465, 300);
+            ExportBtn.Name = "ExportBtn";
+            ExportBtn.Size = new Size(253, 54);
+            ExportBtn.TabIndex = 16;
+            ExportBtn.Text = "EXPORT QUESTIONS";
+            ExportBtn.UseVisualStyleBackColor = false;
+            ExportBtn.Click += ExportBtn_Click;
             // 
             // NotiTxt
             // 
@@ -169,7 +170,7 @@
         private Button StartBtn;
         private Label TimeLbl;
         private TextBox NotiTxt;
-        private Button button1;
+        private Button ExportBtn;
         private Label HeaderLbl;
     }
 }

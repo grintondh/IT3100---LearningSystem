@@ -48,7 +48,7 @@ namespace Learning_System
         }
 
         private JArray? _categoriesDataJarray = new();
-        private DataProcessing contestData = new();
+        private DataProcessing contestData = ContestsTable.table;
         public int ContestID;
 
         private void loadQuestionData()
