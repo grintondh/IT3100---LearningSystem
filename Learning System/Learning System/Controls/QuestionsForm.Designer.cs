@@ -161,7 +161,7 @@
             QuestionForm_ShowQuestionsDtg.Cursor = Cursors.Hand;
             QuestionForm_ShowQuestionsDtg.GridColor = SystemColors.ButtonFace;
             QuestionForm_ShowQuestionsDtg.Location = new Point(52, 337);
-            QuestionForm_ShowQuestionsDtg.MaximumSize = new Size(5000, 5000);
+            QuestionForm_ShowQuestionsDtg.MaximumSize = new Size(1671, 400);
             QuestionForm_ShowQuestionsDtg.Name = "QuestionForm_ShowQuestionsDtg";
             QuestionForm_ShowQuestionsDtg.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -180,7 +180,7 @@
             QuestionForm_ShowQuestionsDtg.RowTemplate.Height = 38;
             QuestionForm_ShowQuestionsDtg.RowTemplate.ReadOnly = true;
             QuestionForm_ShowQuestionsDtg.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            QuestionForm_ShowQuestionsDtg.Size = new Size(1677, 387);
+            QuestionForm_ShowQuestionsDtg.Size = new Size(1663, 374);
             QuestionForm_ShowQuestionsDtg.TabIndex = 15;
             QuestionForm_ShowQuestionsDtg.CellContentClick += QuestionForm_ShowQuestionsDtg_CellContentClick;
             QuestionForm_ShowQuestionsDtg.CellMouseEnter += QuestionForm_ShowQuestionsDtg_CellMouseEnter;
@@ -201,7 +201,7 @@
             QuestionName.Name = "QuestionName";
             QuestionName.ReadOnly = true;
             QuestionName.SortMode = DataGridViewColumnSortMode.NotSortable;
-            QuestionName.Width = 1450;
+            QuestionName.Width = 1400;
             // 
             // Edit
             // 

@@ -74,6 +74,7 @@ namespace Learning_System
             JArray? _contestData = JsonProcessing.ImportJsonContentInDefaultFolder("Contest.json", null, null);
             if (_contestData == null)
                 throw new E01CantFindFile();
+
             ContestsTable.table.Import(_contestData);
 
 
