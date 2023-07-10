@@ -4,7 +4,7 @@ namespace Learning_System
 {
     public partial class PageOfPreviewQuiz : UserControl
     {
-        public const int HEIGHTMAX = 500;
+        public const int HEIGHTMAX = 250;
         public double mark = 0;
         private PreviewQuizForm parentForm;
         public bool IsMultipleChoiceQuestion;
