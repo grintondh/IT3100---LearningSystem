@@ -2,7 +2,6 @@
 // Last modified: 4.5.2023 by DH
 
 using Newtonsoft.Json.Linq;
-using System.Diagnostics.Eventing.Reader;
 
 namespace Learning_System.ProcessingClasses
 {

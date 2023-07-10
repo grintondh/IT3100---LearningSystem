@@ -1,9 +1,16 @@
 # LearningSystem
-Phần mềm tổ chức tạo ngân hàng đề thi và tạo đề thi trắc nghiệm - Bài tập lớn IT3100 HUST 2022.2
 
-# Hướng dẫn:
+**Bài tập lớn IT3100 HUST 2022.2**
 
-## Làm việc cơ bản với Github và Visual Studio
-- Làm việc trên Folder DemoWebsite
-- Sử dụng Project / Solution DemoWebsite bên trong thư mục. Hiện đang có Project Clone Shopee trong Solution.
-- Sau khi hoàn tất tuần 2 sẽ xóa 2 folder .vs và DemoWebsite này để thực hiện build app. Folder thử nghiệm sẽ tạo ở chỗ khác.
+Phần mềm tổ chức tạo ngân hàng đề thi và tạo đề thi trắc nghiệm
+
+**Nhóm 14**
+
+| STT 	| Họ và tên            	|
+|-----	|----------------------	|
+| 94  	| Tạ Công Nam          	|
+| 78  	| Nguyễn Đức Lâm       	|
+| 152 	| Nguyễn Anh Tú        	|
+| 96  	| Hoàng Thị Thanh Ngân 	|
+| 121 	| Sok Sokong           	|
+

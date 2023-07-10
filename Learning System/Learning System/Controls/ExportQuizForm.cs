@@ -14,13 +14,14 @@ using System.Text.RegularExpressions;
 
 namespace Learning_System
 {
-    public partial class ExportForm : UserControl
+    public partial class ExportQuizForm : Form
     {
         private DataTable? DataTable = new();
-
-        public ExportForm()
+        private List<int> questionID = new();
+        public ExportQuizForm(List<int> questionID)
         {
             InitializeComponent();
+            this.questionID = questionID;
         }
 
         [Obsolete]
@@ -29,7 +30,20 @@ namespace Learning_System
             ExportForm_progressLabel.Text = "Processing. It can be lagged during this phase but please don't interupt...";
 
             QuestionsTable.table.LoadData(JsonProcessing.QuestionsPath);
-            DataTable = QuestionsTable.table.Init().Get();
+
+            DataTable.Columns.Add("ID", typeof(int));
+            DataTable.Columns.Add("Name", typeof(string));
+            DataTable.Columns.Add("CategoryID", typeof(int));
+            DataTable.Columns.Add("Content", typeof(string));
+            DataTable.Columns.Add("DefaultMark", typeof(double));
+            DataTable.Columns.Add("Choice", typeof(JArray));
+
+            for (int i = 0; i < questionID.Count; i++)
+            {
+                List<string> query = new() { "ID", questionID[i].ToString() };
+                DataRow row = QuestionsTable.table.Init().Offset(0).Limit(1).Query(query).GetFirstRow();
+                DataTable.Rows.Add(row.ItemArray);
+            }
 
             if (DataTable == null)
                 throw new E02CantProcessQuery();

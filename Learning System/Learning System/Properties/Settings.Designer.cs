@@ -25,10 +25,10 @@ namespace Learning_System.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("DefaultContest")]
-        public string ChoosingContest {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ChoosingContest {
             get {
-                return ((string)(this["ChoosingContest"]));
+                return ((int)(this["ChoosingContest"]));
             }
         }
     }

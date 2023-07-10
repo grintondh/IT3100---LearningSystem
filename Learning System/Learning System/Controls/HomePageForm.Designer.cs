@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomePageForm));
             panel1 = new Panel();
             HomePageForm_UserNameLbl = new Label();
@@ -39,14 +40,15 @@
             HomePageForm_ITLbl = new Label();
             panel3 = new Panel();
             panel_popup = new Panel();
+            PopUpForm = new PopUpForm();
             flowLayoutPanel_popup = new FlowLayoutPanel();
             HomePageForm_QuestionsBtn = new Button();
             HomePageForm_CategoriesBtn = new Button();
             HomePageForm_ImportBtn = new Button();
             HomePageForm_ExportBtn = new Button();
             HomePageForm_QuestionsBankLbl = new Label();
-            PopUpForm = new PopUpForm();
             panel2 = new Panel();
+            notifyIcon1 = new NotifyIcon(components);
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)HomePageForm_AvatarPic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)HomePageForm_MenuPic).BeginInit();
@@ -78,7 +80,7 @@
             HomePageForm_UserNameLbl.Name = "HomePageForm_UserNameLbl";
             HomePageForm_UserNameLbl.Size = new Size(108, 28);
             HomePageForm_UserNameLbl.TabIndex = 2;
-            HomePageForm_UserNameLbl.Text = "User Name";
+            HomePageForm_UserNameLbl.Text = "Group 14";
             // 
             // HomePageForm_AvatarPic
             // 
@@ -93,6 +95,7 @@
             // 
             // HomePageForm_MenuPic
             // 
+            HomePageForm_MenuPic.Cursor = Cursors.Hand;
             HomePageForm_MenuPic.Image = (Image)resources.GetObject("HomePageForm_MenuPic.Image");
             HomePageForm_MenuPic.Location = new Point(22, 12);
             HomePageForm_MenuPic.Name = "HomePageForm_MenuPic";
@@ -101,11 +104,11 @@
             HomePageForm_MenuPic.TabIndex = 0;
             HomePageForm_MenuPic.TabStop = false;
             HomePageForm_MenuPic.Click += HomePageForm_MenuPic_Click;
-            HomePageForm_MenuPic.Cursor = Cursors.Hand;
             // 
             // HomePageForm_GearPic
             // 
             HomePageForm_GearPic.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            HomePageForm_GearPic.Cursor = Cursors.Hand;
             HomePageForm_GearPic.Image = (Image)resources.GetObject("HomePageForm_GearPic.Image");
             HomePageForm_GearPic.Location = new Point(1330, 70);
             HomePageForm_GearPic.Name = "HomePageForm_GearPic";
@@ -114,12 +117,12 @@
             HomePageForm_GearPic.TabIndex = 2;
             HomePageForm_GearPic.TabStop = false;
             HomePageForm_GearPic.Click += Picture_setting_Click;
-            HomePageForm_GearPic.Cursor = Cursors.Hand;
             // 
             // HomePageForm_EditingBtn
             // 
             HomePageForm_EditingBtn.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             HomePageForm_EditingBtn.BackColor = Color.FromArgb(0, 115, 165);
+            HomePageForm_EditingBtn.Cursor = Cursors.Hand;
             HomePageForm_EditingBtn.FlatStyle = FlatStyle.Flat;
             HomePageForm_EditingBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             HomePageForm_EditingBtn.ForeColor = Color.White;
@@ -130,7 +133,6 @@
             HomePageForm_EditingBtn.Text = "TURN EDITING ON";
             HomePageForm_EditingBtn.UseVisualStyleBackColor = false;
             HomePageForm_EditingBtn.Click += HomePageForm_EditingBtn_Click;
-            HomePageForm_EditingBtn.Cursor = Cursors.Hand;
             // 
             // HomePageForm_PathLbl
             // 
@@ -191,6 +193,7 @@
             // 
             // HomePageForm_QuestionsBtn
             // 
+            HomePageForm_QuestionsBtn.Cursor = Cursors.Hand;
             HomePageForm_QuestionsBtn.FlatAppearance.BorderSize = 0;
             HomePageForm_QuestionsBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 255, 255);
             HomePageForm_QuestionsBtn.FlatStyle = FlatStyle.Flat;
@@ -203,10 +206,10 @@
             HomePageForm_QuestionsBtn.Text = "Questions";
             HomePageForm_QuestionsBtn.UseVisualStyleBackColor = true;
             HomePageForm_QuestionsBtn.Click += Button_Questions_Click;
-            HomePageForm_QuestionsBtn.Cursor = Cursors.Hand;
             // 
             // HomePageForm_CategoriesBtn
             // 
+            HomePageForm_CategoriesBtn.Cursor = Cursors.Hand;
             HomePageForm_CategoriesBtn.FlatAppearance.BorderSize = 0;
             HomePageForm_CategoriesBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 255, 255);
             HomePageForm_CategoriesBtn.FlatStyle = FlatStyle.Flat;
@@ -219,10 +222,10 @@
             HomePageForm_CategoriesBtn.Text = "Categories";
             HomePageForm_CategoriesBtn.UseVisualStyleBackColor = true;
             HomePageForm_CategoriesBtn.Click += Button_Categories_Click;
-            HomePageForm_CategoriesBtn.Cursor = Cursors.Hand;
             // 
             // HomePageForm_ImportBtn
             // 
+            HomePageForm_ImportBtn.Cursor = Cursors.Hand;
             HomePageForm_ImportBtn.FlatAppearance.BorderSize = 0;
             HomePageForm_ImportBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 255, 255);
             HomePageForm_ImportBtn.FlatStyle = FlatStyle.Flat;
@@ -235,10 +238,10 @@
             HomePageForm_ImportBtn.Text = "Import";
             HomePageForm_ImportBtn.UseVisualStyleBackColor = true;
             HomePageForm_ImportBtn.Click += Button_Import_Click;
-            HomePageForm_ImportBtn.Cursor = Cursors.Hand;
             // 
             // HomePageForm_ExportBtn
             // 
+            HomePageForm_ExportBtn.Cursor = Cursors.Hand;
             HomePageForm_ExportBtn.FlatAppearance.BorderSize = 0;
             HomePageForm_ExportBtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 255, 255);
             HomePageForm_ExportBtn.FlatStyle = FlatStyle.Flat;
@@ -251,7 +254,6 @@
             HomePageForm_ExportBtn.Text = "Export";
             HomePageForm_ExportBtn.UseVisualStyleBackColor = true;
             HomePageForm_ExportBtn.Click += Button_Export_Click;
-            HomePageForm_ExportBtn.Cursor = Cursors.Hand;
             // 
             // HomePageForm_QuestionsBankLbl
             // 
@@ -283,6 +285,14 @@
             PopUpForm.TabIndex = 0;
             PopUpForm.Visible = false;
             // 
+            // notifyIcon1
+            // 
+            notifyIcon1.BalloonTipText = "You can return to home using 3-line button on the top-right of your computer screen.";
+            notifyIcon1.BalloonTipTitle = "Welcome to our learning system app";
+            notifyIcon1.Icon = SystemIcons.Application;
+            notifyIcon1.Text = "Notification";
+            notifyIcon1.Visible = true;
+            // 
             // HomePageForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -295,8 +305,8 @@
             Controls.Add(panel3);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Name = "HomePageForm";
-            Text = "Home Page";
+            Name = "Learning System";
+            Text = "Learning System";
             WindowState = FormWindowState.Maximized;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -340,5 +350,6 @@
         private Button HomePageForm_ImportBtn;
         private Button HomePageForm_ExportBtn;
         private Panel panel_popup;
+        private NotifyIcon notifyIcon1;
     }
 }

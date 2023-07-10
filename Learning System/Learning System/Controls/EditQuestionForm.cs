@@ -1,7 +1,8 @@
-﻿using Learning_System.ProcessingClasses;
-using Learning_System.Modals;
+﻿using Learning_System.Modals;
+using Learning_System.ProcessingClasses;
 using Newtonsoft.Json.Linq;
 using System.Data;
+using System.Text.RegularExpressions;
 
 namespace Learning_System
 {
@@ -127,7 +128,7 @@ namespace Learning_System
                 panel[i] = new Panel
                 {
                     Location = new Point(354, 6),
-                    Size = new Size(800, 243)
+                    Size = new Size(900, 243)
                 };
                 panel[i].Controls.Add(richTextBoxes[i]);
                 panel[i].Controls.Add(combobox[i]);
@@ -143,7 +144,7 @@ namespace Learning_System
                 // richtextbox
                 richTextBoxes[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
                 richTextBoxes[i].Location = new Point(106, 14);
-                richTextBoxes[i].Size = new Size(568, 162);
+                richTextBoxes[i].Size = new Size(730, 162);
                 richTextBoxes[i].TabIndex = (i * 2) + 12;
                 richTextBoxes[i].Text = "";
                 // label choice
@@ -296,7 +297,7 @@ namespace Learning_System
                 for (int i = 0; i < Count_Choices; i++)
                 {
                     if (richTextBoxes[i].TextLength != 0)
-                    {
+                    { 
                         QuestionChoice newChoice = new QuestionChoice()
                         {
                             choice = richTextBoxes[i].Rtf,
@@ -433,7 +434,7 @@ namespace Learning_System
                 panel[i] = new Panel
                 {
                     Location = new Point(354, 6),
-                    Size = new Size(800, 243)
+                    Size = new Size(900, 243)
                 };
                 panel[i].Controls.Add(richTextBoxes[i]);
                 panel[i].Controls.Add(combobox[i]);
@@ -452,7 +453,7 @@ namespace Learning_System
                 // richtextbox
                 richTextBoxes[i].Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
                 richTextBoxes[i].Location = new Point(106, 14);
-                richTextBoxes[i].Size = new Size(568, 162);
+                richTextBoxes[i].Size = new Size(730, 162);
                 richTextBoxes[i].Text = "";
                 richTextBoxes[i].TabIndex = (i * 2) + 12;
 

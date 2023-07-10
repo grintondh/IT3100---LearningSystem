@@ -1,8 +1,8 @@
-﻿using Learning_System.ProcessingClasses;
-using Learning_System.Modals;
+﻿using Learning_System.Modals;
+using Learning_System.ProcessingClasses;
 using Newtonsoft.Json.Linq;
 using System.Data;
-using System.CodeDom;
+using System.Text.RegularExpressions;
 
 namespace Learning_System
 {
@@ -61,7 +61,7 @@ namespace Learning_System
                 panel[i] = new Panel
                 {
                     Location = new Point(354, 6),
-                    Size = new Size(800, 243)
+                    Size = new Size(900, 243)
                 };
                 panel[i].Controls.Add(richTextBoxes[i]);
                 panel[i].Controls.Add(combobox[i]);
@@ -79,7 +79,7 @@ namespace Learning_System
                 // richtextbox
                 richTextBoxes[i].Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
                 richTextBoxes[i].Location = new Point(106, 14);
-                richTextBoxes[i].Size = new Size(568, 162);
+                richTextBoxes[i].Size = new Size(730, 162);
                 richTextBoxes[i].Text = "";
                 combobox[i].TabIndex = (i * 2) + 12;
                 // label choice
@@ -200,7 +200,10 @@ namespace Learning_System
 
                 var _parentId = AddNewQuestionForm_CategoryCbo.SelectedValue;
                 var _name = AddNewQuestionForm_NameTxt.Text;
-                var _content = AddNewQuestionForm_TextRtb.Rtf;
+                string _content;
+                if (AddNewQuestionForm_TextRtb.Rtf.Contains("\\pict"))
+                    _content = AddNewQuestionForm_TextRtb.Rtf;
+                else _content = AddNewQuestionForm_TextRtb.Text;
                 try
                 {
                     Convert.ToDouble(AddNewQuestionForm_MarkTxt.Text);
@@ -219,12 +222,19 @@ namespace Learning_System
                 {
                     if (richTextBoxes[i].TextLength != 0)
                     {
+                        string _choiceContent;
+                        if (richTextBoxes[i].Rtf.Contains("\\pict"))
+                            _choiceContent = richTextBoxes[i].Rtf;
+                        else _choiceContent = richTextBoxes[i].Text;
+
                         QuestionChoice newChoice = new QuestionChoice()
                         {
-                            choice = richTextBoxes[i].Rtf,
+                            choice = _choiceContent,
                             mark = ConvertComboboxTextToDouble(combobox[i].Text)
                         };
+
                         _choice.Add(newChoice);
+
                         if (newChoice.mark > 0)
                             sumPositiveGrade += newChoice.mark;
                     }
@@ -365,7 +375,7 @@ namespace Learning_System
                 panel[i] = new Panel
                 {
                     Location = new Point(354, 6),
-                    Size = new Size(800, 243)
+                    Size = new Size(900, 243)
                 };
                 panel[i].Controls.Add(richTextBoxes[i]);
                 panel[i].Controls.Add(combobox[i]);
@@ -383,7 +393,7 @@ namespace Learning_System
                 // richtextbox
                 richTextBoxes[i].Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
                 richTextBoxes[i].Location = new Point(106, 14);
-                richTextBoxes[i].Size = new Size(568, 162);
+                richTextBoxes[i].Size = new Size(730, 162);
                 richTextBoxes[i].Text = "";
                 combobox[i].TabIndex = (i * 2) + 12;
                 // label choice

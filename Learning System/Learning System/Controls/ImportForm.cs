@@ -1,10 +1,11 @@
-﻿using System.Data;
-using Newtonsoft.Json.Linq;
-using Microsoft.Office.Interop.Word;
-using System.Reflection;
-using Microsoft.VisualBasic.Devices;
+﻿using Learning_System.Modals;
 using Learning_System.ProcessingClasses;
-using Learning_System.Modals;
+using Microsoft.Office.Interop.Word;
+using Microsoft.VisualBasic.Devices;
+using Newtonsoft.Json.Linq;
+using System.Data;
+using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Learning_System
 {
@@ -69,6 +70,9 @@ namespace Learning_System
             }
             return false;
         }
+
+        List<List<char>> answerLetter = new();
+
         /// <summary>
         /// Check Aiken format của file
         /// </summary>
@@ -85,14 +89,17 @@ namespace Learning_System
                     questionCount++;
                     i++;
                     List<char> listAnswers = new();
+
                     try
                     {
                         while (lines[i] != null)
                         {
                             if (!CheckAnswerAikenFormat(lines[i], listAnswers))
                             {
-                                if (CheckChoicesAikenFormat(lines[i]) == ' ') return i;
-                                listAnswers.Add(CheckChoicesAikenFormat(lines[i]));
+                                char answerLetter = CheckChoicesAikenFormat(lines[i]);
+                                if (answerLetter == ' ') return i;
+
+                                listAnswers.Add(answerLetter);
                                 i++;
                             }
                             else
@@ -100,7 +107,7 @@ namespace Learning_System
                                 i++;
                                 if (i == lines.Count) break;
                                 if (lines[i].Length > 0) return i;
-                                i++;
+                                while (lines[i].Length == 0 && i < lines.Count) i++;
                                 break;
                             }
                         }
@@ -110,11 +117,14 @@ namespace Learning_System
                         return i;
                         throw;
                     }
+
+                    answerLetter.Add(listAnswers);
                 }
                 else return i;
             }
             return -questionCount;
         }
+
 
         /// <summary>
         /// Import câu hỏi vào file json
@@ -157,7 +167,9 @@ namespace Learning_System
 
             int questionIDCount = (_maxQuestionIdTbl.Rows.Count == 0) ? 0 : _maxQuestionIdTbl.Rows[0].Field<int>("ID");
 
-            int i = 0;
+            int i = 0, questionOrder = 0;
+            string EndLine = @"\r\n\\pard\\kerning0\\f1\\fs18\\par\r\n";
+
             while (i < lines.Count)
             {
                 if (lines[i].Length > 0)
@@ -166,23 +178,32 @@ namespace Learning_System
                     if (Path.GetExtension(ImportPath) != ".txt") _stringContent = lineTextBoxes[i].Rtf;
                     else _stringContent = lines[i];
                     string questionContent = _stringContent;
+                    questionContent = Regex.Replace(questionContent, EndLine, "", RegexOptions.RightToLeft);
                     questionIDCount++;
                     i++;
 
                     List<QuestionChoice> _questionChoices = new();
+
+                    int choiceOrder = 0;
+
                     while (lines[i].Length > 0)
                     {
                         if (lines[i][1] == '.')
                         {
                             if (Path.GetExtension(ImportPath) != ".txt")
                             {
-                                lineTextBoxes[i].Text = lineTextBoxes[i].Text[3..];
                                 _stringContent = lineTextBoxes[i].Rtf;
                             }
                             else
                             {
-                                _stringContent = lines[i][3..];
+                                _stringContent = lines[i];
                             }
+
+                            // Remove choices' letter:
+                            Regex removeChoice = new Regex(answerLetter[questionOrder][choiceOrder].ToString() + ". ");
+                            _stringContent = removeChoice.Replace(_stringContent, "", 1);
+                            _stringContent = Regex.Replace(_stringContent, EndLine, "", RegexOptions.RightToLeft);
+                            
                             QuestionChoice _questionChoice = new()
                             {
                                 choice = _stringContent,
@@ -190,6 +211,7 @@ namespace Learning_System
                             };
                             _questionChoices.Add(_questionChoice);
                             i++;
+                            choiceOrder++;
                         }
                         else
                         {
@@ -199,7 +221,9 @@ namespace Learning_System
                                 if (lines[i].EndsWith(lines[i - _questionChoices.Count + j][0])) _questionChoice.mark = 1;
                                 j++;
                             }
-                            i += 2;
+                            i++;
+                            if (i >= lines.Count) break;
+                            while (lines[i].Length == 0 && i < lines.Count) i++;
                             break;
                         }
 
@@ -222,6 +246,7 @@ namespace Learning_System
                     if (parentCtg == null)
                         throw new E03NotExistColumn("QuestionArray");
                     parentCtg.Add(newQuestions.ID);
+                    questionOrder++;
                 }
             }
 
@@ -370,13 +395,18 @@ namespace Learning_System
             else if (CheckFileFormat(ImportPath) == false)
             {
                 MessageBox.Show("Wrong format!");
+                ImportForm_StatusLbl.Text = $"Maximum size for new files: {Math.Round(maximumSizeForNewFiles, 2)} MB";
             }
             else
             {
+                // Remove old list
+                answerLetter.Clear();
+
                 double fileSize = new System.IO.FileInfo(ImportPath).Length;
                 if (fileSize >= MAX_OF_SIZE * SIZE_OF_MB)
                 {
                     MessageBox.Show($"File's size must be smaller than {MAX_OF_SIZE} MB!");
+                    ImportForm_StatusLbl.Text = $"Maximum size for new files: {Math.Round(maximumSizeForNewFiles, 2)} MB";
                     return;
                 }
                 ImportForm_ImportProgress.Value = 10;
@@ -394,6 +424,7 @@ namespace Learning_System
                 {
                     MessageBox.Show($"Error at line {checkAikenFormat + 1}!");
                     ImportForm_ImportStatus.Text = "Error";
+                    ImportForm_StatusLbl.Text = $"Maximum size for new files: {Math.Round(maximumSizeForNewFiles, 2)} MB";
                 }
                 else
                 {
@@ -406,7 +437,7 @@ namespace Learning_System
                         MessageBox.Show($"OK. Successfully imported {-checkAikenFormat} question(s)!");
                         maximumSizeForNewFiles -= fileSize / SIZE_OF_MB;
                         ImportForm_StatusLbl.Text = $"Maximum size for new files: {Math.Round(maximumSizeForNewFiles, 2)} MB";
-                    } 
+                    }
                     else
                         ImportForm_ImportStatus.Text = "Error";
                 }
