@@ -43,5 +43,20 @@
     "TimeLimit": 45,
     "TimeLimitEnable": true,
     "MaximumGrade": 10
+  },
+  {
+    "Id": 3,
+    "Name": "Bài kiểm tra ảnh",
+    "Description": "",
+    "DescriptionShow": true,
+    "QuestionArray": [ 60, 61, 59 ],
+    "ShuffleAnswer": true,
+    "TimeStart": "2023-05-05 11:00:00",
+    "StartEnable": true,
+    "TimeEnd": "2023-08-05 12:00:00",
+    "EndEnable": true,
+    "TimeLimit": 45,
+    "TimeLimitEnable": true,
+    "MaximumGrade": 10
   }
 ]

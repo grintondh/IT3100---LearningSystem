@@ -216,6 +216,7 @@ namespace Learning_System
                         if (quiz[questionPerPage * i + j].mark == 1)
                         {
                             quiz[questionPerPage * i + j].KeyRtb.Text = "Your answer is correct.";
+                            quiz[questionPerPage * i + j].KeyRtb.Font = new Font("Segoe UI", 12F);
                             quiz[questionPerPage * i + j].KeyRtb.BackColor = Color.LightGreen;
                             // set button color
                             button[questionPerPage * i + j].BackColor = Color.LightGreen;
@@ -224,6 +225,7 @@ namespace Learning_System
                         {
                             quiz[questionPerPage * i + j].KeyRtb.BackColor = Color.FromArgb(255, 236, 220);
                             quiz[questionPerPage * i + j].KeyRtb.Text = "Your answer is incorrect.\nThe correct answer is:" + correctAnswer;
+                            quiz[questionPerPage * i + j].KeyRtb.Font = new Font("Segoe UI", 12F);
                             // set button color
                             button[questionPerPage * i + j].BackColor = Color.Red;
                         }
