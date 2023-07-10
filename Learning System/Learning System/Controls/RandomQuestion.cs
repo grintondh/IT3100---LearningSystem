@@ -33,46 +33,135 @@ namespace Learning_System
 
         //RandomQuestionData
         public List<int> randomSelectedQuestions = new List<int>();
-        public void AddSpace(ref List<Categories> List, ref List<Categories> addList, int begin, string space)
+        public struct CboList
         {
-            foreach (int x in addList[begin].SubArray)
-            {
-                addList[x].Name = space + addList[x].Name;
-                AddSpace(ref List, ref addList, x, space + "  ");
-            }
-            addList[begin].Name = "  " + addList[begin].Name;
-
-            if (addList[begin].QuestionArray.Count > 0)
-                addList[begin].Name = addList[begin].Name + " (" + addList[begin].QuestionArray.Count + ")";
-            List.Add(addList[begin]);
+            public Categories category;
+            public int loaded;
         }
-        public void loadCategoriesData()
+
+        public void LoadCategoriesData()
         {
-            List<Categories>? listCategories = new List<Categories>();
-            List<Categories> newListCategories = new List<Categories>();
+            List<CboList>? listCategories = new();
+            List<CboList> newListCategories = new();
             try
             {
-                listCategories = _categoriesDataJarray.ToObject<List<Categories>>();
-                if (listCategories == null) return;
-                categories = listCategories;
-                AddSpace(ref newListCategories, ref listCategories, 0, "  ");
+                DataTable _dt = CategoriesTable.table.Init().Get();
+
+                if (_dt == null) return;
+
+                foreach (DataRow _row in _dt.Rows)
+                {
+                    CboList _c = new();
+                    _c.category = new Categories();
+
+                    _c.category.Id = _row.Field<int>("Id");
+                    _c.category.Name = _row.Field<string>("Name");
+                    _c.category.QuestionArray = _row.Field<JArray>("QuestionArray").ToObject<List<int>>();
+                    _c.category.SubArray = _row.Field<JArray>("SubArray").ToObject<List<int>>();
+
+                    _c.loaded = 0;
+                    listCategories.Add(_c);
+                    categories.Add(_c.category);
+                }
+
+                /*
+                List<Categories>? _tmp;
+
+                JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
+                if (_categoriesData == null)
+                    throw new E01CantFindFile("category.json");
+
+                _tmp = _categoriesData.ToObject<List<Categories>>();
+
+                if (_tmp == null) return;
+
+                foreach (Categories _x in _tmp)
+                {
+                    CboList _c = new();
+                    _c.category = _x;
+                    _c.loaded = 0;
+
+                    listCategories.Add(_c);
+                }
+                */
+                for (int i = 0; i < listCategories.Count; i++)
+                    if (listCategories[i].loaded == 0)
+                    {
+                        listCategories[i] = new CboList
+                        {
+                            category = listCategories[i].category,
+                            loaded = -1
+                        };
+
+                        AddSpace(ref newListCategories, ref listCategories, i, "  ");
+                    }
+
                 newListCategories.Reverse();
             }
             catch (Exception ex)
             {
-                DialogResult dialog = MessageBox.Show("Can't get categories data:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                if (dialog == DialogResult.OK)
-                    System.Windows.Forms.Application.Exit();
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            List<Categories> onlyCategoriesName = new List<Categories>();
+            foreach (CboList _x in newListCategories)
+                onlyCategoriesName.Add(_x.category);
 
             RandomQuestion_CategoryCbo.ValueMember = "Id";
             RandomQuestion_CategoryCbo.DisplayMember = "Name";
-            RandomQuestion_CategoryCbo.DataSource = newListCategories;
+            RandomQuestion_CategoryCbo.DataSource = onlyCategoriesName;
+            RandomQuestion_CategoryCbo.DrawItem += new DrawItemEventHandler((sender, args) =>
+            {
+                System.Drawing.Font font;
+                FontFamily ffm = RandomQuestion_CategoryCbo.Font.FontFamily;
+                float fsz = RandomQuestion_CategoryCbo.Font.Size;
+
+                if (newListCategories.Count > args.Index)
+                {
+                    if (newListCategories[args.Index].loaded == -1)
+                        font = new System.Drawing.Font(ffm, fsz, FontStyle.Bold);
+                    else
+                        font = new System.Drawing.Font(ffm, fsz, FontStyle.Regular);
+
+                    if ((args.State & DrawItemState.Selected) == DrawItemState.Selected)
+                    {
+                        args.DrawBackground();
+                        args.Graphics.DrawString(newListCategories[args.Index].category.Name, font, SystemBrushes.Window, args.Bounds);
+                    }
+                    else
+                    {
+                        args.DrawBackground();
+                        args.Graphics.DrawString(newListCategories[args.Index].category.Name, font, SystemBrushes.WindowText, args.Bounds);
+                    }
+                }
+            });
+        }
+
+        //Them Space cho cac lua chon Combobox
+        public void AddSpace(ref List<CboList> List, ref List<CboList> addList, int begin, string space)
+        {
+            if (addList[begin].loaded == 0)
+                addList[begin] = new CboList
+                {
+                    category = addList[begin].category,
+                    loaded = 1
+                };
+
+            foreach (int x in addList[begin].category.SubArray)
+            {
+                addList[x].category.Name = space + addList[x].category.Name;
+                AddSpace(ref List, ref addList, x, space + "  ");
+            }
+            addList[begin].category.Name = "  " + addList[begin].category.Name;
+
+            if (addList[begin].category.QuestionArray.Count > 0)
+                addList[begin].category.Name = addList[begin].category.Name + " (" + addList[begin].category.QuestionArray.Count + ")";
+            List.Add(addList[begin]);
         }
         private void RandomQuestion_CategoryCbo_Click(object sender, EventArgs e)
         {
-            loadCategoriesData();
+            LoadCategoriesData();
         }
         private void GetSubCategories(int _parentCategories, ref List<int> _subCategories, ref List<Categories> categories)
         {

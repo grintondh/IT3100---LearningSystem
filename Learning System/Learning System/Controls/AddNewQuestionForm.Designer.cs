@@ -71,7 +71,6 @@ namespace Learning_System
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AddNewQuestionForm_ExpandPic).BeginInit();
             panel3.SuspendLayout();
-            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // AddNewQuestionForm_HeadingLbl
@@ -217,7 +216,7 @@ namespace Learning_System
             AddNewQuestionForm_TextRtb.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_TextRtb.Location = new Point(460, 174);
             AddNewQuestionForm_TextRtb.Name = "AddNewQuestionForm_TextRtb";
-            AddNewQuestionForm_TextRtb.Size = new Size(568, 235);
+            AddNewQuestionForm_TextRtb.Size = new Size(730, 235);
             AddNewQuestionForm_TextRtb.TabIndex = 10;
             AddNewQuestionForm_TextRtb.Text = "";
             // 
@@ -398,8 +397,8 @@ namespace Learning_System
             Controls.Add(panel_body);
             Controls.Add(panel_heading);
             Controls.Add(panel3);
-            Name = "AddNewQuestionForm";
             FormBorderStyle = FormBorderStyle.None;
+            Name = "AddNewQuestionForm";
             WindowState = FormWindowState.Maximized;
             panel_heading.ResumeLayout(false);
             panel_heading.PerformLayout();
@@ -414,8 +413,6 @@ namespace Learning_System
             ((System.ComponentModel.ISupportInitialize)AddNewQuestionForm_ExpandPic).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             ResumeLayout(false);
         }
 

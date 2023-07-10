@@ -18,6 +18,7 @@ namespace Learning_System
         public FromQuestionBank(EditQuiz _EditQuiz)
         {
             InitializeComponent();
+
             FromQuestionBank_SelectCategoryCbo.Text = "  Default";
             ParentEditQuiz = _EditQuiz;
             FromQuestionBank_ShowQuestionsDtg.BorderStyle = BorderStyle.None;
@@ -31,8 +32,8 @@ namespace Learning_System
         }
         public void addData(DataProcessing _questionData, DataProcessing _categoriesData, JArray __categoriesDataJarray)
         {
-            questionsData = _questionData;
-            categoriesData = _categoriesData;
+            questionsData = QuestionsTable.table;
+            categoriesData = CategoriesTable.table;
             _categoriesDataJarray = __categoriesDataJarray;
         }
 
@@ -116,31 +117,130 @@ namespace Learning_System
                     System.Windows.Forms.Application.Exit();
             }
         }
-        public void loadCategoriesData()
+
+        public struct CboList
         {
-            List<Categories>? listCategories = _categoriesDataJarray.ToObject<List<Categories>>();
-            List<Categories> newListCategories = new List<Categories>();
-            if (listCategories == null) return;
-            AddSpace(ref newListCategories, ref listCategories, 0, "  ");
-            newListCategories.Reverse();
+            public Categories category;
+            public int loaded;
+        }
+
+        public void LoadCategoriesData()
+        {
+            List<CboList>? listCategories = new();
+            List<CboList> newListCategories = new();
+            try
+            {
+                DataTable _dt = CategoriesTable.table.Init().Get();
+
+                if (_dt == null) return;
+
+                foreach (DataRow _row in _dt.Rows)
+                {
+                    CboList _c = new();
+                    _c.category = new Categories();
+
+                    _c.category.Id = _row.Field<int>("Id");
+                    _c.category.Name = _row.Field<string>("Name");
+                    _c.category.QuestionArray = _row.Field<JArray>("QuestionArray").ToObject<List<int>>();
+                    _c.category.SubArray = _row.Field<JArray>("SubArray").ToObject<List<int>>();
+
+                    _c.loaded = 0;
+                    listCategories.Add(_c);
+                }
+
+                /*
+                List<Categories>? _tmp;
+
+                JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
+                if (_categoriesData == null)
+                    throw new E01CantFindFile("category.json");
+
+                _tmp = _categoriesData.ToObject<List<Categories>>();
+
+                if (_tmp == null) return;
+
+                foreach (Categories _x in _tmp)
+                {
+                    CboList _c = new();
+                    _c.category = _x;
+                    _c.loaded = 0;
+
+                    listCategories.Add(_c);
+                }
+                */
+                for (int i = 0; i < listCategories.Count; i++)
+                    if (listCategories[i].loaded == 0)
+                    {
+                        listCategories[i] = new CboList
+                        {
+                            category = listCategories[i].category,
+                            loaded = -1
+                        };
+
+                        AddSpace(ref newListCategories, ref listCategories, i, "  ");
+                    }
+
+                newListCategories.Reverse();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            List<Categories> onlyCategoriesName = new List<Categories>();
+            foreach (CboList _x in newListCategories)
+                onlyCategoriesName.Add(_x.category);
 
             FromQuestionBank_SelectCategoryCbo.ValueMember = "Id";
             FromQuestionBank_SelectCategoryCbo.DisplayMember = "Name";
-            FromQuestionBank_SelectCategoryCbo.DataSource = newListCategories;
+            FromQuestionBank_SelectCategoryCbo.DataSource = onlyCategoriesName;
+            FromQuestionBank_SelectCategoryCbo.DrawItem += new DrawItemEventHandler((sender, args) =>
+            {
+                System.Drawing.Font font;
+                FontFamily ffm = FromQuestionBank_SelectCategoryCbo.Font.FontFamily;
+                float fsz = FromQuestionBank_SelectCategoryCbo.Font.Size;
+
+                if (newListCategories.Count > args.Index)
+                {
+                    if (newListCategories[args.Index].loaded == -1)
+                        font = new System.Drawing.Font(ffm, fsz, FontStyle.Bold);
+                    else
+                        font = new System.Drawing.Font(ffm, fsz, FontStyle.Regular);
+
+                    if ((args.State & DrawItemState.Selected) == DrawItemState.Selected)
+                    {
+                        args.DrawBackground();
+                        args.Graphics.DrawString(newListCategories[args.Index].category.Name, font, SystemBrushes.Window, args.Bounds);
+                    }
+                    else
+                    {
+                        args.DrawBackground();
+                        args.Graphics.DrawString(newListCategories[args.Index].category.Name, font, SystemBrushes.WindowText, args.Bounds);
+                    }
+                }
+            });
         }
 
         //Them Space cho cac lua chon Combobox
-        public void AddSpace(ref List<Categories> List, ref List<Categories> addList, int begin, string space)
+        public void AddSpace(ref List<CboList> List, ref List<CboList> addList, int begin, string space)
         {
-            foreach (int x in addList[begin].SubArray)
+            if (addList[begin].loaded == 0)
+                addList[begin] = new CboList
+                {
+                    category = addList[begin].category,
+                    loaded = 1
+                };
+
+            foreach (int x in addList[begin].category.SubArray)
             {
-                addList[x].Name = space + addList[x].Name;
+                addList[x].category.Name = space + addList[x].category.Name;
                 AddSpace(ref List, ref addList, x, space + "  ");
             }
-            addList[begin].Name = "  " + addList[begin].Name;
+            addList[begin].category.Name = "  " + addList[begin].category.Name;
 
-            if (addList[begin].QuestionArray.Count > 0)
-                addList[begin].Name = addList[begin].Name + " (" + addList[begin].QuestionArray.Count + ")";
+            if (addList[begin].category.QuestionArray.Count > 0)
+                addList[begin].category.Name = addList[begin].category.Name + " (" + addList[begin].category.QuestionArray.Count + ")";
             List.Add(addList[begin]);
         }
 
@@ -155,7 +255,7 @@ namespace Learning_System
             //
             try
             {
-                //JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
+                JArray? _categoriesData = JsonProcessing.ImportJsonContentInDefaultFolder("Category.json", null, null);
                 if (_categoriesDataJarray == null) return;
                 List<Categories>? categories = _categoriesDataJarray.ToObject<List<Categories>>();
                 if (categories == null || _categoriesDataJarray == null) return;
@@ -200,7 +300,7 @@ namespace Learning_System
             if (!isLoad)
             {
                 isLoad = true;
-                loadCategoriesData();
+                LoadCategoriesData();
             }
         }
 

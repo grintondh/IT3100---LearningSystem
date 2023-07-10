@@ -168,6 +168,8 @@ namespace Learning_System
             int questionIDCount = (_maxQuestionIdTbl.Rows.Count == 0) ? 0 : _maxQuestionIdTbl.Rows[0].Field<int>("ID");
 
             int i = 0, questionOrder = 0;
+            string EndLine = @"\r\n\\pard\\kerning0\\f1\\fs18\\par\r\n";
+
             while (i < lines.Count)
             {
                 if (lines[i].Length > 0)
@@ -176,7 +178,7 @@ namespace Learning_System
                     if (Path.GetExtension(ImportPath) != ".txt") _stringContent = lineTextBoxes[i].Rtf;
                     else _stringContent = lines[i];
                     string questionContent = _stringContent;
-
+                    questionContent = Regex.Replace(questionContent, EndLine, "", RegexOptions.RightToLeft);
                     questionIDCount++;
                     i++;
 
@@ -200,7 +202,8 @@ namespace Learning_System
                             // Remove choices' letter:
                             Regex removeChoice = new Regex(answerLetter[questionOrder][choiceOrder].ToString() + ". ");
                             _stringContent = removeChoice.Replace(_stringContent, "", 1);
-
+                            _stringContent = Regex.Replace(_stringContent, EndLine, "", RegexOptions.RightToLeft);
+                            
                             QuestionChoice _questionChoice = new()
                             {
                                 choice = _stringContent,

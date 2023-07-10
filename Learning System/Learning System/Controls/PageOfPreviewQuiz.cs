@@ -47,7 +47,7 @@ namespace Learning_System
                     ContentRtb.Height += Convert.ToInt32(Math.Round(imageHeight * 0.0666666667));
                 }
 
-                ContentRtb.Height = Math.Max(HEIGHTMIN, Math.Min(HEIGHTMAX * 3, ContentRtb.Height) + 5);
+                ContentRtb.Height = Math.Max(HEIGHTMIN, Math.Min(HEIGHTMAX * 3, ContentRtb.Height) + 20);
             }
             catch
             {
@@ -56,7 +56,7 @@ namespace Learning_System
                 using (Graphics g = CreateGraphics())
                 {
                     ContentRtb.Height = (int)g.MeasureString(ContentRtb.Text,
-                        ContentRtb.Font, ContentRtb.Width).Height + 5;
+                        ContentRtb.Font, ContentRtb.Width).Height + 20;
                 }
             }
 
@@ -98,7 +98,7 @@ namespace Learning_System
                 {
                     richTextBoxes[i].Rtf = questionChoices[i].choice;
                     richTextBoxes[i].Font = new Font("Segoe UI", 12F);
-                    richTextBoxes[i].Height = TextRenderer.MeasureText(richTextBoxes[i].Text, richTextBoxes[i].Font).Height;
+                    richTextBoxes[i].Height = TextRenderer.MeasureText(richTextBoxes[i].Text, richTextBoxes[i].Font).Height + 10;
 
                     string pichgoal = "pichgoal[0-9]+";
                     MatchCollection matches = Regex.Matches(richTextBoxes[i].Rtf, pichgoal, RegexOptions.IgnoreCase);
@@ -118,7 +118,7 @@ namespace Learning_System
                     using (Graphics g = CreateGraphics())
                     {
                         richTextBoxes[i].Height = (int)g.MeasureString(richTextBoxes[i].Text,
-                            richTextBoxes[i].Font, richTextBoxes[i].Width).Height + 12;
+                            richTextBoxes[i].Font, richTextBoxes[i].Width).Height + 20;
                     }
                 }
                 richTextBoxes[i].ReadOnly = true;
@@ -155,7 +155,7 @@ namespace Learning_System
 
         public void resize()
         {
-            panel2.Padding = new Padding(10, 5, 5, 0);
+            panel2.Padding = new Padding(10, 10, 5, 0);
             panel2.BackColor = Color.FromArgb(231, 243, 245);
 
 
@@ -169,13 +169,13 @@ namespace Learning_System
             int answerHeight = 0;
             for (int i = 0; i < numberOfChoice; i++)
             {
-                answerHeight += richTextBoxes[i].Height;
+                answerHeight += richTextBoxes[i].Height + 10;
             }
 
-            QuestionChoiceGrb.Height = answerHeight + 45;
+            QuestionChoiceGrb.Height = answerHeight + 35;
 
             panel3.Height = QuestionChoiceGrb.Height;
-            panel2.Height = panel3.Height + ContentRtb.Height;
+            panel2.Height = panel3.Height + ContentRtb.Height + 15;
             panel1.Height = panel2.Height;
             this.Height = panel2.Height + panel2.Location.Y + 10;
         }

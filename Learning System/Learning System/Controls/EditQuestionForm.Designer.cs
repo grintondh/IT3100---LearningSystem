@@ -172,7 +172,7 @@
             AddNewQuestionForm_TextRtb.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             AddNewQuestionForm_TextRtb.Location = new Point(460, 180);
             AddNewQuestionForm_TextRtb.Name = "AddNewQuestionForm_TextRtb";
-            AddNewQuestionForm_TextRtb.Size = new Size(568, 235);
+            AddNewQuestionForm_TextRtb.Size = new Size(730, 235);
             AddNewQuestionForm_TextRtb.TabIndex = 10;
             AddNewQuestionForm_TextRtb.Text = "";
             // 
@@ -386,9 +386,9 @@
             Controls.Add(panel_body);
             Controls.Add(panel_heading);
             Controls.Add(panel3);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "EditQuestionForm";
             WindowState = FormWindowState.Maximized;
-            FormBorderStyle = FormBorderStyle.None;
             panel_heading.ResumeLayout(false);
             panel_heading.PerformLayout();
             panel_body.ResumeLayout(false);

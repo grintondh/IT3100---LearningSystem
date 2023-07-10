@@ -80,7 +80,7 @@
             HomePageForm_UserNameLbl.Name = "HomePageForm_UserNameLbl";
             HomePageForm_UserNameLbl.Size = new Size(108, 28);
             HomePageForm_UserNameLbl.TabIndex = 2;
-            HomePageForm_UserNameLbl.Text = "User Name";
+            HomePageForm_UserNameLbl.Text = "Group 14";
             // 
             // HomePageForm_AvatarPic
             // 
